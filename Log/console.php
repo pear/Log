@@ -12,6 +12,41 @@
 class Log_console extends Log
 {
     /**
+     * Handle to the current output stream.
+     * @var resource
+     * @access private
+     */
+    var $_stream = STDOUT;
+
+    /**
+     * String containing the format of a log line.
+     * @var string
+     * @access private
+     */
+    var $_lineFormat = '%1$s %2$s [%3$s] %4$s';
+
+    /**
+     * String containing the timestamp format.  It will be passed directly to
+     * strftime().  Note that the timestamp string will generated using the
+     * current locale.
+     * @var string
+     * @access private
+     */
+    var $_timeFormat = '%b %d %H:%M:%S';
+
+    /**
+     * Hash that maps canonical format keys to position arguments for the
+     * "line format" string.
+     * @var array
+     * @access private
+     */
+    var $_formatMap = array('%{timestamp}'  => '%1$s',
+                            '%{ident}'      => '%2$s',
+                            '%{priority}'   => '%3$s',
+                            '%{message}'    => '%4$s',
+                            '%\{'           => '%%{');
+
+    /**
      * Constructs a new Log_console object.
      * 
      * @param string $name     Ignored.
@@ -26,6 +61,20 @@ class Log_console extends Log
         $this->_id = md5(microtime());
         $this->_ident = $ident;
         $this->_mask = Log::UPTO($maxLevel);
+
+        if (!empty($conf['stream'])) {
+            $this->_stream = $conf['stream'];
+        }
+
+        if (!empty($conf['lineFormat'])) {
+            $this->_lineFormat = str_replace(array_keys($this->_formatMap),
+                                             array_values($this->_formatMap),
+                                             $conf['lineFormat']);
+        }
+
+        if (!empty($conf['timeFormat'])) {
+            $this->_timeFormat = $conf['timeFormat'];
+        }
     }
 
     /**
@@ -48,9 +97,15 @@ class Log_console extends Log
             return false;
         }
 
-        printf("%s %s [%s] %s\n", strftime('%b %d %H:%M:%S'), $this->_ident,
-            Log::priorityToString($priority), $message);
+        /* Build the string containing the complete log line. */
+        $line = sprintf($this->_lineFormat, strftime($this->_timeFormat),
+                $this->_ident, $this->priorityToString($priority),
+                $message) . "\n";
 
+        /* Print the line to the output stream. */
+        fwrite($this->_stream, $line);
+
+        /* Notify observers about this log message. */
         $this->_announce(array('priority' => $priority, 'message' => $message));
 
         return true;
