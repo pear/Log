@@ -13,16 +13,17 @@
     </maintainer>
   </maintainers>
   <release>
-    <version>1.8.3</version>
-    <date>2004-01-07</date>
+    <version>1.8.4</version>
+    <date>2004-01-11</date>
     <license>PHP License</license>
     <state>stable</state>
-    <notes>Added a new handler that logs using the Sqlite extension.
+    <notes>The Log package now requires PHP 4.3.0 or later.
 
-The open(), close() and log() methods now consistently return success or failure.</notes>
+If an object or array is passed as a log event, it's human-readable representation will be used.</notes>
     <deps>
       <dep type="pkg" rel="has" optional="yes">DB</dep>
       <dep type="ext" rel="has" optional="yes">sqlite</dep>
+      <dep type="php" rel="ge" version="4.3.0" optional="no"/>
     </deps>
     <filelist>
       <file role="doc" baseinstalldir="/" name="docs/guide.txt"/>
@@ -66,8 +67,19 @@ The open(), close() and log() methods now consistently return success or failure
   </release>
   <changelog>
     <release>
+      <version>1.8.4</version>
+      <date>2004-01-11</date>
+      <license>PHP License</license>
+      <state>stable</state>
+      <notes>The Log package now requires PHP 4.3.0 or later.
+
+The _extractMessage() method no longer uses the serialize()'ed version of an event object if no string conversion method is available.  Instead, the human-readable (via print_r()) representation of the object will be used.
+
+_extractMessage() can now handle arrays.  Their human-readable representation will be used.</notes>
+    </release>
+    <release>
       <version>1.8.3</version>
-      <date>2004-01-07</date>
+      <date>2004-01-11</date>
       <license>PHP License</license>
       <state>stable</state>
       <notes>The open() and close() methods now consistently return success or failure.  Previously, some handlers' open() and close() methods did not return any result.  Also, the log() methods will return failure when the handler cannot be opened.

@@ -3,17 +3,19 @@
 require_once 'PEAR/PackageFileManager.php';
 require_once 'Console/Getopt.php';
 
-$version = '1.8.3';
+$version = '1.8.4';
 $notes = <<<EOT
-Added a new handler that logs using the Sqlite extension.
+The Log package now requires PHP 4.3.0 or later.
 
-The open(), close() and log() methods now consistently return success or failure.
+If an object or array is passed as a log event, it's human-readable representation will be used.
 EOT;
 
 $changelog = <<<EOT
-The open() and close() methods now consistently return success or failure.  Previously, some handlers' open() and close() methods did not return any result.  Also, the log() methods will return failure when the handler cannot be opened.
+The Log package now requires PHP 4.3.0 or later.
 
-Bertrand Mansion contributed a new handler that logs using the Sqlite extension.
+The _extractMessage() method no longer uses the serialize()'ed version of an event object if no string conversion method is available.  Instead, the human-readable (via print_r()) representation of the object will be used.
+
+_extractMessage() can now handle arrays.  Their human-readable representation will be used.
 EOT;
 
 $package = new PEAR_PackageFileManager();
@@ -40,6 +42,7 @@ if (PEAR::isError($result)) {
 
 $package->addMaintainer('jon', 'lead', 'Jon Parise', 'jon@php.net');
 
+$package->addDependency('php', '4.3.0', 'ge', 'php');
 $package->addDependency('DB', false, 'has', 'pkg', true);
 $package->addDependency('sqlite', false, 'has', 'ext', true);
 
