@@ -36,6 +36,7 @@ The open(), close() and log() methods now consistently return success or failure
       <file role="doc" baseinstalldir="/" name="docs/examples/pear_error_handler.php"/>
       <file role="doc" baseinstalldir="/" name="docs/examples/php_error_handler.php"/>
       <file role="doc" baseinstalldir="/" name="docs/examples/sql.php"/>
+      <file role="doc" baseinstalldir="/" name="docs/examples/sqlite.php"/>
       <file role="doc" baseinstalldir="/" name="docs/examples/syslog.php"/>
       <file role="doc" baseinstalldir="/" name="docs/examples/win.php"/>
       <file role="php" baseinstalldir="/" name="Log/composite.php"/>
