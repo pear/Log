@@ -13,7 +13,7 @@ if (is_a($console1, 'Log_console') && is_a($console2, 'Log_console'))
 	echo "Two Log_console objects.\n";
 }
 
-if ($console1->_id == $console2->id) {
+if ($console1->_id == $console2->_id) {
 	echo "The objects have the same ID.\n";
 }
 
