@@ -14,11 +14,12 @@
   </maintainers>
   <release>
     <version>1.8.7</version>
-    <date>2004-11-27</date>
+    <date>2004-12-20</date>
     <license>PHP License</license>
     <state>stable</state>
     <notes>The Log package now supports logging arrays with a 'message' key.
-The 'display' handler now preserves line breaks in its output.</notes>
+The 'display' handler now preserves line breaks in its output.
+An experimental new handler ('daemon') has been added.</notes>
     <deps>
       <dep type="pkg" rel="has" optional="yes">DB</dep>
       <dep type="ext" rel="has" optional="yes">sqlite</dep>
@@ -48,6 +49,7 @@ The 'display' handler now preserves line breaks in its output.</notes>
        <dir name="Log">
         <file role="php" name="composite.php"/>
         <file role="php" name="console.php"/>
+        <file role="php" name="daemon.php"/>
         <file role="php" name="display.php"/>
         <file role="php" name="error_log.php"/>
         <file role="php" name="file.php"/>
@@ -84,11 +86,12 @@ The 'display' handler now preserves line breaks in its output.</notes>
   <changelog>
     <release>
       <version>1.8.7</version>
-      <date>2004-11-27</date>
+      <date>2004-12-20</date>
       <license>PHP License</license>
       <state>stable</state>
       <notes>The Log::_extractMessage() routine will now extract and use the value of an array's 'message' key if it exists. (Laurent Laville)
-The 'display' handler now preserves line breaks in its output. (Bug 2606)</notes>
+The 'display' handler now preserves line breaks in its output. (Bug 2606)
+An experimental new syslog daemon log handler ('daemon') has been added to the Log distribution. (Bart van der Schans)</notes>
     </release>
     <release>
       <version>1.8.6</version>
