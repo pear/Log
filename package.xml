@@ -28,6 +28,7 @@
 	      <file role="php">composite.php</file>
 	      <file role="php">console.php</file>
 	      <file role="php">file.php</file>
+	      <file role="php">mail.php</file>
 	      <file role="php">mcal.php</file>
 	      <file role="php">observer.php</file>
 	      <file role="php">sql.php</file>
