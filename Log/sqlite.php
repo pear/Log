@@ -37,6 +37,8 @@
  * @author  Jon Parise <jon@php.net>
  * @since   Log 1.8.3
  * @package Log
+ *
+ * @example sqlite.php      Using the Sqlite handler.
  */
 class Log_sqlite extends Log
 {
