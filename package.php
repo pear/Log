@@ -1,7 +1,6 @@
 <?php
 
 require_once 'PEAR/PackageFileManager.php';
-require_once 'Console/Getopt.php';
 
 $version = '1.8.7';
 $notes = <<<EOT
