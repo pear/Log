@@ -501,6 +501,9 @@ The SQL (DB) Handler
 The SQL handler sends log events to a database using `PEAR's DB abstraction
 layer`_.
 
+**Note:** Due to the constraints of the database schema, the SQL handler
+limits the length of the ``$ident`` string to sixteen (16) characters.
+
 Configuration
 ~~~~~~~~~~~~~
 +-------------------+-----------+---------------+---------------------------+
