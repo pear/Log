@@ -100,13 +100,22 @@ class Log
                      $maxLevel = PEAR_LOG_DEBUG)
     {
         $type = strtolower($type);
+        $class = 'Log_' . $type;
         $classfile = 'Log/' . $type . '.php';
-        if (@include_once $classfile) {
-            $class = 'Log_' . $type;
+
+        /*
+         * Attempt to include our version of the named class, but don't treat
+         * a failure as fatal.  The caller may have already included their own
+         * version of the named class.
+         */
+        @include_once $classfile;
+
+        /* If the class exists, return a new instance of it. */
+        if (class_exists($class)) {
             return new $class($name, $ident, $conf, $maxLevel);
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
