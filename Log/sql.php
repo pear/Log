@@ -73,7 +73,7 @@ class Log_sql extends Log {
     {
         if (!$this->_opened) {
             $this->db = &DB::connect($this->dsn, true);
-            if (DB::isError($this->db) || DB::isWarning($this->db)) {
+            if (DB::isError($this->db)) {
                 return false;
             }
             $this->_opened = true;
