@@ -94,7 +94,7 @@ class Log_file extends Log {
             $this->open();
         }
 
-        $entry = sprintf("%s %s [%s] %s\n", strftime('%b %d %T'),
+        $entry = sprintf("%s %s [%s] %s\n", strftime('%b %d %H:%M:%S'),
             $this->_ident, Log::priorityToString($priority), $message);
 
         if ($this->fp) {

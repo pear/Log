@@ -43,7 +43,7 @@ class Log_console extends Log
         /* Abort early if the priority is above the maximum logging level. */
         if ($priority > $this->_maxLevel) return;
 
-        printf("%s %s [%s] %s\n", strftime('%b %d %T'), $this->_ident,
+        printf("%s %s [%s] %s\n", strftime('%b %d %H:%M:%S'), $this->_ident,
             Log::priorityToString($priority), $message);
 
         $this->notifyAll(array('priority' => $priority, 'message' => $message));
