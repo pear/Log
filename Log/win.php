@@ -217,7 +217,7 @@ win.document.writeln('<th>Priority</th><th width="100%">Message</th></tr>');
         if (!empty($this->_ident)) {
             $line .= '<td>' . $this->_ident . '</td>';
         }
-        $line .= '<td>' . $this->priorityToString($priority) . '</td>';
+        $line .= '<td>' . ucfirst($this->priorityToString($priority)) . '</td>';
         $line .= sprintf('<td style="color: %s">%s</td>',
                          $this->_colors[$priority], nl2br($message));
         $line .= '</tr>';
