@@ -19,6 +19,20 @@ class Log_console extends Log
     var $_stream = STDOUT;
 
     /**
+     * Should the output be buffered or displayed immediately?
+     * @var string
+     * @access private
+     */
+    var $_buffering = false;
+
+    /**
+     * String holding the buffered output.
+     * @var string
+     * @access private
+     */
+    var $_buffer = '';
+
+    /**
      * String containing the format of a log line.
      * @var string
      * @access private
@@ -66,6 +80,10 @@ class Log_console extends Log
             $this->_stream = $conf['stream'];
         }
 
+        if (isset($conf['buffering'])) {
+            $this->_buffering = $conf['buffering'];
+        }
+
         if (!empty($conf['lineFormat'])) {
             $this->_lineFormat = str_replace(array_keys($this->_formatMap),
                                              array_values($this->_formatMap),
@@ -74,6 +92,29 @@ class Log_console extends Log
 
         if (!empty($conf['timeFormat'])) {
             $this->_timeFormat = $conf['timeFormat'];
+        }
+
+        /*
+         * If output buffering has been requested, we need to register a
+         * shutdown function that will dump the buffer upon termination.
+         */
+        if ($this->_buffering) {
+            register_shutdown_function(array(&$this, '_Log_console'));
+        }
+    }
+
+    /**
+     * Destructor
+     */
+    function _Log_console()
+    {
+        /*
+         * If output buffering is enabled, dump the contents of the buffer to
+         * the output stream.
+         */
+        if ($this->_buffering && (strlen($this->_buffer) > 0)) {
+            fwrite($this->_stream, $this->_buffer);
+            $this->_buffer = '';
         }
     }
 
@@ -102,8 +143,15 @@ class Log_console extends Log
                 $this->_ident, $this->priorityToString($priority),
                 $message) . "\n";
 
-        /* Print the line to the output stream. */
-        fwrite($this->_stream, $line);
+        /*
+         * If buffering is enabled, append this line to the output buffer.
+         * Otherwise, print the line to the output stream immediately.
+         */
+        if ($this->_buffering) {
+            $this->_buffer .= $line;
+        } else {
+            fwrite($this->_stream, $line);
+        }
 
         /* Notify observers about this log message. */
         $this->_announce(array('priority' => $priority, 'message' => $message));
