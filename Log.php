@@ -428,6 +428,34 @@ class Log
     }
 
     /**
+     * Returns the the PEAR_LOG_* integer constant for the given string
+     * representation of a priority name.  This function performs a
+     * case-insensitive search.
+     *
+     * @param string $name      String containing a priority name.
+     *
+     * @return string           The PEAR_LOG_* integer contstant corresponding
+     *                          the the specified priority name.
+     *
+     * @since   Log 1.9.0
+     */
+    function stringToPriority($name)
+    {
+        $levels = array(
+            'emergency' => PEAR_LOG_EMERG,
+            'alert'     => PEAR_LOG_ALERT,
+            'critical'  => PEAR_LOG_CRIT,
+            'error'     => PEAR_LOG_ERR,
+            'warning'   => PEAR_LOG_WARNING,
+            'notice'    => PEAR_LOG_NOTICE,
+            'info'      => PEAR_LOG_INFO,
+            'debug'     => PEAR_LOG_DEBUG
+        );
+
+        return $levels[strtolower($name)];
+    }
+
+    /**
      * Calculate the log mask for the given priority.
      *
      * @param integer   $priority   The priority whose mask will be calculated.

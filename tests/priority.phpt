@@ -16,9 +16,15 @@ $logger->setPriority(PEAR_LOG_DEBUG);
 $logger->log('Log message');
 
 /* Verify that the getPriority() method also things we're at PEAR_LOG_DEBUG. */
-echo $logger->priorityToString($logger->getPriority()) . "\n";
+$priority = $logger->priorityToString($logger->getPriority());
+echo "$priority\n";
+
+/* Verify that stringToPriority() can convert back to a constant. */
+$priority = $logger->stringToPriority($priority);
+echo "$priority\n";
 
 --EXPECT--
 [info] Log message
 [debug] Log message
 debug
+7
