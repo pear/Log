@@ -130,6 +130,40 @@ class Log_file extends Log
     }
 
     /**
+     * Creates the given directory path.  If the parent directories don't
+     * already exist, they will be created, too.
+     *
+     * @param   string  $path       The full directory path to create.
+     * @param   integer $mode       The permissions mode with which the
+     *                              directories will be created.
+     *
+     * @return  True if the full path is successfully created or already
+     *          exists.
+     *
+     * @access  private
+     */
+    function _mkpath($path, $mode = 0700)
+    {
+        /* We're only interested in the directory component of the path. */
+        $path = dirname($path);
+
+        /* If the directory already exists, return success immediately. */
+        if (is_dir($path)) {
+            return true;
+        }
+
+        /*
+         * In order to understand recursion, you must first understand
+         * recursion ...
+         */
+        if ($this->_mkpath(dirname($path), $mode) === false) {
+            return false;
+        }
+
+        return @mkdir($path);
+    }
+
+    /**
      * Opens the log file for output.  If the specified log file does not
      * already exist, it will be created.  By default, new log entries are
      * appended to the end of the log file.
@@ -141,6 +175,11 @@ class Log_file extends Log
     function open()
     {
         if (!$this->_opened) {
+            /* If the log file's directory doesn't exist, create it. */
+            if (!is_dir(dirname($this->_filename))) {
+                $this->_mkpath($this->_filename);
+            }
+
             /* Obtain a handle to the log file. */
             $this->_fp = fopen($this->_filename, ($this->_append) ? 'a' : 'w');
 
