@@ -99,7 +99,7 @@ class Log_mail extends Log {
     function open()
     {
         if (!$this->_opened) {
-            $this->_message = "Log messages:\n\n";
+            $this->_message = "Log messages:\r\n\r\n";
             $this->_opened = true;
         }
     }
@@ -153,7 +153,7 @@ class Log_mail extends Log {
             $this->open();
         }
 
-        $entry = sprintf("%s %s [%s] %s\n", strftime('%b %d %H:%M:%S'),
+        $entry = sprintf("%s %s [%s] %s\r\n", strftime('%b %d %H:%M:%S'),
             $this->_ident, Log::priorityToString($priority), $message);
 
         $this->_message .= $entry;
