@@ -21,7 +21,7 @@
         <date>2002-09-15</date>
         <state>stable</state>
         <notes>
-         Adding an mail logging target.
+         Adding a mail logging target.
         </notes>
       <filelist>
         <dir name="/">
