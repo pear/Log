@@ -501,8 +501,30 @@ The SQL (DB) Handler
 The SQL handler sends log events to a database using `PEAR's DB abstraction
 layer`_.
 
-**Note:** Due to the constraints of the database schema, the SQL handler
-limits the length of the ``$ident`` string to sixteen (16) characters.
+**Note:** Due to the constraints of the default database schema, the SQL
+handler limits the length of the ``$ident`` string to sixteen (16) characters.
+This limit can be adjusted using the ``identLimit`` configuration parameter.
+
+The Log Table
+~~~~~~~~~~~~~
+The default SQL table used by this handler looks like this::
+
+    CREATE TABLE log_table (
+        id          INT NOT NULL,
+        logtime     TIMESTAMP NOT NULL,
+        ident       CHAR(16) NOT NULL,
+        priority    INT NOT NULL,
+        message     VARCHAR(200),
+        PRIMARY KEY (id)
+    );
+
+This is the "lowest common denominator" that should work across all SQL
+compliant database.  You may want to make database- or site-specific changes
+to this schema to support your specific needs, however.  For example,
+`PostgreSQL`_ users may prefer to use a ``TEXT`` type for the ``message``
+field.
+
+.. _PostgreSQL: http://www.postgresql.org/
 
 Configuration
 ~~~~~~~~~~~~~
@@ -527,6 +549,10 @@ Configuration
 |                   |           |               | require updates to the SQL|
 |                   |           |               | schema, as well.**        |
 +-------------------+-----------+---------------+---------------------------+
+
+The name of the database table to which the log entries will be written is
+specified using the ``$name`` construction parameter (see `Configuring a
+Handler`_).
 
 .. _DB: http://pear.php.net/package/DB
 .. _PEAR's DB abstraction layer: DB_
