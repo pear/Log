@@ -73,9 +73,9 @@ class Log
 
 
     /**
-     * Attempts to return a concrete Log instance of $type.
+     * Attempts to return a concrete Log instance of type $handler.
      *
-     * @param string $type      The type of concrete Log subclass to return.
+     * @param string $handler   The type of concrete Log subclass to return.
      *                          Attempt to dynamically include the code for
      *                          this subclass. Currently, valid values are
      *                          'console', 'syslog', 'sql', 'file', and 'mcal'.
@@ -96,12 +96,12 @@ class Log
      *                          false on an error.
      * @access public
      */
-    function &factory($type, $name = '', $ident = '', $conf = array(),
-                     $maxLevel = PEAR_LOG_DEBUG)
+    function &factory($handler, $name = '', $ident = '', $conf = array(),
+                      $maxLevel = PEAR_LOG_DEBUG)
     {
-        $type = strtolower($type);
-        $class = 'Log_' . $type;
-        $classfile = 'Log/' . $type . '.php';
+        $handler = strtolower($handler);
+        $class = 'Log_' . $handler;
+        $classfile = 'Log/' . $handler . '.php';
 
         /*
          * Attempt to include our version of the named class, but don't treat
@@ -120,9 +120,9 @@ class Log
     }
 
     /**
-     * Attempts to return a reference to a concrete Log instance of $type, only
-     * creating a new instance if no log instance with the same parameters
-     * currently exists.
+     * Attempts to return a reference to a concrete Log instance of type
+     * $handler, only creating a new instance if no log instance with the same
+     * parameters currently exists.
      *
      * You should use this if there are multiple places you might create a
      * logger, you don't want to create multiple loggers, and you don't want to
@@ -133,7 +133,7 @@ class Log
      * Without the ampersand (&) in front of the method name, you will not get
      * a reference, you will get a copy.</b>
      *
-     * @param string $type      The type of concrete Log subclass to return.
+     * @param string $handler   The type of concrete Log subclass to return.
      *                          Attempt to dynamically include the code for
      *                          this subclass. Currently, valid values are
      *                          'console', 'syslog', 'sql', 'file', and 'mcal'.
@@ -148,22 +148,22 @@ class Log
      * @param array $conf       A hash containing any additional configuration
      *                          information that a subclass might need.
      *
-     * @param int $maxLevel     Minimum priority level at which to log.
+     * @param int $maxLevel     Maximum priority level at which to log.
      *
      * @return object Log       The newly created concrete Log instance, or an
      *                          false on an error.
      * @access public
      */
-    function &singleton($type, $name = '', $ident = '', $conf = array(),
+    function &singleton($handler, $name = '', $ident = '', $conf = array(),
                         $maxLevel = PEAR_LOG_DEBUG)
     {
         static $instances;
         if (!isset($instances)) $instances = array();
 
-        $signature = serialize(array($type, $name, $ident, $conf, $maxLevel));
+        $signature = serialize(array($handler, $name, $ident, $conf, $maxLevel));
         if (!isset($instances[$signature])) {
-            $instances[$signature] = &Log::factory($type, $name, $ident, $conf,
-                $maxLevel);
+            $instances[$signature] = &Log::factory($handler, $name, $ident,
+                                                   $conf, $maxLevel);
         }
 
         return $instances[$signature];
@@ -348,11 +348,11 @@ class Log
      *
      * @param int $priority     A PEAR_LOG_* integer constant.
      *
-     * @return string           The string representation of $priority.
+     * @return string           The string representation of $level.
      */
     function priorityToString($priority)
     {
-        $priorities = array(
+        $levels = array(
             PEAR_LOG_EMERG   => 'emergency',
             PEAR_LOG_ALERT   => 'alert',
             PEAR_LOG_CRIT    => 'critical',
@@ -363,7 +363,7 @@ class Log
             PEAR_LOG_DEBUG   => 'debug'
         );
 
-        return $priorities[$priority];
+        return $levels[$priority];
     }
 
     /**
