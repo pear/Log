@@ -170,7 +170,7 @@ class Log extends PEAR {
      */
     function priorityToString($priority)
     {
-        $priorities = array(
+        static $priorities = array(
             PEAR_LOG_EMERG   => 'emergency',
             PEAR_LOG_ALERT   => 'alert',
             PEAR_LOG_CRIT    => 'critical',
