@@ -16,6 +16,8 @@
  * @author  Paul Yanchenko <pusher@inaco.ru>
  * @since   Log 1.8.0
  * @package Log
+ *
+ * @example display.php     Using the display handler.
  */
 class Log_display extends Log
 {

@@ -13,6 +13,8 @@
  * @author  Jon Parise <jon@php.net>
  * @since   Log 1.8.2
  * @package Log
+ *
+ * @example null.php    Using the null handler.
  */
 class Log_null extends Log
 {

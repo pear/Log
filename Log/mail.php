@@ -22,6 +22,8 @@
  * @author  Jon Parise <jon@php.net>
  * @since   Log 1.3
  * @package Log
+ *
+ * @example mail.php    Using the mail handler.
  */
 class Log_mail extends Log
 {

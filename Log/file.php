@@ -9,11 +9,13 @@
 /**
  * The Log_file class is a concrete implementation of the Log abstract
  * class that logs messages to a text file.
- *
+ * 
  * @author  Jon Parise <jon@php.net>
  * @author  Roman Neuhauser <neuhauser@bellavista.cz>
  * @since   Log 1.0
  * @package Log
+ *
+ * @example file.php    Using the file handler.
  */
 class Log_file extends Log
 {

@@ -16,6 +16,8 @@
  * @since   Horde 1.3
  * @since   Log 1.0
  * @package Log
+ *
+ * @example syslog.php      Using the syslog handler.
  */
 class Log_syslog extends Log
 {

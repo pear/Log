@@ -30,6 +30,8 @@ require_once 'DB.php';
  * @since   Horde 1.3
  * @since   Log 1.0
  * @package Log 
+ *
+ * @example sql.php     Using the SQL handler.
  */
 class Log_sql extends Log {
 

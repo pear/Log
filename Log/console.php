@@ -13,6 +13,8 @@
  * @author  Jon Parise <jon@php.net>
  * @since   Log 1.1
  * @package Log
+ *
+ * @example console.php     Using the console handler.
  */
 class Log_console extends Log
 {

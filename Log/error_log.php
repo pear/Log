@@ -13,6 +13,8 @@
  * @author  Jon Parise <jon@php.net>
  * @since   Log 1.7.0
  * @package Log
+ * 
+ * @example error_log.php   Using the error_log handler.
  */
 class Log_error_log extends Log
 {

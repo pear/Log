@@ -15,6 +15,8 @@
  * @since   Horde 1.3
  * @since   Log 1.0
  * @package Log
+ *
+ * @example observer_mail.php   An example Log_observer implementation.
  */
 class Log_observer
 {

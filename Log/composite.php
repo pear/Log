@@ -17,6 +17,8 @@
  * @since Horde 1.3
  * @since Log 1.0
  * @package Log
+ *
+ * @example composite.php   Using the composite handler.
  */
 class Log_composite extends Log
 {

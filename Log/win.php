@@ -18,6 +18,8 @@
  * @author  Jon Parise <jon@php.net>
  * @since   Log 1.7.0
  * @package Log
+ *
+ * @example win.php     Using the window handler.
  */
 class Log_win extends Log
 {
