@@ -19,7 +19,7 @@ The Log framework provides an abstracted logging system.  It supports logging to
         <date>2003-04-06</date>
         <state>stable</state>
         <notes>
-In the Log_observer, operate directly on the reference to the Log instance (instead of on a copy of the object).
+In the Log_observer class, operate directly on the reference to the Log instance (instead of on a copy of the object).
         </notes>
       <filelist>
         <dir name="/">
