@@ -58,6 +58,7 @@ class Log_composite extends Log
             foreach ($this->_children as $id => $child) {
                 $this->_children[$id]->open();
             }
+            $this->_opened = true;
         }
     }
 
@@ -72,6 +73,7 @@ class Log_composite extends Log
             foreach ($this->_children as $id => $child) {
                 $this->_children[$id]->close();
             }
+            $this->_opened = false;
         }
     }
 
