@@ -61,6 +61,14 @@ class Log
     var $_ident = '';
 
     /**
+     * The default priority to use when logging an event.
+     *
+     * @var integer
+     * @access private
+     */
+    var $_priority = PEAR_LOG_INFO;
+
+    /**
      * The bitmask of allowed log levels.
      * @var integer
      * @access private
@@ -205,7 +213,7 @@ class Log
      * Abstract implementation of the log() method.
      * @since Log 1.0
      */
-    function log($message, $priority = PEAR_LOG_INFO)
+    function log($message, $priority = null)
     {
         return false;
     }
@@ -489,6 +497,32 @@ class Log
     function _isMasked($priority)
     {
         return (Log::MASK($priority) & $this->_mask);
+    }
+
+    /**
+     * Returns the current default priority.
+     *
+     * @return integer  The current default priority.
+     *
+     * @access  public
+     * @since   Log 1.8.4
+     */
+    function getPriority()
+    {
+        return $this->_priority;
+    }
+
+    /**
+     * Sets the default priority to the specified value.
+     *
+     * @param   integer $priority   The new default priority.
+     *
+     * @access  public
+     * @since   Log 1.8.4
+     */
+    function setPriority($priority)
+    {
+        $this->_priority = $priority;
     }
 
     /**

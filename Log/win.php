@@ -205,12 +205,16 @@ win.document.writeln('<th>Priority</th><th width="100%">Message</th></tr>');
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
-     *                  The default is PEAR_LOG_INFO.
      * @return boolean  True on success or false on failure.
      * @access public
      */
-    function log($message, $priority = PEAR_LOG_INFO)
+    function log($message, $priority = null)
     {
+        /* If a priority hasn't been specified, use the default value. */
+        if ($priority === null) {
+            $priority = $this->_priority;
+        }
+
         /* Abort early if the priority is above the maximum logging level. */
         if (!$this->_isMasked($priority)) {
             return false;

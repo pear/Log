@@ -101,14 +101,18 @@ class Log_composite extends Log
      *                              PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                              PEAR_LOG_NOTICE, PEAR_LOG_INFO, and
      *                              PEAR_LOG_DEBUG.
-     *                              The default is PEAR_LOG_INFO.
      *
      * @return boolean  True if the entry is successfully logged.
      *
      * @access public
      */
-    function log($message, $priority = PEAR_LOG_INFO)
+    function log($message, $priority = null)
     {
+        /* If a priority hasn't been specified, use the default value. */
+        if ($priority === null) {
+            $priority = $this->_priority;
+        }
+
         foreach ($this->_children as $id => $child) {
             $this->_children[$id]->log($message, $priority);
         }
