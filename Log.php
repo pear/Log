@@ -2,13 +2,13 @@
 // $Id$
 // $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
 
-define('PEAR_LOG_EMERG',    0);                                                
-define('PEAR_LOG_ALERT',    1);                                                
-define('PEAR_LOG_CRIT',     2);                                                
-define('PEAR_LOG_ERR',      3);                                                
-define('PEAR_LOG_WARNING',  4);                                                
-define('PEAR_LOG_NOTICE',   5);                                                
-define('PEAR_LOG_INFO',     6);                                                
+define('PEAR_LOG_EMERG',    0);
+define('PEAR_LOG_ALERT',    1);
+define('PEAR_LOG_CRIT',     2);
+define('PEAR_LOG_ERR',      3);
+define('PEAR_LOG_WARNING',  4);
+define('PEAR_LOG_NOTICE',   5);
+define('PEAR_LOG_INFO',     6);
 define('PEAR_LOG_DEBUG',    7);
 
 /**
@@ -21,8 +21,8 @@ define('PEAR_LOG_DEBUG',    7);
  * @since   Horde 1.3
  * @package Log
  */
-class Log {
-
+class Log
+{
     /**
      * Indicates whether or not the log can been opened / connected.
      *
@@ -31,7 +31,7 @@ class Log {
      */
     var $_opened = false;
 
-    /** 
+    /**
      * The label that uniquely identifies this set of log messages.
      *
      * @var string
@@ -39,7 +39,7 @@ class Log {
      */
     var $_ident = '';
 
-    /** 
+    /**
      * The maximum priority level at which to log a message.
      *
      * @var int
@@ -47,7 +47,7 @@ class Log {
      */
     var $_maxLevel = PEAR_LOG_DEBUG;
 
-    /** 
+    /**
      * Holds all Log_observer objects that wish to be notified of new messages.
      *
      * @var array
@@ -58,7 +58,7 @@ class Log {
 
     /**
      * Attempts to return a concrete Log instance of $type.
-     * 
+     *
      * @param string $type      The type of concrete Log subclass to return.
      *                          Attempt to dynamically include the code for
      *                          this subclass. Currently, valid values are
@@ -75,7 +75,7 @@ class Log {
      *                          information that a subclass might need.
      *
      * @param int $maxLevel     Maximum priority level at which to log.
-     * 
+     *
      * @return object Log       The newly created concrete Log instance, or an
      *                          false on an error.
      * @access public
@@ -106,7 +106,7 @@ class Log {
      * <b>You MUST call this method with the $var = &Log::singleton() syntax.
      * Without the ampersand (&) in front of the method name, you will not get
      * a reference, you will get a copy.</b>
-     * 
+     *
      * @param string $type      The type of concrete Log subclass to return.
      *                          Attempt to dynamically include the code for
      *                          this subclass. Currently, valid values are
@@ -121,9 +121,9 @@ class Log {
      *
      * @param array $conf       A hash containing any additional configuration
      *                          information that a subclass might need.
-     * 
+     *
      * @param int $maxLevel     Minimum priority level at which to log.
-     * 
+     *
      * @return object Log       The newly created concrete Log instance, or an
      *                          false on an error.
      * @access public
