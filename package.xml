@@ -7,27 +7,32 @@
      logging to file, syslog, SQL, and mcal targets.  It also provides a
      subject - observer mechanism.
     </description>
+    <license>PHP 2.02</license>
     <maintainer>
         <user>jon</user>
         <name>Jon Parise</name>
         <email>jon@php.net</email>
+        <role>lead</role>
     </maintainer>
     <release>
         <version>1.0</version>
         <date>2002-03-07</date>
+        <state>stable</state>
         <notes>
          This is the initial independent release of the Log package.
         </notes>
+      <filelist>
+        <dir name="/">
+          <file role="php">Log.php</file>
+	    <dir name="Log">
+	      <file role="php">composite.php</file>
+	      <file role="php">file.php</file>
+	      <file role="php">mcal.php</file>
+	      <file role="php">observer.php</file>
+	      <file role="php">sql.php</file>
+	      <file role="php">syslog.php</file>
+	    </dir>
+        </dir>
+      </filelist>
     </release>
-    <filelist>
-	<file role="php" baseinstalldir="/">Log.php</file>
-	<dir name="Log" baseinstalldir="/Log">
-	    <file role="php">composite.php</file>
-	    <file role="php">file.php</file>
-	    <file role="php">mcal.php</file>
-	    <file role="php">observer.php</file>
-	    <file role="php">sql.php</file>
-	    <file role="php">syslog.php</file>
-	</dir>
-    </filelist>
 </package>
