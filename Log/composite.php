@@ -75,6 +75,7 @@ class Log_composite extends Log {
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      *                  The default is PEAR_LOG_INFO.
+     * @return boolean  True on success or false on failure.
      */
     function log($message, $priority = PEAR_LOG_INFO)
     {
@@ -84,6 +85,8 @@ class Log_composite extends Log {
         }
         
         $this->notifyAll(array('priority' => $priority, 'message' => $message));
+
+        return true;
     }
 
     /**

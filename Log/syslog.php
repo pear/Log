@@ -79,19 +79,27 @@ class Log_syslog extends Log {
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      *                  The default is PEAR_LOG_INFO.
+     * @return boolean  True on success or false on failure.
      * @access public     
      */
     function log($message, $priority = PEAR_LOG_INFO)
     {
         /* Abort early if the priority is above the maximum logging level. */
-        if ($priority > $this->_maxLevel) return;
+        if ($priority > $this->_maxLevel) {
+            return false;
+        }
 
         if (!$this->_opened) {
             $this->open();
         }
 
-        syslog($this->_toSyslog($priority), $message);
+        if (!syslog($this->_toSyslog($priority), $message)) {
+            return false;
+        }
+
         $this->notifyAll(array('priority' => $priority, 'message' => $message));
+
+        return true;
     }
 
     /**

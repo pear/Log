@@ -148,6 +148,7 @@ class Log_file extends Log
     *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT, PEAR_LOG_CRIT,
     *                  PEAR_LOG_ERR, PEAR_LOG_WARNING, PEAR_LOG_NOTICE, PEAR_LOG_INFO, and
     *                  PEAR_LOG_DEBUG. The default is PEAR_LOG_INFO.
+    * @return boolean  True on success or false on failure.
     * @access public
     */
     function log($message, $priority = PEAR_LOG_INFO)
@@ -162,6 +163,8 @@ class Log_file extends Log
 
         // Notify observers
         $this->notifyAll(array('message' => $message, 'priority' => $priority));
+
+        return true;
     }
     
     /**
