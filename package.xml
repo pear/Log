@@ -22,8 +22,9 @@ The Log framework provides an abstracted logging system.  It supports logging to
         <notes>
 The Log package now includes a users guide.
 
-A number of small improvements have been made to the 'win' log handler (based
-on suggestions from Paul Yanchenko).
+A number of small improvements have been made to the 'win' log handler (based on suggestions from Paul Yanchenko).
+
+A new 'display' log handler has been added to the distribution.  Contributed by Paul Yanchenko, this handler simply prints the error message back to the browser.  It respects the 'error_prepend_string' and 'error_append_string' PHP INI values and is useful when using PEAR::setErrorHandling()'s PEAR_ERROR_CALLBACK mechanism.
         </notes>
         <filelist>
           <dir name="/">
@@ -31,6 +32,7 @@ on suggestions from Paul Yanchenko).
 	      <dir name="Log">
 	        <file role="php">composite.php</file>
 	        <file role="php">console.php</file>
+	        <file role="php">display.php</file>
 	        <file role="php">error_log.php</file>
 	        <file role="php">file.php</file>
   	        <file role="php">mail.php</file>

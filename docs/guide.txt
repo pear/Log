@@ -274,6 +274,31 @@ Example
     }
 
 
+The Display Handler
+-------------------
+The Display handler simply prints the log events back to the browser.  It
+respects the ``error_prepend_string`` and ``error_append_string`` `error
+handling values`_ and is useful when using `PEAR::setErrorHandling()`_'s
+``PEAR_ERROR_CALLBACK`` mechanism.
+
+Configuration
+~~~~~~~~~~~~~
++-------------------+-----------+---------------+---------------------------+
+| Parameter         | Type      | Default       | Description               |
++===================+===========+===============+===========================+
+| ``error_prepend`` | String    | PHP INI value | This string will be       |
+|                   |           |               | prepended to the log      |
+|                   |           |               | output.
++-------------------+-----------+---------------+---------------------------+
+| ``error_append``  | String    | PHP INI value | This string will be       |
+|                   |           |               | appended to the log       |
+|                   |           |               | output.                   |
++-------------------+-----------+---------------+---------------------------+
+
+.. _error handling values: http://www.php.net/manual/en/ref.errorfunc.php
+.. _PEAR::setErrorHandling(): http://pear.php.net/manual/en/core.pear.pear.seterrorhandling.php
+
+
 The Error_Log Handler
 ---------------------
 The Error_Log handler sends log events to PHP's `error_log()`_ function.
