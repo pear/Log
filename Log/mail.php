@@ -30,7 +30,7 @@ class Log_mail extends Log {
      * String holding the email's subject.
      * @var string
      */
-    var $_subject = 'Log message from Log_mail';
+    var $_subject = '[Log_mail] Log message';
 
     /**
      * String holding the mail message body.
@@ -94,12 +94,16 @@ class Log_mail extends Log {
                 $headers = "From: $this->_from\r\n";
                 $headers .= "User-Agent: Log_mail\r\n";
 
-                /* TODO: Handle mail() failures */
-                mail($this->_recipient, $this->_subject, $this->_message,
-                     $headers);
+                if (mail($this->_recipient, $this->_subject, $this->_message,
+                        $headers) == false) {
+                    error_log("Log_mail: Failure executing mail()", 0);
+                    return false;
+                }
             }
             $this->_opened = false;
         }
+
+        return true;
     }
 
     /**
