@@ -540,6 +540,76 @@ Using an existing `DB`_ object::
     }
 
 
+The Sqlite Handler
+------------------
+:Author:        Bertrand Mansion
+:Contact:       bmansion@mamasam.com
+
+The Sqlite handler sends log events to an Sqlite database using the `native
+PHP sqlite functions`_.
+
+It is faster than `the SQL (DB) handler`_ because requests are made directly
+to the database without using an abstraction layer.  It is also interesting to
+note that Sqlite database files can be moved, copied, and deleted on your
+system just like any other files, which makes log management easier.  Last but
+not least, using a database to log your events allows you to use SQL queries
+to create reports and statistics.
+
+When using a database and logging a lot of events, it is recommended to split
+the database into smaller databases.  This is allowed by Sqlite, and you can
+later use the Sqlite `ATTACH`_ statement to query your log database files
+globally.
+
+If the database does not exist when the log is opened, sqlite will try to
+create it automatically. If the log table does not exist, it will also be
+automatically created.  The table creation uses the following SQL request::
+
+    CREATE TABLE log_table (
+        id          INTEGER PRIMARY KEY NOT NULL,
+        logtime     NOT NULL,
+        ident       CHAR(16) NOT NULL,
+        priority    INT NOT NULL,
+        message
+    );
+
+Configuration
+~~~~~~~~~~~~~
++-------------------+-----------+---------------+---------------------------+
+| Parameter         | Type      | Default       | Description               |
++===================+===========+===============+===========================+
+| ``filename``      | String    | '' `(empty)`  | Path to an Sqlite         |
+|                   |           |               | database.                 |
++-------------------+-----------+---------------+---------------------------+
+| ``mode``          | Integer   | 0666          | Octal mode used to open   |
+|                   |           |               | the database.             |
++-------------------+-----------+---------------+---------------------------+
+| ``persistent``    | Boolean   | false         | Use a persistent          |
+|                   |           |               | connection.               |
++-------------------+-----------+---------------+---------------------------+
+
+An already opened database connection can also be passed as parameter instead
+of the above configuration.  In this case, closing the database connection is
+up to the user.
+
+.. _native PHP sqlite functions: http://www.php.net/sqlite
+.. _ATTACH: http://www.sqlite.org/lang.html#attach
+
+Examples
+~~~~~~~~
+Using a configuration to create a new database connection::
+
+    $conf = array('filename' => 'log.db', 'mode' => 0666, 'persistent' => true);
+    $logger =& Log::factory('sqlite', 'log_table', 'ident', $conf);
+    $logger->log('logging an event', PEAR_LOG_WARNING);
+
+Using an existing connection::
+
+    $db = sqlite_open('log.db', 0666, $error);
+    $logger =& Log::factory('sqlite', 'log_table', 'ident', $db);
+    $logger->log('logging an event', PEAR_LOG_WARNING);
+    sqlite_close($db);
+
+
 The Syslog Handler
 ------------------
 The Syslog handler sends log events to the system logging service (syslog on
