@@ -89,7 +89,9 @@ class Log_sql extends Log {
         $this->setIdent($ident);
 
         /* If a specific sequence name was provided, use it. */
-        if (!empty($conf['sequence'])) $this->_sequence = $conf['sequence'];
+        if (!empty($conf['sequence'])) {
+            $this->_sequence = $conf['sequence'];
+        }
 
         /* If an existing database connection was provided, use it. */
         if (isset($conf['db'])) {
