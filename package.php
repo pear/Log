@@ -3,17 +3,16 @@
 require_once 'PEAR/PackageFileManager.php';
 require_once 'Console/Getopt.php';
 
-$version = '1.8.0';
+$version = '1.8.1';
 $notes = <<<EOT
-The Log package now includes a users guide, example scripts and unit tests.
-
-A number of small improvements have been made to the 'win' log handler (based on suggestions from Paul Yanchenko).
-
-A new 'display' log handler has been added to the distribution.  Contributed by Paul Yanchenko, this handler simply prints the error message back to the browser.  It respects the 'error_prepend_string' and 'error_append_string' PHP INI values and is useful when using PEAR::setErrorHandling()'s PEAR_ERROR_CALLBACK mechanism.
+Fixed some bugs in the 'win' handler.
+Updated the Log_observer::factory() method for consistency with Log::factory().
 EOT;
 
-$description =<<<EOT
-The Log framework provides an abstracted logging system.  It supports logging to console, file, syslog, SQL, mail, and mcal targets.  It also provides a subject - observer mechanism.
+$changelog = <<<EOT
+The 'win' handler now handles newline sequences correctly (Bug 282).
+
+The Log_observer::factory() method has been updated to accept an optional associative array of configuration values, return the newly-created object by reference, and look for files named 'Log/observer_$type.php'.
 EOT;
 
 $package = new PEAR_PackageFileManager();
@@ -21,13 +20,13 @@ $package = new PEAR_PackageFileManager();
 $result = $package->setOptions(array(
     'package'           => 'Log',
     'summary'           => 'Logging utilities',
-    'description'       => $description,
     'version'           => $version,
     'state'             => 'stable',
     'license'           => 'PHP License',
     'filelistgenerator' => 'cvs',
     'ignore'            => array('package.php', 'package.xml'),
     'notes'             => $notes,
+    'changelognotes'    => $changelog,
     'changelogoldtonew' => false,
     'baseinstalldir'    => '/',
     'packagedirectory'  => ''));

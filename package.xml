@@ -13,15 +13,12 @@
     </maintainer>
   </maintainers>
   <release>
-    <version>1.8.0</version>
-    <date>2003-11-18</date>
+    <version>1.8.1</version>
+    <date>2003-12-14</date>
     <license>PHP License</license>
     <state>stable</state>
-    <notes>The Log package now includes a users guide, example scripts and unit tests.
-
-A number of small improvements have been made to the 'win' log handler (based on suggestions from Paul Yanchenko).
-
-A new 'display' log handler has been added to the distribution.  Contributed by Paul Yanchenko, this handler simply prints the error message back to the browser.  It respects the 'error_prepend_string' and 'error_append_string' PHP INI values and is useful when using PEAR::setErrorHandling()'s PEAR_ERROR_CALLBACK mechanism.</notes>
+    <notes>Fixed some bugs in the 'win' handler.
+Updated the Log_observer::factory() method for consistency with Log::factory().</notes>
     <deps>
       <dep type="pkg" rel="has" optional="yes">DB</dep>
     </deps>
@@ -109,10 +106,10 @@ A new 'display' log handler has been added to the distribution.  Contributed by 
       <file role="php" baseinstalldir="/" md5sum="14b5fbe0f5487ea8c549bf68b2b66271" name="Log/file.php"/>
       <file role="php" baseinstalldir="/" md5sum="bf591a4550662cb88f9189224c8e6008" name="Log/mail.php"/>
       <file role="php" baseinstalldir="/" md5sum="877e2a99d689f1fdcd34cde7b3da4635" name="Log/mcal.php"/>
-      <file role="php" baseinstalldir="/" md5sum="f74cf852c1275fb3d9f23bc4f7386175" name="Log/observer.php"/>
+      <file role="php" baseinstalldir="/" md5sum="8afa5a110010677d4cb4e56d1a3cbd8d" name="Log/observer.php"/>
       <file role="php" baseinstalldir="/" md5sum="9f6f7750d3804adf273c1a0eedbb44b7" name="Log/sql.php"/>
       <file role="php" baseinstalldir="/" md5sum="9ea63304921b3c084aa07aded4bd643c" name="Log/syslog.php"/>
-      <file role="php" baseinstalldir="/" md5sum="2d65e4ff4f72a080e37b4879d5191496" name="Log/win.php"/>
+      <file role="php" baseinstalldir="/" md5sum="e2fbee5870ca13cff34c0d06f3154b58" name="Log/win.php"/>
       <file role="test" baseinstalldir="/" md5sum="c8bb01df1ac3a923b474cc003d51b189" name="tests/composite.phpt"/>
       <file role="test" baseinstalldir="/" md5sum="cda100f931b35c935125a0bf8f44f769" name="tests/console.phpt"/>
       <file role="test" baseinstalldir="/" md5sum="0d86370df14ae3b5267abdeddf0b8b7a" name="tests/display.phpt"/>
@@ -122,15 +119,13 @@ A new 'display' log handler has been added to the distribution.  Contributed by 
   </release>
   <changelog>
     <release>
-      <version>1.8.0</version>
-      <date>2003-11-15</date>
+      <version>1.8.1</version>
+      <date>2003-12-14</date>
       <license>PHP License</license>
       <state>stable</state>
-      <notes>The Log package now includes a users guide.
+      <notes>The 'win' handler now handles newline sequences correctly (Bug 282).
 
-A number of small improvements have been made to the 'win' log handler (based on suggestions from Paul Yanchenko).
-
-A new 'display' log handler has been added to the distribution.  Contributed by Paul Yanchenko, this handler simply prints the error message back to the browser.  It respects the 'error_prepend_string' and 'error_append_string' PHP INI values and is useful when using PEAR::setErrorHandling()'s PEAR_ERROR_CALLBACK mechanism.</notes>
+The Log_observer::factory() method has been updated to accept an optional associative array of configuration values, return the newly-created object by reference, and look for files named 'Log/observer_.php'.</notes>
     </release>
     <release>
       <version>1.8.0</version>
