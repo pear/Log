@@ -25,7 +25,7 @@ class Log_composite extends Log
 
 
     /**
-     * Construct a new composite Log object.
+     * Constructs a new composite Log object.
      *
      * @param boolean   $name       This parameter is ignored.
      * @param boolean   $ident      This parameter is ignored.
@@ -40,7 +40,7 @@ class Log_composite extends Log
     }
 
     /**
-     * Open the child connections.
+     * Opens the child connections.
      *
      * @access public
      */
@@ -54,7 +54,7 @@ class Log_composite extends Log
     }
 
     /**
-     * Close any child instances.
+     * Closes any child instances.
      *
      * @access public
      */
@@ -68,7 +68,7 @@ class Log_composite extends Log
     }
 
     /**
-     * Send $message and $priority to each child of this composite.
+     * Sends $message and $priority to each child of this composite.
      *
      * @param string    $message    The textual message to be logged.
      * @param string    $priority   (optional) The priority of the message.
@@ -95,7 +95,7 @@ class Log_composite extends Log
     }
 
     /**
-     * Return true if this is a composite.
+     * Returns true if this is a composite.
      *
      * @return boolean  True if this is a composite class.
      *
@@ -107,7 +107,7 @@ class Log_composite extends Log
     }
 
     /**
-     * Add a Log instance to the list of children.
+     * Adds a Log instance to the list of children.
      *
      * @param object    $child      The Log instance to add.
      *
@@ -128,7 +128,7 @@ class Log_composite extends Log
     }
 
     /**
-     * Remove a Log instance from the list of children.
+     * Removes a Log instance from the list of children.
      *
      * @param object    $child      The Log instance to remove.
      *

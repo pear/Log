@@ -185,7 +185,7 @@ class Log {
     }
 
     /**
-     * Add a Log_observer instance to the list of observers that are listening
+     * Adds a Log_observer instance to the list of observers that are listening
      * for messages emitted by this Log instance.
      *
      * @param object    $observer   The Log_observer instance to attach as a
@@ -207,7 +207,7 @@ class Log {
     }
 
     /**
-     * Remove a Log_observer instance from the list of observers.
+     * Removes a Log_observer instance from the list of observers.
      *
      * @param object    $observer   The Log_observer instance to detach from
      *                              the list of listeners.
@@ -229,7 +229,7 @@ class Log {
     }
 
     /**
-     * Inform each registered observer instance that a new message has been
+     * Informs each registered observer instance that a new message has been
      * logged.
      *
      * @param array     $event      A hash describing the log event.
@@ -256,7 +256,7 @@ class Log {
     }
 
     /**
-     * Set this Log instance's identification string.
+     * Sets this Log instance's identification string.
      *
      * @param string    $ident      The new identification string for this Log
      *                              instance.
@@ -269,7 +269,7 @@ class Log {
     }
 
     /**
-     * Return the current identification string.
+     * Returns the current identification string.
      *
      * @return string   The current Log instance's identification string.
      *

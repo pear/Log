@@ -26,7 +26,7 @@ class Log_observer
 
 
     /**
-     * Create a new basic Log_observer instance.
+     * Creates a new basic Log_observer instance.
      *
      * @param integer   $priority   The highest priority at which to receive
      *                              log event notifications.
@@ -39,7 +39,8 @@ class Log_observer
     }
 
     /**
-     * Attempt to return a concrete Log_observer instance of the requested type.
+     * Attempts to return a new concrete Log_observer instance of the requested
+     * type.
      *
      * @param string    $type       The type of concreate Log_observer subclass
      *                              to return.
