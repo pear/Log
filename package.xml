@@ -14,7 +14,7 @@
   </maintainers>
   <release>
     <version>1.8.0</version>
-    <date>2003-11-15</date>
+    <date>2003-11-18</date>
     <license>PHP License</license>
     <state>stable</state>
     <notes>The Log package now includes a users guide, example scripts and unit tests.
@@ -134,7 +134,7 @@ A new 'display' log handler has been added to the distribution.  Contributed by 
     </release>
     <release>
       <version>1.8.0</version>
-      <date>2003-11-15</date>
+      <date>2003-11-18</date>
       <license>PHP License</license>
       <state>stable</state>
       <notes>The Log package now includes a users guide, example scripts and unit tests.
