@@ -142,7 +142,10 @@ class Log_sql extends Log {
             $this->_table, $this->_db->quote($this->_ident),
             $priority, $this->_db->quote($message));
 
-        $this->_db->query($q);
+        $result = $this->_db->query($q);
+        if (DB::isError($result)) {
+            die($result->getMessage());
+        }
 
         $this->notifyAll(array('priority' => $priority, 'message' => $message));
     }
