@@ -136,7 +136,7 @@ class Log extends PEAR {
         static $instances;
         if (!isset($instances)) $instances = array();
 
-        $signature = md5($type . '|' . $name . '|' . $ident . '|' . $maxLevel);
+        $signature = serialize(array($type, $name, $ident, $conf, $maxLevel));
         if (!isset($instances[$signature])) {
             $instances[$signature] = &Log::factory($type, $name, $ident, $conf,
                 $maxLevel);
