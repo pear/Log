@@ -368,7 +368,9 @@ class Log
         /*
          * If we've been given an object, attempt to extract the message using
          * a known method.  If we can't find such a method, default to the
-         * serialized version of the object.
+         * "human-readable" version of the object.
+         *
+         * We also use the human-readable format for arrays.
          */
         if (is_object($message)) {
             if (method_exists($message, 'getmessage')) {
@@ -378,8 +380,10 @@ class Log
             } else if (method_exists($message, '__tostring')) {
                 $message = (string)$message;
             } else {
-                $message = serialize($message);
+                $message = print_r($message, true);
             }
+        } else if (is_array($message)) {
+            $message = print_r($message, true);
         }
 
         /* Otherwise, we assume the message is a string. */
