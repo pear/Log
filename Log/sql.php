@@ -59,7 +59,14 @@ class Log_sql extends Log {
         $this->_table = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;
-        $this->_dsn = $conf['dsn'];
+
+        /* If an existing database connection was provided, use it. */
+        if (isset($conf['db'])) {
+            $this->_db = &$conf['db'];
+            $this->_opened = true;
+        } else {
+            $this->_dsn = $conf['dsn'];
+        }
     }
 
     /**
