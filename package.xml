@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE package SYSTEM "../package.dtd">
-<!-- do not use the "Type" attribute here, that one is only for
-     generated package.xml files -->
-<package version="1.0">
-  <name>Log</name>
-  <summary>Logging utilities</summary>
-  <maintainers>
+<package>
+    <name>Log</name>
+    <summary>Logging utilities</summary>
+    <description>
+     The Log framework provides an abstracted logging system.  It supports
+     logging to file, syslog, SQL, and mcal targets.  It also provides a
+     subject - observer mechanism.
+    </description>
     <maintainer>
-      <user>jon</user>
-      <name>Jon Parise</name>
-      <email>jon@php.net</email>
+        <user>jon</user>
+        <name>Jon Parise</name>
+        <email>jon@php.net</email>
     </maintainer>
-  </maintainers>
-  <release>
-    <version>1.0</version>
-    <date>2001-05-15</date>
-    <notes>
-      This is the initial independent release of the Log package.
-    </notes>
+    <release>
+        <version>1.0</version>
+        <date>2001-05-15</date>
+        <notes>
+         This is the initial independent release of the Log package.
+        </notes>
+    </release>
     <filelist>
-      <file>Log.php</file>
-      <dir name="Log">
-	<file>composite.php</file>
-	<file>file.php</file>
-	<file>mcal.php</file>
-	<file>observer.php</file>
-	<file>sql.php</file>
-	<file>syslog.php</file>
-      </dir>
+	<file role="php" baseinstalldir="/">Log.php</file>
+	<dir name="Log" baseinstalldir="/Log">
+	    <file role="php">Log/composite.php</file>
+	    <file role="php">Log/file.php</file>
+	    <file role="php">Log/mcal.php</file>
+	    <file role="php">Log/observer.php</file>
+	    <file role="php">Log/sql.php</file>
+	    <file role="php">Log/syslog.php</file>
+	</dir>
     </filelist>
-  </release>
 </package>
