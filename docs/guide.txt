@@ -288,7 +288,7 @@ Configuration
 +===================+===========+===============+===========================+
 | ``error_prepend`` | String    | PHP INI value | This string will be       |
 |                   |           |               | prepended to the log      |
-|                   |           |               | output.
+|                   |           |               | output.                   |
 +-------------------+-----------+---------------+---------------------------+
 | ``error_append``  | String    | PHP INI value | This string will be       |
 |                   |           |               | appended to the log       |
@@ -297,6 +297,34 @@ Configuration
 
 .. _error handling values: http://www.php.net/manual/en/ref.errorfunc.php
 .. _PEAR::setErrorHandling(): http://pear.php.net/manual/en/core.pear.pear.seterrorhandling.php
+
+Example
+~~~~~~~
+::
+
+    $conf = array('error_prepend' => '<font color="#ff0000"><tt>',
+                  'error_append'  => '</tt></font>');
+    $logger = &Log::singleton('display', '', '', $conf, PEAR_LOG_DEBUG);
+
+    function errorHandler($error)
+    {
+        global $logger;
+
+        $message = $error->getMessage();
+
+        if (!empty($error->backtrace[1]['file'])) {
+            $message .= ' (' . $error->backtrace[1]['file'];
+            if (!empty($error->backtrace[1]['line'])) {
+                $message .= ' at line ' . $error->backtrace[1]['line'];
+            }
+            $message .= ')';
+        }
+
+        $display->log($message, $error->code);
+    }
+
+    PEAR::setErrorHandling(PEAR_ERROR_CALLBACK, 'errorHandler');
+    PEAR::raiseError('This is an information log message.', PEAR_LOG_INFO);
 
 
 The Error_Log Handler
