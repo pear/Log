@@ -11,7 +11,7 @@
 :Date:          $Date$
 :Revision:      $Revision$
 
-.. contents:: Table of Contents
+.. contents:: Contents
 .. section-numbering::
 
 Using Log Handlers
@@ -278,8 +278,7 @@ The Display Handler
 -------------------
 The Display handler simply prints the log events back to the browser.  It
 respects the ``error_prepend_string`` and ``error_append_string`` `error
-handling values`_ and is useful when using `PEAR::setErrorHandling()`_'s
-``PEAR_ERROR_CALLBACK`` mechanism.
+handling values`_ and is useful when `logging from standard error handlers`_.
 
 Configuration
 ~~~~~~~~~~~~~
@@ -296,7 +295,6 @@ Configuration
 +-------------------+-----------+---------------+---------------------------+
 
 .. _error handling values: http://www.php.net/manual/en/ref.errorfunc.php
-.. _PEAR::setErrorHandling(): http://pear.php.net/manual/en/core.pear.pear.seterrorhandling.php
 
 Example
 ~~~~~~~
@@ -305,26 +303,9 @@ Example
     $conf = array('error_prepend' => '<font color="#ff0000"><tt>',
                   'error_append'  => '</tt></font>');
     $logger = &Log::singleton('display', '', '', $conf, PEAR_LOG_DEBUG);
-
-    function errorHandler($error)
-    {
-        global $logger;
-
-        $message = $error->getMessage();
-
-        if (!empty($error->backtrace[1]['file'])) {
-            $message .= ' (' . $error->backtrace[1]['file'];
-            if (!empty($error->backtrace[1]['line'])) {
-                $message .= ' at line ' . $error->backtrace[1]['line'];
-            }
-            $message .= ')';
-        }
-
-        $display->log($message, $error->code);
+    for ($i = 0; $i < 10; $i++) {
+        $logger->log("Log entry $i");
     }
-
-    PEAR::setErrorHandling(PEAR_ERROR_CALLBACK, 'errorHandler');
-    PEAR::raiseError('This is an information log message.', PEAR_LOG_INFO);
 
 
 The Error_Log Handler
@@ -650,11 +631,85 @@ with the Log package.
 .. _observer pattern: http://phppatterns.com/index.php/article/articleview/27/1/1/
 
 
+Logging From Standard Error Handlers
+====================================
+
+Logging PHP Errors
+------------------
+PHP's default error handler can be overridden using the `set_error_handler()`_
+function.  The custom error handling function can use a global Log instance to
+log the PHP errors.
+
+**Note:** Fatal PHP errors cannot be handled by a custom error handler at this
+time.
+
+::
+
+    function errorHandler($code, $message, $file, $line)
+    {
+        global $logger;
+
+        /* Map the PHP error to a Log priority. */
+        switch ($code) {
+        case E_WARNING:
+        case E_USER_WARNING:
+            $priority = PEAR_LOG_WARNING;
+            break;
+        case E_NOTICE:
+        case E_USER_NOTICE:
+            $priority = PEAR_LOG_NOTICE;
+            break;
+        case E_ERROR:
+        case E_USER_ERROR:
+            $priority = PEAR_LOG_ERR;
+            break;
+        default:
+            $priotity = PEAR_LOG_INFO;
+        }
+
+        $logger->log($message . ' in ' . $file . ' at line ' . $line,
+                     $priority);
+    }
+
+    set_error_handler('errorHandler');
+    trigger_error('This is an information log message.', E_USER_NOTICE);
+
+.. _set_error_handler(): http://www.php.net/manual/en/function.set-error-handler.php
+
+Logging PEAR Errors
+-------------------
+The Log package can be used with `PEAR::setErrorHandling()`_'s
+``PEAR_ERROR_CALLBACK`` mechanism by writing an error handling function that
+uses a global Log instance.  Here's an example::
+
+    function errorHandler($error)
+    {
+        global $logger;
+
+        $message = $error->getMessage();
+
+        if (!empty($error->backtrace[1]['file'])) {
+            $message .= ' (' . $error->backtrace[1]['file'];
+            if (!empty($error->backtrace[1]['line'])) {
+                $message .= ' at line ' . $error->backtrace[1]['line'];
+            }
+            $message .= ')';
+        }
+
+        $logger->log($message, $error->code);
+    }
+
+    PEAR::setErrorHandling(PEAR_ERROR_CALLBACK, 'errorHandler');
+    PEAR::raiseError('This is an information log message.', PEAR_LOG_INFO);
+
+.. _PEAR::setErrorHandling(): http://pear.php.net/manual/en/core.pear.pear.seterrorhandling.php
+
+
 Writing Custom Handlers
 =======================
 
-Write New Handlers
-------------------
+Writing New Handlers
+--------------------
 
 TODO
 
