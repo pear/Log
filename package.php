@@ -6,10 +6,14 @@ require_once 'Console/Getopt.php';
 $version = '1.8.6';
 $notes = <<<EOT
 The maximum length of the 'sql' handler's 'ident' string is now configurable.
+
+Different instances of the 'win' handler can now address their own output windows.
 EOT;
 
 $changelog = <<<EOT
 The maximum length of the 'sql' handler's 'ident' string is now configurable via the 'identLimit' configuration parameter. (Bug 2137)
+
+Different instances of the 'win' handler can now address their own output windows. (Bug 2212)
 EOT;
 
 $package = new PEAR_PackageFileManager();

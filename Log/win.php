@@ -108,28 +108,34 @@ class Log_win extends Log
     function open()
     {
         if (!$this->_opened) {
-?>
+            $win = $this->_name;
+
+            if (!empty($this->_ident)) {
+                $identHeader = "$win.document.writeln('<th>Ident</th>')";
+            } else {
+                $identHeader = '';
+            }
+
+            echo <<< END_OF_SCRIPT
 <script language="JavaScript">
-win = window.open('', '<?php echo $this->_name; ?>', 'toolbar=no,scrollbars,width=600,height=400');
-win.document.writeln('<html>');
-win.document.writeln('<head>');
-win.document.writeln('<title><?php echo $this->_title; ?></title>');
-win.document.writeln('<style type="text/css">');
-win.document.writeln('body { font-family: monospace; font-size: 8pt; }');
-win.document.writeln('td,th { font-size: 8pt; }');
-win.document.writeln('td,th { border-bottom: #999999 solid 1px; }');
-win.document.writeln('td,th { border-right: #999999 solid 1px; }');
-win.document.writeln('</style>');
-win.document.writeln('</head>');
-win.document.writeln('<body>');
-win.document.writeln('<table border="0" cellpadding="2" cellspacing="0">');
-win.document.writeln('<tr><th>Time</th>');
-<?php if (!empty($this->_ident)): ?>
-win.document.writeln('<th>Ident</th>');
-<?php endif; ?>
-win.document.writeln('<th>Priority</th><th width="100%">Message</th></tr>');
+$win = window.open('', '{$this->_name}', 'toolbar=no,scrollbars,width=600,height=400');
+$win.document.writeln('<html>');
+$win.document.writeln('<head>');
+$win.document.writeln('<title>{$this->_title}</title>');
+$win.document.writeln('<style type="text/css">');
+$win.document.writeln('body { font-family: monospace; font-size: 8pt; }');
+$win.document.writeln('td,th { font-size: 8pt; }');
+$win.document.writeln('td,th { border-bottom: #999999 solid 1px; }');
+$win.document.writeln('td,th { border-right: #999999 solid 1px; }');
+$win.document.writeln('</style>');
+$win.document.writeln('</head>');
+$win.document.writeln('<body>');
+$win.document.writeln('<table border="0" cellpadding="2" cellspacing="0">');
+$win.document.writeln('<tr><th>Time</th>');
+$identHeader
+$win.document.writeln('<th>Priority</th><th width="100%">Message</th></tr>');
 </script>
-<?php
+END_OF_SCRIPT;
             $this->_opened = true;
         }
 
@@ -185,9 +191,10 @@ win.document.writeln('<th>Priority</th><th width="100%">Message</th></tr>');
         }
 
         /* Drain the buffer to the output window. */
+        $win = $this->_name;
         foreach ($this->_buffer as $line) {
             echo "<script language='JavaScript'>\n";
-            echo "win.document.writeln('" . addslashes($line) . "');\n";
+            echo "$win.document.writeln('" . addslashes($line) . "');\n";
             echo "self.focus();\n";
             echo "</script>\n";
         }

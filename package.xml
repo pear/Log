@@ -14,10 +14,12 @@
   </maintainers>
   <release>
     <version>1.8.6</version>
-    <date>2004-08-18</date>
+    <date>2004-09-08</date>
     <license>PHP License</license>
     <state>stable</state>
-    <notes>The maximum length of the 'sql' handler's 'ident' string is now configurable.</notes>
+    <notes>The maximum length of the 'sql' handler's 'ident' string is now configurable.
+
+Different instances of the 'win' handler can now address their own output windows.</notes>
     <deps>
       <dep type="pkg" rel="has" optional="yes">DB</dep>
       <dep type="ext" rel="has" optional="yes">sqlite</dep>
@@ -83,10 +85,12 @@
   <changelog>
     <release>
       <version>1.8.6</version>
-      <date>2004-08-18</date>
+      <date>2004-09-08</date>
       <license>PHP License</license>
       <state>stable</state>
-      <notes>The maximum length of the 'sql' handler's 'ident' string is now configurable via the 'identLimit' configuration parameter. (Bug 2137)</notes>
+      <notes>The maximum length of the 'sql' handler's 'ident' string is now configurable via the 'identLimit' configuration parameter. (Bug 2137)
+
+Different instances of the 'win' handler can now address their own output windows. (Bug 2212)</notes>
     </release>
     <release>
       <version>1.8.5</version>
