@@ -15,11 +15,15 @@ The Log framework provides an abstracted logging system.  It supports logging to
         </maintainer>
     </maintainers>
     <release>
-        <version>1.6.2</version>
-        <date>2003-04-06</date>
+        <version>1.6.3</version>
+        <date>2003-04-07</date>
         <state>stable</state>
         <notes>
-In the Log_observer class, operate directly on the reference to the Log instance (instead of on a copy of the object).
+A unique identifier is now stored inside each Log instance.  Both the composite and subject-observer mechanisms use this identifier to index their object lists.
+
+The internals of the Log_observer system have been rewritten for general cleanliness.  The external interface remains unchanged.
+
+The Log class now offers public setIdent() and getIdent() members for setting and getting the Log instance's identification string during the object's lifetime.
         </notes>
       <filelist>
         <dir name="/">
@@ -41,6 +45,14 @@ In the Log_observer class, operate directly on the reference to the Log instance
       </deps>
     </release>
     <changelog>
+      <release>
+        <version>1.6.2</version>
+        <date>2003-04-06</date>
+        <state>stable</state>
+        <notes>
+In the Log_observer class, operate directly on the reference to the Log instance (instead of on a copy of the object).
+        </notes>
+      </release>
       <release>
         <version>1.6.1</version>
         <date>2003-04-02</date>
