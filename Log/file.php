@@ -115,8 +115,8 @@ class Log_file extends Log
         
         $this->_logLines = array();
         $this->_writeOut = true;
-        
-        $this->PEAR();
+
+        register_shutdown_function(array(&$this, '_Log_file'));
     }
     
     /**
@@ -125,10 +125,8 @@ class Log_file extends Log
     *
     * @access private
     */
-    function _Log_File()
+    function _Log_file()
     {
-        $this->_PEAR();
-
         if (!empty($this->_logLines) AND $this->_writeOut AND $this->_openLogfile()) {
             
             foreach ($this->_logLines as $line) {

@@ -23,7 +23,7 @@ define('PEAR_LOG_DEBUG',    7);
  * @since   Horde 1.3
  * @package Log
  */
-class Log extends PEAR {
+class Log {
 
     /**
      * Indicates whether or not the log can been opened / connected.
