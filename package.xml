@@ -13,112 +13,59 @@
     </maintainer>
   </maintainers>
   <release>
-    <version>1.8.1</version>
-    <date>2003-12-14</date>
+    <version>1.8.2</version>
+    <date>2003-12-28</date>
     <license>PHP License</license>
     <state>stable</state>
-    <notes>Fixed some bugs in the 'win' handler.
-Updated the Log_observer::factory() method for consistency with Log::factory().</notes>
+    <notes>Added a new 'null' log handler.</notes>
     <deps>
       <dep type="pkg" rel="has" optional="yes">DB</dep>
     </deps>
-    <provides type="class" name="Log_composite" extends="Log" />
-    <provides type="function" name="Log_composite::open" />
-    <provides type="function" name="Log_composite::close" />
-    <provides type="function" name="Log_composite::log" />
-    <provides type="function" name="Log_composite::isComposite" />
-    <provides type="function" name="Log_composite::setIdent" />
-    <provides type="function" name="Log_composite::addChild" />
-    <provides type="function" name="Log_composite::removeChild" />
-    <provides type="class" name="Log_console" extends="Log" />
-    <provides type="function" name="Log_console::log" />
-    <provides type="class" name="Log_display" extends="Log" />
-    <provides type="function" name="Log_display::log" />
-    <provides type="class" name="Log_error_log" extends="Log" />
-    <provides type="function" name="Log_error_log::log" />
-    <provides type="class" name="Log_file" extends="Log" />
-    <provides type="function" name="Log_file::open" />
-    <provides type="function" name="Log_file::close" />
-    <provides type="function" name="Log_file::log" />
-    <provides type="class" name="Log_mail" extends="Log" />
-    <provides type="function" name="Log_mail::open" />
-    <provides type="function" name="Log_mail::close" />
-    <provides type="function" name="Log_mail::log" />
-    <provides type="class" name="Log_mcal" extends="Log" />
-    <provides type="function" name="Log_mcal::open" />
-    <provides type="function" name="Log_mcal::close" />
-    <provides type="function" name="Log_mcal::log" />
-    <provides type="class" name="Log_observer" />
-    <provides type="function" name="Log_observer::factory" />
-    <provides type="function" name="Log_observer::notify" />
-    <provides type="class" name="Log_sql" extends="Log" />
-    <provides type="function" name="Log_sql::open" />
-    <provides type="function" name="Log_sql::close" />
-    <provides type="function" name="Log_sql::log" />
-    <provides type="class" name="Log_syslog" extends="Log" />
-    <provides type="function" name="Log_syslog::open" />
-    <provides type="function" name="Log_syslog::close" />
-    <provides type="function" name="Log_syslog::log" />
-    <provides type="class" name="Log_win" extends="Log" />
-    <provides type="function" name="Log_win::open" />
-    <provides type="function" name="Log_win::close" />
-    <provides type="function" name="Log_win::log" />
-    <provides type="class" name="Log" />
-    <provides type="function" name="Log::factory" />
-    <provides type="function" name="Log::singleton" />
-    <provides type="function" name="Log::open" />
-    <provides type="function" name="Log::close" />
-    <provides type="function" name="Log::emerg" />
-    <provides type="function" name="Log::alert" />
-    <provides type="function" name="Log::crit" />
-    <provides type="function" name="Log::err" />
-    <provides type="function" name="Log::warning" />
-    <provides type="function" name="Log::notice" />
-    <provides type="function" name="Log::info" />
-    <provides type="function" name="Log::debug" />
-    <provides type="function" name="Log::priorityToString" />
-    <provides type="function" name="Log::MASK" />
-    <provides type="function" name="Log::UPTO" />
-    <provides type="function" name="Log::setMask" />
-    <provides type="function" name="Log::getMask" />
-    <provides type="function" name="Log::attach" />
-    <provides type="function" name="Log::detach" />
-    <provides type="function" name="Log::isComposite" />
-    <provides type="function" name="Log::setIdent" />
-    <provides type="function" name="Log::getIdent" />
     <filelist>
-      <file role="doc" baseinstalldir="/" md5sum="3925064494fa4586c8801fd61788f6bd" name="docs/guide.txt"/>
-      <file role="doc" baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="docs/examples/composite.php"/>
-      <file role="doc" baseinstalldir="/" md5sum="19e0f5e8f0bb9d2e31a09b5b4ae86a73" name="docs/examples/console.php"/>
-      <file role="doc" baseinstalldir="/" md5sum="ece4e33eabcd56ae45013155bd623d5c" name="docs/examples/display.php"/>
-      <file role="doc" baseinstalldir="/" md5sum="775294dbee8158b8c4b13f0f1849f0bc" name="docs/examples/error_log.php"/>
-      <file role="doc" baseinstalldir="/" md5sum="f1829c72e025359de7d04af6adb2685f" name="docs/examples/file.php"/>
-      <file role="doc" baseinstalldir="/" md5sum="d53ed4d000a0848919136f74fd57b6c8" name="docs/examples/mail.php"/>
-      <file role="doc" baseinstalldir="/" md5sum="3f9f92a65a6dc85fb739a41c3f128f7a" name="docs/examples/observer_mail.php"/>
-      <file role="doc" baseinstalldir="/" md5sum="959d3590bcce733131fb5cdac2873d0b" name="docs/examples/pear_error_handler.php"/>
-      <file role="doc" baseinstalldir="/" md5sum="34c957866e5c983d3b67af00099ce8f1" name="docs/examples/php_error_handler.php"/>
-      <file role="doc" baseinstalldir="/" md5sum="5ce33090cd30c47fb028736bf918b85a" name="docs/examples/sql.php"/>
-      <file role="doc" baseinstalldir="/" md5sum="73963c2e2ed53f6349e0bcd6d3955bc8" name="docs/examples/syslog.php"/>
-      <file role="doc" baseinstalldir="/" md5sum="6a758092ffb2a6a3a80f9d3dd5539ebf" name="docs/examples/win.php"/>
-      <file role="php" baseinstalldir="/" md5sum="6877af86967b93e2ebc9ab9de2906d31" name="Log/composite.php"/>
-      <file role="php" baseinstalldir="/" md5sum="3d0ffcb67cad3c5082d202806cca96b1" name="Log/console.php"/>
-      <file role="php" baseinstalldir="/" md5sum="b7ec829ba97894fbeff80d14ff46b881" name="Log/display.php"/>
-      <file role="php" baseinstalldir="/" md5sum="671991dbf28dacb6ddb910398a921f87" name="Log/error_log.php"/>
-      <file role="php" baseinstalldir="/" md5sum="14b5fbe0f5487ea8c549bf68b2b66271" name="Log/file.php"/>
-      <file role="php" baseinstalldir="/" md5sum="bf591a4550662cb88f9189224c8e6008" name="Log/mail.php"/>
-      <file role="php" baseinstalldir="/" md5sum="877e2a99d689f1fdcd34cde7b3da4635" name="Log/mcal.php"/>
-      <file role="php" baseinstalldir="/" md5sum="30d65341312a12281e2606d4cc4e6b18" name="Log/observer.php"/>
-      <file role="php" baseinstalldir="/" md5sum="9f6f7750d3804adf273c1a0eedbb44b7" name="Log/sql.php"/>
-      <file role="php" baseinstalldir="/" md5sum="9ea63304921b3c084aa07aded4bd643c" name="Log/syslog.php"/>
-      <file role="php" baseinstalldir="/" md5sum="e2fbee5870ca13cff34c0d06f3154b58" name="Log/win.php"/>
-      <file role="test" baseinstalldir="/" md5sum="c8bb01df1ac3a923b474cc003d51b189" name="tests/composite.phpt"/>
-      <file role="test" baseinstalldir="/" md5sum="cda100f931b35c935125a0bf8f44f769" name="tests/console.phpt"/>
-      <file role="test" baseinstalldir="/" md5sum="0d86370df14ae3b5267abdeddf0b8b7a" name="tests/display.phpt"/>
-      <file role="test" baseinstalldir="/" md5sum="efdc9b35727a3de34ea32fa594a0bfa4" name="tests/error_log.phpt"/>
-      <file role="php" baseinstalldir="/" md5sum="db839ac561ba2638f9cb5558cb827c35" name="Log.php"/>
+      <file role="doc" baseinstalldir="/" name="docs/guide.txt"/>
+      <file role="doc" baseinstalldir="/" name="docs/examples/composite.php"/>
+      <file role="doc" baseinstalldir="/" name="docs/examples/console.php"/>
+      <file role="doc" baseinstalldir="/" name="docs/examples/display.php"/>
+      <file role="doc" baseinstalldir="/" name="docs/examples/error_log.php"/>
+      <file role="doc" baseinstalldir="/" name="docs/examples/file.php"/>
+      <file role="doc" baseinstalldir="/" name="docs/examples/mail.php"/>
+      <file role="doc" baseinstalldir="/" name="docs/examples/observer_mail.php"/>
+      <file role="doc" baseinstalldir="/" name="docs/examples/pear_error_handler.php"/>
+      <file role="doc" baseinstalldir="/" name="docs/examples/php_error_handler.php"/>
+      <file role="doc" baseinstalldir="/" name="docs/examples/sql.php"/>
+      <file role="doc" baseinstalldir="/" name="docs/examples/syslog.php"/>
+      <file role="doc" baseinstalldir="/" name="docs/examples/win.php"/>
+      <file role="php" baseinstalldir="/" name="Log/composite.php"/>
+      <file role="php" baseinstalldir="/" name="Log/console.php"/>
+      <file role="php" baseinstalldir="/" name="Log/display.php"/>
+      <file role="php" baseinstalldir="/" name="Log/error_log.php"/>
+      <file role="php" baseinstalldir="/" name="Log/file.php"/>
+      <file role="php" baseinstalldir="/" name="Log/mail.php"/>
+      <file role="php" baseinstalldir="/" name="Log/mcal.php"/>
+      <file role="php" baseinstalldir="/" name="Log/null.php"/>
+      <file role="php" baseinstalldir="/" name="Log/observer.php"/>
+      <file role="php" baseinstalldir="/" name="Log/sql.php"/>
+      <file role="php" baseinstalldir="/" name="Log/syslog.php"/>
+      <file role="php" baseinstalldir="/" name="Log/win.php"/>
+      <file role="test" baseinstalldir="/" name="tests/composite.phpt"/>
+      <file role="test" baseinstalldir="/" name="tests/console.phpt"/>
+      <file role="test" baseinstalldir="/" name="tests/display.phpt"/>
+      <file role="test" baseinstalldir="/" name="tests/error_log.phpt"/>
+      <file role="test" baseinstalldir="/" name="tests/factory.phpt"/>
+      <file role="test" baseinstalldir="/" name="tests/singleton.phpt"/>
+      <file role="php" baseinstalldir="/" name="Log.php"/>
     </filelist>
   </release>
   <changelog>
+    <release>
+      <version>1.8.2</version>
+      <date>2003-12-28</date>
+      <license>PHP License</license>
+      <state>stable</state>
+      <notes>A new 'null' log handler that simply consumes log events has been added.  The 'null' handler will still respect log masks and attached observers.
+
+New unit tests for the Factory and Singleton construction methods have been added.</notes>
+    </release>
     <release>
       <version>1.8.1</version>
       <date>2003-12-14</date>
