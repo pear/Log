@@ -41,6 +41,7 @@ if (PEAR::isError($result)) {
 $package->addMaintainer('jon', 'lead', 'Jon Parise', 'jon@php.net');
 
 $package->addDependency('DB', false, 'has', 'pkg', true);
+$package->addDependency('sqlite', false, 'has', 'ext', true);
 
 if ($_SERVER['argv'][1] == 'commit') {
     $result = $package->writePackageFile();

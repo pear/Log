@@ -22,6 +22,7 @@
 The open(), close() and log() methods now consistently return success or failure.</notes>
     <deps>
       <dep type="pkg" rel="has" optional="yes">DB</dep>
+      <dep type="ext" rel="has" optional="yes">sqlite</dep>
     </deps>
     <filelist>
       <file role="doc" baseinstalldir="/" name="docs/guide.txt"/>
