@@ -36,7 +36,7 @@ class Log_syslog extends Log {
             $conf = false ;
         }    
         $this->name = $log_name;
-        $this->ident = $ident;
+        $this->_ident = $ident;
     }
 
     /**
@@ -46,9 +46,9 @@ class Log_syslog extends Log {
      */
     function open()
     {
-        if (!$this->opened) {
-            openlog($this->ident, LOG_PID, $this->name);
-            $this->opened = true;
+        if (!$this->_opened) {
+            openlog($this->_ident, LOG_PID, $this->name);
+            $this->_opened = true;
         }
     }
 
@@ -58,9 +58,9 @@ class Log_syslog extends Log {
      */
     function close()
     {
-        if ($this->opened) {
+        if ($this->_opened) {
             closelog();
-            $this->opened = false;
+            $this->_opened = false;
         }
     }
 
@@ -78,7 +78,7 @@ class Log_syslog extends Log {
      */
     function log($message, $priority = LOG_INFO)
     {
-        if (!$this->opened) {
+        if (!$this->_opened) {
             $this->open();
         }
 

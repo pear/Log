@@ -41,7 +41,7 @@ class Log_file extends Log {
             $conf = false ;
         }    
         $this->filename = $log_name;
-        $this->ident = $ident;
+        $this->_ident = $ident;
     }
 
     /**
@@ -52,9 +52,9 @@ class Log_file extends Log {
      */
     function open()
     {
-        if (!$this->opened) {
+        if (!$this->_opened) {
             $this->fp = fopen($this->filename, 'a');
-            $this->opened = true;
+            $this->_opened = true;
         }
     }
 
@@ -64,9 +64,9 @@ class Log_file extends Log {
      */
     function close()
     {
-        if ($this->opened) {
+        if ($this->_opened) {
             fclose($this->fp);
-            $this->opened = false;
+            $this->_opened = false;
         }
     }
 
@@ -84,12 +84,12 @@ class Log_file extends Log {
      */
     function log($message, $priority = LOG_INFO)
     {
-        if (!$this->opened) {
+        if (!$this->_opened) {
             $this->open();
         }
 
         $entry = sprintf("%s %s [%s] %s\n", strftime('%b %d %T'),
-            $this->ident, Log::priorityToString($priority), $message);
+            $this->_ident, Log::priorityToString($priority), $message);
 
         if ($this->fp) {
             fwrite($this->fp, $entry);

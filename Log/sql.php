@@ -44,12 +44,6 @@ class Log_sql extends Log {
     */
     var $table = 'log_table';
 
-    /** 
-    * Boolean indicating the current connection state. 
-    * @var boolean
-    */
-    var $opened = false;
-
 
     /**
      * Constructs a new sql logging object.
@@ -62,7 +56,7 @@ class Log_sql extends Log {
     function Log_sql($log_name, $ident = '', $conf)
     {
         $this->table = $log_name;
-        $this->ident = $ident;
+        $this->_ident = $ident;
         $this->dsn = $conf['dsn'];
     }
 
@@ -75,12 +69,12 @@ class Log_sql extends Log {
      */
     function open()
     {
-        if (!$this->opened) {
+        if (!$this->_opened) {
             $this->db = &DB::connect($this->dsn, true);
             if (DB::isError($this->db) || DB::isWarning($this->db)) {
                 return false;
             }
-            $this->opened = true;
+            $this->_opened = true;
         }
 
         return true;
@@ -94,8 +88,8 @@ class Log_sql extends Log {
      */
     function close()
     {
-        if ($this->opened) {
-            $this->opened = false;
+        if ($this->_opened) {
+            $this->_opened = false;
             return $this->db->disconnect();
         }
 
@@ -116,13 +110,13 @@ class Log_sql extends Log {
      */
     function log($message, $priority = LOG_INFO)
     {
-        if (!$this->opened) {
+        if (!$this->_opened) {
             $this->open();
         }
 
         $timestamp = time();
         $q = "insert into $this->table
-              values($timestamp, '$this->ident', $priority, '$message')";
+              values($timestamp, '$this->_ident', $priority, '$message')";
         $this->db->query($q);
         $this->notifyAll(array('priority' => $priority, 'message' => $message));
     }

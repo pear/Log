@@ -21,7 +21,7 @@ class Log_console extends Log
      */
     function Log_console($log_name, $ident = '', $conf = array())
     {
-        $this->ident = $ident;
+        $this->_ident = $ident;
     }
 
     /**
@@ -37,7 +37,7 @@ class Log_console extends Log
      */
     function log($message, $priority = LOG_INFO)
     {
-        printf("%s %s [%s] %s\n", strftime('%b %d %T'), $this->ident,
+        printf("%s %s [%s] %s\n", strftime('%b %d %T'), $this->_ident,
             Log::priorityToString($priority), $message);
 
         $this->notifyAll(array('priority' => $priority, 'message' => $message));

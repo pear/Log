@@ -66,7 +66,7 @@ class Log_mcal extends Log {
             $conf = false ;
         }
         $this->name = $log_name;
-        $this->ident = $ident;
+        $this->_ident = $ident;
         $this->calendar = $conf['calendar'];
         $this->username = $conf['username'];
         $this->password = $conf['password'];
@@ -80,9 +80,9 @@ class Log_mcal extends Log {
      */
     function open()
     {
-        if (!$this->opened) {
+        if (!$this->_opened) {
             $this->stream = mcal_open($this->calendar, $this->username, $this->password, $this->options);
-            $this->opened = true;
+            $this->_opened = true;
         }
     }
 
@@ -92,9 +92,9 @@ class Log_mcal extends Log {
      */
     function close()
     {
-        if ($this->opened) {
+        if ($this->_opened) {
             mcal_close($this->stream);
-            $this->opened = false;
+            $this->_opened = false;
         }
     }
 
@@ -113,7 +113,7 @@ class Log_mcal extends Log {
      */
     function log($message, $priority = LOG_INFO)
     {
-        if (!$this->opened) {
+        if (!$this->_opened) {
             $this->open();
         }
 
@@ -121,7 +121,7 @@ class Log_mcal extends Log {
         $dates = explode(':', $date_str);
 
         mcal_event_init($this->stream);
-        mcal_event_set_title($this->stream, $this->ident);
+        mcal_event_set_title($this->stream, $this->_ident);
         mcal_event_set_category($this->stream, $this->name);
         mcal_event_set_description($this->stream, $message);
         mcal_event_add_attribute($this->stream, 'priority', $priority);

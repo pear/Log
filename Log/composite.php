@@ -41,7 +41,7 @@ class Log_composite {
      */
     function open()
     {
-        if (!$this->opened) {
+        if (!$this->_opened) {
             reset($this->children);
             foreach ($this->children as $child) {
                 $child->open();
@@ -56,7 +56,7 @@ class Log_composite {
      */
     function close()
     {
-        if ($this->opened) {
+        if ($this->_opened) {
             reset($this->children);
             foreach ($this->children as $child) {
                 $child->close();

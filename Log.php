@@ -15,24 +15,28 @@
 class Log {
 
     /**
-    * indicating whether or not the log connection is currently open.
-    * @var boolean
-    */
-    var $opened = false;
+     * Indicates whether or not the log can been opened / connected.
+     *
+     * @var boolean
+     * @access private
+     */
+    var $_opened = false;
 
     /** 
-    * holding the identifier 
-    * that will be stored along with each logged message. 
-    * @var string
-    */
-    var $ident = '';
+     * The label that uniquely identifies this set of log messages.
+     *
+     * @var string
+     * @access private
+     */
+    var $_ident = '';
 
     /** 
-    * holding all Log_observer objects 
-    * that wish to be notified of any messages that we handle. 
-    * @var array
-    */
-    var $listeners = array();
+     * Holds all Log_observer objects that wish to be notified of new messages
+     *
+     * @var array
+     * @access private
+     */
+    var $_listeners = array();
 
 
     /**
@@ -154,7 +158,7 @@ class Log {
         
         $logObserver->_listenerID = uniqid(rand());
         
-        $this->listeners[$logObserver->_listenerID] = &$logObserver;
+        $this->_listeners[$logObserver->_listenerID] = &$logObserver;
     }
 
     /**
@@ -167,8 +171,8 @@ class Log {
      */
     function detach($logObserver)
     {
-        if (isset($this->listeners[$logObserver->_listenerID])) {
-            unset($this->listeners[$logObserver->_listenerID]);
+        if (isset($this->_listeners[$logObserver->_listenerID])) {
+            unset($this->_listeners[$logObserver->_listenerID]);
         }
     }
 
@@ -182,8 +186,8 @@ class Log {
      */
     function notifyAll($messageOb)
     {
-        reset($this->listeners);
-        foreach ($this->listeners as $listener) {
+        reset($this->_listeners);
+        foreach ($this->_listeners as $listener) {
             if ($messageOb['priority'] <= $listener->priority) {
                 $listener->notify($messageOb);
             }
