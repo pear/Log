@@ -80,9 +80,15 @@ class Log_win extends Log
         register_shutdown_function(array(&$this, '_Log_win'));
     }
 
+    /**
+     * Destructor
+     */
     function _Log_win()
     {
-        $this->close();
+        if ($this->_opened || (count($this->_buffer) > 0)) {
+            $this->close();
+            $this->_opened = false;
+        }
     }
 
     /**
@@ -131,13 +137,12 @@ win.document.writeln('<tr><th>Time</th><th>Ident</th><th>Message</th></tr>');
          * If there are still lines waiting to be written, open the output
          * window so that we can drain the buffer.
          */
-        if (count($this->_buffer > 0)) {
+        if (!$this->_opened && (count($this->_buffer) > 0)) {
             $this->open();
         }
 
         if ($this->_opened) {
             $this->_writeln('</table>');
-            $this->_writeln('<br /><b>-- End --</b>');
             $this->_writeln('</body></html>');
             $this->_opened = false;
         }
@@ -195,10 +200,6 @@ win.document.writeln('<tr><th>Time</th><th>Ident</th><th>Message</th></tr>');
         /* Abort early if the priority is above the maximum logging level. */
         if (!$this->_isMasked($priority)) {
             return false;
-        }
-
-        if (!$this->_opened && headers_sent()) {
-            $this->open();
         }
 
         list($usec, $sec) = explode(' ', microtime());
