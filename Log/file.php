@@ -130,7 +130,7 @@ class Log_file extends Log
         if (!empty($this->_logLines) AND $this->_writeOut AND $this->_openLogfile()) {
             
             foreach ($this->_logLines as $line) {
-                $this->_writeLine($line['message'], $line['priority'], $line['time']);
+                $this->_writeLine($line['message'], $line['ident'], $line['priority'], $line['time']);
             }
 
             $this->_closeLogfile();
@@ -157,7 +157,7 @@ class Log_file extends Log
         }
 
         // Add to loglines array
-        $this->_logLines[] = array('message' => $message, 'priority' => $priority, 'time' => strftime($this->_timeFormat));
+        $this->_logLines[] = array('message' => $message, 'ident' => $this->_ident, 'priority' => $priority, 'time' => strftime($this->_timeFormat));
 
         // Notify observers
         $this->_announce(array('message' => $message, 'priority' => $priority));
@@ -187,7 +187,7 @@ class Log_file extends Log
         if (!empty($this->_logLines) AND $this->_openLogfile()) {
             
             foreach ($this->_logLines as $line) {
-                $this->_writeLine($line['message'], $line['priority'], $line['time']);
+                $this->_writeLine($line['message'], $line['ident'], $line['priority'], $line['time']);
             }
 
             $this->_logLines = array();
@@ -226,13 +226,14 @@ class Log_file extends Log
     * Writes a line to the logfile
     *
     * @param  string $line      The line to write
+    * @param  string $ident     The ident string of this line
     * @param  integer $priority The priority of this line/msg
     * @return integer           Number of bytes written or -1 on error
     * @access private
     */
-    function _writeLine($line, $priority, $time)
+    function _writeLine($line, $ident, $priority, $time)
     {
-        return fwrite($this->_fp, sprintf("%s %s [%s] %s\r\n", $time, $this->_ident, $this->priorityToString($priority), $line));
+        return fwrite($this->_fp, sprintf("%s %s [%s] %s\r\n", $time, $ident, $this->priorityToString($priority), $line));
     }
 
 } // End of class

@@ -15,6 +15,33 @@ The Log framework provides an abstracted logging system.  It supports logging to
         </maintainer>
     </maintainers>
     <release>
+        <version>1.6.6</version>
+        <date>2003-06-05</date>
+        <state>stable</state>
+        <notes>
+In the file handler, store the ident string in the _logLines cache.  It's now possible to change the ident string using Log::setIdent() in the middle of a set of log entries.
+        </notes>
+        <filelist>
+          <dir name="/">
+            <file role="php">Log.php</file>
+	      <dir name="Log">
+	        <file role="php">composite.php</file>
+	        <file role="php">console.php</file>
+	        <file role="php">file.php</file>
+  	        <file role="php">mail.php</file>
+  	        <file role="php">mcal.php</file>
+  	        <file role="php">observer.php</file>
+	        <file role="php">sql.php</file>
+	        <file role="php">syslog.php</file>
+	      </dir>
+          </dir>
+        </filelist>
+        <deps>
+          <dep type="pkg" rel="has">DB</dep>
+        </deps>
+    </release>
+    <changelog>
+      <release>
         <version>1.6.5</version>
         <date>2003-04-26</date>
         <state>stable</state>
@@ -39,8 +66,7 @@ The mail log handler needs to register its own destructer now that the Log class
         <deps>
           <dep type="pkg" rel="has">DB</dep>
         </deps>
-    </release>
-    <changelog>
+      </release>
       <release>
         <version>1.6.4</version>
         <date>2003-04-08</date>
