@@ -119,10 +119,13 @@ class Log_sql extends Log {
             $this->open();
         }
 
-        $timestamp = time();
-        $q = "insert into $this->_table
-              values($timestamp, '$this->_ident', $priority, '$message')";
+        /* Build the SQL query for this log entry insertion. */
+        $q = sprintf("insert into %s values(%d, %s, %d, %s)",
+            $this->_table, time(), $this->_db->quote($this->_ident),
+            $priority, $this->_db->quote($message));
+
         $this->_db->query($q);
+
         $this->notifyAll(array('priority' => $priority, 'message' => $message));
     }
 }
