@@ -521,6 +521,12 @@ Configuration
 |                   |           |               | to use when generating    |
 |                   |           |               | unique event IDs.         |
 +-------------------+-----------+---------------+---------------------------+
+| ``identLimit``    | Integer   | 16            | The maximum length of the |
+|                   |           |               | ``ident`` string.         |
+|                   |           |               | **Changing this value may |
+|                   |           |               | require updates to the SQL|
+|                   |           |               | schema, as well.**        |
++-------------------+-----------+---------------+---------------------------+
 
 .. _DB: http://pear.php.net/package/DB
 .. _PEAR's DB abstraction layer: DB_

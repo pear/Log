@@ -3,21 +3,13 @@
 require_once 'PEAR/PackageFileManager.php';
 require_once 'Console/Getopt.php';
 
-$version = '1.8.5';
+$version = '1.8.6';
 $notes = <<<EOT
-The 'sql' handler now enforces a maximum 'ident' length of 16 characters.
-
-The 'sql' handler can now use a user-defined sequence.
-
-The 'composite' handler now properly closes all of its children. (Bug 1947)
+The maximum length of the 'sql' handler's 'ident' string is now configurable.
 EOT;
 
 $changelog = <<<EOT
-The 'sql' handler now enforces a maximum 'ident' length of 16 characters.
-
-The 'sql' handler can now use a user-defined sequence (via the 'sequence' configuration parameter).  This allows each log table to use its own sequence.  You will need to take appropriate steps to preserve your sequence numbering if that is important to your site; the ID sequence will be reinitialized to 0 the first time this updated handler is used.  You may also need to explicitly drop the 'log_id_seq' sequence before using this new code.
-
-The 'composite' handler now properly closes all of its children when its close() method is called.  It also guards against multiple calls to open(). (Bug 1947)
+The maximum length of the 'sql' handler's 'ident' string is now configurable via the 'identLimit' configuration parameter. (Bug 2137)
 EOT;
 
 $package = new PEAR_PackageFileManager();
