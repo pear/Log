@@ -220,7 +220,7 @@ class Log_file extends Log
             return false;
         }
 
-        chmod($this->_filename, $this->_mode);
+        @chmod($this->_filename, $this->_mode);
 
         return true;
     }
