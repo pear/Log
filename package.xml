@@ -14,7 +14,7 @@
   </maintainers>
   <release>
     <version>1.8.3</version>
-    <date>2004-01-05</date>
+    <date>2004-01-07</date>
     <license>PHP License</license>
     <state>stable</state>
     <notes>Added a new handler that logs using the Sqlite extension.
@@ -58,13 +58,14 @@ The open(), close() and log() methods now consistently return success or failure
       <file role="test" baseinstalldir="/" name="tests/factory.phpt"/>
       <file role="test" baseinstalldir="/" name="tests/null.phpt"/>
       <file role="test" baseinstalldir="/" name="tests/singleton.phpt"/>
+      <file role="test" baseinstalldir="/" name="tests/sqlite.phpt"/>
       <file role="php" baseinstalldir="/" name="Log.php"/>
     </filelist>
   </release>
   <changelog>
     <release>
       <version>1.8.3</version>
-      <date>2004-01-05</date>
+      <date>2004-01-07</date>
       <license>PHP License</license>
       <state>stable</state>
       <notes>The open() and close() methods now consistently return success or failure.  Previously, some handlers' open() and close() methods did not return any result.  Also, the log() methods will return failure when the handler cannot be opened.
