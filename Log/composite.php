@@ -140,7 +140,7 @@ class Log_composite extends Log
      */
     function removeChild($child)
     {
-        if (!isset($this->_children[$child->_id])) {
+        if (!is_a($child, 'Log') || !isset($this->_children[$child->_id])) {
             return false;
         }
 
