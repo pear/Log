@@ -447,6 +447,22 @@ Example
     }
 
 
+The Null Handler
+----------------
+The Null handler simply consumes log events (akin to sending them to
+``/dev/null``).  `Log level masks`_ are respected, and the event will still be
+sent to any registered `log observers`_.
+
+Example
+~~~~~~~
+::
+
+    $logger = &Log::singleton('null');
+    for ($i = 0; $i < 10; $i++) {
+        $logger->log("Log entry $i");
+    }
+
+
 The SQL (DB) Handler
 --------------------
 
