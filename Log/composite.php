@@ -12,7 +12,7 @@
  * @package Log 
  */
 
-class Log_composite {
+class Log_composite extends Log {
 
     /** 
     * Array holding all Log instances 
@@ -112,7 +112,7 @@ class Log_composite {
 
         $child->_childID = uniqid(rand());
 
-        $this->children[$child->_listenerID] = &$child;
+        $this->children[$child->_childID] = &$child;
     }
 
     /**
