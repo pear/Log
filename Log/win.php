@@ -224,7 +224,8 @@ win.document.writeln('<th>Priority</th><th width="100%">Message</th></tr>');
         }
         $line .= '<td>' . ucfirst($this->priorityToString($priority)) . '</td>';
         $line .= sprintf('<td style="color: %s">%s</td>',
-                         $this->_colors[$priority], nl2br($message));
+                         $this->_colors[$priority],
+                         preg_replace('/\r\n|\n|\r/', '<br />', $message));
         $line .= '</tr>';
 
         $this->_writeln($line);
