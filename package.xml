@@ -4,8 +4,8 @@
     <summary>Logging utilities</summary>
     <description>
      The Log framework provides an abstracted logging system.  It supports
-     logging to file, syslog, SQL, and mcal targets.  It also provides a
-     subject - observer mechanism.
+     logging to console, file, syslog, SQL, and mcal targets.  It also
+     provides a subject - observer mechanism.
     </description>
     <license>PHP 2.02</license>
     <maintainer>
@@ -15,17 +15,18 @@
         <role>lead</role>
     </maintainer>
     <release>
-        <version>1.0</version>
-        <date>2002-03-07</date>
+        <version>1.1</version>
+        <date>2002-04-12</date>
         <state>stable</state>
         <notes>
-         This is the initial independent release of the Log package.
+         Adding a new console logging target.
         </notes>
       <filelist>
         <dir name="/">
           <file role="php">Log.php</file>
 	    <dir name="Log">
 	      <file role="php">composite.php</file>
+	      <file role="php">console.php</file>
 	      <file role="php">file.php</file>
 	      <file role="php">mcal.php</file>
 	      <file role="php">observer.php</file>
