@@ -97,7 +97,7 @@ class Log_file extends Log
     * @param  int    $maxLevel Maximum level at which to log.
     * @access public
     */
-    function Log_File($name, $ident = '', $conf = array(), $maxLevel = LOG_DEBUG)
+    function Log_File($name, $ident = '', $conf = array(), $maxLevel = PEAR_LOG_DEBUG)
     {
         /* If a file mode has been provided, use it. */
         if (!empty($conf['mode'])) {

@@ -156,7 +156,7 @@ class Log extends PEAR {
     /**
      * Abstract implementation of the log() method.
      */
-    function log($message, $priority = LOG_INFO)
+    function log($message, $priority = PEAR_LOG_INFO)
     {
         return false;
     }
