@@ -53,18 +53,6 @@ class Log_file extends Log
     var $_filename;
 
     /**
-    * No idea what this does.
-    * @var string (maybe)
-    */
-    var $_ident;
-
-    /**
-    * Maximum level to log
-    * @var integer
-    */
-    var $_maxLevel;
-
-    /**
     * Integer holding the file handle. 
     * @var integer
     */
