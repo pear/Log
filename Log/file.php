@@ -38,10 +38,6 @@ class Log_file extends Log {
     function Log_file($name, $ident = '', $conf = array(),
                       $maxLevel = LOG_DEBUG)
     {
-        // bc compatibilty
-        if( 0 == count( $conf )) {
-            $conf = false ;
-        }    
         $this->_filename = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;

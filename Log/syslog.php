@@ -33,10 +33,6 @@ class Log_syslog extends Log {
     function Log_syslog($name, $ident = '', $conf = array(),
                         $maxLevel = LOG_DEBUG)
     {    
-        // bc compatibilty
-        if( 0 == count( $conf )) {
-            $conf = false ;
-        }    
         $this->_name = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;

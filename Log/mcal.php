@@ -63,10 +63,6 @@ class Log_mcal extends Log {
     function Log_mcal($name, $ident = '', $conf = array(),
                       $maxLevel = LOG_DEBUG)
     {
-        // bc compatibilty
-        if( 0 == count( $conf )) {
-            $conf = false ;
-        }
         $this->_name = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;
