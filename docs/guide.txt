@@ -541,7 +541,10 @@ Configuration
 +-------------------+-----------+---------------+---------------------------+
 | ``sequence``      | String    | ``log_id``    | The name of the sequence  |
 |                   |           |               | to use when generating    |
-|                   |           |               | unique event IDs.         |
+|                   |           |               | unique event IDs.   Under |
+|                   |           |               | many databases, this will |
+|                   |           |               | be used as the name of    |
+|                   |           |               | the sequence table.       |
 +-------------------+-----------+---------------+---------------------------+
 | ``identLimit``    | Integer   | 16            | The maximum length of the |
 |                   |           |               | ``ident`` string.         |
