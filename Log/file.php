@@ -156,11 +156,11 @@ class Log_file extends Log
          * In order to understand recursion, you must first understand
          * recursion ...
          */
-        if ($this->_mkpath(dirname($path), $mode) === false) {
+        if ($this->_mkpath($path, $mode) === false) {
             return false;
         }
 
-        return @mkdir($path);
+        return @mkdir($path, $mode);
     }
 
     /**
