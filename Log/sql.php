@@ -27,27 +27,27 @@ require_once 'DB.php';
 class Log_sql extends Log {
 
     /** 
-    * Array containing the dsn information. 
-    * @var string
-    */
+     * Array containing the dsn information. 
+     * @var string
+     */
     var $_dsn = '';
 
     /** 
-    * Object holding the database handle. 
-    * @var string
-    */
+     * Object holding the database handle. 
+     * @var string
+     */
     var $_db = '';
 
     /**
-    * Flag indicating that we're using an existing database connection.
-    * @var boolean
-    */
+     * Flag indicating that we're using an existing database connection.
+     * @var boolean
+     */
     var $_existingConnection = false;
 
     /** 
-    * String holding the database table to use. 
-    * @var string
-    */
+     * String holding the database table to use. 
+     * @var string
+     */
     var $_table = 'log_table';
 
 
