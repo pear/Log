@@ -38,6 +38,12 @@ class Log_sql extends Log {
     */
     var $_db = '';
 
+    /**
+    * Flag indicating that we're using an existing database connection.
+    * @var boolean
+    */
+    var $_existingConnection = false;
+
     /** 
     * String holding the database table to use. 
     * @var string
@@ -64,6 +70,7 @@ class Log_sql extends Log {
         /* If an existing database connection was provided, use it. */
         if (isset($conf['db'])) {
             $this->_db = &$conf['db'];
+            $this->_existingConnection = true;
             $this->_opened = true;
         } else {
             $this->_dsn = $conf['dsn'];
@@ -91,14 +98,16 @@ class Log_sql extends Log {
     }
 
     /**
-     * Closes the connection to the database, if it is open.
+     * Closes the connection to the database if it is still open and we were
+     * the ones that opened it.  It is the caller's responsible to close an
+     * existing connection that was passed to us via $conf['db'].
      *
      * @return boolean   True on success, false on failure.
      * @access public     
      */
     function close()
     {
-        if ($this->_opened) {
+        if ($this->_opened && !$this->_existingConnection) {
             $this->_opened = false;
             return $this->_db->disconnect();
         }
