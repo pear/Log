@@ -122,9 +122,7 @@ class Log_composite extends Log
             return false;
         }
 
-        $id = md5(microtime());
-        $child->_id = $id;
-        $this->_children[$id] = &$child;
+        $this->_children[$child->_id] = &$child;
 
         return true;
     }

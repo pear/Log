@@ -108,6 +108,7 @@ class Log_file extends Log
             chmod($name, $this->_mode);
         }
 
+        $this->_id       = md5(microtime());
         $this->_filename = realpath($name);
         $this->_ident    = $ident;
         $this->_maxLevel = $maxLevel;

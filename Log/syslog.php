@@ -38,6 +38,7 @@ class Log_syslog extends Log {
             $name = LOG_SYSLOG;
         }
 
+        $this->_id = md5(microtime());
         $this->_name = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;

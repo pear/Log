@@ -64,6 +64,7 @@ class Log_sql extends Log {
     function Log_sql($name, $ident = '', $conf = array(),
                      $maxLevel = PEAR_LOG_DEBUG)
     {
+        $this->_id = md5(microtime());
         $this->_table = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;

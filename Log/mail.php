@@ -61,6 +61,7 @@ class Log_mail extends Log {
     function Log_mail($name, $ident = '', $conf = array(),
                       $maxLevel = PEAR_LOG_DEBUG)
     {
+        $this->_id = md5(microtime());
         $this->_recipient = $name;
         $this->_ident    = $ident;
         $this->_maxLevel = $maxLevel;

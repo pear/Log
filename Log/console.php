@@ -23,6 +23,7 @@ class Log_console extends Log
     function Log_console($name, $ident = '', $conf = array(),
                          $maxLevel = PEAR_LOG_DEBUG)
     {
+        $this->_id = md5(microtime());
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;
     }
