@@ -178,7 +178,7 @@ class Log_sql extends Log {
         $message = $this->_extractMessage($message);
 
         /* Build the SQL query for this log entry insertion. */
-        $id = $this->_db->nextId('log_id');
+        $id = $this->_db->nextId(substr($this->_table, 0, 56) . '_id');
         $q = sprintf('insert into %s (id, logtime, ident, priority, message)' .
                      'values(%d, CURRENT_TIMESTAMP, %s, %d, %s)',
                      $this->_table, $id, $this->_db->quote($this->_ident),
