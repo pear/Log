@@ -83,14 +83,20 @@ class Log_win extends Log
     {
         if (!$this->_opened) {
 ?>
-            <script language="JavaScript">
-            win = window.open('', '<?php echo $this->_name; ?>', 'toolbar=no,scrollbars,width=600,height=400');
-            win.document.writeln('<html>');
-            win.document.writeln('<head>');
-            win.document.writeln('<title><?php echo $this->_title; ?></title>');
-            win.document.writeln('</head>');
-            win.document.writeln('<body><pre style="font-size: 8pt">');
-            </script>
+<script language="JavaScript">
+win = window.open('', '<?php echo $this->_name; ?>', 'toolbar=no,scrollbars,width=600,height=400');
+win.document.writeln('<html>');
+win.document.writeln('<head>');
+win.document.writeln('<title><?php echo $this->_title; ?></title>');
+win.document.writeln('<style type="text/css">');
+win.document.writeln('body { font-family: monospace; font-size: 8pt; }');
+win.document.writeln('td { font-size: 8pt; }');
+win.document.writeln('td { border-bottom: #999999 solid 1px; }');
+win.document.writeln('td { border-right: #999999 solid 1px; }');
+win.document.writeln('</style>');
+win.document.writeln('</head>');
+win.document.writeln('<body>');
+</script>
 <?php
             $this->_opened = true;
         }
@@ -105,6 +111,7 @@ class Log_win extends Log
     {
         if ($this->_opened) {
             $this->_writeln('<br /><b>-- End --</b>');
+            $this->_writeln('</body></html>');
             $this->_opened = false;
         }
     }
@@ -150,9 +157,14 @@ class Log_win extends Log
 
         list($usec, $sec) = explode(' ', microtime());
 
-        $line = sprintf('<span style="color: %s">%s.%s [%s] %s</span>',
-                        $this->_colors[$priority], strftime('%T', $sec),
-                        substr($usec, 2, 2), $this->_ident, nl2br($message));
+        $line  = '<table border="0" cellpadding="2" cellspacing="0">';
+        $line .= '<tr align="left" valign="top">';
+        $line .= sprintf('<td>%s.%s</td><td>%s</td>',
+                         strftime('%T', $sec), substr($usec, 2, 2),
+                         $this->_ident);
+        $line .= sprintf('<td style="color: %s" width="100%%">%s</td>',
+                         $this->_colors[$priority], nl2br($message));
+        $line .= '</tr></table>';
 
         $this->_writeln($line);
 
