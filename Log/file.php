@@ -224,6 +224,17 @@ class Log_file extends Log
     }
 
     /**
+     * Flushes all pending data to the file handle.
+     *
+     * @access public
+     * @since Log 1.8.2
+     */
+    function flush()
+    {
+        return fflush($this->_fp);
+    }
+
+    /**
      * Logs $message to the output window.  The message is also passed along
      * to any Log_observer instances that are observing this Log.
      *

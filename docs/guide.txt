@@ -236,6 +236,38 @@ It is also possible to retrieve and modify a Log object's existing mask::
     $logger->setMask($mask);
 
 
+Flushing Log Events
+-------------------
+Some log handlers (such as `the console handler`_) support explicit
+"buffering".  When buffering is enabled, log events won't actually be written
+to the output stream until the handler is closed.  Other handlers (such as
+`the file handler`_) support implicit buffering because they use the operating
+system's IO routines, which may buffer the output.
+
+It's possible to force these handlers to flush their output, however, by
+calling their ``flush()`` method::
+
+    $conf = array('buffering' => true);
+    $logger = &Log::singleton('console', '', 'test', $conf);
+
+    for ($i = 0; $i < 10; $i++) {
+        $logger->log('This event will be buffered.');
+    }
+
+    /* Flush all of the buffered log events. */
+    $logger->flush();
+
+    for ($i = 0; $i < 10; $i++) {
+        $logger->log('This event will be buffered.');
+    }
+
+    /* Implicitly flush the buffered events on close. */
+    $logger->close();
+
+At this time, the ``flush()`` method is only implemented by `the console
+handler`_, `the file handler`_ and `the mail handler`_.
+
+
 Standard Log Handlers
 =====================
 

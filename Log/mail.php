@@ -155,6 +155,23 @@ class Log_mail extends Log
     }
 
     /**
+     * Flushes the log output by forcing the email message to be sent now.
+     * Events that are logged after flush() is called will be appended to a
+     * new email message.
+     *
+     * @access public
+     * @since Log 1.8.2
+     */
+    function flush()
+    {
+        /*
+         * It's sufficient to simply call close() to flush the output.
+         * The next call to log() will cause the handler to be reopened.
+         */
+        return $this->close();
+    }
+
+    /**
      * Writes $message to the currently open mail message.
      * Calls open(), if necessary.
      * 

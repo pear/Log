@@ -74,6 +74,21 @@ class Log_composite extends Log
     }
 
     /**
+     * Flushes all open child instances.
+     *
+     * @access public
+     * @since Log 1.8.2
+     */
+    function flush()
+    {
+        if ($this->_opened) {
+            foreach ($this->_children as $id => $child) {
+                $this->_children[$id]->flush();
+            }
+        }
+    }
+
+    /**
      * Sends $message and $priority to each child of this composite.
      *
      * @param mixed     $message    String or object containing the message

@@ -194,6 +194,15 @@ class Log
     }
 
     /**
+     * Abstract implementation of the flush() method.
+     * @since Log 1.8.2
+     */
+    function flush()
+    {
+        return false;
+    }
+
+    /**
      * Abstract implementation of the log() method.
      * @since Log 1.0
      */

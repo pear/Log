@@ -113,6 +113,17 @@ class Log_console extends Log
      */
     function _Log_console()
     {
+        $this->flush();
+    }
+
+    /**
+     * Flushes all pending ("buffered") data to the output stream.
+     *
+     * @access public
+     * @since Log 1.8.2
+     */
+    function flush()
+    {
         /*
          * If output buffering is enabled, dump the contents of the buffer to
          * the output stream.
@@ -121,6 +132,8 @@ class Log_console extends Log
             fwrite($this->_stream, $this->_buffer);
             $this->_buffer = '';
         }
+ 
+        return fflush($this->_stream);
     }
 
     /**
