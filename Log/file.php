@@ -77,6 +77,12 @@ class Log_file extends Log
     var $_mode = 0644;
 
     /**
+    * String containing the format to use when generating timestamps.
+    * @var string
+    */
+    var $_timeFormat = '%b %d %H:%M:%S';
+
+    /**
     * Array holding the lines to log
     * @var array
     */
@@ -102,6 +108,11 @@ class Log_file extends Log
         /* If a file mode has been provided, use it. */
         if (!empty($conf['mode'])) {
             $this->_mode = $conf['mode'];
+        }
+
+        /* If a custom time format has been provided, use it. */
+        if (!empty($conf['timeFormat'])) {
+            $this->_timeFormat = $conf['timeFormat'];
         }
 
         if (!file_exists($name)) {
@@ -159,7 +170,7 @@ class Log_file extends Log
         }
 
         // Add to loglines array
-        $this->_logLines[] = array('message' => $message, 'priority' => $priority, 'time' => strftime('%b %d %H:%M:%S'));
+        $this->_logLines[] = array('message' => $message, 'priority' => $priority, 'time' => strftime($this->_timeFormat));
 
         // Notify observers
         $this->notifyAll(array('message' => $message, 'priority' => $priority));
