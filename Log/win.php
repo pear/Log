@@ -47,6 +47,13 @@ class Log_win extends Log
                     );
 
     /**
+     * String buffer that holds line that are pending output.
+     * @var array
+     * @access private
+     */
+    var $_buffer = array();
+
+    /**
      * Constructs a new Log_win object.
      * 
      * @param string $name     Ignored.
@@ -69,6 +76,13 @@ class Log_win extends Log
         if (isset($conf['colors']) && is_array($conf['colors'])) {
             $this->_colors = $conf['colors'];
         }
+
+        register_shutdown_function(array(&$this, '_Log_win'));
+    }
+
+    function _Log_win()
+    {
+        $this->close();
     }
 
     /**
@@ -90,12 +104,14 @@ win.document.writeln('<head>');
 win.document.writeln('<title><?php echo $this->_title; ?></title>');
 win.document.writeln('<style type="text/css">');
 win.document.writeln('body { font-family: monospace; font-size: 8pt; }');
-win.document.writeln('td { font-size: 8pt; }');
-win.document.writeln('td { border-bottom: #999999 solid 1px; }');
-win.document.writeln('td { border-right: #999999 solid 1px; }');
+win.document.writeln('td,th { font-size: 8pt; }');
+win.document.writeln('td,th { border-bottom: #999999 solid 1px; }');
+win.document.writeln('td,th { border-right: #999999 solid 1px; }');
 win.document.writeln('</style>');
 win.document.writeln('</head>');
 win.document.writeln('<body>');
+win.document.writeln('<table border="0" cellpadding="2" cellspacing="0">');
+win.document.writeln('<tr><th>Time</th><th>Ident</th><th>Message</th></tr>');
 </script>
 <?php
             $this->_opened = true;
@@ -103,13 +119,24 @@ win.document.writeln('<body>');
     }
 
     /**
-     * Closes the connection to the system logger, if it is open.
+     * Closes the output stream if it is open.  If there are still pending
+     * lines in the output buffer, the output window will be opened so that
+     * the buffer can be drained.
      *
      * @access public
      */
     function close()
     {
+        /*
+         * If there are still lines waiting to be written, open the output
+         * window so that we can drain the buffer.
+         */
+        if (count($this->_buffer > 0)) {
+            $this->open();
+        }
+
         if ($this->_opened) {
+            $this->_writeln('</table>');
             $this->_writeln('<br /><b>-- End --</b>');
             $this->_writeln('</body></html>');
             $this->_opened = false;
@@ -125,10 +152,29 @@ win.document.writeln('<body>');
      */
     function _writeln($line)
     {
-        echo "<script language='JavaScript'>\n";
-        echo "win.document.writeln('$line');\n";
-        echo "self.focus();\n";
-        echo "</script>\n";
+        /* Add this line to our output buffer. */
+        $this->_buffer[] = $line;
+
+        /* Buffer the output until this page's headers have been sent. */
+        if (!headers_sent()) {
+            return;
+        }
+
+        /* If we haven't already opened the output window, do so now. */
+        if (!$this->_opened) {
+            $this->open();
+        }
+
+        /* Drain the buffer to the output window. */
+        foreach ($this->_buffer as $line) {
+            echo "<script language='JavaScript'>\n";
+            echo "win.document.writeln('$line');\n";
+            echo "self.focus();\n";
+            echo "</script>\n";
+        }
+
+        /* Now that the buffer has been drained, clear it. */
+        $this->_buffer = array();
     }
 
     /**
@@ -151,20 +197,20 @@ win.document.writeln('<body>');
             return false;
         }
 
-        if (!$this->_opened) {
+        if (!$this->_opened && headers_sent()) {
             $this->open();
         }
 
         list($usec, $sec) = explode(' ', microtime());
 
-        $line  = '<table border="0" cellpadding="2" cellspacing="0">';
-        $line .= '<tr align="left" valign="top">';
+        /* Build the output line that contains the log entry row. */
+        $line  = '<tr align="left" valign="top">';
         $line .= sprintf('<td>%s.%s</td><td>%s</td>',
                          strftime('%T', $sec), substr($usec, 2, 2),
                          $this->_ident);
         $line .= sprintf('<td style="color: %s" width="100%%">%s</td>',
                          $this->_colors[$priority], nl2br($message));
-        $line .= '</tr></table>';
+        $line .= '</tr>';
 
         $this->_writeln($line);
 
