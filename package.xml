@@ -16,10 +16,12 @@ The Log framework provides an abstracted logging system.  It supports logging to
     </maintainers>
     <release>
         <version>1.5.2</version>
-        <date>2002-11-28</date>
+        <date>2003-01-01</date>
         <state>stable</state>
         <notes>
-- Altered the singleton's "signature" construction to be shorter and more array-friendly.
+- Improved singleton()'s signature generation.
+- The SQL handler no longer closes existing database connections.
+- The log() method now returns a boolean result indicating success or failure.
         </notes>
       <filelist>
         <dir name="/">
@@ -38,6 +40,14 @@ The Log framework provides an abstracted logging system.  It supports logging to
       </filelist>
     </release>
     <changelog>
+      <release>
+        <version>1.5.2</version>
+        <date>2002-11-28</date>
+        <state>stable</state>
+        <notes>
+- Altered the singleton's "signature" construction to be shorter and more array-friendly.
+        </notes>
+      </release>
       <release>
         <version>1.5.1</version>
         <date>2002-11-17</date>
