@@ -12,7 +12,7 @@ EOT;
 $changelog = <<<EOT
 The 'win' handler now handles newline sequences correctly (Bug 282).
 
-The Log_observer::factory() method has been updated to accept an optional associative array of configuration values, return the newly-created object by reference, and look for files named 'Log/observer_$type.php'.
+The Log_observer::factory() method has been updated to accept an optional associative array of configuration values, return the newly-created object by reference, and look for files named 'Log/observer_$type.php'.  Backwards compatibility for the old-style conventions has been preserved.
 EOT;
 
 $package = new PEAR_PackageFileManager();

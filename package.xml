@@ -106,7 +106,7 @@ Updated the Log_observer::factory() method for consistency with Log::factory().<
       <file role="php" baseinstalldir="/" md5sum="14b5fbe0f5487ea8c549bf68b2b66271" name="Log/file.php"/>
       <file role="php" baseinstalldir="/" md5sum="bf591a4550662cb88f9189224c8e6008" name="Log/mail.php"/>
       <file role="php" baseinstalldir="/" md5sum="877e2a99d689f1fdcd34cde7b3da4635" name="Log/mcal.php"/>
-      <file role="php" baseinstalldir="/" md5sum="8afa5a110010677d4cb4e56d1a3cbd8d" name="Log/observer.php"/>
+      <file role="php" baseinstalldir="/" md5sum="7cb2ac46dfdd82e342453c44b2cc849b" name="Log/observer.php"/>
       <file role="php" baseinstalldir="/" md5sum="9f6f7750d3804adf273c1a0eedbb44b7" name="Log/sql.php"/>
       <file role="php" baseinstalldir="/" md5sum="9ea63304921b3c084aa07aded4bd643c" name="Log/syslog.php"/>
       <file role="php" baseinstalldir="/" md5sum="e2fbee5870ca13cff34c0d06f3154b58" name="Log/win.php"/>
@@ -125,7 +125,7 @@ Updated the Log_observer::factory() method for consistency with Log::factory().<
       <state>stable</state>
       <notes>The 'win' handler now handles newline sequences correctly (Bug 282).
 
-The Log_observer::factory() method has been updated to accept an optional associative array of configuration values, return the newly-created object by reference, and look for files named 'Log/observer_.php'.</notes>
+The Log_observer::factory() method has been updated to accept an optional associative array of configuration values, return the newly-created object by reference, and look for files named 'Log/observer_.php'.  Backwards compatibility for the old-style conventions has been preserved.</notes>
     </release>
     <release>
       <version>1.8.0</version>

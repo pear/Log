@@ -69,7 +69,22 @@ class Log_observer
     {
         $type = strtolower($type);
         $class = 'Log_observer_' . $type;
-        $classfile = 'Log/observer_' . $type . '.php';
+
+        /* Support both the new-style and old-style file naming conventions. */
+        if (file_exists(dirname(__FILE__) . '/observer_' . $type . '.php')) {
+            $classfile = 'Log/observer_' . $type . '.php';
+            $newstyle = true;
+        } else {
+            $classfile = 'Log/' . $type . '.php';
+            $newstyle = false;
+        }
+
+        /* Issue a warning if the old-style conventions are being used. */
+        if (!$newstyle)
+        {
+            trigger_error('Using old-style Log_observer conventions',
+                          E_USER_WARNING);
+        }
 
         /*
          * Attempt to include our version of the named class, but don't treat
@@ -80,7 +95,12 @@ class Log_observer
 
         /* If the class exists, return a new instance of it. */
         if (class_exists($class)) {
-            $object =& new $class($priority, $conf);
+            /* Support both new-style and old-style construction. */
+            if ($newstyle) {
+                $object =& new $class($priority, $conf);
+            } else {
+                $object =& new $class($priority);
+            }
             return $object;
         }
 
