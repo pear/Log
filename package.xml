@@ -3,9 +3,7 @@
     <name>Log</name>
     <summary>Logging utilities</summary>
     <description>
-     The Log framework provides an abstracted logging system.  It supports
-     logging to console, file, syslog, SQL, mail, and mcal targets.  It
-     also provides a subject - observer mechanism.
+The Log framework provides an abstracted logging system.  It supports logging to console, file, syslog, SQL, mail, and mcal targets.  It also provides a subject - observer mechanism.
     </description>
     <license>PHP 2.02</license>
     <maintainers>
