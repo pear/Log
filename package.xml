@@ -37,7 +37,7 @@ In the file handler, store the ident string in the _logLines cache.  It's now po
           </dir>
         </filelist>
         <deps>
-          <dep type="pkg" rel="has">DB</dep>
+          <dep type="pkg" rel="has" optional="yes">DB</dep>
         </deps>
     </release>
     <changelog>
@@ -64,7 +64,7 @@ The mail log handler needs to register its own destructer now that the Log class
           </dir>
         </filelist>
         <deps>
-          <dep type="pkg" rel="has">DB</dep>
+          <dep type="pkg" rel="has" optional="yes">DB</dep>
         </deps>
       </release>
       <release>
@@ -79,7 +79,7 @@ The Log_file class now registers its own destructor to ensure that the logfile i
 A ZendEngine 1 incompatibility was introduced in the previous release.  This has been corrrected.
         </notes>
         <deps>
-          <dep type="pkg" rel="has">DB</dep>
+          <dep type="pkg" rel="has" optional="yes">DB</dep>
         </deps>
       </release>
       <release>
