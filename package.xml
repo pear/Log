@@ -15,12 +15,11 @@ The Log framework provides an abstracted logging system.  It supports logging to
         </maintainer>
     </maintainers>
     <release>
-        <version>1.5.1</version>
-        <date>2002-11-17</date>
+        <version>1.5.2</version>
+        <date>2002-11-28</date>
         <state>stable</state>
         <notes>
-- The mail handler now implements a destructor to ensure close() is called.
-- The syslog handler now requires $name to be a valid syslog facility.
+- Altered the singleton's "signature" construction to be shorter and more array-friendly.
         </notes>
       <filelist>
         <dir name="/">
@@ -39,6 +38,15 @@ The Log framework provides an abstracted logging system.  It supports logging to
       </filelist>
     </release>
     <changelog>
+      <release>
+        <version>1.5.1</version>
+        <date>2002-11-17</date>
+        <state>stable</state>
+        <notes>
+- The mail handler now implements a destructor to ensure close() is called.
+- The syslog handler now requires $name to be a valid syslog facility.
+        </notes>
+      </release>
       <release>
         <version>1.5</version>
         <date>2002-10-24</date>
