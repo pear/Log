@@ -112,7 +112,8 @@ class Log
 
         /* If the class exists, return a new instance of it. */
         if (class_exists($class)) {
-            return new $class($name, $ident, $conf, $maxLevel);
+            $object =& new $class($name, $ident, $conf, $maxLevel);
+            return $object;
         }
 
         return false;
