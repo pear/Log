@@ -15,12 +15,11 @@ The Log framework provides an abstracted logging system.  It supports logging to
         </maintainer>
     </maintainers>
     <release>
-        <version>1.6.0</version>
-        <date>2003-02-17</date>
+        <version>1.6.1</version>
+        <date>2003-04-02</date>
         <state>stable</state>
         <notes>
-- The SQL handler now uses sequences instead of timestamps as unique identifiers.
-- The time format used by the file handler is now configurable.
+- Fix a typo that broke the Log_Observer class.
         </notes>
       <filelist>
         <dir name="/">
@@ -42,6 +41,15 @@ The Log framework provides an abstracted logging system.  It supports logging to
       </deps>
     </release>
     <changelog>
+      <release>
+        <version>1.6.0</version>
+        <date>2003-02-17</date>
+        <state>stable</state>
+        <notes>
+- The SQL handler now uses sequences instead of timestamps as unique identifiers.
+- The time format used by the file handler is now configurable.
+        </notes>
+      </release>
       <release>
         <version>1.5.3</version>
         <date>2003-01-01</date>
