@@ -5,7 +5,7 @@
   <name>Log</name>
   <summary>Logging utilities</summary>
   <maintainer>
-    <initials>JCP</initials>
+    <user>jon</user>
     <name>Jon Parise</name>
     <email>jon@php.net</email>
   </maintainer>
