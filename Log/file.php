@@ -30,6 +30,7 @@
 // |                                                                       |
 // +-----------------------------------------------------------------------+
 // | Author: Richard Heyes <richard@phpguru.org>                           |
+// |         Jon Parise <jon@php.net>                                      |
 // +-----------------------------------------------------------------------+
 //
 // $Id$
@@ -70,6 +71,12 @@ class Log_file extends Log
     var $_fp;
 
     /**
+    * Integer (in octal) containing the logfile's permissions mode.
+    * @var integer
+    */
+    var $_mode = 0644;
+
+    /**
     * Array holding the lines to log
     * @var array
     */
@@ -92,9 +99,16 @@ class Log_file extends Log
     */
     function Log_File($name, $ident = '', $conf = array(), $maxLevel = LOG_DEBUG)
     {
+        /* If a file mode has been provided, use it. */
+        if (!empty($conf['mode'])) {
+            $this->_mode = $conf['mode'];
+        }
+
         if (!file_exists($name)) {
             touch($name);
+            chmod($name, $this->_mode);
         }
+
         $this->_filename = realpath($name);
         $this->_ident    = $ident;
         $this->_maxLevel = $maxLevel;
@@ -188,7 +202,13 @@ class Log_file extends Log
     */
     function _openLogfile()
     {
-        return (bool)($this->_fp = @fopen($this->_filename, 'a'));
+        if (($this->_fp = @fopen($this->_filename, 'a')) == false) {
+            return false;
+        }
+
+        chmod($this->_filename, $this->_mode);
+
+        return true;
     }
     
     /**
