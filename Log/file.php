@@ -57,8 +57,6 @@ class Log_file extends Log {
     {
         if (!$this->_opened) {
             $this->_fp = fopen($this->_filename, 'a');
-            flock($this->_fp, LOCK_EX);
-            fseek($this->_fp, 0, SEEK_END);
             $this->_opened = true;
         }
     }
@@ -70,7 +68,6 @@ class Log_file extends Log {
     function close()
     {
         if ($this->_opened) {
-            flock($this->_fp, LOCK_UN);
             fclose($this->_fp);
             $this->_opened = false;
         }
