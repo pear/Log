@@ -113,7 +113,7 @@ class Log_file extends Log
         if (!empty($conf['eol'])) {
             $this->_eol = $conf['eol'];
         } else {
-            $this->_eol = (OS_WINDOWS) ? "\r\n" : "\n";
+            $this->_eol = (strstr(PHP_OS, 'WIN')) ? "\r\n" : "\n";
         }
 
         register_shutdown_function(array(&$this, '_Log_file'));
