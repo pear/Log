@@ -517,6 +517,10 @@ Configuration
 |                   |           |               | will be used, and ``dsn`` |
 |                   |           |               | will be ignored.          |
 +-------------------+-----------+---------------+---------------------------+
+| ``sequence``      | String    | ``log_id``    | The name of the sequence  |
+|                   |           |               | to use when generating    |
+|                   |           |               | unique event IDs.         |
++-------------------+-----------+---------------+---------------------------+
 
 .. _DB: http://pear.php.net/package/DB
 .. _PEAR's DB abstraction layer: DB_
