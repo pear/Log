@@ -21,6 +21,8 @@ The Log framework provides an abstracted logging system.  It supports logging to
         <state>stable</state>
         <notes>
 The mail handler now uses "\n" to terminate lines instead of "\r\n".
+
+The file handler's path creation routines now guard against potentially infinite recursion.
         </notes>
         <filelist>
           <dir name="/">

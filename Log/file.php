@@ -144,6 +144,15 @@ class Log_file extends Log
      */
     function _mkpath($path, $mode = 0700)
     {
+        static $depth = 0;
+
+        /* Guard against potentially infinite recursion. */
+        if ($depth++ > 25) {
+            trigger_error("_mkpath(): Maximum recursion depth (25) exceeded",
+                          E_USER_WARNING);
+            return false;
+        }
+
         /* We're only interested in the directory component of the path. */
         $path = dirname($path);
 
