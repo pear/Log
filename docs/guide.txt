@@ -457,8 +457,8 @@ Configuration
 +-------------------+-----------+---------------+---------------------------+
 | Parameter         | Type      | Default       | Description               |
 +===================+===========+===============+===========================+
-| ``from``          | String    | '' `(empty)`  | Value for the message's   |
-|                   |           |               | ``From:`` header.         |
+| ``from``          | String    | sendmail_from | Value for the message's   |
+|                   |           | INI value     | ``From:`` header.         |
 +-------------------+-----------+---------------+---------------------------+
 | ``subject``       | String    | ``[Log_mail]  | Value for the message's   |
 |                   |           | Log message`` | ``Subject:`` header.      |
@@ -507,6 +507,7 @@ Configuration
 | Parameter         | Type      | Default       | Description               |
 +===================+===========+===============+===========================+
 | ``dsn``           | String    | '' `(empty)`  | A `Data Source Name`_.    |
+|                   |           |               | |required|                |
 +-------------------+-----------+---------------+---------------------------+
 | ``db``            | Object    | NULL          | An existing `DB`_ object. |
 |                   |           |               | If specified, this object |
@@ -578,7 +579,7 @@ Configuration
 | Parameter         | Type      | Default       | Description               |
 +===================+===========+===============+===========================+
 | ``filename``      | String    | '' `(empty)`  | Path to an Sqlite         |
-|                   |           |               | database.                 |
+|                   |           |               | database. |required|      |
 +-------------------+-----------+---------------+---------------------------+
 | ``mode``          | Integer   | 0666          | Octal mode used to open   |
 |                   |           |               | the database.             |
@@ -836,5 +837,7 @@ Extending Existing Handlers
 
 TODO
 
+
+.. |required| replace:: **[required]**
 
 .. vim: tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth=78:
