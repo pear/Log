@@ -2,8 +2,6 @@
 // $Id$
 // $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
 
-require_once 'PEAR.php';
-
 define('PEAR_LOG_EMERG',    0);                                                
 define('PEAR_LOG_ALERT',    1);                                                
 define('PEAR_LOG_CRIT',     2);                                                
