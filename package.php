@@ -5,7 +5,7 @@ require_once 'Console/Getopt.php';
 
 $version = '1.8.0';
 $notes = <<<EOT
-The Log package now includes a users guide and example scripts.
+The Log package now includes a users guide, example scripts and unit tests.
 
 A number of small improvements have been made to the 'win' log handler (based on suggestions from Paul Yanchenko).
 

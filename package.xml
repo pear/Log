@@ -17,7 +17,7 @@
     <date>2003-11-15</date>
     <license>PHP License</license>
     <state>stable</state>
-    <notes>The Log package now includes a users guide and example scripts.
+    <notes>The Log package now includes a users guide, example scripts and unit tests.
 
 A number of small improvements have been made to the 'win' log handler (based on suggestions from Paul Yanchenko).
 
@@ -113,6 +113,10 @@ A new 'display' log handler has been added to the distribution.  Contributed by 
       <file role="php" baseinstalldir="/" md5sum="9f6f7750d3804adf273c1a0eedbb44b7" name="Log/sql.php"/>
       <file role="php" baseinstalldir="/" md5sum="9ea63304921b3c084aa07aded4bd643c" name="Log/syslog.php"/>
       <file role="php" baseinstalldir="/" md5sum="2d65e4ff4f72a080e37b4879d5191496" name="Log/win.php"/>
+      <file role="test" baseinstalldir="/" md5sum="c8bb01df1ac3a923b474cc003d51b189" name="tests/composite.phpt"/>
+      <file role="test" baseinstalldir="/" md5sum="cda100f931b35c935125a0bf8f44f769" name="tests/console.phpt"/>
+      <file role="test" baseinstalldir="/" md5sum="0d86370df14ae3b5267abdeddf0b8b7a" name="tests/display.phpt"/>
+      <file role="test" baseinstalldir="/" md5sum="efdc9b35727a3de34ea32fa594a0bfa4" name="tests/error_log.phpt"/>
       <file role="php" baseinstalldir="/" md5sum="db839ac561ba2638f9cb5558cb827c35" name="Log.php"/>
     </filelist>
   </release>
@@ -133,7 +137,7 @@ A new 'display' log handler has been added to the distribution.  Contributed by 
       <date>2003-11-15</date>
       <license>PHP License</license>
       <state>stable</state>
-      <notes>The Log package now includes a users guide and example scripts.
+      <notes>The Log package now includes a users guide, example scripts and unit tests.
 
 A number of small improvements have been made to the 'win' log handler (based on suggestions from Paul Yanchenko).
 
