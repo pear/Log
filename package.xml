@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE package SYSTEM "../package.dtd">
 <!-- do not use the "Type" attribute here, that one is only for
      generated package.xml files -->
-<package>
+<package version="1.0">
   <name>Log</name>
   <summary>Logging utilities</summary>
-  <maintainer>
-    <user>jon</user>
-    <name>Jon Parise</name>
-    <email>jon@php.net</email>
-  </maintainer>
+  <maintainers>
+    <maintainer>
+      <user>jon</user>
+      <name>Jon Parise</name>
+      <email>jon@php.net</email>
+    </maintainer>
+  </maintainers>
   <release>
     <version>1.0</version>
     <date>2001-05-15</date>
     <notes>
       This is the initial independent release of the Log package.
     </notes>
+    <filelist>
+      <file>Log.php</file>
+      <dir name="Log">
+	<file>composite.php</file>
+	<file>file.php</file>
+	<file>mcal.php</file>
+	<file>observer.php</file>
+	<file>sql.php</file>
+	<file>syslog.php</file>
+      </dir>
+    </filelist>
   </release>
-  <filelist>
-    <dir>/</dir>
-    <file>Log.php</file>
-    <dir>Log</dir>
-    <file>composite.php</file>
-    <file>file.php</file>
-    <file>mcal.php</file>
-    <file>observer.php</file>
-    <file>sql.php</file>
-    <file>syslog.php</file>
-  </filelist>
 </package>
