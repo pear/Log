@@ -1,0 +1,9 @@
+To install the Log package, you have to make a distribution tarball first:
+
+    $ pear package package.xml
+
+This will result in a file called Log-1.0.tgz that you have to install:
+
+    $ pear install HTTP-1.0.tgz
+
+Then, you should be all set.

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!-- do not use the "Type" attribute here, that one is only for
+     generated package.xml files -->
+<Package>
+  <Name>Log</Name>
+  <Summary>Logging utilities</Summary>
+  <Maintainer>
+    <Initials>JCP</Initials>
+    <Name>Jon Parise</Name>
+    <Email>jon@php.net</Email>
+  </Maintainer>
+  <Release>
+    <Version>1.0</Version>
+    <Date>2001-05-15</Date>
+    <Notes>
+      This is the initial independent release of the Log package.
+    </Notes>
+  </Release>
+  <FileList>
+    <Dir>/</Dir>
+    <File>Log.php</File>
+    <Dir>Log</Dir>
+    <File>composite.php</File>
+    <File>file.php</File>
+    <File>mcal.php</File>
+    <File>observer.php</File>
+    <File>sql.php</File>
+    <File>syslog.php</File>
+  </FileList>
+</Package>
