@@ -14,7 +14,7 @@
   </maintainers>
   <release>
     <version>1.8.4</version>
-    <date>2004-01-19</date>
+    <date>2004-02-16</date>
     <license>PHP License</license>
     <state>stable</state>
     <notes>The Log package now requires PHP 4.3.0 or later.
@@ -72,7 +72,7 @@ It's now possible to specify the default priority for events logged using the lo
   <changelog>
     <release>
       <version>1.8.4</version>
-      <date>2004-01-19</date>
+      <date>2004-02-16</date>
       <license>PHP License</license>
       <state>stable</state>
       <notes>The Log package now requires PHP 4.3.0 or later.
