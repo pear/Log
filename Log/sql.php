@@ -139,14 +139,12 @@ class Log_sql extends Log {
             $this->open();
         }
 
-        $id = $this->_db->nextId('log_id');
-        $now = date('Y-m-d H:i:s');
-
         /* Build the SQL query for this log entry insertion. */
-        $q = sprintf('insert into %s values(%d, %s, %s, %d, %s)',
-            $this->_table, $id, $this->_db->quote($now),
-            $this->_db->quote($this->_ident), $priority,
-            $this->_db->quote($message));
+        $id = $this->_db->nextId('log_id');
+        $q = sprintf('insert into %s (id, logtime, ident, priority, message)' .
+                     'values(%d, CURRENT_TIMESTAMP, %s, %d, %s)',
+                     $this->_table, $id, $this->_db->quote($this->_ident),
+                     $priority, $this->_db->quote($message));
 
         $result = $this->_db->query($q);
         if (DB::isError($result)) {
