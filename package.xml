@@ -34,9 +34,9 @@ To log only notices and debug messages:
     $mask = Log::MASK(PEAR_LOG_NOTICE) | Log::MASK(PEAR_LOG_DEBUG);
     $log->setMask($mask);
 
-Complete backwards compatibility has been maintained.
+A number of convenient "shortcut" functions have been added for logging messages at specific log messages.
 
-Also, a number of convenient "shortcut" functions have been added for logging messages at specific log messages.
+A new log hander, 'error_log', has been added.  It wraps PHP's native error_log() function.
         </notes>
         <filelist>
           <dir name="/">

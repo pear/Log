@@ -14,6 +14,12 @@ define('PEAR_LOG_DEBUG',    7);     /** Debug-level messages */
 define('PEAR_LOG_ALL',      bindec('11111111'));  /** All messages */
 define('PEAR_LOG_NONE',     bindec('00000000'));  /** No message */
 
+/* Log types for PHP's native error_log() function. */
+define('PEAR_LOG_TYPE_SYSTEM',  0); /** Use PHP's system logger */
+define('PEAR_LOG_TYPE_MAIL',    1); /** Use PHP's mail() function */
+define('PEAR_LOG_TYPE_DEBUG',   2); /** Use PHP's debugging connection */
+define('PEAR_LOG_TYPE_FILE',    3); /** Append to a file */
+
 /**
  * The Log:: class implements both an abstraction for various logging
  * mechanisms and the Subject end of a Subject-Observer pattern.
