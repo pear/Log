@@ -3,7 +3,7 @@
 // $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
 
 define('PEAR_LOG_EMERG',    0);     /** System is unusable */
-define('PEAR_LOG_ALERT',    1);     /** Immediately action */
+define('PEAR_LOG_ALERT',    1);     /** Immediate action required */
 define('PEAR_LOG_CRIT',     2);     /** Critical conditions */
 define('PEAR_LOG_ERR',      3);     /** Error conditions */
 define('PEAR_LOG_WARNING',  4);     /** Warning conditions */
