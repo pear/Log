@@ -162,7 +162,7 @@ class Log_file extends Log
         $this->_logLines[] = array('message' => $message, 'priority' => $priority, 'time' => strftime($this->_timeFormat));
 
         // Notify observers
-        $this->notifyAll(array('message' => $message, 'priority' => $priority));
+        $this->_announce(array('message' => $message, 'priority' => $priority));
 
         return true;
     }

@@ -152,7 +152,7 @@ class Log_sql extends Log {
             return false;
         }
 
-        $this->notifyAll(array('priority' => $priority, 'message' => $message));
+        $this->_announce(array('priority' => $priority, 'message' => $message));
 
         return true;
     }

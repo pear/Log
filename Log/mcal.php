@@ -139,7 +139,7 @@ class Log_mcal extends Log {
             $dates[3], $dates[4], $dates[5]);
         mcal_append_event($this->_stream);
 
-        $this->notifyAll(array('priority' => $priority, 'message' => $message));
+        $this->_announce(array('priority' => $priority, 'message' => $message));
 
         return true;
     }

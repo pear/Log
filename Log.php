@@ -185,54 +185,62 @@ class Log extends PEAR {
     }
 
     /**
-     * Adds a Log_observer instance to the list of observers that are be
-     * notified when a message is logged.
-     *  
-     * @param object Log_observer &$logObserver The Log_observer instance to
-     *                                          be added to the $listeners
-     *                                          array.
+     * Add a Log_observer instance to the list of observers that are listening
+     * for messages emitted by this Log instance.
+     *
+     * @param object    $observer   The Log_observer instance to attach as a
+     *                              listener.
+     *
+     * @param boolean   True if the observer is successfully attached.
+     *
      * @access public
      */
-    function attach(&$logObserver)
+    function attach(&$observer)
     {
-        if (!is_object($logObserver)) {
+        if (!is_a($observer, 'Log_observer')) {
             return false;
         }
-        
-        $logObserver->_listenerID = uniqid(rand());
-        
-        $this->_listeners[$logObserver->_listenerID] = &$logObserver;
+
+        $this->_listeners[$observer->_id] = &$observer;
+
+        return true;
     }
 
     /**
-     * Removes a Log_observer instance from the list of observers.
+     * Remove a Log_observer instance from the list of observers.
      *
-     * @param object Log_observer $logObserver  The Log_observer instance to
-     *                                          be removed from the $listeners
-     *                                          array.
+     * @param object    $observer   The Log_observer instance to detach from
+     *                              the list of listeners.
+     *
+     * @param boolean   True if the observer is successfully detached.
+     *
      * @access public
      */
-    function detach($logObserver)
+    function detach($observer)
     {
-        if (isset($this->_listeners[$logObserver->_listenerID])) {
-            unset($this->_listeners[$logObserver->_listenerID]);
+        if (!is_a($observer, 'Log_observer') ||
+            !isset($this->_listeners[$observer->_id])) {
+            return false;
         }
+
+        unset($this->_listeners[$observer->_id]);
+
+        return true;
     }
 
     /**
-     * Sends any Log_observer objects listening to this Log the message that
-     * was just logged.
+     * Inform each registered observer instance that a new message has been
+     * logged.
      *
-     * @param array $msgObj     The data structure holding all relevant log
-     *                          information - the message, the priority, what
-     *                          log this is, etc.
+     * @param array     $event      A hash describing the log event.
+     *
+     * @access private
      */
-    function notifyAll($msgObj)
+    function _announce($event)
     {
-        reset($this->_listeners);
-        foreach ($this->_listeners as $listener) {
-            if ($msgObj['priority'] <= $listener->_priority) {
-                $listener->notify($msgObj);
+        foreach ($this->_listeners as $id => $listener) {
+            if ($event['priority'] <= $this->_listeners[$id]->_priority) {
+                $this->_listeners[$id]->notify($event);
             }
         }
     }

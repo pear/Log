@@ -158,7 +158,7 @@ class Log_mail extends Log {
 
         $this->_message .= $entry;
 
-        $this->notifyAll(array('priority' => $priority, 'message' => $message));
+        $this->_announce(array('priority' => $priority, 'message' => $message));
 
         return true;
     }

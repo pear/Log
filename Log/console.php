@@ -51,7 +51,7 @@ class Log_console extends Log
         printf("%s %s [%s] %s\n", strftime('%b %d %H:%M:%S'), $this->_ident,
             Log::priorityToString($priority), $message);
 
-        $this->notifyAll(array('priority' => $priority, 'message' => $message));
+        $this->_announce(array('priority' => $priority, 'message' => $message));
 
         return true;
     }

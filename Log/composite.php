@@ -89,7 +89,7 @@ class Log_composite extends Log
             $this->_children[$id]->log($message, $priority);
         }
 
-        $this->notifyAll(array('priority' => $priority, 'message' => $message));
+        $this->_announce(array('priority' => $priority, 'message' => $message));
 
         return true;
     }
