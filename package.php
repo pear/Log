@@ -3,17 +3,13 @@
 require_once 'PEAR/PackageFileManager.php';
 require_once 'Console/Getopt.php';
 
-$version = '1.8.6';
+$version = '1.8.7';
 $notes = <<<EOT
-The maximum length of the 'sql' handler's 'ident' string is now configurable.
-
-Different instances of the 'win' handler can now address their own output windows.
+The Log package now supports logging arrays with a 'message' key.
 EOT;
 
 $changelog = <<<EOT
-The maximum length of the 'sql' handler's 'ident' string is now configurable via the 'identLimit' configuration parameter. (Bug 2137)
-
-Different instances of the 'win' handler can now address their own output windows. (Bug 2212)
+The Log::_extractMessage() routine will now extract and use the value of an array's 'message' key if it exists. (Laurent Laville)
 EOT;
 
 $package = new PEAR_PackageFileManager();

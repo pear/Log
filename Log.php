@@ -391,7 +391,11 @@ class Log
                 $message = print_r($message, true);
             }
         } else if (is_array($message)) {
-            $message = print_r($message, true);
+            if (isset($message['message'])) {
+                $message = $message['message'];
+            } else {
+                $message = print_r($message, true);
+            }
         }
 
         /* Otherwise, we assume the message is a string. */

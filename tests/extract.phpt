@@ -32,6 +32,9 @@ $logger->log(new PEAR_Error('PEAR_Error object', 100));
 /* Logging an array. */
 $logger->log(array(1, 2, 'three' => 3));
 
+/* Logging an array with a 'message' key. */
+$logger->log(array('message' => 'Message Key'));
+
 --EXPECT--
 ident [info] String
 ident [info] bareobject Object
@@ -47,3 +50,5 @@ ident [info] Array
     [1] => 2
     [three] => 3
 )
+
+ident [info] Message Key
