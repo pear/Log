@@ -70,7 +70,8 @@ class Log_composite extends Log
     /**
      * Sends $message and $priority to each child of this composite.
      *
-     * @param string    $message    The textual message to be logged.
+     * @param mixed     $message    String or object containing the message
+     *                              to log.
      * @param string    $priority   (optional) The priority of the message.
      *                              Valid values are: PEAR_LOG_EMERG,
      *                              PEAR_LOG_ALERT, PEAR_LOG_CRIT,

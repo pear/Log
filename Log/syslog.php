@@ -73,7 +73,7 @@ class Log_syslog extends Log
      * open() if necessary. Also passes the message along to any Log_observer
      * instances that are observing this Log.
      *
-     * @param string $message  The textual message to be logged.
+     * @param mixed $message String or object containing the message to log.
      * @param int $priority (optional) The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
@@ -92,6 +92,9 @@ class Log_syslog extends Log
         if (!$this->_opened) {
             $this->open();
         }
+
+        /* Extract the string representation of the message. */
+        $message = $this->_extractMessage($message);
 
         if (!syslog($this->_toSyslog($priority), $message)) {
             return false;

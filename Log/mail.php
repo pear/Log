@@ -145,7 +145,7 @@ class Log_mail extends Log
      * Writes $message to the currently open mail message.
      * Calls open(), if necessary.
      * 
-     * @param string $message  The textual message to be logged.
+     * @param mixed  $message  String or object containing the message to log.
      * @param string $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
@@ -164,6 +164,9 @@ class Log_mail extends Log
         if (!$this->_opened) {
             $this->open();
         }
+
+        /* Extract the string representation of the message. */
+        $message = $this->_extractMessage($message);
 
         $entry = sprintf("%s %s [%s] %s\n", strftime('%b %d %H:%M:%S'),
                          $this->_ident, Log::priorityToString($priority),

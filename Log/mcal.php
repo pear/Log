@@ -105,7 +105,7 @@ class Log_mcal extends Log {
      * message along to any Log_observer instances that are observing
      * this Log.
      * 
-     * @param string $message  The textual message to be logged.
+     * @param mixed  $message  String or object containing the message to log.
      * @param string $priority The priority of the message. Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
@@ -124,6 +124,9 @@ class Log_mcal extends Log {
         if (!$this->_opened) {
             $this->open();
         }
+
+        /* Extract the string representation of the message. */
+        $message = $this->_extractMessage($message);
 
         $date_str = date('Y:n:j:G:i:s');
         $dates = explode(':', $date_str);

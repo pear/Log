@@ -23,6 +23,8 @@ The Log framework provides an abstracted logging system.  It supports logging to
 The mail handler now uses "\n" to terminate lines instead of "\r\n".
 
 The file handler's path creation routines now guard against potentially infinite recursion.
+
+It is now possible to pass an object to the logging methods.  If the object offers a PEAR_Error-style getMessage() method, it will be used to extract the message text.
         </notes>
         <filelist>
           <dir name="/">

@@ -185,7 +185,7 @@ win.document.writeln('<tr><th>Time</th><th>Ident</th><th>Message</th></tr>');
      * Logs $message to the output window.  The message is also passed along
      * to any Log_observer instances that are observing this Log.
      * 
-     * @param string $message  The textual message to be logged.
+     * @param mixed  $message  String or object containing the message to log.
      * @param string $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
@@ -200,6 +200,9 @@ win.document.writeln('<tr><th>Time</th><th>Ident</th><th>Message</th></tr>');
         if (!$this->_isMasked($priority)) {
             return false;
         }
+
+        /* Extract the string representation of the message. */
+        $message = $this->_extractMessage($message);
 
         list($usec, $sec) = explode(' ', microtime());
 
