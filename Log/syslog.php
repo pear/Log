@@ -6,24 +6,23 @@
  * The Log_syslog class is a concrete implementation of the Log::
  * abstract class which sends messages to syslog on UNIX-like machines
  * (PHP emulates this with the Event Log on Windows machines).
- * 
+ *
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @version $Revision$
  * @since   Horde 1.3
- * @package Log 
+ * @package Log
  */
-class Log_syslog extends Log {
-
-    /** 
+class Log_syslog extends Log
+{
+    /**
     * Integer holding the log facility to use. 
     * @var string
     */
     var $_name = LOG_SYSLOG;
 
-    
     /**
      * Constructs a new syslog object.
-     * 
+     *
      * @param string $name     The syslog facility.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
@@ -32,7 +31,7 @@ class Log_syslog extends Log {
      */
     function Log_syslog($name, $ident = '', $conf = array(),
                         $maxLevel = PEAR_LOG_DEBUG)
-    {    
+    {
         /* Ensure we have a valid integer value for $name. */
         if (empty($name) || !is_int($name)) {
             $name = LOG_SYSLOG;
@@ -59,7 +58,7 @@ class Log_syslog extends Log {
 
     /**
      * Closes the connection to the system logger, if it is open.
-     * @access public     
+     * @access public
      */
     function close()
     {
@@ -73,7 +72,7 @@ class Log_syslog extends Log {
      * Sends $message to the currently open syslog connection.  Calls
      * open() if necessary. Also passes the message along to any Log_observer
      * instances that are observing this Log.
-     * 
+     *
      * @param string $message  The textual message to be logged.
      * @param int $priority (optional) The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
@@ -81,7 +80,7 @@ class Log_syslog extends Log {
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      *                  The default is PEAR_LOG_INFO.
      * @return boolean  True on success or false on failure.
-     * @access public     
+     * @access public
      */
     function log($message, $priority = PEAR_LOG_INFO)
     {
@@ -137,6 +136,5 @@ class Log_syslog extends Log {
 
         return $priorities[$priority];
     }
-
 }
 ?>
