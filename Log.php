@@ -146,6 +146,22 @@ class Log extends PEAR {
     }
 
     /**
+     * Abstract implementation of the close() method.
+     */
+    function close()
+    {
+        return false;
+    }
+
+    /**
+     * Abstract implementation of the log() method.
+     */
+    function log($message, $priority = LOG_INFO)
+    {
+        return false;
+    }
+
+    /**
      * Returns the string representation of a PEAR_LOG_* integer constant.
      *
      * @param int $priority     A PEAR_LOG_* integer constant.
