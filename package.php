@@ -2,17 +2,13 @@
 
 require_once 'PEAR/PackageFileManager.php';
 
-$version = '1.8.7';
+$version = '1.9.0';
 $notes = <<<EOT
-The Log package now supports logging arrays with a 'message' key.
-The 'display' handler now preserves line breaks in its output.
-An experimental new handler ('daemon') has been added.
+Added stringToPriority() for converting priority names to PEAR_LOG_* constants.
 EOT;
 
 $changelog = <<<EOT
-The Log::_extractMessage() routine will now extract and use the value of an array's 'message' key if it exists. (Laurent Laville)
-The 'display' handler now preserves line breaks in its output. (Bug 2606)
-An experimental new syslog daemon log handler ('daemon') has been added to the Log distribution. (Bart van der Schans)
+Added stringToPriority() for converting priority names to PEAR_LOG_* constants. (Bug 2853)
 EOT;
 
 $package = new PEAR_PackageFileManager();
