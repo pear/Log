@@ -15,7 +15,7 @@ The Log framework provides an abstracted logging system.  It supports logging to
         </maintainer>
     </maintainers>
     <release>
-        <version>1.5.2</version>
+        <version>1.5.3</version>
         <date>2003-01-01</date>
         <state>stable</state>
         <notes>
