@@ -27,9 +27,11 @@ class Log_syslog extends Log {
      * @param string $name     The syslog facility.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
+     * @param int    $maxLevel Maximum level at which to log.
      * @access public
      */
-    function Log_syslog($name, $ident = '', $conf = array())
+    function Log_syslog($name, $ident = '', $conf = array(),
+                        $maxLevel = LOG_DEBUG)
     {    
         // bc compatibilty
         if( 0 == count( $conf )) {
@@ -37,6 +39,7 @@ class Log_syslog extends Log {
         }    
         $this->name = $name;
         $this->_ident = $ident;
+        $this->_maxLevel = $maxLevel;
     }
 
     /**
@@ -78,6 +81,9 @@ class Log_syslog extends Log {
      */
     function log($message, $priority = LOG_INFO)
     {
+        /* Abort early if the priority is above the maximum logging level. */
+        if ($priority > $this->_maxLevel) return;
+
         if (!$this->_opened) {
             $this->open();
         }

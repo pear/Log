@@ -31,6 +31,14 @@ class Log {
     var $_ident = '';
 
     /** 
+     * The maximum priority level at which to log a message.
+     *
+     * @var int
+     * @access private
+     */
+    var $_maxLevel = LOG_DEBUG;
+
+    /** 
      * Holds all Log_observer objects that wish to be notified of new messages.
      *
      * @var array
@@ -56,18 +64,21 @@ class Log {
      *
      * @param array  $conf      A hash containing any additional configuration
      *                          information that a subclass might need.
+     *
+     * @param int $maxLevel     Maximum priority level at which to log.
      * 
      * @return object Log       The newly created concrete Log instance, or an
      *                          false on an error.
      * @access public
      */
-    function factory($type, $name = '', $ident = '', $conf = array())
+    function factory($type, $name = '', $ident = '', $conf = array(),
+                     $maxLevel = LOG_DEBUG)
     {
         $type = strtolower($type);
         $classfile = 'Log/' . $type . '.php';
         if (@include_once $classfile) {
             $class = 'Log_' . $type;
-            return new $class($name, $ident, $conf);
+            return new $class($name, $ident, $conf, $maxLevel);
         } else {
             return false;
         }
@@ -102,18 +113,22 @@ class Log {
      * @param array $conf       A hash containing any additional configuration
      *                          information that a subclass might need.
      * 
+     * @param int $maxLevel     Minimum priority level at which to log.
+     * 
      * @return object Log       The newly created concrete Log instance, or an
      *                          false on an error.
      * @access public
      */
-    function &singleton($type, $name = '', $ident = '', $conf = array())
+    function &singleton($type, $name = '', $ident = '', $conf = array(),
+                        $maxLevel = LOG_DEBUG)
     {
         static $instances;
         if (!isset($instances)) $instances = array();
         
-        $signature = md5($type . '][' . $name . '][' . $ident . '][' . implode('][', $conf));
+        $signature = md5($type . '][' . $name . '][' . $ident . '][' . implode('][', $conf) . '][' . $maxLevel);
         if (!isset($instances[$signature])) {
-            $instances[$signature] = Log::factory($type, $name, $ident, $conf);
+            $instances[$signature] = Log::factory($type, $name, $ident, $conf,
+                $maxLevel);
         }
 
         return $instances[$signature];

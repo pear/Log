@@ -28,9 +28,11 @@ class Log_composite {
      * @param boolean $name     This is ignored.
      * @param boolean $ident    This is ignored.
      * @param boolean $conf     This is ignored.
+     * @param boolean $maxLevel This is ignored.
      * @access public
      */
-    function Log_composite($name = false, $ident = false, $conf = false)
+    function Log_composite($name = false, $ident = false, $conf = false,
+                           $maxLevel = LOG_DEBUG)
     {
     }
     

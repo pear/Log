@@ -51,12 +51,14 @@ class Log_sql extends Log {
      * @param string $name         The target SQL table.
      * @param string $ident        The identification field.
      * @param array $conf          The connection configuration array.
+     * @param int $maxLevel        Maximum level at which to log.
      * @access public     
      */
-    function Log_sql($name, $ident = '', $conf)
+    function Log_sql($name, $ident = '', $conf = array(), $maxLevel = LOG_DEBUG)
     {
         $this->table = $name;
         $this->_ident = $ident;
+        $this->_maxLevel = $maxLevel;
         $this->dsn = $conf['dsn'];
     }
 
@@ -110,6 +112,9 @@ class Log_sql extends Log {
      */
     function log($message, $priority = LOG_INFO)
     {
+        /* Abort early if the priority is above the maximum logging level. */
+        if ($priority > $this->_maxLevel) return;
+
         if (!$this->_opened) {
             $this->open();
         }

@@ -17,11 +17,14 @@ class Log_console extends Log
      * @param string $name     Ignored.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
+     * @param array  $maxLevel Maximum priority level at which to log.
      * @access public
      */
-    function Log_console($name, $ident = '', $conf = array())
+    function Log_console($name, $ident = '', $conf = array(),
+                         $maxLevel = LOG_DEBUG)
     {
         $this->_ident = $ident;
+        $this->_maxLevel = $maxLevel;
     }
 
     /**
@@ -37,6 +40,9 @@ class Log_console extends Log
      */
     function log($message, $priority = LOG_INFO)
     {
+        /* Abort early if the priority is above the maximum logging level. */
+        if ($priority > $this->_maxLevel) return;
+
         printf("%s %s [%s] %s\n", strftime('%b %d %T'), $this->_ident,
             Log::priorityToString($priority), $message);
 

@@ -57,9 +57,11 @@ class Log_mcal extends Log {
      * @param string $name     The category to use for our events.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
+     * @param int    $maxLevel Maximum level at which to log.
      * @access public
      */
-    function Log_mcal($name, $ident = '', $conf = array())
+    function Log_mcal($name, $ident = '', $conf = array(),
+                      $maxLevel = LOG_DEBUG)
     {
         // bc compatibilty
         if( 0 == count( $conf )) {
@@ -67,6 +69,7 @@ class Log_mcal extends Log {
         }
         $this->name = $name;
         $this->_ident = $ident;
+        $this->_maxLevel = $maxLevel;
         $this->calendar = $conf['calendar'];
         $this->username = $conf['username'];
         $this->password = $conf['password'];
@@ -113,6 +116,9 @@ class Log_mcal extends Log {
      */
     function log($message, $priority = LOG_INFO)
     {
+        /* Abort early if the priority is above the maximum logging level. */
+        if ($priority > $this->_maxLevel) return;
+
         if (!$this->_opened) {
             $this->open();
         }
