@@ -41,6 +41,14 @@ class Log
     var $_opened = false;
 
     /**
+     * Instance-specific unique identification number.
+     *
+     * @var integer
+     * @access private
+     */
+    var $_id = 0;
+
+    /**
      * The label that uniquely identifies this set of log messages.
      *
      * @var string

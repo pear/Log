@@ -14,6 +14,14 @@
 class Log_observer
 {
     /**
+     * Instance-specific unique identification number.
+     *
+     * @var integer
+     * @access private
+     */
+    var $_id = 0;
+
+    /**
      * The minimum priority level of message that we want to hear about.
      * PEAR_LOG_EMERG is the highest priority, so we will only hear messages
      * with an integer priority value less than or equal to ours.  It defaults
@@ -23,7 +31,6 @@ class Log_observer
      * @access private
      */
     var $_priority = PEAR_LOG_INFO;
-
 
     /**
      * Creates a new basic Log_observer instance.
@@ -35,6 +42,7 @@ class Log_observer
      */
     function Log_observer($priority = PEAR_LOG_INFO)
     {
+        $this->_id = md5(microtime());
         $this->_priority = $priority;
     }
 
