@@ -39,6 +39,12 @@ class Log_mail extends Log {
     var $_subject = '[Log_mail] Log message';
 
     /**
+     * String holding an optional preamble for the log messages.
+     * @var string
+     */
+    var $_preamble = '';
+
+    /**
      * String holding the mail message body.
      * @var string
      */
@@ -75,6 +81,10 @@ class Log_mail extends Log {
         if (!empty($conf['subject'])) {
             $this->_subject = $conf['subject'];
         }
+
+        if (!empty($conf['preamble'])) {
+            $this->_preamble = $conf['preamble'];
+        }
         
         /* register the destructor */
         register_shutdown_function(array(&$this, '_Log_mail'));
@@ -99,7 +109,9 @@ class Log_mail extends Log {
     function open()
     {
         if (!$this->_opened) {
-            $this->_message = "Log messages:\r\n\r\n";
+            if (!empty($this->_preamble)) {
+                $this->_message = $this->_preamble . "\r\n\r\n";
+            }
             $this->_opened = true;
         }
     }
