@@ -8,12 +8,14 @@
      provides a subject - observer mechanism.
     </description>
     <license>PHP 2.02</license>
-    <maintainer>
-        <user>jon</user>
-        <name>Jon Parise</name>
-        <email>jon@php.net</email>
-        <role>lead</role>
-    </maintainer>
+    <maintainers>
+        <maintainer>
+            <user>jon</user>
+            <name>Jon Parise</name>
+            <email>jon@php.net</email>
+            <role>lead</role>
+        </maintainer>
+    </maintainers>
     <release>
         <version>1.1</version>
         <date>2002-04-12</date>
