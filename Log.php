@@ -2,6 +2,8 @@
 // $Id$
 // $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
 
+require_once 'PEAR.php';
+
 define('PEAR_LOG_EMERG',    0);                                                
 define('PEAR_LOG_ALERT',    1);                                                
 define('PEAR_LOG_CRIT',     2);                                                
@@ -21,7 +23,7 @@ define('PEAR_LOG_DEBUG',    7);
  * @since   Horde 1.3
  * @package Log
  */
-class Log {
+class Log extends PEAR {
 
     /**
      * Indicates whether or not the log can been opened / connected.
@@ -80,7 +82,7 @@ class Log {
      *                          false on an error.
      * @access public
      */
-    function factory($type, $name = '', $ident = '', $conf = array(),
+    function &factory($type, $name = '', $ident = '', $conf = array(),
                      $maxLevel = PEAR_LOG_DEBUG)
     {
         $type = strtolower($type);
