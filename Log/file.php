@@ -111,7 +111,7 @@ class Log_file extends Log
         $this->_id       = md5(microtime());
         $this->_filename = realpath($name);
         $this->_ident    = $ident;
-        $this->_maxLevel = $maxLevel;
+        $this->_mask     = Log::UPTO($maxLevel);
         
         $this->_logLines = array();
         $this->_writeOut = true;
@@ -152,7 +152,7 @@ class Log_file extends Log
     function log($message, $priority = PEAR_LOG_INFO)
     {
         // Abort early if the priority is above the maximum logging level.
-        if ($priority > $this->_maxLevel) {
+        if (!$this->_isLoggedPriority($priority)) {
             return false;
         }
 

@@ -40,7 +40,7 @@ class Log_syslog extends Log
         $this->_id = md5(microtime());
         $this->_name = $name;
         $this->_ident = $ident;
-        $this->_maxLevel = $maxLevel;
+        $this->_mask = Log::UPTO($maxLevel);
     }
 
     /**
@@ -85,7 +85,7 @@ class Log_syslog extends Log
     function log($message, $priority = PEAR_LOG_INFO)
     {
         /* Abort early if the priority is above the maximum logging level. */
-        if ($priority > $this->_maxLevel) {
+        if (!$this->_isLoggedPriority($priority)) {
             return false;
         }
 

@@ -66,7 +66,7 @@ class Log_mcal extends Log {
         $this->_id = md5(microtime());
         $this->_name = $name;
         $this->_ident = $ident;
-        $this->_maxLevel = $maxLevel;
+        $this->_mask = Log::UPTO($maxLevel);
         $this->_calendar = $conf['calendar'];
         $this->_username = $conf['username'];
         $this->_password = $conf['password'];
@@ -117,7 +117,7 @@ class Log_mcal extends Log {
     function log($message, $priority = PEAR_LOG_INFO)
     {
         /* Abort early if the priority is above the maximum logging level. */
-        if ($priority > $this->_maxLevel) {
+        if (!$this->_isLoggedPriority($priority)) {
             return false;
         }
 

@@ -2,14 +2,17 @@
 // $Id$
 // $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
 
-define('PEAR_LOG_EMERG',    0);
-define('PEAR_LOG_ALERT',    1);
-define('PEAR_LOG_CRIT',     2);
-define('PEAR_LOG_ERR',      3);
-define('PEAR_LOG_WARNING',  4);
-define('PEAR_LOG_NOTICE',   5);
-define('PEAR_LOG_INFO',     6);
-define('PEAR_LOG_DEBUG',    7);
+define('PEAR_LOG_EMERG',    0);     /** System is unusable */
+define('PEAR_LOG_ALERT',    1);     /** Immediately action */
+define('PEAR_LOG_CRIT',     2);     /** Critical conditions */
+define('PEAR_LOG_ERR',      3);     /** Error conditions */
+define('PEAR_LOG_WARNING',  4);     /** Warning conditions */
+define('PEAR_LOG_NOTICE',   5);     /** Normal but significant */
+define('PEAR_LOG_INFO',     6);     /** Informational */
+define('PEAR_LOG_DEBUG',    7);     /** Debug-level messages */
+
+define('PEAR_LOG_ALL',      bindec('11111111'));  /** All messages */
+define('PEAR_LOG_NONE',     bindec('00000000'));  /** No message */
 
 /**
  * The Log:: class implements both an abstraction for various logging
@@ -39,13 +42,12 @@ class Log
      */
     var $_ident = '';
 
-    /**
-     * The maximum priority level at which to log a message.
-     *
-     * @var int
+    /*
+     * The bitmask of allowed log levels.
+     * @var integer
      * @access private
      */
-    var $_maxLevel = PEAR_LOG_DEBUG;
+    var $_mask = PEAR_LOG_ALL;
 
     /**
      * Holds all Log_observer objects that wish to be notified of new messages.
@@ -180,6 +182,81 @@ class Log
         );
 
         return $priorities[$priority];
+    }
+
+    /**
+     * Calculate the log mask for the given priority.
+     *
+     * @param integer   $priority   The priority whose mask will be calculated.
+     *
+     * @return integer  The calculated log mask.
+     *
+     * @access public
+     */
+    function MASK($priority)
+    {
+        return (1 << $priority);
+    }
+
+    /**
+     * Calculate the log mask for all priorities up to the given priority.
+     *
+     * @param integer   $priority   The maximum priority covered by this mask.
+     *
+     * @return integer  The calculated log mask.
+     *
+     * @access public
+     */
+    function UPTO($priority)
+    {
+        return ((1 << ($priority + 1)) - 1);
+    }
+
+    /**
+     * Set and return the level mask for the current Log instance.
+     *
+     * @param integer $mask     A bitwise mask of log levels.
+     *
+     * @return integer          The current level mask.
+     *
+     * @access public
+     */
+    function setMask($mask)
+    {
+        $this->_mask = $mask;
+
+        return $this->_mask;
+    }
+
+    /**
+     * Returns the current level mask.
+     *
+     * @return interger         The current level mask.
+     *
+     * @access public
+     */
+    function getMask()
+    {
+        return $this->_mask;
+    }
+
+    /**
+     * Check if the given priority is included in the current level mask.
+     *
+     * @param integer   $priority   The priority to check.
+     *
+     * @return boolean  True if the given priority is included in the current
+     *                  log mask.
+     *
+     * @access private
+     */
+    function _isLoggedPriority($priority)
+    {
+        if (!(Log::MASK($priority) & $this->_mask)) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

@@ -67,7 +67,7 @@ class Log_sql extends Log {
         $this->_id = md5(microtime());
         $this->_table = $name;
         $this->_ident = $ident;
-        $this->_maxLevel = $maxLevel;
+        $this->_mask = Log::UPTO($maxLevel);
 
         /* If an existing database connection was provided, use it. */
         if (isset($conf['db'])) {
@@ -134,7 +134,9 @@ class Log_sql extends Log {
     function log($message, $priority = PEAR_LOG_INFO)
     {
         /* Abort early if the priority is above the maximum logging level. */
-        if ($priority > $this->_maxLevel) return;
+        if (!$this->_isLoggedPriority($priority)) {
+            return false;
+        }
 
         if (!$this->_opened) {
             $this->open();
