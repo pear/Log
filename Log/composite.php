@@ -107,6 +107,20 @@ class Log_composite extends Log
     }
 
     /**
+     * Sets this identification string for all of this composite's children.
+     *
+     * @param string    $ident      The new identification string.
+     *
+     * @access public
+     */
+    function setIdent($ident)
+    {
+        foreach ($this->_children as $id => $child) {
+            $this->_children[$id]->setIdent($ident);
+        }
+    }
+
+    /**
      * Adds a Log instance to the list of children.
      *
      * @param object    $child      The Log instance to add.

@@ -256,8 +256,7 @@ class Log {
     /**
      * Sets this Log instance's identification string.
      *
-     * @param string    $ident      The new identification string for this Log
-     *                              instance.
+     * @param string    $ident      The new identification string.
      *
      * @access public
      */
