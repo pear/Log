@@ -94,6 +94,7 @@ Updated the Log_observer::factory() method for consistency with Log::factory().<
       <file role="doc" baseinstalldir="/" md5sum="775294dbee8158b8c4b13f0f1849f0bc" name="docs/examples/error_log.php"/>
       <file role="doc" baseinstalldir="/" md5sum="f1829c72e025359de7d04af6adb2685f" name="docs/examples/file.php"/>
       <file role="doc" baseinstalldir="/" md5sum="d53ed4d000a0848919136f74fd57b6c8" name="docs/examples/mail.php"/>
+      <file role="doc" baseinstalldir="/" md5sum="3f9f92a65a6dc85fb739a41c3f128f7a" name="docs/examples/observer_mail.php"/>
       <file role="doc" baseinstalldir="/" md5sum="959d3590bcce733131fb5cdac2873d0b" name="docs/examples/pear_error_handler.php"/>
       <file role="doc" baseinstalldir="/" md5sum="34c957866e5c983d3b67af00099ce8f1" name="docs/examples/php_error_handler.php"/>
       <file role="doc" baseinstalldir="/" md5sum="5ce33090cd30c47fb028736bf918b85a" name="docs/examples/sql.php"/>
@@ -106,7 +107,7 @@ Updated the Log_observer::factory() method for consistency with Log::factory().<
       <file role="php" baseinstalldir="/" md5sum="14b5fbe0f5487ea8c549bf68b2b66271" name="Log/file.php"/>
       <file role="php" baseinstalldir="/" md5sum="bf591a4550662cb88f9189224c8e6008" name="Log/mail.php"/>
       <file role="php" baseinstalldir="/" md5sum="877e2a99d689f1fdcd34cde7b3da4635" name="Log/mcal.php"/>
-      <file role="php" baseinstalldir="/" md5sum="7cb2ac46dfdd82e342453c44b2cc849b" name="Log/observer.php"/>
+      <file role="php" baseinstalldir="/" md5sum="30d65341312a12281e2606d4cc4e6b18" name="Log/observer.php"/>
       <file role="php" baseinstalldir="/" md5sum="9f6f7750d3804adf273c1a0eedbb44b7" name="Log/sql.php"/>
       <file role="php" baseinstalldir="/" md5sum="9ea63304921b3c084aa07aded4bd643c" name="Log/syslog.php"/>
       <file role="php" baseinstalldir="/" md5sum="e2fbee5870ca13cff34c0d06f3154b58" name="Log/win.php"/>
