@@ -2,10 +2,16 @@
 // $Id$
 
 /**
- * The Log_mail class is a concrete implementation of the Log::
- * abstract class which sends log messages to a mailbox.
- * The mail is actually sent when you close() the logger.
- * If you do not close() it, the pending log messages will be lost.
+ * The Log_mail class is a concrete implementation of the Log:: abstract class
+ * which sends log messages to a mailbox.
+ * The mail is actually sent when you close() the logger, or when the destructor
+ * is called (when the script is terminated).
+ * 
+ * PLEASE NOTE that you must create a Log_mail object using =&, like this :
+ *  $logger =& Log::factory("mail", "recipient@example.com", ...)
+ * 
+ * This is a PEAR requirement for destructors to work properly.
+ * See http://pear.php.net/manual/en/class.pear.php
  * 
  * @author  Ronnie Garcia <ronnie@mk2.net>
  * @author  Jon Parise <jon@php.net>
@@ -68,11 +74,25 @@ class Log_mail extends Log {
         if (!empty($conf['subject'])) {
             $this->_subject = $conf['subject'];
         }
+        
+        /* register the destructor */
+        $this->PEAR();
+    }
+    
+    /**
+     * Destructor. Calls close().
+     *
+     * @access private
+     */
+    function _Log_mail()
+    {
+        $this->close();
     }
 
     /**
      * Starts a new mail message.
      * This is implicitly called by log(), if necessary.
+     * 
      * @access public
      */
     function open()
@@ -85,6 +105,8 @@ class Log_mail extends Log {
 
     /**
      * Closes the message, if it is open, and sends the mail.
+     * This is implicitly called by the destructor, if necessary.
+     * 
      * @access public
      */
     function close()
@@ -107,9 +129,8 @@ class Log_mail extends Log {
     }
 
     /**
-     * Writes $message to the currently open mail message. Calls open(), if
-     * necessary.
-     * We still need to close() the logger to actually send the mail, thought.
+     * Writes $message to the currently open mail message.
+     * Calls open(), if necessary.
      * 
      * @param string $message  The textual message to be logged.
      * @param string $priority The priority of the message.  Valid
