@@ -16,7 +16,7 @@ define('PEAR_LOG_DEBUG',    7);
  * mechanisms and the Subject end of a Subject-Observer pattern.
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @author  Jon Parise <jon@horde.org>
+ * @author  Jon Parise <jon@php.net>
  * @version $Revision$
  * @since   Horde 1.3
  * @package Log

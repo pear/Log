@@ -19,7 +19,7 @@ require_once 'DB.php';
  *  primary key (unixtime, ident)
  * );
  *
- * @author  Jon Parise <jon@horde.org>
+ * @author  Jon Parise <jon@php.net>
  * @version $Revision$
  * @since   Horde 1.3
  * @package Log 

@@ -6,7 +6,7 @@
  * The Log_file class is a concrete implementation of the Log::
  * abstract class which writes message to a text file.
  * 
- * @author  Jon Parise <jon@horde.org>
+ * @author  Jon Parise <jon@php.net>
  * @version $Revision$
  * @since   Horde 1.3
  * @package Log
