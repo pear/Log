@@ -130,6 +130,11 @@ class Log_syslog extends Log {
             PEAR_LOG_DEBUG   => LOG_DEBUG
         );
 
+        /* If we're passed an unknown priority, default to LOG_INFO. */
+        if (!is_int($priority) || !in_array($priority, $priorities)) {
+            return LOG_INFO;
+        }
+
         return $priorities[$priority];
     }
 
