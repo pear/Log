@@ -10,37 +10,61 @@
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @version $Revision$
  * @since Horde 1.3
+ * @package Log 
  */
 class Log_mcal extends Log {
 
-    /** String holding the calendar specification to connect to. */
+    /**
+    * holding the calendar specification to connect to. 
+    * @var string
+    */
     var $calendar = '{localhost/mstore}';
 
-    /** String holding the username to use. */
+    /** 
+    * holding the username to use. 
+    * @var string
+    */
     var $username = '';
 
-    /** String holding the password to use. */
+    /** 
+    * holding the password to use. 
+    * @var string
+    */
     var $password = '';
 
-    /** Integer holding the options to pass to the calendar stream. */
+    /** 
+    * holding the options to pass to the calendar stream. 
+    * @var integer
+    */
     var $options = 0;
 
-    /** ResourceID of the MCAL stream. */
+    /** 
+    * ResourceID of the MCAL stream. 
+    * @var string
+    */
     var $stream = '';
 
-    /** Integer holding the log facility to use. */
+    /** 
+    * Integer holding the log facility to use. 
+    * @var string
+    */
     var $name = LOG_SYSLOG;
 
 
     /**
      * Constructs a new Log_mcal object.
      * 
-     * @param $log_name (optional) The category to use for our events.
-     * @param $ident    (optional) The identity string.
-     * @param $conf     (optional) The configuration array.
+     * @param string $log_name The category to use for our events.
+     * @param string $ident    The identity string.
+     * @param array  $conf     The configuration array.
+     * @access public
      */
-    function Log_mcal($log_name = LOG_SYSLOG, $ident = '', $conf = false)
+    function Log_mcal($log_name = LOG_SYSLOG, $ident = '', $conf = array())
     {
+        // bc compatibilty
+        if( 0 == count( $conf )) {
+            $conf = false ;
+        }
         $this->name = $log_name;
         $this->ident = $ident;
         $this->calendar = $conf['calendar'];
@@ -52,6 +76,7 @@ class Log_mcal extends Log {
     /**
      * Opens a calendar stream, if it has not already been
      * opened. This is implicitly called by log(), if necessary.
+     * @access public
      */
     function open()
     {
@@ -63,6 +88,7 @@ class Log_mcal extends Log {
 
     /**
      * Closes the calendar stream, if it is open.
+     * @access public
      */
     function close()
     {
@@ -78,11 +104,12 @@ class Log_mcal extends Log {
      * message along to any Log_observer instances that are observing
      * this Log.
      * 
-     * @param $message  The textual message to be logged.
-     * @param $priority (optional) The priority of the message. Valid
+     * @param string $message  The textual message to be logged.
+     * @param string $priority The priority of the message. Valid
      *                  values are: LOG_EMERG, LOG_ALERT, LOG_CRIT,
      *                  LOG_ERR, LOG_WARNING, LOG_NOTICE, LOG_INFO,
      *                  and LOG_DEBUG. The default is LOG_INFO.
+     * @access public
      */
     function log($message, $priority = LOG_INFO)
     {

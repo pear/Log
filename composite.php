@@ -9,21 +9,26 @@
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @version $Revision$
  * @since Horde 1.3
+ * @package Log 
  */
 
 class Log_composite {
 
-    /** Array holding all Log instances which should be sent events
-        sent to the composite. */
+    /** 
+    * Array holding all Log instances 
+    * which should be sent events sent to the composite. 
+    * @var array
+    */
     var $children = array();
 
 
     /**
      * Constructs a new composite Log object.
      * 
-     * @param $log_name (optional) This is ignored.
-     * @param $ident    (optional) This is ignored.
-     * @param $conf     (optional) This is ignored.
+     * @param boolean $log_name This is ignored.
+     * @param boolean $ident    This is ignored.
+     * @param boolean $conf     This is ignored.
+     * @access public
      */
     function Log_composite($log_name = false, $ident = false, $conf = false)
     {
@@ -32,6 +37,7 @@ class Log_composite {
     /**
      * Open the log connections of each and every child of this
      * composite.
+     * @access public     
      */
     function open()
     {
@@ -46,6 +52,7 @@ class Log_composite {
     /**
      * If we've gone ahead and opened each child, go through and close
      * each child.
+     * @access public     
      */
     function close()
     {
@@ -60,8 +67,8 @@ class Log_composite {
     /**
      * Sends $message and $priority to every child of this composite.
      * 
-     * @param $message  The textual message to be logged.
-     * @param $priority (optional) The priority of the message. Valid
+     * @param string $message  The textual message to be logged.
+     * @param string $priority (optional) The priority of the message. Valid
      *                  values are: LOG_EMERG, LOG_ALERT, LOG_CRIT,
      *                  LOG_ERR, LOG_WARNING, LOG_NOTICE, LOG_INFO,
      *                  and LOG_DEBUG. The default is LOG_INFO.
@@ -77,9 +84,10 @@ class Log_composite {
     }
 
     /**
-     * @return a Boolean: true if this is a composite class, false
+     * @return boolean true if this is a composite class, false
      * otherwise. Always returns true since this is the composite
      * subclass.
+     * @access public
      */
     function isComposite()
     {
@@ -90,7 +98,9 @@ class Log_composite {
      * Add a Log instance to the list of children that messages sent
      * to us should be passed on to.
      *
-     * @param $child The Log instance to add.
+     * @param object Log &$child The Log instance to add.
+     * @access public 
+     * @return boolean false, if &$child isn't a Log instance    
      */
     function addChild(&$child)
     {
@@ -107,7 +117,8 @@ class Log_composite {
      * Remove a Log instance from the list of children that messages
      * sent to us should be passed on to.
      *
-     * @param $child The Log instance to remove.
+     * @param object Log $child The Log instance to remove.
+     * @access public     
      */
     function removeChild($child)
     {

@@ -22,28 +22,42 @@ require_once 'DB.php';
  * @author  Jon Parise <jon@csh.rit.edu>
  * @version $Revision$
  * @since   Horde 1.3
+ * @package Log 
  */
 class Log_sql extends Log {
 
-    /** Array containing the dsn information. */
+    /** 
+    * Array containing the dsn information. 
+    * @var string
+    */
     var $dsn = '';
 
-    /** Object holding the database handle. */
+    /** 
+    * Object holding the database handle. 
+    * @var string
+    */
     var $db = '';
 
-    /** String holding the database table to use. */
+    /** 
+    * String holding the database table to use. 
+    * @var string
+    */
     var $table = 'log_table';
 
-    /** Boolean indicating the current connection state. */
+    /** 
+    * Boolean indicating the current connection state. 
+    * @var boolean
+    */
     var $opened = false;
 
 
     /**
      * Constructs a new sql logging object.
      *
-     * @param $log_name     The target SQL table.
-     * @param $ident        (optional) The identification field.
-     * @param $conf         The connection configuration array.
+     * @param string $log_name     The target SQL table.
+     * @param string $ident        The identification field.
+     * @param array $conf          The connection configuration array.
+     * @access public     
      */
     function Log_sql($log_name, $ident = '', $conf)
     {
@@ -56,7 +70,8 @@ class Log_sql extends Log {
      * Opens a connection to the database, if it has not already
      * been opened. This is implicitly called by log(), if necessary.
      *
-     * @return              True on success, false on failure.
+     * @return boolean   True on success, false on failure.
+     * @access public     
      */
     function open()
     {
@@ -73,7 +88,8 @@ class Log_sql extends Log {
     /**
      * Closes the connection to the database, if it is open.
      *
-     * @return              True on success, false on failure.
+     * @return boolean   True on success, false on failure.
+     * @access public     
      */
     function close()
     {
@@ -89,11 +105,12 @@ class Log_sql extends Log {
      * if necessary.  Also passes the message along to any Log_observer
      * instances that are observing this Log.
      *
-     * @param $message  The textual message to be logged.
-     * @param $priority (optional) The priority of the message.  Valid
+     * @param string $message  The textual message to be logged.
+     * @param string $priority The priority of the message.  Valid
      *                  values are: LOG_EMERG, LOG_ALERT, LOG_CRIT,
      *                  LOG_ERR, * LOG_WARNING, LOG_NOTICE, LOG_INFO,
      *                  and LOG_DEBUG. The default is LOG_INFO.
+     * @access public     
      */
     function log($message, $priority = LOG_INFO)
     {

@@ -10,20 +10,26 @@
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @version $Revision$
  * @since   Horde 1.3
+ * @package Log
  */
 class Log_observer {
  
-    /** The minimum priority level of message that we want to hear
-        about. 0 (LOG_EMERG) is the highest priority, so we will only
-        hear messages with an integer priority value less than or
-        equal to ours. It defaults to LOG_INFO, which listens to
-        everything except LOG_DEBUG. */
+    /** 
+    * The minimum priority level of message that we want to hear
+    * about. 0 (LOG_EMERG) is the highest priority, so we will only
+    * hear messages with an integer priority value less than or
+    * equal to ours. It defaults to LOG_INFO, which listens to
+    * everything except LOG_DEBUG. 
+    * @var string
+    */
     var $priority = LOG_INFO;
 
 
     /**
      * Basic Log_observer instance that just prints out messages
      * received.
+     * @param string $priority priority level of message
+     * @access public
      */
     function Log_observer($priority = LOG_INFO)
     {
@@ -34,10 +40,11 @@ class Log_observer {
      * Attempts to return a concrete Log_observer instance of the
      * specified type.
      * 
-     * @param $observer_type    The type of concrate Log_observer subclass
+     * @param string $observer_type    The type of concrate Log_observer subclass
      *                          to return.  We will attempt to dynamically
      *                          include the code for this subclass.
-     * @return                  The newly created concrete Log_observer
+     * @param string $priority priority level of message
+     * @return object Log_observer  The newly created concrete Log_observer
      * instance, or an false on an error.
      */
     function factory($observer_type, $priority = LOG_INFO)
@@ -59,7 +66,7 @@ class Log_observer {
      * desireable in practically any situation - which is why you need
      * to override this method. :)
      * 
-     * @param $messageOb    A hash containing all information - the text
+     * @param array $messageOb    A hash containing all information - the text
      *                      message itself, the priority, what log it came
      *                      from, etc.
      */

@@ -9,25 +9,37 @@
  * @author  Jon Parise <jon@csh.rit.edu>
  * @version $Revision$
  * @since   Horde 1.3
+ * @package Log
  */
 class Log_file extends Log {
 
-    /** String holding the filename of the logfile. */
+    /** 
+    * String holding the filename of the logfile. 
+    * @var string
+    */
     var $filename = '';
 
-    /** Integer holding the file handle. */
-    var $fp = '';
+    /**
+    * Integer holding the file handle. 
+    * @var integer
+    */
+    var $fp = 0 ;
 
 
     /**
      * Constructs a new logfile object.
      * 
-     * @param $log_name The filename of the logfile.
-     * @param $ident    (optional) The identity string.
-     * @param $conf     (optional) The configuration array.
+     * @param string $log_name The filename of the logfile.
+     * @param string $ident    The identity string.
+     * @param array  $conf     The configuration array.
+     * @access public
      */
-    function Log_file($log_name, $ident = '', $conf = false)
+    function Log_file($log_name, $ident = '', $conf = array())
     {
+        // bc compatibilty
+        if( 0 == count( $conf )) {
+            $conf = false ;
+        }    
         $this->filename = $log_name;
         $this->ident = $ident;
     }
@@ -36,6 +48,7 @@ class Log_file extends Log {
      * Opens the logfile for appending, if it has not already been opened.
      * If the file doesn't already exist, attempt to create it.  This is
      * implicitly called by log(), if necessary.
+     * @access public
      */
     function open()
     {
@@ -47,6 +60,7 @@ class Log_file extends Log {
 
     /**
      * Closes the logfile, if it is open.
+     * @access public
      */
     function close()
     {
@@ -61,11 +75,12 @@ class Log_file extends Log {
      * necessary.  Also, passes the message along to any Log_observer
      * instances that are observing this Log.
      * 
-     * @param $message  The textual message to be logged.
-     * @param $priority (optional) The priority of the message.  Valid
+     * @param string $message  The textual message to be logged.
+     * @param string $priority The priority of the message.  Valid
      *                  values are: LOG_EMERG, LOG_ALERT, LOG_CRIT,
      *                  LOG_ERR, LOG_WARNING, LOG_NOTICE, LOG_INFO, and
      *                  LOG_DEBUG. The default is LOG_INFO.
+     * @access public
      */
     function log($message, $priority = LOG_INFO)
     {
