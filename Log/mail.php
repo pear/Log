@@ -77,7 +77,7 @@ class Log_mail extends Log {
         }
         
         /* register the destructor */
-        $this->PEAR();
+        register_shutdown_function(array(&$this, '_Log_mail'));
     }
     
     /**
