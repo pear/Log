@@ -15,15 +15,13 @@ The Log framework provides an abstracted logging system.  It supports logging to
         </maintainer>
     </maintainers>
     <release>
-        <version>1.6.3</version>
-        <date>2003-04-07</date>
+        <version>1.6.4</version>
+        <date>2003-04-??</date>
         <state>stable</state>
         <notes>
-A unique identifier is now stored inside each Log instance.  Both the composite and subject-observer mechanisms use this identifier to index their object lists.
+The Log classes no longer inherits from the PEAR base class.  Not including the PEAR base class gives us smaller, faster Log objects.
 
-The internals of the Log_observer system have been rewritten for general cleanliness.  The external interface remains unchanged.
-
-The Log class now offers public setIdent() and getIdent() members for setting and getting the Log instance's identification string during the object's lifetime.
+The Log_file class now registers its own destructor to ensure that the logfile is correctly closed upon shutdown.
         </notes>
       <filelist>
         <dir name="/">
@@ -45,6 +43,18 @@ The Log class now offers public setIdent() and getIdent() members for setting an
       </deps>
     </release>
     <changelog>
+      <release>
+        <version>1.6.3</version>
+        <date>2003-04-07</date>
+        <state>stable</state>
+        <notes>
+A unique identifier is now stored inside each Log instance.  Both the composite and subject-observer mechanisms use this identifier to index their object lists.
+
+The internals of the Log_observer system have been rewritten for general cleanliness.  The external interface remains unchanged.
+
+The Log class now offers public setIdent() and getIdent() members for setting and getting the Log instance's identification string during the object's lifetime.
+        </notes>
+      </release>
       <release>
         <version>1.6.2</version>
         <date>2003-04-06</date>
