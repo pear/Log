@@ -19,24 +19,11 @@ The Log framework provides an abstracted logging system.  It supports logging to
         <date>2003-06-??</date>
         <state>stable</state>
         <notes>
-It is now possible to specific a specific mask that dictates exactly which levels will be logged.  For example, to log all events *except* those that were assigned the PEAR_LOG_NOTICE priority:
-
-    $mask = PEAR_LOG_ALL ^ Log::MASK(PEAR_LOG_NOTICE);
-    $log->setMask($mask);
-
-To log all message up to a specific log level (which is equivalent to the previous "maxLevel" setting):
-
-    $mask = Log::UPTO(PEAR_LOG_INFO);
-    $log->setMask($mask);
-
-To log only notices and debug messages:
-
-    $mask = Log::MASK(PEAR_LOG_NOTICE) | Log::MASK(PEAR_LOG_DEBUG);
-    $log->setMask($mask);
+It is now possible to specific a specific mask that dictates exactly which levels will be logged.  
 
 A number of convenient "shortcut" functions have been added for logging messages at specific log messages.
 
-A new log hander, 'error_log', has been added.  It wraps PHP's native error_log() function.
+Two new log handers have been added: the 'error_log' handler wraps PHP's native error_log() function; and the 'win' handler outputs log messages to a separate browser window.
         </notes>
         <filelist>
           <dir name="/">
@@ -44,12 +31,14 @@ A new log hander, 'error_log', has been added.  It wraps PHP's native error_log(
 	      <dir name="Log">
 	        <file role="php">composite.php</file>
 	        <file role="php">console.php</file>
+	        <file role="php">error_log.php</file>
 	        <file role="php">file.php</file>
   	        <file role="php">mail.php</file>
   	        <file role="php">mcal.php</file>
   	        <file role="php">observer.php</file>
 	        <file role="php">sql.php</file>
 	        <file role="php">syslog.php</file>
+	        <file role="php">win.php</file>
 	      </dir>
           </dir>
         </filelist>
