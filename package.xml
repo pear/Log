@@ -15,10 +15,11 @@ The Log framework provides an abstracted logging system.  It supports logging to
         </maintainer>
     </maintainers>
     <release>
-        <version>1.5.4</version>
-        <date>2003-XX-XX</date>
+        <version>1.6.0</version>
+        <date>2003-02-17</date>
         <state>stable</state>
         <notes>
+- The SQL handler now uses sequences instead of timestamps as unique identifiers.
 - The time format used by the file handler is now configurable.
         </notes>
       <filelist>
@@ -36,6 +37,9 @@ The Log framework provides an abstracted logging system.  It supports logging to
 	    </dir>
         </dir>
       </filelist>
+      <deps>
+        <dep type="pkg" rel="has">DB</dep>
+      </deps>
     </release>
     <changelog>
       <release>
