@@ -26,7 +26,7 @@ A wide variety of handlers are distributed with the Log package, and, should
 none of them fit your application's needs, it's easy to `write your own`__.
 
 .. _Log class: http://cvs.php.net/co.php/pear/Log/Log.php
-__ `Writing Custom Handlers`_
+__ `Custom Handlers`_
 
 Creating a Log Object
 ---------------------
@@ -824,8 +824,46 @@ uses a global Log instance.  Here's an example::
 .. _PEAR::setErrorHandling(): http://pear.php.net/manual/en/core.pear.pear.seterrorhandling.php
 
 
-Writing Custom Handlers
-=======================
+Custom Handlers
+===============
+There are times when the standard handlers aren't a perfect match for your
+needs.  In those situations, the solution might be to write a custom handler.
+
+Using a Custom Handler
+----------------------
+Using a custom Log handler is very simple.  Once written (see `Writing New
+Handlers`_ and `Extending Existing Handlers`_ below), you have the choice of
+placing the file in your PEAR installation's main ``Log/`` directory (usually
+something like ``/usr/local/lib/php/Log`` or ``C:\php\pear\Log``), where it
+can be found and use by any PHP application on the system, or placing the file
+somewhere in your application's local hierarchy and including it before the
+the custom Log object is constructed.
+
+Method 1: Handler in the Standard Location
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+After copying the handler file to your PEAR installation's ``Log/`` directory,
+simply treat the handler as if it were part of the standard distributed.  If
+your handler is named ``custom`` (and therefore implemented by a class named
+``Log_custom``)::
+
+    require_once 'Log.php';
+
+    $logger = &Log::factory('custom', '', 'CUSTOM');
+
+
+Method 2: Handler in a Custom Location
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+If you prefer storing your handler in your application's local hierarchy,
+you'll need to include that file before you can create a Log instance based on
+it.
+
+::
+
+    require_once 'Log.php';
+    require_once 'LocalHandlers/custom.php';
+
+    $logger = &Log::factory('custom', '', 'CUSTOM');
+
 
 Writing New Handlers
 --------------------
@@ -840,4 +878,4 @@ TODO
 
 .. |required| replace:: **[required]**
 
-.. vim: tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth=78:
+.. vim: tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth=78 ft=rst:
