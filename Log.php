@@ -254,6 +254,31 @@ class Log extends PEAR {
     {
         return false;
     }
+
+    /**
+     * Set this Log instance's identification string.
+     *
+     * @param string    $ident      The new identification string for this Log
+     *                              instance.
+     *
+     * @access public
+     */
+    function setIdent($ident)
+    {
+        $this->_ident = $ident;
+    }
+
+    /**
+     * Return the current identification string.
+     *
+     * @return string   The current Log instance's identification string.
+     *
+     * @access public
+     */
+    function getIdent()
+    {
+        return $this->_ident;
+    }
 }
 
 ?>
