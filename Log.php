@@ -169,6 +169,14 @@ class Log
     }
 
     /**
+     * Abstract implementation of the open() method.
+     */
+    function open()
+    {
+        return false;
+    }
+
+    /**
      * Abstract implementation of the close() method.
      */
     function close()
