@@ -14,7 +14,7 @@
   </maintainers>
   <release>
     <version>1.8.5</version>
-    <date>2004-08-08</date>
+    <date>2004-08-09</date>
     <license>PHP License</license>
     <state>stable</state>
     <notes>The 'sql' handler now enforces a maximum 'ident' length of 16 characters.
@@ -72,6 +72,7 @@ The 'composite' handler now properly closes all of its children. (Bug 1947)</not
         <file role="test" name="display.phpt"/>
         <file role="test" name="error_log.phpt"/>
         <file role="test" name="extract.phpt"/>
+        <file role="test" name="extract2.phpt"/>
         <file role="test" name="factory.phpt"/>
         <file role="test" name="null.phpt"/>
         <file role="test" name="priority.phpt"/>
@@ -86,7 +87,7 @@ The 'composite' handler now properly closes all of its children. (Bug 1947)</not
   <changelog>
     <release>
       <version>1.8.5</version>
-      <date>2004-08-08</date>
+      <date>2004-08-09</date>
       <license>PHP License</license>
       <state>stable</state>
       <notes>The 'sql' handler now enforces a maximum 'ident' length of 16 characters.
