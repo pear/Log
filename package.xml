@@ -3,7 +3,7 @@
 <package version="1.0">
   <name>Log</name>
   <summary>Logging utilities</summary>
-  <description>The Log framework provides an abstracted logging system.  It supports logging to console, file, syslog, SQL, mail, and mcal targets.  It also provides a subject - observer mechanism.</description>
+  <description>The Log framework provides an abstracted logging system.  It supports logging to console, file, syslog, SQL, Sqlite, mail and mcal targets.  It also provides a subject - observer mechanism.</description>
   <maintainers>
     <maintainer>
       <user>jon</user>
