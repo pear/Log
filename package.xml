@@ -16,12 +16,14 @@ The Log framework provides an abstracted logging system.  It supports logging to
     </maintainers>
     <release>
         <version>1.6.4</version>
-        <date>2003-04-??</date>
+        <date>2003-04-08</date>
         <state>stable</state>
         <notes>
 The Log classes no longer inherits from the PEAR base class.  Not including the PEAR base class gives us smaller, faster Log objects.
 
 The Log_file class now registers its own destructor to ensure that the logfile is correctly closed upon shutdown.
+
+A ZendEngine 1 incompatibility was introduced in the previous release.  This has been corrrected.
         </notes>
       <filelist>
         <dir name="/">
