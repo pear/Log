@@ -47,7 +47,6 @@ class Log_composite extends Log
     function open()
     {
         if (!$this->_opened) {
-            reset($this->_children);
             foreach ($this->_children as $child) {
                 $child->open();
             }
@@ -62,7 +61,6 @@ class Log_composite extends Log
     function close()
     {
         if ($this->_opened) {
-            reset($this->_children);
             foreach ($this->_children as $child) {
                 $child->close();
             }
@@ -87,7 +85,6 @@ class Log_composite extends Log
      */
     function log($message, $priority = PEAR_LOG_INFO)
     {
-        reset($this->_children);
         foreach ($this->_children as $child) {
             $child->log($message, $priority);
         }
@@ -120,12 +117,12 @@ class Log_composite extends Log
      */
     function addChild(&$child)
     {
-        if (!is_object($child)) {
+        /* Make sure this is a Log instance. */
+        if (!is_a($child, 'Log')) {
             return false;
         }
 
         $child->_childID = uniqid(rand());
-
         $this->_children[$child->_childID] = &$child;
 
         return true;
@@ -136,13 +133,19 @@ class Log_composite extends Log
      *
      * @param object    $child      The Log instance to remove.
      *
+     * @return boolean  True if the Log instance was successfully removed.
+     *
      * @access public
      */
     function removeChild($child)
     {
-        if (isset($this->_children[$child->_childID])) {
-            unset($this->_children[$child->_childID]);
+        if (!isset($this->_children[$child->_childID])) {
+            return false;
         }
+
+        unset($this->_children[$child->_childID]);
+
+        return true;
     }
 }
 
