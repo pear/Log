@@ -16,7 +16,7 @@ The Log framework provides an abstracted logging system.  It supports logging to
     </maintainers>
     <release>
         <version>1.7.0</version>
-        <date>2003-06-??</date>
+        <date>2003-07-??</date>
         <state>stable</state>
         <notes>
 It is now possible to specific a specific mask that dictates exactly which levels will be logged.  
@@ -24,6 +24,8 @@ It is now possible to specific a specific mask that dictates exactly which level
 A number of convenient "shortcut" functions have been added for logging messages at specific log messages.
 
 Two new log handers have been added: the 'error_log' handler wraps PHP's native error_log() function; and the 'win' handler outputs log messages to a separate browser window.
+
+The file log handler has been completely rewritten based on suggestions from Roman Neuhauser.  It no longer buffers log output in memory before writing to the log file.
         </notes>
         <filelist>
           <dir name="/">

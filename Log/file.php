@@ -1,240 +1,211 @@
 <?php
-// +-----------------------------------------------------------------------+
-// | Copyright (c) 2002-2003  Richard Heyes                                     |
-// | All rights reserved.                                                  |
-// |                                                                       |
-// | Redistribution and use in source and binary forms, with or without    |
-// | modification, are permitted provided that the following conditions    |
-// | are met:                                                              |
-// |                                                                       |
-// | o Redistributions of source code must retain the above copyright      |
-// |   notice, this list of conditions and the following disclaimer.       |
-// | o Redistributions in binary form must reproduce the above copyright   |
-// |   notice, this list of conditions and the following disclaimer in the |
-// |   documentation and/or other materials provided with the distribution.|
-// | o The names of the authors may not be used to endorse or promote      |
-// |   products derived from this software without specific prior written  |
-// |   permission.                                                         |
-// |                                                                       |
-// | THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS   |
-// | "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT     |
-// | LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR |
-// | A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT  |
-// | OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, |
-// | SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT      |
-// | LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, |
-// | DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY |
-// | THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT   |
-// | (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE |
-// | OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  |
-// |                                                                       |
-// +-----------------------------------------------------------------------+
-// | Author: Richard Heyes <richard@phpguru.org>                           |
-// |         Jon Parise <jon@php.net>                                      |
-// +-----------------------------------------------------------------------+
-//
 // $Id$
 
 /**
-* The Log_file class is a concrete implementation of the Log::
-* abstract class which writes message to a text file. This is based
-* on the previous Log_file class by Jon Parise.
-* 
-* @author  Richard Heyes <richard@php.net>
-* @version $Revision$
-* @package Log
-*/
+ * The Log_file class is a concrete implementation of the Log abstract
+ * class that logs messages to a text file.
+ *
+ * @author  Jon Parise <jon@php.net>
+ * @author  Roman Neuhauser <neuhauser@bellavista.cz>
+ * @version $Revision$
+ * @package Log
+ */
 class Log_file extends Log
 {
-    /** 
-    * String holding the filename of the logfile. 
-    * @var string
-    */
-    var $_filename;
+    /**
+     * String containing the name of the log file.
+     * @var string
+     * @access private
+     */
+    var $_filename = 'php.log';
 
     /**
-    * Integer holding the file handle. 
-    * @var integer
-    */
-    var $_fp;
+     * Handle to the log file.
+     * @var resource
+     * @access private
+     */
+    var $_fp = false;
 
     /**
-    * Integer (in octal) containing the logfile's permissions mode.
-    * @var integer
-    */
+     * Should new log entries be append to an existing log file, or should the
+     * a new log file overwrite an existing one?
+     * @var boolean
+     * @access private
+     */
+    var $_append = true;
+
+    /**
+     * Integer (in octal) containing the log file's permissions mode.
+     * @var integer
+     */
     var $_mode = 0644;
 
     /**
-    * String containing the format to use when generating timestamps.
-    * @var string
-    */
+     * String containing the format of a log line.
+     * @var string
+     * @access private
+     */
+    var $_lineFormat = '%1$s %2$s [%3$s] %4$s';
+
+    /**
+     * String containing the timestamp format.  It will be passed directly to
+     * strftime().  Note that the timestamp string will generated using the
+     * current locale.
+     * @var string
+     * @access private
+     */
     var $_timeFormat = '%b %d %H:%M:%S';
 
     /**
-    * Array holding the lines to log
-    * @var array
-    */
-    var $_logLines;
+     * Hash that maps canonical format keys to position arguments for the
+     * "line format" string.
+     * @var array
+     * @access private
+     */
+    var $_formatMap = array('%{timestamp}'  => '%1$s',
+                            '%{ident}'      => '%2$s',
+                            '%{priority}'   => '%3$s',
+                            '%{message}'    => '%4$s',
+                            '%\{'           => '%%{');
 
     /**
-    * Boolean which if true will mean
-    * the lines are *NOT* written out.
-    */
-    var $_writeOut;
+     * String containing the end-on-line character sequence.
+     * @var string
+     * @access private
+     */
+    var $_eol = "\n";
 
     /**
-    * Creates a new logfile object.
-    * 
-    * @param  string $name     The filename of the logfile.
-    * @param  string $ident    The identity string.
-    * @param  array  $conf     The configuration array.
-    * @param  int    $maxLevel Maximum level at which to log.
-    * @access public
-    */
-    function Log_file($name, $ident = '', $conf = array(), $maxLevel = PEAR_LOG_DEBUG)
+     * Constructs a new Log_file object.
+     *
+     * @param string $name     Ignored.
+     * @param string $ident    The identity string.
+     * @param array  $conf     The configuration array.
+     * @param array  $maxLevel Maximum priority level at which to log.
+     * @access public
+     */
+    function Log_file($name, $ident = '', $conf = array(),
+                      $maxLevel = PEAR_LOG_DEBUG)
     {
-        /* If a file mode has been provided, use it. */
+        $this->_id = md5(microtime());
+        $this->_filename = $name;
+        $this->_ident = $ident;
+        $this->_mask = Log::UPTO($maxLevel);
+
+        if (isset($conf['append'])) {
+            $this->_append = $conf['append'];
+        }
+
         if (!empty($conf['mode'])) {
             $this->_mode = $conf['mode'];
         }
 
-        /* If a custom time format has been provided, use it. */
+        if (!empty($conf['lineFormat'])) {
+            $this->_lineFormat = str_replace(array_keys($this->_formatMap),
+                                             array_values($this->_formatMap),
+                                             $conf['lineFormat']);
+        }
+
         if (!empty($conf['timeFormat'])) {
             $this->_timeFormat = $conf['timeFormat'];
         }
 
-        if (!file_exists($name)) {
-            touch($name);
-            chmod($name, $this->_mode);
+        if (!empty($conf['eol'])) {
+            $this->_eol = $conf['eol'];
+        } else {
+            $this->_eol = (OS_WINDOWS) ? "\r\n" : "\n";
         }
-
-        $this->_id       = md5(microtime());
-        $this->_filename = realpath($name);
-        $this->_ident    = $ident;
-        $this->_mask     = Log::UPTO($maxLevel);
-        
-        $this->_logLines = array();
-        $this->_writeOut = true;
 
         register_shutdown_function(array(&$this, '_Log_file'));
     }
-    
+
     /**
-    * Destructor. This will write out any lines to the logfile, UNLESS the dontLog()
-    * method has been called, in which case it won't.
-    *
-    * @access private
-    */
+     * Destructor
+     */
     function _Log_file()
     {
-        if (!empty($this->_logLines) AND $this->_writeOut AND $this->_openLogfile()) {
-            
-            foreach ($this->_logLines as $line) {
-                $this->_writeLine($line['message'], $line['ident'], $line['priority'], $line['time']);
-            }
-
-            $this->_closeLogfile();
+        if ($this->_opened) {
+            $this->close();
         }
     }
 
     /**
-    * Adds a line to be logged. Adds it to the internal array and will only
-    * get written out when the destructor is called.
-    *
-    * @param string $message  The textual message to be logged.
-    * @param string $priority The priority of the message.  Valid
-    *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT, PEAR_LOG_CRIT,
-    *                  PEAR_LOG_ERR, PEAR_LOG_WARNING, PEAR_LOG_NOTICE, PEAR_LOG_INFO, and
-    *                  PEAR_LOG_DEBUG. The default is PEAR_LOG_INFO.
-    * @return boolean  True on success or false on failure.
-    * @access public
-    */
+     * Opens the log file for output.  If the specified log file does not
+     * already exist, it will be created.  By default, new log entries are
+     * appended to the end of the log file.
+     *
+     * This is implicitly called by log(), if necessary.
+     *
+     * @access public
+     */
+    function open()
+    {
+        if (!$this->_opened) {
+            /* Obtain a handle to the log file. */
+            $this->_fp = fopen($this->_filename, ($this->_append) ? 'a' : 'w');
+
+            $this->_opened = ($this->_fp !== false);
+
+            /* Attempt to set the log file's mode. */
+            @chmod($this->_filename, $this->_mode);
+        }
+
+        return $this->_opened;
+    }
+
+    /**
+     * Closes the log file if it is open.
+     *
+     * @access public
+     */
+    function close()
+    {
+        /* If the log file is open, close it. */
+        if ($this->_opened && fclose($this->_fp)) {
+            $this->_opened = false;
+        }
+
+        return ($this->_opened === false);
+    }
+
+    /**
+     * Logs $message to the output window.  The message is also passed along
+     * to any Log_observer instances that are observing this Log.
+     *
+     * @param string $message  The textual message to be logged.
+     * @param string $priority The priority of the message.  Valid
+     *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
+     *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
+     *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
+     *                  The default is PEAR_LOG_INFO.
+     * @return boolean  True on success or false on failure.
+     * @access public
+     */
     function log($message, $priority = PEAR_LOG_INFO)
     {
-        // Abort early if the priority is above the maximum logging level.
+        /* Abort early if the priority is above the maximum logging level. */
         if (!$this->_isMasked($priority)) {
             return false;
         }
 
-        // Add to loglines array
-        $this->_logLines[] = array('message' => $message, 'ident' => $this->_ident, 'priority' => $priority, 'time' => strftime($this->_timeFormat));
-
-        // Notify observers
-        $this->_announce(array('message' => $message, 'priority' => $priority));
-
-        return true;
-    }
-    
-    /**
-    * This function will prevent the destructor from logging.
-    *
-    * @access public
-    */
-    function dontLog()
-    {
-        $this->_writeOut = false;
-    }
-
-    /**
-    * Function to force writing out of log *now*. Will clear the queue.
-    * Using this function does not cancel the writeout in the destructor.
-    * Handy for long running processes.
-    *
-    * @access public
-    */
-    function writeOut()
-    {
-        if (!empty($this->_logLines) AND $this->_openLogfile()) {
-            
-            foreach ($this->_logLines as $line) {
-                $this->_writeLine($line['message'], $line['ident'], $line['priority'], $line['time']);
-            }
-
-            $this->_logLines = array();
-            $this->_closeLogfile();
-        }
-    }
-
-    /**
-    * Opens the logfile for appending. File should always exist, as
-    * constructor will create it if it doesn't.
-    *
-    * @access private
-    */
-    function _openLogfile()
-    {
-        if (($this->_fp = @fopen($this->_filename, 'a')) == false) {
+        /* If the log file isn't already open, open it now. */
+        if (!$this->_opened && !$this->open()) {
             return false;
         }
 
-        @chmod($this->_filename, $this->_mode);
+        /* Build the string containing the complete log line. */
+        $line = sprintf($this->_lineFormat, strftime($this->_timeFormat),
+                $this->_ident, $this->priorityToString($priority),
+                $message) . $this->_eol;
 
-        return true;
-    }
-    
-    /**
-    * Closes the logfile file pointer.
-    *
-    * @access private
-    */
-    function _closeLogfile()
-    {
-        return fclose($this->_fp);
-    }
+        /* Write the log line to the log file. */
+        $success = (fwrite($this->_fp, $line) !== false);
 
-    /**
-    * Writes a line to the logfile
-    *
-    * @param  string $line      The line to write
-    * @param  string $ident     The ident string of this line
-    * @param  integer $priority The priority of this line/msg
-    * @return integer           Number of bytes written or -1 on error
-    * @access private
-    */
-    function _writeLine($line, $ident, $priority, $time)
-    {
-        return fwrite($this->_fp, sprintf("%s %s [%s] %s\r\n", $time, $ident, $this->priorityToString($priority), $line));
-    }
+        /* Notify observers about this log message. */
+        $this->_announce(array('priority' => $priority, 'message' => $message));
 
-} // End of class
+        return $success;
+    }
+}
+
 ?>
