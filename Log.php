@@ -334,6 +334,8 @@ class Log
                 $message = $message->getMessage();
             } else if (method_exists($message, 'tostring')) {
                 $message = $message->toString();
+            } else if (method_exists($message, '__tostring')) {
+                $message = (string)$message;
             } else {
                 $message = serialize($message);
             }
