@@ -47,8 +47,8 @@ class Log_composite extends Log
     function open()
     {
         if (!$this->_opened) {
-            foreach ($this->_children as $child) {
-                $child->open();
+            foreach ($this->_children as $id => $child) {
+                $this->_children[$id]->open();
             }
         }
     }
@@ -61,8 +61,8 @@ class Log_composite extends Log
     function close()
     {
         if ($this->_opened) {
-            foreach ($this->_children as $child) {
-                $child->close();
+            foreach ($this->_children as $id => $child) {
+                $this->_children[$id]->close();
             }
         }
     }
@@ -85,8 +85,8 @@ class Log_composite extends Log
      */
     function log($message, $priority = PEAR_LOG_INFO)
     {
-        foreach ($this->_children as $child) {
-            $child->log($message, $priority);
+        foreach ($this->_children as $id => $child) {
+            $this->_children[$id]->log($message, $priority);
         }
 
         $this->notifyAll(array('priority' => $priority, 'message' => $message));
@@ -122,8 +122,9 @@ class Log_composite extends Log
             return false;
         }
 
-        $child->_childID = uniqid(rand());
-        $this->_children[$child->_childID] = &$child;
+        $id = md5(microtime());
+        $child->_id = $id;
+        $this->_children[$id] = &$child;
 
         return true;
     }
@@ -139,11 +140,11 @@ class Log_composite extends Log
      */
     function removeChild($child)
     {
-        if (!isset($this->_children[$child->_childID])) {
+        if (!isset($this->_children[$child->_id])) {
             return false;
         }
 
-        unset($this->_children[$child->_childID]);
+        unset($this->_children[$child->_id]);
 
         return true;
     }
