@@ -35,6 +35,8 @@ To log only notices and debug messages:
     $log->setMask($mask);
 
 Complete backwards compatibility has been maintained.
+
+Also, a number of convenient "shortcut" functions have been added for logging messages at specific log messages.
         </notes>
         <filelist>
           <dir name="/">

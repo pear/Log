@@ -162,6 +162,110 @@ class Log
     }
 
     /**
+     * A convenience function for logging a emergency event.  It will log a
+     * message at the PEAR_LOG_EMERG log level.
+     *
+     * @param   string  $message    String containing the message to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     */
+    function emerg($message)
+    {
+        return $this->log($message, PEAR_LOG_EMERG);
+    }
+
+    /**
+     * A convenience function for logging an alert event.  It will log a
+     * message at the PEAR_LOG_ALERT log level.
+     *
+     * @param   string  $message    String containing the message to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     */
+    function alert($message)
+    {
+        return $this->log($message, PEAR_LOG_ALERT);
+    }
+
+    /**
+     * A convenience function for logging a critical event.  It will log a
+     * message at the PEAR_LOG_CRIT log level.
+     *
+     * @param   string  $message    String containing the message to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     */
+    function crit($message)
+    {
+        return $this->log($message, PEAR_LOG_CRIT);
+    }
+
+    /**
+     * A convenience function for logging a error event.  It will log a
+     * message at the PEAR_LOG_ERR log level.
+     *
+     * @param   string  $message    String containing the message to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     */
+    function err($message)
+    {
+        return $this->log($message, PEAR_LOG_ERR);
+    }
+
+    /**
+     * A convenience function for logging a warning event.  It will log a
+     * message at the PEAR_LOG_WARNING log level.
+     *
+     * @param   string  $message    String containing the message to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     */
+    function warning($message)
+    {
+        return $this->log($message, PEAR_LOG_WARNING);
+    }
+
+    /**
+     * A convenience function for logging a notice event.  It will log a
+     * message at the PEAR_LOG_NOTICE log level.
+     *
+     * @param   string  $message    String containing the message to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     */
+    function notice($message)
+    {
+        return $this->log($message, PEAR_LOG_NOTICE);
+    }
+
+    /**
+     * A convenience function for logging a information event.  It will log a
+     * message at the PEAR_LOG_INFO log level.
+     *
+     * @param   string  $message    String containing the message to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     */
+    function info($message)
+    {
+        return $this->log($message, PEAR_LOG_INFO);
+    }
+
+    /**
+     * A convenience function for logging a debug event.  It will log a
+     * message at the PEAR_LOG_DEBUG log level.
+     *
+     * @param   string  $message    String containing the message to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     */
+    function debug($message)
+    {
+        return $this->log($message, PEAR_LOG_DEBUG);
+    }
+
+    /**
      * Returns the string representation of a PEAR_LOG_* integer constant.
      *
      * @param int $priority     A PEAR_LOG_* integer constant.
