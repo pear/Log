@@ -22,12 +22,12 @@
     <filelist>
 	<file role="php" baseinstalldir="/">Log.php</file>
 	<dir name="Log" baseinstalldir="/Log">
-	    <file role="php">Log/composite.php</file>
-	    <file role="php">Log/file.php</file>
-	    <file role="php">Log/mcal.php</file>
-	    <file role="php">Log/observer.php</file>
-	    <file role="php">Log/sql.php</file>
-	    <file role="php">Log/syslog.php</file>
+	    <file role="php">composite.php</file>
+	    <file role="php">file.php</file>
+	    <file role="php">mcal.php</file>
+	    <file role="php">observer.php</file>
+	    <file role="php">sql.php</file>
+	    <file role="php">syslog.php</file>
 	</dir>
     </filelist>
 </package>
