@@ -13,7 +13,7 @@ EOT;
 $changelog = <<<EOT
 The 'sql' handler now enforces a maximum $ident length of 16 characters.
 
-The 'sql' handler now maintains a separate sequence for each log table within the database.  You will need to take appropriate steps to preserve your sequence numbering if that is important to your site; the ID sequence will be reinitialized to 0 the first time this updated handler is used. (Submitted by Rob Lineweaver.)
+The 'sql' handler now maintains a separate sequence for each log table within the database.  You will need to take appropriate steps to preserve your sequence numbering if that is important to your site; the ID sequence will be reinitialized to 0 the first time this updated handler is used.  You may also need to explicitly drop the 'log_id_seq' sequence before using this new code. (Submitted by Rob Lineweaver.)
 EOT;
 
 $package = new PEAR_PackageFileManager();
