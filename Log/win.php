@@ -87,7 +87,6 @@ class Log_win extends Log
     {
         if ($this->_opened || (count($this->_buffer) > 0)) {
             $this->close();
-            $this->_opened = false;
         }
     }
 
