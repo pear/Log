@@ -13,63 +13,84 @@
     </maintainer>
   </maintainers>
   <release>
-    <version>1.8.4</version>
-    <date>2004-02-16</date>
+    <version>1.8.5</version>
+    <date>2004-03-19</date>
     <license>PHP License</license>
     <state>stable</state>
-    <notes>The Log package now requires PHP 4.3.0 or later.
+    <notes>The 'sql' handler now enforces a maximum  length of 16 characters.
 
-If an object or array is passed as a log event, its human-readable representation will be used.
-
-It's now possible to specify the default priority for events logged using the log() method.</notes>
+The 'sql' handler now maintains a separate sequence for each log table within the database.</notes>
     <deps>
       <dep type="pkg" rel="has" optional="yes">DB</dep>
       <dep type="ext" rel="has" optional="yes">sqlite</dep>
       <dep type="php" rel="ge" version="4.3.0" optional="no"/>
     </deps>
     <filelist>
-      <file role="doc" baseinstalldir="/" name="docs/guide.txt"/>
-      <file role="doc" baseinstalldir="/" name="docs/examples/composite.php"/>
-      <file role="doc" baseinstalldir="/" name="docs/examples/console.php"/>
-      <file role="doc" baseinstalldir="/" name="docs/examples/display.php"/>
-      <file role="doc" baseinstalldir="/" name="docs/examples/error_log.php"/>
-      <file role="doc" baseinstalldir="/" name="docs/examples/file.php"/>
-      <file role="doc" baseinstalldir="/" name="docs/examples/mail.php"/>
-      <file role="doc" baseinstalldir="/" name="docs/examples/null.php"/>
-      <file role="doc" baseinstalldir="/" name="docs/examples/observer_mail.php"/>
-      <file role="doc" baseinstalldir="/" name="docs/examples/pear_error_handler.php"/>
-      <file role="doc" baseinstalldir="/" name="docs/examples/php_error_handler.php"/>
-      <file role="doc" baseinstalldir="/" name="docs/examples/sql.php"/>
-      <file role="doc" baseinstalldir="/" name="docs/examples/sqlite.php"/>
-      <file role="doc" baseinstalldir="/" name="docs/examples/syslog.php"/>
-      <file role="doc" baseinstalldir="/" name="docs/examples/win.php"/>
-      <file role="php" baseinstalldir="/" name="Log/composite.php"/>
-      <file role="php" baseinstalldir="/" name="Log/console.php"/>
-      <file role="php" baseinstalldir="/" name="Log/display.php"/>
-      <file role="php" baseinstalldir="/" name="Log/error_log.php"/>
-      <file role="php" baseinstalldir="/" name="Log/file.php"/>
-      <file role="php" baseinstalldir="/" name="Log/mail.php"/>
-      <file role="php" baseinstalldir="/" name="Log/mcal.php"/>
-      <file role="php" baseinstalldir="/" name="Log/null.php"/>
-      <file role="php" baseinstalldir="/" name="Log/observer.php"/>
-      <file role="php" baseinstalldir="/" name="Log/sql.php"/>
-      <file role="php" baseinstalldir="/" name="Log/sqlite.php"/>
-      <file role="php" baseinstalldir="/" name="Log/syslog.php"/>
-      <file role="php" baseinstalldir="/" name="Log/win.php"/>
-      <file role="test" baseinstalldir="/" name="tests/composite.phpt"/>
-      <file role="test" baseinstalldir="/" name="tests/console.phpt"/>
-      <file role="test" baseinstalldir="/" name="tests/display.phpt"/>
-      <file role="test" baseinstalldir="/" name="tests/error_log.phpt"/>
-      <file role="test" baseinstalldir="/" name="tests/extract.phpt"/>
-      <file role="test" baseinstalldir="/" name="tests/factory.phpt"/>
-      <file role="test" baseinstalldir="/" name="tests/null.phpt"/>
-      <file role="test" baseinstalldir="/" name="tests/priority.phpt"/>
-      <file role="test" baseinstalldir="/" name="tests/singleton.phpt"/>
-      <file role="test" baseinstalldir="/" name="tests/sqlite.phpt"/>
-      <file role="php" baseinstalldir="/" name="Log.php"/>
+      <dir baseinstalldir="/" name="/">
+       <dir name="docs">
+        <file role="doc" name="guide.txt"/>
+        <dir name="examples">
+         <file role="doc" name="composite.php"/>
+         <file role="doc" name="console.php"/>
+         <file role="doc" name="display.php"/>
+         <file role="doc" name="error_log.php"/>
+         <file role="doc" name="file.php"/>
+         <file role="doc" name="mail.php"/>
+         <file role="doc" name="null.php"/>
+         <file role="doc" name="observer_mail.php"/>
+         <file role="doc" name="pear_error_handler.php"/>
+         <file role="doc" name="php_error_handler.php"/>
+         <file role="doc" name="sql.php"/>
+         <file role="doc" name="sqlite.php"/>
+         <file role="doc" name="syslog.php"/>
+         <file role="doc" name="win.php"/>
+        </dir> <!-- docs/examples -->
+       </dir> <!-- docs -->
+       <dir name="Log">
+        <file role="php" name="composite.php"/>
+        <file role="php" name="console.php"/>
+        <file role="php" name="display.php"/>
+        <file role="php" name="error_log.php"/>
+        <file role="php" name="file.php"/>
+        <file role="php" name="mail.php"/>
+        <file role="php" name="mcal.php"/>
+        <file role="php" name="null.php"/>
+        <file role="php" name="observer.php"/>
+        <file role="php" name="sql.php"/>
+        <file role="php" name="sqlite.php"/>
+        <file role="php" name="syslog.php"/>
+        <file role="php" name="win.php"/>
+       </dir> <!-- Log -->
+       <dir name="misc">
+        <file role="data" name="log.sql"/>
+       </dir> <!-- misc -->
+       <dir name="tests">
+        <file role="test" name="composite.phpt"/>
+        <file role="test" name="console.phpt"/>
+        <file role="test" name="display.phpt"/>
+        <file role="test" name="error_log.phpt"/>
+        <file role="test" name="extract.phpt"/>
+        <file role="test" name="factory.phpt"/>
+        <file role="test" name="null.phpt"/>
+        <file role="test" name="priority.phpt"/>
+        <file role="test" name="singleton.phpt"/>
+        <file role="test" name="sqlite.phpt"/>
+        <file role="test" name="sql_ident.phpt"/>
+       </dir> <!-- tests -->
+       <file role="php" name="Log.php"/>
+      </dir> <!-- / -->
     </filelist>
   </release>
   <changelog>
+    <release>
+      <version>1.8.5</version>
+      <date>2004-03-19</date>
+      <license>PHP License</license>
+      <state>stable</state>
+      <notes>The 'sql' handler now enforces a maximum  length of 16 characters.
+
+The 'sql' handler now maintains a separate sequence for each log table within the database.  You will need to take appropriate steps to preserve your sequence numbering if that is important to your site; the ID sequence will be reinitialized to 0 the first time this updated handler is used. (Submitted by Rob Lineweaver.)</notes>
+    </release>
     <release>
       <version>1.8.4</version>
       <date>2004-02-16</date>
