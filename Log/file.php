@@ -158,6 +158,7 @@ class Log_file extends Log
 
         /* If the directory already exists, return success immediately. */
         if (is_dir($path)) {
+            $depth = 0;
             return true;
         }
 
