@@ -250,13 +250,9 @@ class Log
      *
      * @access private
      */
-    function _isLoggedPriority($priority)
+    function _isMasked($priority)
     {
-        if (!(Log::MASK($priority) & $this->_mask)) {
-            return false;
-        }
-
-        return true;
+        return (Log::MASK($priority) & $this->_mask);
     }
 
     /**

@@ -152,7 +152,7 @@ class Log_file extends Log
     function log($message, $priority = PEAR_LOG_INFO)
     {
         // Abort early if the priority is above the maximum logging level.
-        if (!$this->_isLoggedPriority($priority)) {
+        if (!$this->_isMasked($priority)) {
             return false;
         }
 
