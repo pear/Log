@@ -33,6 +33,11 @@ class Log_syslog extends Log {
     function Log_syslog($name, $ident = '', $conf = array(),
                         $maxLevel = PEAR_LOG_DEBUG)
     {    
+        /* Ensure we have a valid integer value for $name. */
+        if (empty($name) || !is_int($name)) {
+            $name = LOG_SYSLOG;
+        }
+
         $this->_name = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;
