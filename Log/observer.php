@@ -59,15 +59,17 @@ class Log_observer
      *                              to return.
      * @param integer   $priority   The highest priority at which to receive
      *                              log event notifications.
+     * @param array     $conf       Optional associative array of additional
+     *                              configuration values.
      *
      * @return object               The newly created concrete Log_observer
      *                              instance, or an false on an error.
      */
-    function factory($type, $priority = PEAR_LOG_INFO)
+    function &factory($type, $priority = PEAR_LOG_INFO, $conf = array())
     {
         $type = strtolower($type);
         $class = 'Log_observer_' . $type;
-        $classfile = 'Log/' . $type . '.php';
+        $classfile = 'Log/observer_' . $type . '.php';
 
         /*
          * Attempt to include our version of the named class, but don't treat
@@ -78,7 +80,8 @@ class Log_observer
 
         /* If the class exists, return a new instance of it. */
         if (class_exists($class)) {
-            return new $class($priority);
+            $object =& new $class($priority, $conf);
+            return $object;
         }
 
         return false;
