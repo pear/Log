@@ -57,16 +57,16 @@ class Log_mcal extends Log {
      * @param string $name     The category to use for our events.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
-     * @param int    $maxLevel Maximum level at which to log.
+     * @param int    $level    Log messages up to and including this level.
      * @access public
      */
     function Log_mcal($name, $ident = '', $conf = array(),
-                      $maxLevel = PEAR_LOG_DEBUG)
+                      $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_name = $name;
         $this->_ident = $ident;
-        $this->_mask = Log::UPTO($maxLevel);
+        $this->_mask = Log::UPTO($level);
         $this->_calendar = $conf['calendar'];
         $this->_username = $conf['username'];
         $this->_password = $conf['password'];

@@ -36,16 +36,16 @@ class Log_error_log extends Log
      * @param string $name     Ignored.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
-     * @param array  $maxLevel Maximum priority level at which to log.
+     * @param int    $level    Log messages up to and including this level.
      * @access public
      */
     function Log_error_log($name, $ident = '', $conf = array(),
-                           $maxLevel = PEAR_LOG_DEBUG)
+                           $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_type = $name;
         $this->_ident = $ident;
-        $this->_mask = Log::UPTO($maxLevel);
+        $this->_mask = Log::UPTO($level);
 
         if (!empty($conf['destination'])) {
             $this->_destination = $conf['destination'];

@@ -58,16 +58,16 @@ class Log_sql extends Log {
      * @param string $name         The target SQL table.
      * @param string $ident        The identification field.
      * @param array $conf          The connection configuration array.
-     * @param int $maxLevel        Maximum level at which to log.
+     * @param int $level           Log messages up to and including this level.
      * @access public     
      */
     function Log_sql($name, $ident = '', $conf = array(),
-                     $maxLevel = PEAR_LOG_DEBUG)
+                     $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_table = $name;
         $this->_ident = $ident;
-        $this->_mask = Log::UPTO($maxLevel);
+        $this->_mask = Log::UPTO($level);
 
         /* If an existing database connection was provided, use it. */
         if (isset($conf['db'])) {

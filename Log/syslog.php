@@ -26,11 +26,11 @@ class Log_syslog extends Log
      * @param string $name     The syslog facility.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
-     * @param int    $maxLevel Maximum level at which to log.
+     * @param int    $level    Log messages up to and including this level.
      * @access public
      */
     function Log_syslog($name, $ident = '', $conf = array(),
-                        $maxLevel = PEAR_LOG_DEBUG)
+                        $level = PEAR_LOG_DEBUG)
     {
         /* Ensure we have a valid integer value for $name. */
         if (empty($name) || !is_int($name)) {
@@ -40,7 +40,7 @@ class Log_syslog extends Log
         $this->_id = md5(microtime());
         $this->_name = $name;
         $this->_ident = $ident;
-        $this->_mask = Log::UPTO($maxLevel);
+        $this->_mask = Log::UPTO($level);
     }
 
     /**

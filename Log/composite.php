@@ -30,12 +30,12 @@ class Log_composite extends Log
      * @param boolean   $name       This parameter is ignored.
      * @param boolean   $ident      This parameter is ignored.
      * @param boolean   $conf       This parameter is ignored.
-     * @param boolean   $maxLevel   This parameter is ignored.
+     * @param boolean   $level      This parameter is ignored.
      *
      * @access public
      */
     function Log_composite($name = false, $ident = false, $conf = false,
-                           $maxLevel = PEAR_LOG_DEBUG)
+                           $level = PEAR_LOG_DEBUG)
     {
     }
 

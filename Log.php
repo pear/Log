@@ -90,14 +90,14 @@ class Log
      * @param array  $conf      A hash containing any additional configuration
      *                          information that a subclass might need.
      *
-     * @param int $maxLevel     Maximum priority level at which to log.
+     * @param int $level        Log messages up to and including this level.
      *
      * @return object Log       The newly created concrete Log instance, or an
      *                          false on an error.
      * @access public
      */
     function &factory($handler, $name = '', $ident = '', $conf = array(),
-                      $maxLevel = PEAR_LOG_DEBUG)
+                      $level = PEAR_LOG_DEBUG)
     {
         $handler = strtolower($handler);
         $class = 'Log_' . $handler;
@@ -112,7 +112,7 @@ class Log
 
         /* If the class exists, return a new instance of it. */
         if (class_exists($class)) {
-            $object =& new $class($name, $ident, $conf, $maxLevel);
+            $object =& new $class($name, $ident, $conf, $level);
             return $object;
         }
 
@@ -148,22 +148,22 @@ class Log
      * @param array $conf       A hash containing any additional configuration
      *                          information that a subclass might need.
      *
-     * @param int $maxLevel     Maximum priority level at which to log.
+     * @param int $level        Log messages up to and including this level.
      *
      * @return object Log       The newly created concrete Log instance, or an
      *                          false on an error.
      * @access public
      */
     function &singleton($handler, $name = '', $ident = '', $conf = array(),
-                        $maxLevel = PEAR_LOG_DEBUG)
+                        $level = PEAR_LOG_DEBUG)
     {
         static $instances;
         if (!isset($instances)) $instances = array();
 
-        $signature = serialize(array($handler, $name, $ident, $conf, $maxLevel));
+        $signature = serialize(array($handler, $name, $ident, $conf, $level));
         if (!isset($instances[$signature])) {
             $instances[$signature] = &Log::factory($handler, $name, $ident,
-                                                   $conf, $maxLevel);
+                                                   $conf, $level);
         }
 
         return $instances[$signature];
