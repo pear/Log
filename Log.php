@@ -1,6 +1,11 @@
 <?php
-// $Id$
-// $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
+/**
+ * $Header$
+ * $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
+ *
+ * @version $Revision$
+ * @package Log
+ */
 
 define('PEAR_LOG_EMERG',    0);     /** System is unusable */
 define('PEAR_LOG_ALERT',    1);     /** Immediate action required */
@@ -26,7 +31,6 @@ define('PEAR_LOG_TYPE_FILE',    3); /** Append to a file */
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision$
  * @since   Horde 1.3
  * @package Log
  */
@@ -56,7 +60,7 @@ class Log
      */
     var $_ident = '';
 
-    /*
+    /**
      * The bitmask of allowed log levels.
      * @var integer
      * @access private
@@ -95,6 +99,7 @@ class Log
      * @return object Log       The newly created concrete Log instance, or an
      *                          false on an error.
      * @access public
+     * @since Log 1.0
      */
     function &factory($handler, $name = '', $ident = '', $conf = array(),
                       $level = PEAR_LOG_DEBUG)
@@ -153,6 +158,7 @@ class Log
      * @return object Log       The newly created concrete Log instance, or an
      *                          false on an error.
      * @access public
+     * @since Log 1.0
      */
     function &singleton($handler, $name = '', $ident = '', $conf = array(),
                         $level = PEAR_LOG_DEBUG)
@@ -171,6 +177,7 @@ class Log
 
     /**
      * Abstract implementation of the open() method.
+     * @since Log 1.0
      */
     function open()
     {
@@ -179,6 +186,7 @@ class Log
 
     /**
      * Abstract implementation of the close() method.
+     * @since Log 1.0
      */
     function close()
     {
@@ -187,6 +195,7 @@ class Log
 
     /**
      * Abstract implementation of the log() method.
+     * @since Log 1.0
      */
     function log($message, $priority = PEAR_LOG_INFO)
     {
@@ -201,6 +210,9 @@ class Log
      *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
      */
     function emerg($message)
     {
@@ -215,6 +227,9 @@ class Log
      *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
      */
     function alert($message)
     {
@@ -229,6 +244,9 @@ class Log
      *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
      */
     function crit($message)
     {
@@ -243,6 +261,9 @@ class Log
      *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
      */
     function err($message)
     {
@@ -257,6 +278,9 @@ class Log
      *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
      */
     function warning($message)
     {
@@ -271,6 +295,9 @@ class Log
      *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
      */
     function notice($message)
     {
@@ -285,6 +312,9 @@ class Log
      *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
      */
     function info($message)
     {
@@ -299,6 +329,9 @@ class Log
      *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
      */
     function debug($message)
     {
@@ -351,6 +384,8 @@ class Log
      * @param int $priority     A PEAR_LOG_* integer constant.
      *
      * @return string           The string representation of $level.
+     *
+     * @since   Log 1.0
      */
     function priorityToString($priority)
     {
@@ -375,7 +410,8 @@ class Log
      *
      * @return integer  The calculated log mask.
      *
-     * @access public
+     * @access  public
+     * @since   Log 1.7.0
      */
     function MASK($priority)
     {
@@ -389,7 +425,8 @@ class Log
      *
      * @return integer  The calculated log mask.
      *
-     * @access public
+     * @access  public
+     * @since   Log 1.7.0
      */
     function UPTO($priority)
     {
@@ -403,7 +440,8 @@ class Log
      *
      * @return integer          The current level mask.
      *
-     * @access public
+     * @access  public
+     * @since   Log 1.7.0
      */
     function setMask($mask)
     {
@@ -417,7 +455,8 @@ class Log
      *
      * @return interger         The current level mask.
      *
-     * @access public
+     * @access  public
+     * @since   Log 1.7.0
      */
     function getMask()
     {
@@ -432,7 +471,8 @@ class Log
      * @return boolean  True if the given priority is included in the current
      *                  log mask.
      *
-     * @access private
+     * @access  private
+     * @since   Log 1.7.0
      */
     function _isMasked($priority)
     {
@@ -448,7 +488,8 @@ class Log
      *
      * @param boolean   True if the observer is successfully attached.
      *
-     * @access public
+     * @access  public
+     * @since   Log 1.0
      */
     function attach(&$observer)
     {
@@ -469,7 +510,8 @@ class Log
      *
      * @param boolean   True if the observer is successfully detached.
      *
-     * @access public
+     * @access  public
+     * @since   Log 1.0
      */
     function detach($observer)
     {
@@ -504,6 +546,9 @@ class Log
      * Indicates whether this is a composite class.
      *
      * @return boolean          True if this is a composite class.
+     *
+     * @access  public
+     * @since   Log 1.0
      */
     function isComposite()
     {
@@ -515,7 +560,8 @@ class Log
      *
      * @param string    $ident      The new identification string.
      *
-     * @access public
+     * @access  public
+     * @since   Log 1.6.3
      */
     function setIdent($ident)
     {
@@ -527,7 +573,8 @@ class Log
      *
      * @return string   The current Log instance's identification string.
      *
-     * @access public
+     * @access  public
+     * @since   Log 1.6.3
      */
     function getIdent()
     {

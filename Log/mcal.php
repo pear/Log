@@ -1,6 +1,11 @@
 <?php
-// $Id$
-// $Horde: horde/lib/Log/mcal.php,v 1.2 2000/06/28 21:36:13 jon Exp $
+/**
+ * $Header$
+ * $Horde: horde/lib/Log/mcal.php,v 1.2 2000/06/28 21:36:13 jon Exp $
+ *
+ * @version $Revision$
+ * @package Log 
+ */
 
 /**
  * The Log_mcal class is a concrete implementation of the Log::
@@ -8,8 +13,8 @@
  * store accessed through MCAL.
  * 
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision$
  * @since Horde 1.3
+ * @since Log 1.0
  * @package Log 
  */
 class Log_mcal extends Log {
@@ -17,36 +22,42 @@ class Log_mcal extends Log {
     /**
     * holding the calendar specification to connect to. 
     * @var string
+    * @access private
     */
     var $_calendar = '{localhost/mstore}';
 
     /** 
     * holding the username to use. 
     * @var string
+    * @access private
     */
     var $_username = '';
 
     /** 
     * holding the password to use. 
     * @var string
+    * @access private
     */
     var $_password = '';
 
     /** 
     * holding the options to pass to the calendar stream. 
     * @var integer
+    * @access private
     */
     var $_options = 0;
 
     /** 
     * ResourceID of the MCAL stream. 
     * @var string
+    * @access private
     */
     var $_stream = '';
 
     /** 
     * Integer holding the log facility to use. 
     * @var string
+    * @access private
     */
     var $_name = LOG_SYSLOG;
 

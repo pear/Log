@@ -1,6 +1,11 @@
 <?php
-// $Id$
-// $Horde: horde/lib/Log/syslog.php,v 1.6 2000/06/28 21:36:13 jon Exp $
+/**
+ * $Header$
+ * $Horde: horde/lib/Log/syslog.php,v 1.6 2000/06/28 21:36:13 jon Exp $
+ *
+ * @version $Revision$
+ * @package Log
+ */
 
 /**
  * The Log_syslog class is a concrete implementation of the Log::
@@ -8,8 +13,8 @@
  * (PHP emulates this with the Event Log on Windows machines).
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision$
  * @since   Horde 1.3
+ * @since   Log 1.0
  * @package Log
  */
 class Log_syslog extends Log
@@ -17,6 +22,7 @@ class Log_syslog extends Log
     /**
     * Integer holding the log facility to use. 
     * @var string
+    * @access private
     */
     var $_name = LOG_SYSLOG;
 

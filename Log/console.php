@@ -1,12 +1,17 @@
 <?php
-// $Id$
+/**
+ * $Header$
+ *
+ * @version $Revision$
+ * @package Log
+ */
 
 /**
  * The Log_console class is a concrete implementation of the Log::
  * abstract class which writes message to the text console.
  * 
  * @author  Jon Parise <jon@php.net>
- * @version $Revision$
+ * @since   Log 1.1
  * @package Log
  */
 class Log_console extends Log

@@ -1,5 +1,10 @@
 <?php
-// $Id$
+/**
+ * $Header$
+ *
+ * @version $Revision$
+ * @package Log
+ */
 
 /**
  * The Log_mail class is a concrete implementation of the Log:: abstract class
@@ -15,7 +20,7 @@
  * 
  * @author  Ronnie Garcia <ronnie@mk2.net>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision$
+ * @since   Log 1.3
  * @package Log
  */
 class Log_mail extends Log
@@ -23,30 +28,35 @@ class Log_mail extends Log
     /** 
      * String holding the recipient's email address.
      * @var string
+     * @access private
      */
     var $_recipient = '';
 
     /** 
      * String holding the sender's email address.
      * @var string
+     * @access private
      */
     var $_from = '';
 
     /** 
      * String holding the email's subject.
      * @var string
+     * @access private
      */
     var $_subject = '[Log_mail] Log message';
 
     /**
      * String holding an optional preamble for the log messages.
      * @var string
+     * @access private
      */
     var $_preamble = '';
 
     /**
      * String holding the mail message body.
      * @var string
+     * @access private
      */
     var $_message = '';
 

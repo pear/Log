@@ -1,12 +1,17 @@
 <?php
-// $Id$
+/**
+ * $Header$
+ *
+ * @version $Revision$
+ * @package Log
+ */
 
 /**
  * The Log_error_log class is a concrete implementation of the Log abstract
  * class that logs messages using PHP's error_log() function.
  * 
  * @author  Jon Parise <jon@php.net>
- * @version $Revision$
+ * @since   Log 1.7.0
  * @package Log
  */
 class Log_error_log extends Log
@@ -14,12 +19,14 @@ class Log_error_log extends Log
     /**
      * The error_log() log type.
      * @var integer
+     * @access private
      */
     var $_type = PEAR_LOG_TYPE_SYSTEM;
 
     /**
      * The type-specific destination value.
      * @var string
+     * @access private
      */
     var $_destination = '';
 
@@ -27,6 +34,7 @@ class Log_error_log extends Log
      * Additional headers to pass to the mail() function when the
      * PEAR_LOG_TYPE_MAIL type is used.
      * @var string
+     * @access private
      */
     var $_extra_headers = '';
 

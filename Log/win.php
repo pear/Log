@@ -1,5 +1,10 @@
 <?php
-// $Id$
+/**
+ * $Header$
+ *
+ * @version $Revision$
+ * @package Log
+ */
 
 /**
  * The Log_win class is a concrete implementation of the Log abstract
@@ -11,7 +16,7 @@
  *  http://www.zend.com/zend/tut/tutorial-DebugLib.php
  * 
  * @author  Jon Parise <jon@php.net>
- * @version $Revision$
+ * @since   Log 1.7.0
  * @package Log
  */
 class Log_win extends Log

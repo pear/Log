@@ -1,5 +1,10 @@
 <?php
-// $Id$
+/**
+ * $Header$
+ *
+ * @version $Revision$
+ * @package Log
+ */
 
 /**
  * The Log_display class is a concrete implementation of the Log::
@@ -9,7 +14,7 @@
  * PHP error handler.
  *
  * @author  Paul Yanchenko <pusher@inaco.ru>
- * @version $Revision$
+ * @since   Log 1.8.0
  * @package Log
  */
 class Log_display extends Log

@@ -1,6 +1,11 @@
 <?php
-// $Id$
-// $Horde: horde/lib/Log/composite.php,v 1.2 2000/06/28 21:36:13 jon Exp $
+/**
+ * $Header$
+ * $Horde: horde/lib/Log/composite.php,v 1.2 2000/06/28 21:36:13 jon Exp $
+ *
+ * @version $Revision$
+ * @package Log
+ */
 
 /**
  * The Log_composite:: class implements a Composite pattern which
@@ -8,11 +13,11 @@
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision$
+ *
  * @since Horde 1.3
+ * @since Log 1.0
  * @package Log
  */
-
 class Log_composite extends Log
 {
     /**
@@ -20,6 +25,7 @@ class Log_composite extends Log
      * sent.
      *
      * @var array
+     * @access private
      */
     var $_children = array();
 
@@ -113,6 +119,7 @@ class Log_composite extends Log
      * @param string    $ident      The new identification string.
      *
      * @access public
+     * @since  Log 1.6.7
      */
     function setIdent($ident)
     {

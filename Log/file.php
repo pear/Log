@@ -1,5 +1,10 @@
 <?php
-// $Id$
+/**
+ * $Header$
+ *
+ * @version $Revision$
+ * @package Log
+ */
 
 /**
  * The Log_file class is a concrete implementation of the Log abstract
@@ -7,7 +12,7 @@
  *
  * @author  Jon Parise <jon@php.net>
  * @author  Roman Neuhauser <neuhauser@bellavista.cz>
- * @version $Revision$
+ * @since   Log 1.0
  * @package Log
  */
 class Log_file extends Log
@@ -37,6 +42,7 @@ class Log_file extends Log
     /**
      * Integer (in octal) containing the log file's permissions mode.
      * @var integer
+     * @access private
      */
     var $_mode = 0644;
 

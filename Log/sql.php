@@ -1,7 +1,13 @@
 <?php
-// $Id$
-// $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
+/**
+ * $Header$
+ * $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
+ *
+ * @version $Revision$
+ * @package Log
+ */
 
+/** PEAR's DB package */
 require_once 'DB.php';
 
 /**
@@ -21,8 +27,8 @@ require_once 'DB.php';
  * );
  *
  * @author  Jon Parise <jon@php.net>
- * @version $Revision$
  * @since   Horde 1.3
+ * @since   Log 1.0
  * @package Log 
  */
 class Log_sql extends Log {
@@ -30,24 +36,28 @@ class Log_sql extends Log {
     /** 
      * Array containing the dsn information. 
      * @var string
+     * @access private
      */
     var $_dsn = '';
 
     /** 
      * Object holding the database handle. 
      * @var object
+     * @access private
      */
     var $_db = null;
 
     /**
      * Flag indicating that we're using an existing database connection.
      * @var boolean
+     * @access private
      */
     var $_existingConnection = false;
 
     /** 
      * String holding the database table to use. 
      * @var string
+     * @access private
      */
     var $_table = 'log_table';
 
