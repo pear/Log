@@ -126,6 +126,8 @@ class Log_mail extends Log
             }
             $this->_opened = true;
         }
+
+        return $this->_opened;
     }
 
     /**
@@ -153,7 +155,7 @@ class Log_mail extends Log
             $this->_opened = false;
         }
 
-        return true;
+        return ($this->_opened === false);
     }
 
     /**
@@ -193,8 +195,9 @@ class Log_mail extends Log
             return false;
         }
 
-        if (!$this->_opened) {
-            $this->open();
+        /* If the message isn't open and can't be opened, return failure. */
+        if (!$this->_opened && !$this->open()) {
+            return false;
         }
 
         /* Extract the string representation of the message. */

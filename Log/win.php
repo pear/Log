@@ -132,6 +132,8 @@ win.document.writeln('<th>Priority</th><th width="100%">Message</th></tr>');
 <?php
             $this->_opened = true;
         }
+
+        return $this->_opened;
     }
 
     /**
@@ -156,6 +158,8 @@ win.document.writeln('<th>Priority</th><th width="100%">Message</th></tr>');
             $this->_writeln('</body></html>');
             $this->_opened = false;
         }
+
+        return ($this->_opened === false);
     }
 
     /**
@@ -176,8 +180,8 @@ win.document.writeln('<th>Priority</th><th width="100%">Message</th></tr>');
         }
 
         /* If we haven't already opened the output window, do so now. */
-        if (!$this->_opened) {
-            $this->open();
+        if (!$this->_opened && !$this->open()) {
+            return false;
         }
 
         /* Drain the buffer to the output window. */

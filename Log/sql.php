@@ -108,7 +108,7 @@ class Log_sql extends Log {
             $this->_opened = true;
         }
 
-        return true;
+        return $this->_opened;
     }
 
     /**
@@ -126,7 +126,7 @@ class Log_sql extends Log {
             return $this->_db->disconnect();
         }
 
-        return true;
+        return ($this->_opened === false);
     }
 
     /**
@@ -150,8 +150,9 @@ class Log_sql extends Log {
             return false;
         }
 
-        if (!$this->_opened) {
-            $this->open();
+        /* If the connection isn't open and can't be opened, return failure. */
+        if (!$this->_opened && !$this->open()) {
+            return false;
         }
 
         /* Extract the string representation of the message. */

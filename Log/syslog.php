@@ -62,6 +62,8 @@ class Log_syslog extends Log
             openlog($this->_ident, LOG_PID, $this->_name);
             $this->_opened = true;
         }
+
+        return $this->_opened;
     }
 
     /**
@@ -74,6 +76,8 @@ class Log_syslog extends Log
             closelog();
             $this->_opened = false;
         }
+
+        return ($this->_opened === false);
     }
 
     /**
@@ -97,8 +101,9 @@ class Log_syslog extends Log
             return false;
         }
 
-        if (!$this->_opened) {
-            $this->open();
+        /* If the connection isn't open and can't be opened, return failure. */
+        if (!$this->_opened && !$this->open()) {
+            return false;
         }
 
         /* Extract the string representation of the message. */

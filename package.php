@@ -3,18 +3,13 @@
 require_once 'PEAR/PackageFileManager.php';
 require_once 'Console/Getopt.php';
 
-$version = '1.8.2';
+$version = '1.8.3';
 $notes = <<<EOT
-Added a new 'null' log handler.
-Added a flush() method to the public Log API.
+The open(), close() and log() methods now consistently return success or failure.
 EOT;
 
 $changelog = <<<EOT
-A new 'null' log handler that simply consumes log events has been added.  The 'null' handler will still respect log masks and attached observers.
-
-The public Log API has grown a flush() method.  This allows buffered log output to be explicitly flushed.  At this time, the flush() method is only implemented by the console, file and mail handlers.
-
-New unit tests for the Factory and Singleton construction methods have been added.
+The open() and close() methods now consistently return success or failure.  Previously, some handlers' open() and close() methods did not return any result.  Also, the log() methods will return failure when the handler cannot be opened.
 EOT;
 
 $package = new PEAR_PackageFileManager();

@@ -13,12 +13,11 @@
     </maintainer>
   </maintainers>
   <release>
-    <version>1.8.2</version>
-    <date>2004-01-01</date>
+    <version>1.8.3</version>
+    <date>2004-01-05</date>
     <license>PHP License</license>
     <state>stable</state>
-    <notes>Added a new 'null' log handler.
-Added a flush() method to the public Log API.</notes>
+    <notes>The open(), close() and log() methods now consistently return success or failure.</notes>
     <deps>
       <dep type="pkg" rel="has" optional="yes">DB</dep>
     </deps>
@@ -60,6 +59,13 @@ Added a flush() method to the public Log API.</notes>
     </filelist>
   </release>
   <changelog>
+    <release>
+      <version>1.8.3</version>
+      <date>2004-01-05</date>
+      <license>PHP License</license>
+      <state>stable</state>
+      <notes>The open() and close() methods now consistently return success or failure.  Previously, some handlers' open() and close() methods did not return any result.  Also, the log() methods will return failure when the handler cannot be opened.</notes>
+    </release>
     <release>
       <version>1.8.2</version>
       <date>2004-01-01</date>

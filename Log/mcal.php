@@ -96,6 +96,8 @@ class Log_mcal extends Log {
                 $this->_password, $this->_options);
             $this->_opened = true;
         }
+
+        return $this->_opened;
     }
 
     /**
@@ -108,6 +110,8 @@ class Log_mcal extends Log {
             mcal_close($this->_stream);
             $this->_opened = false;
         }
+
+        return ($this->_opened === false);
     }
 
     /**
@@ -132,8 +136,9 @@ class Log_mcal extends Log {
             return false;
         }
 
-        if (!$this->_opened) {
-            $this->open();
+        /* If the connection isn't open and can't be opened, return failure. */
+        if (!$this->_opened && !$this->open()) {
+            return false;
         }
 
         /* Extract the string representation of the message. */
