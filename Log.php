@@ -231,7 +231,7 @@ class Log extends PEAR {
     {
         reset($this->_listeners);
         foreach ($this->_listeners as $listener) {
-            if ($msgObj['priority'] <= $listener->priority) {
+            if ($msgObj['priority'] <= $listener->_priority) {
                 $listener->notify($msgObj);
             }
         }
