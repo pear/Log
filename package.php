@@ -5,11 +5,15 @@ require_once 'Console/Getopt.php';
 
 $version = '1.8.3';
 $notes = <<<EOT
+Added a new handler that logs using the Sqlite extension.
+
 The open(), close() and log() methods now consistently return success or failure.
 EOT;
 
 $changelog = <<<EOT
 The open() and close() methods now consistently return success or failure.  Previously, some handlers' open() and close() methods did not return any result.  Also, the log() methods will return failure when the handler cannot be opened.
+
+Bertrand Mansion contributed a new handler that logs using the Sqlite extension.
 EOT;
 
 $package = new PEAR_PackageFileManager();
