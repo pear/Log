@@ -48,7 +48,7 @@ class Log {
      *                  to an empty string, with which the subclass will
      *                  attempt to do something intelligent.
      *
-     * @param string $ident The indentity reported to the log system.
+     * @param string $ident The identity reported to the log system.
      *
      * @param array  $conf  A hash containing any additional
      *                  configuration information that a subclass might need.
