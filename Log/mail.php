@@ -144,6 +144,9 @@ class Log_mail extends Log
                     error_log("Log_mail: Failure executing mail()", 0);
                     return false;
                 }
+
+                /* Clear the message string now that the email has been sent. */
+                $this->_message = '';
             }
             $this->_opened = false;
         }
