@@ -19,7 +19,7 @@ require_once 'DB.php';
  *  primary key (unixtime, ident)
  * );
  *
- * @author  Jon Parise <jon@csh.rit.edu>
+ * @author  Jon Parise <jon@horde.org>
  * @version $Revision$
  * @since   Horde 1.3
  * @package Log 
@@ -82,6 +82,7 @@ class Log_sql extends Log {
             }
             $this->opened = true;
         }
+
         return true;
     }
 
@@ -97,6 +98,7 @@ class Log_sql extends Log {
             $this->opened = false;
             return $this->db->disconnect();
         }
+
         return true;
     }
 
@@ -114,7 +116,9 @@ class Log_sql extends Log {
      */
     function log($message, $priority = LOG_INFO)
     {
-        if (!$this->opened) $this->open();
+        if (!$this->opened) {
+            $this->open();
+        }
 
         $timestamp = time();
         $q = "insert into $this->table

@@ -122,8 +122,9 @@ class Log_composite {
      */
     function removeChild($child)
     {
-        if (isset($this->children[$child->_childID]))
+        if (isset($this->children[$child->_childID])) {
             unset($this->children[$child->_childID]);
+        }
     }
 }
 

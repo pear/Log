@@ -7,7 +7,7 @@
  * mechanisms and the Subject end of a Subject-Observer pattern.
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @author  Jon Parise <jon@csh.rit.edu>
+ * @author  Jon Parise <jon@horde.org>
  * @version $Revision$
  * @since   Horde 1.3
  * @package Log
@@ -110,6 +110,7 @@ class Log {
         if (!isset($instances[$signature])) {
             $instances[$signature] = Log::factory($log_type, $log_name, $ident, $conf);
         }
+
         return $instances[$signature];
     }
 
@@ -132,6 +133,7 @@ class Log {
             LOG_INFO    => 'info',
             LOG_DEBUG   => 'debug'
         );
+
         return $priorities[$priority];
     }
 
@@ -139,14 +141,16 @@ class Log {
      * Adds a Log_observer instance to the list of observers that are
      * be notified when a message is logged.
      *  
-     * @param object Log_observer &$logObserver  The Log_observer instance to be added to
-     *                      the $listeners array.
+     * @param object Log_observer &$logObserver The Log_observer instance to
+     *                                          be added to the $listeners
+     *                                          array.
      * @access public
      */
     function attach(&$logObserver)
     {
-        if (!is_object($logObserver))
+        if (!is_object($logObserver)) {
             return false;
+        }
         
         $logObserver->_listenerID = uniqid(rand());
         
@@ -156,14 +160,16 @@ class Log {
     /**
      * Removes a Log_observer instance from the list of observers.
      *
-     * @param object Log_observer $logObserver  The Log_observer instance to be removed
-     *                      from the $listeners array.
+     * @param object Log_observer $logObserver  The Log_observer instance to
+     *                                          be removed from the $listeners
+     *                                          array.
      * @access public
      */
     function detach($logObserver)
     {
-        if (isset($this->listeners[$logObserver->_listenerID]))
+        if (isset($this->listeners[$logObserver->_listenerID])) {
             unset($this->listeners[$logObserver->_listenerID]);
+        }
     }
 
     /**
@@ -178,8 +184,9 @@ class Log {
     {
         reset($this->listeners);
         foreach ($this->listeners as $listener) {
-            if ($messageOb['priority'] <= $listener->priority)
+            if ($messageOb['priority'] <= $listener->priority) {
                 $listener->notify($messageOb);
+            }
         }
     }
 

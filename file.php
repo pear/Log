@@ -6,7 +6,7 @@
  * The Log_file class is a concrete implementation of the Log::
  * abstract class which writes message to a text file.
  * 
- * @author  Jon Parise <jon@csh.rit.edu>
+ * @author  Jon Parise <jon@horde.org>
  * @version $Revision$
  * @since   Horde 1.3
  * @package Log
@@ -88,7 +88,7 @@ class Log_file extends Log {
             $this->open();
         }
 
-        $entry = sprintf("%s %s [%s] %s\n", strftime("%b %d %T"),
+        $entry = sprintf("%s %s [%s] %s\n", strftime('%b %d %T'),
             $this->ident, Log::priorityToString($priority), $message);
 
         if ($this->fp) {
