@@ -15,13 +15,26 @@ The Log framework provides an abstracted logging system.  It supports logging to
         </maintainer>
     </maintainers>
     <release>
-        <version>1.6.7</version>
-        <date>2003-06-16</date>
+        <version>1.7.0</version>
+        <date>2003-06-??</date>
         <state>stable</state>
         <notes>
-It is now possible to set the identification string for all of a composite's child instances.
+It is now possible to specific a specific mask that dictates exactly which levels will be logged.  For example, to log all events *except* those that were assigned the PEAR_LOG_NOTICE priority:
 
-The preamble of the mail handler's message is now configurable.
+    $mask = PEAR_LOG_ALL ^ Log::MASK(PEAR_LOG_NOTICE);
+    $log->setMask($mask);
+
+To log all message up to a specific log level (which is equivalent to the previous "maxLevel" setting):
+
+    $mask = Log::UPTO(PEAR_LOG_INFO);
+    $log->setMask($mask);
+
+To log only notices and debug messages:
+
+    $mask = Log::MASK(PEAR_LOG_NOTICE) | Log::MASK(PEAR_LOG_DEBUG);
+    $log->setMask($mask);
+
+Complete backwards compatibility has been maintained.
         </notes>
         <filelist>
           <dir name="/">
@@ -43,6 +56,19 @@ The preamble of the mail handler's message is now configurable.
         </deps>
     </release>
     <changelog>
+      <release>
+        <version>1.6.7</version>
+        <date>2003-06-16</date>
+        <state>stable</state>
+        <notes>
+It is now possible to set the identification string for all of a composite's child instances.
+
+The preamble of the mail handler's message is now configurable.
+        </notes>
+        <deps>
+          <dep type="pkg" rel="has" optional="yes">DB</dep>
+        </deps>
+      </release>
       <release>
         <version>1.6.6</version>
         <date>2003-06-05</date>
