@@ -16,15 +16,14 @@ The Log framework provides an abstracted logging system.  It supports logging to
         </maintainer>
     </maintainers>
     <release>
-        <version>1.7.1</version>
-        <date>2003-09-21</date>
+        <version>1.8</version>
+        <date>2003-??-??</date>
         <state>stable</state>
         <notes>
-The mail handler now uses "\n" to terminate lines instead of "\r\n".
+The Log package now includes a users guide.
 
-The file handler's path creation routines now guard against potentially infinite recursion.
-
-It is now possible to pass an object to the logging methods.  If the object offers a PEAR_Error-style getMessage() or PHP5 exception-style toString() method, it will be used to extract the message text.
+A number of small improvements have been made to the 'win' log handler (based
+on suggestions from Paul Yanchenko).
         </notes>
         <filelist>
           <dir name="/">
@@ -48,6 +47,21 @@ It is now possible to pass an object to the logging methods.  If the object offe
         </deps>
     </release>
     <changelog>
+      <release>
+        <version>1.7.1</version>
+        <date>2003-09-21</date>
+        <state>stable</state>
+        <notes>
+The mail handler now uses "\n" to terminate lines instead of "\r\n".
+
+The file handler's path creation routines now guard against potentially infinite recursion.
+
+It is now possible to pass an object to the logging methods.  If the object offers a PEAR_Error-style getMessage() or PHP5 exception-style toString() method, it will be used to extract the message text.
+        </notes>
+        <deps>
+          <dep type="pkg" rel="has" optional="yes">DB</dep>
+        </deps>
+      </release>
       <release>
         <version>1.7.0</version>
         <date>2003-08-02</date>
