@@ -31,7 +31,7 @@ class Log {
     var $_ident = '';
 
     /** 
-     * Holds all Log_observer objects that wish to be notified of new messages
+     * Holds all Log_observer objects that wish to be notified of new messages.
      *
      * @var array
      * @access private
@@ -43,22 +43,22 @@ class Log {
      * Attempts to return a concrete Log instance of $log_type.
      * 
      * @param string $log_type  The type of concrete Log subclass to return.
-     *                  Attempt to dynamically include the code for this
-     *                  subclass. Currently, valid values are 'syslog',
-     *                  'sql', 'file', and 'mcal'.
+     *                          Attempt to dynamically include the code for
+     *                          this subclass. Currently, valid values are
+     *                          'console', 'syslog', 'sql', 'file', and 'mcal'.
      *
-     * @param string $log_name  The name of the actually log file,
-     *                  table, or other specific store to use. Defaults
-     *                  to an empty string, with which the subclass will
-     *                  attempt to do something intelligent.
+     * @param string $log_name  The name of the actually log file, table, or
+     *                          other specific store to use. Defaults to an
+     *                          empty string, with which the subclass will
+     *                          attempt to do something intelligent.
      *
-     * @param string $ident The identity reported to the log system.
+     * @param string $ident     The identity reported to the log system.
      *
-     * @param array  $conf  A hash containing any additional
-     *                  configuration information that a subclass might need.
+     * @param array  $conf      A hash containing any additional configuration
+     *                          information that a subclass might need.
      * 
-     * @return object Log   The newly created concrete Log instance, or an
-     *                  false on an error.
+     * @return object Log       The newly created concrete Log instance, or an
+     *                          false on an error.
      * @access public
      */
     function factory($log_type, $log_name = '', $ident = '', $conf = array())
@@ -74,35 +74,36 @@ class Log {
     }
 
     /**
-     * Attempts to return a reference to a concrete Log instance of
-     * $log_type, only creating a new instance if no log instance with
-     * the same parameters currently exists.
+     * Attempts to return a reference to a concrete Log instance of $log_type,
+     * only creating a new instance if no log instance with the same parameters
+     * currently exists.
      *
-     * You should use this if there are multiple places you might
-     * create a logger, you don't want to create multiple loggers, and
-     * you don't want to check for the existance of one each time. The
-     * singleton pattern does all the checking work for you.
+     * You should use this if there are multiple places you might create a
+     * logger, you don't want to create multiple loggers, and you don't want to
+     * check for the existance of one each time. The singleton pattern does all
+     * the checking work for you.
      *
-     * <b>You MUST call this method with the $var = &Log::singleton()
-     * syntax. Without the ampersand (&) in front of the method name,
-     * you will not get a reference, you will get a copy.</b>
+     * <b>You MUST call this method with the $var = &Log::singleton() syntax.
+     * Without the ampersand (&) in front of the method name, you will not get
+     * a reference, you will get a copy.</b>
      * 
      * @param string $log_type  The type of concrete Log subclass to return.
-     *                  Attempt to dynamically include the code for
-     *                  this subclass. Currently, valid values are
-     *                  'syslog', 'sql', 'file', and 'mcal'.
+     *                          Attempt to dynamically include the code for
+     *                          this subclass. Currently, valid values are
+     *                          'console', 'syslog', 'sql', 'file', and 'mcal'.
      *
-     * @param string $log_name  The name of the actually log file,
-     *                  table, or other specific store to use.  Defaults
-     *                  to an empty string, with which the subclass will
-     *                  attempt to do something intelligent.
+     * @param string $log_name  The name of the actually log file, table, or
+     *                          other specific store to use.  Defaults to an
+     *                          empty string, with which the subclass will
+     *                          attempt to do something intelligent.
      *
-     * @param string $ident The identity reported to the log system.
+     * @param string $ident     The identity reported to the log system.
      *
-     * @param array $conf   A hash containing any additional
-     *                  configuration information that a subclass might need.
+     * @param array $conf       A hash containing any additional configuration
+     *                          information that a subclass might need.
      * 
-     * @return object Log   The concrete Log reference, or false on an error.
+     * @return object Log       The newly created concrete Log instance, or an
+     *                          false on an error.
      * @access public
      */
     function &singleton($log_type, $log_name = '', $ident = '', $conf = array())
@@ -121,9 +122,9 @@ class Log {
     /**
      * Returns the string representation of a LOG_* integer constant.
      *
-     * @param int $priority The LOG_* integer constant.
+     * @param int $priority     A LOG_* integer constant.
      *
-     * @return          The string representation of $priority.
+     * @return string           The string representation of $priority.
      */
     function priorityToString($priority)
     {
@@ -142,8 +143,8 @@ class Log {
     }
 
     /**
-     * Adds a Log_observer instance to the list of observers that are
-     * be notified when a message is logged.
+     * Adds a Log_observer instance to the list of observers that are be
+     * notified when a message is logged.
      *  
      * @param object Log_observer &$logObserver The Log_observer instance to
      *                                          be added to the $listeners
@@ -180,24 +181,24 @@ class Log {
      * Sends any Log_observer objects listening to this Log the message
      * that was just logged.
      *
-     * @param array $messageOb    The data structure holding all relevant log
-     *                      information - the message, the priority, what
-     *                      log this is, etc.
+     * @param array $msgObj     The data structure holding all relevant log
+     *                          information - the message, the priority, what
+     *                          log this is, etc.
      */
-    function notifyAll($messageOb)
+    function notifyAll($msgObj)
     {
         reset($this->_listeners);
         foreach ($this->_listeners as $listener) {
-            if ($messageOb['priority'] <= $listener->priority) {
-                $listener->notify($messageOb);
+            if ($msgObj['priority'] <= $listener->priority) {
+                $listener->notify($msgObj);
             }
         }
     }
 
     /**
-     * @return boolean true if this is a composite class, false
-     * otherwise. The composite subclass overrides this to return
-     * true.
+     * Indicates whether this is a composite class.
+     *
+     * @return boolean          True if this is a composite class.
      */
     function isComposite()
     {
