@@ -18,7 +18,7 @@ $logger->log($message, PEAR_LOG_WARNING);
 
 $q = "SELECT message FROM log_table WHERE ident='$ident'";
 $res = sqlite_query($db, $q);
-if (sqlite_fetch_single($res) == $message) {
+if (sqlite_fetch_string($res) == $message) {
 	echo 'ok';
 }
 
