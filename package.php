@@ -7,7 +7,7 @@ $version = '1.8.4';
 $notes = <<<EOT
 The Log package now requires PHP 4.3.0 or later.
 
-If an object or array is passed as a log event, it's human-readable representation will be used.
+If an object or array is passed as a log event, its human-readable representation will be used.
 
 It's now possible to specify the default priority for events logged using the log() method.
 EOT;
