@@ -14,7 +14,7 @@
  * entitled "JavaScript Power PHP Debugging:
  *
  *  http://www.zend.com/zend/tut/tutorial-DebugLib.php
- * 
+ *
  * @author  Jon Parise <jon@php.net>
  * @since   Log 1.7.0
  * @package Log
@@ -62,7 +62,7 @@ class Log_win extends Log
 
     /**
      * Constructs a new Log_win object.
-     * 
+     *
      * @param string $name     Ignored.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
@@ -206,7 +206,7 @@ END_OF_SCRIPT;
     /**
      * Logs $message to the output window.  The message is also passed along
      * to any Log_observer instances that are observing this Log.
-     * 
+     *
      * @param mixed  $message  String or object containing the message to log.
      * @param string $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
@@ -251,6 +251,5 @@ END_OF_SCRIPT;
 
         return true;
     }
-}
 
-?>
+}

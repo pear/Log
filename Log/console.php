@@ -185,6 +185,5 @@ class Log_console extends Log
 
         return true;
     }
-}
 
-?>
+}

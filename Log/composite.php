@@ -191,6 +191,5 @@ class Log_composite extends Log
 
         return true;
     }
-}
 
-?>
+}

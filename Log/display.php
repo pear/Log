@@ -103,6 +103,5 @@ class Log_display extends Log
 
         return true;
     }
-}
 
-?>
+}

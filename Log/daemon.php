@@ -10,8 +10,8 @@
  * @version $Revision$
  * @package Log
  */
-class Log_daemon extends Log {
-
+class Log_daemon extends Log
+{
     /**
      * Integer holding the log facility to use.
      * @var string
@@ -226,4 +226,5 @@ class Log_daemon extends Log {
 
         return $priorities[$priority];
     }
+
 }

@@ -9,11 +9,11 @@
 /**
  * The Log_error_log class is a concrete implementation of the Log abstract
  * class that logs messages using PHP's error_log() function.
- * 
+ *
  * @author  Jon Parise <jon@php.net>
  * @since   Log 1.7.0
  * @package Log
- * 
+ *
  * @example error_log.php   Using the error_log handler.
  */
 class Log_error_log extends Log
@@ -42,7 +42,7 @@ class Log_error_log extends Log
 
     /**
      * Constructs a new Log_error_log object.
-     * 
+     *
      * @param string $name     Ignored.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
@@ -68,7 +68,7 @@ class Log_error_log extends Log
     /**
      * Logs $message using PHP's error_log() function.  The message is also
      * passed along to any Log_observer instances that are observing this Log.
-     * 
+     *
      * @param mixed  $message   String or object containing the message to log.
      * @param string $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
@@ -99,6 +99,5 @@ class Log_error_log extends Log
 
         return $success;
     }
-}
 
-?>
+}

@@ -22,7 +22,7 @@
 class Log_syslog extends Log
 {
     /**
-    * Integer holding the log facility to use. 
+    * Integer holding the log facility to use.
     * @var string
     * @access private
     */
@@ -156,5 +156,5 @@ class Log_syslog extends Log
 
         return $priorities[$priority];
     }
+
 }
-?>

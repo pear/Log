@@ -81,7 +81,7 @@ class Log_sqlite extends Log
      *                             to open a new database connection
      *                             or an already opened sqlite connection.
      * @param int    $level        Log messages up to and including this level.
-     * @access public     
+     * @access public
      */
     function Log_sqlite($name, $ident = '', &$conf, $level = PEAR_LOG_DEBUG)
     {
@@ -106,7 +106,7 @@ class Log_sqlite extends Log
      * been opened. This is implicitly called by log(), if necessary.
      *
      * @return boolean   True on success, false on failure.
-     * @access public     
+     * @access public
      */
     function open()
     {
@@ -139,7 +139,7 @@ class Log_sqlite extends Log
      * existing connection that was passed to us via $conf['db'].
      *
      * @return boolean   True on success, false on failure.
-     * @access public     
+     * @access public
      */
     function close()
     {
@@ -167,7 +167,7 @@ class Log_sqlite extends Log
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
-     * @access public     
+     * @access public
      */
     function log($message, $priority = null)
     {
@@ -233,6 +233,5 @@ class Log_sqlite extends Log
 
         return true;
     }
-}
 
-?>
+}

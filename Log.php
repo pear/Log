@@ -659,5 +659,3 @@ class Log
         return $this->_ident;
     }
 }
-
-?>

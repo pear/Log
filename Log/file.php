@@ -281,6 +281,5 @@ class Log_file extends Log
 
         return $success;
     }
-}
 
-?>
+}

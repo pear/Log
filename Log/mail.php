@@ -11,13 +11,13 @@
  * which sends log messages to a mailbox.
  * The mail is actually sent when you close() the logger, or when the destructor
  * is called (when the script is terminated).
- * 
+ *
  * PLEASE NOTE that you must create a Log_mail object using =&, like this :
  *  $logger =& Log::factory("mail", "recipient@example.com", ...)
- * 
+ *
  * This is a PEAR requirement for destructors to work properly.
  * See http://pear.php.net/manual/en/class.pear.php
- * 
+ *
  * @author  Ronnie Garcia <ronnie@mk2.net>
  * @author  Jon Parise <jon@php.net>
  * @since   Log 1.3
@@ -27,21 +27,21 @@
  */
 class Log_mail extends Log
 {
-    /** 
+    /**
      * String holding the recipient's email address.
      * @var string
      * @access private
      */
     var $_recipient = '';
 
-    /** 
+    /**
      * String holding the sender's email address.
      * @var string
      * @access private
      */
     var $_from = '';
 
-    /** 
+    /**
      * String holding the email's subject.
      * @var string
      * @access private
@@ -65,11 +65,11 @@ class Log_mail extends Log
 
     /**
      * Constructs a new Log_mail object.
-     * 
+     *
      * Here is how you can customize the mail driver with the conf[] hash :
      *   $conf['from']    : the mail's "From" header line,
      *   $conf['subject'] : the mail's "Subject" line.
-     * 
+     *
      * @param string $name      The filename of the logfile.
      * @param string $ident     The identity string.
      * @param array  $conf      The configuration array.
@@ -89,7 +89,7 @@ class Log_mail extends Log
         } else {
             $this->_from = ini_get('sendmail_from');
         }
-        
+
         if (!empty($conf['subject'])) {
             $this->_subject = $conf['subject'];
         }
@@ -97,11 +97,11 @@ class Log_mail extends Log
         if (!empty($conf['preamble'])) {
             $this->_preamble = $conf['preamble'];
         }
-        
+
         /* register the destructor */
         register_shutdown_function(array(&$this, '_Log_mail'));
     }
-    
+
     /**
      * Destructor. Calls close().
      *
@@ -115,7 +115,7 @@ class Log_mail extends Log
     /**
      * Starts a new mail message.
      * This is implicitly called by log(), if necessary.
-     * 
+     *
      * @access public
      */
     function open()
@@ -133,7 +133,7 @@ class Log_mail extends Log
     /**
      * Closes the message, if it is open, and sends the mail.
      * This is implicitly called by the destructor, if necessary.
-     * 
+     *
      * @access public
      */
     function close()
@@ -178,7 +178,7 @@ class Log_mail extends Log
     /**
      * Writes $message to the currently open mail message.
      * Calls open(), if necessary.
-     * 
+     *
      * @param mixed  $message  String or object containing the message to log.
      * @param string $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
@@ -217,6 +217,5 @@ class Log_mail extends Log
 
         return true;
     }
-}
 
-?>
+}

@@ -29,21 +29,21 @@ require_once 'DB.php';
  * @author  Jon Parise <jon@php.net>
  * @since   Horde 1.3
  * @since   Log 1.0
- * @package Log 
+ * @package Log
  *
  * @example sql.php     Using the SQL handler.
  */
-class Log_sql extends Log {
-
-    /** 
-     * Array containing the dsn information. 
+class Log_sql extends Log
+{
+    /**
+     * Array containing the dsn information.
      * @var string
      * @access private
      */
     var $_dsn = '';
 
-    /** 
-     * Object holding the database handle. 
+    /**
+     * Object holding the database handle.
      * @var object
      * @access private
      */
@@ -56,8 +56,8 @@ class Log_sql extends Log {
      */
     var $_existingConnection = false;
 
-    /** 
-     * String holding the database table to use. 
+    /**
+     * String holding the database table to use.
      * @var string
      * @access private
      */
@@ -86,7 +86,7 @@ class Log_sql extends Log {
      * @param string $ident        The identification field.
      * @param array $conf          The connection configuration array.
      * @param int $level           Log messages up to and including this level.
-     * @access public     
+     * @access public
      */
     function Log_sql($name, $ident = '', $conf = array(),
                      $level = PEAR_LOG_DEBUG)
@@ -123,7 +123,7 @@ class Log_sql extends Log {
      * been opened. This is implicitly called by log(), if necessary.
      *
      * @return boolean   True on success, false on failure.
-     * @access public     
+     * @access public
      */
     function open()
     {
@@ -144,7 +144,7 @@ class Log_sql extends Log {
      * existing connection that was passed to us via $conf['db'].
      *
      * @return boolean   True on success, false on failure.
-     * @access public     
+     * @access public
      */
     function close()
     {
@@ -182,7 +182,7 @@ class Log_sql extends Log {
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
-     * @access public     
+     * @access public
      */
     function log($message, $priority = null)
     {
@@ -220,6 +220,5 @@ class Log_sql extends Log {
 
         return true;
     }
-}
 
-?>
+}
