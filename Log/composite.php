@@ -32,7 +32,7 @@ class Log_composite extends Log {
      * @access public
      */
     function Log_composite($name = false, $ident = false, $conf = false,
-                           $maxLevel = LOG_DEBUG)
+                           $maxLevel = PEAR_LOG_DEBUG)
     {
     }
     
@@ -71,11 +71,12 @@ class Log_composite extends Log {
      * 
      * @param string $message  The textual message to be logged.
      * @param string $priority (optional) The priority of the message. Valid
-     *                  values are: LOG_EMERG, LOG_ALERT, LOG_CRIT,
-     *                  LOG_ERR, LOG_WARNING, LOG_NOTICE, LOG_INFO,
-     *                  and LOG_DEBUG. The default is LOG_INFO.
+     *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
+     *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
+     *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
+     *                  The default is PEAR_LOG_INFO.
      */
-    function log($message, $priority = LOG_INFO)
+    function log($message, $priority = PEAR_LOG_INFO)
     {
         reset($this->_children);
         foreach ($this->_children as $child) {

@@ -16,13 +16,13 @@ class Log_observer {
  
     /** 
     * The minimum priority level of message that we want to hear
-    * about. 0 (LOG_EMERG) is the highest priority, so we will only
+    * about. PEAR_LOG_EMERG is the highest priority, so we will only
     * hear messages with an integer priority value less than or
-    * equal to ours. It defaults to LOG_INFO, which listens to
-    * everything except LOG_DEBUG. 
+    * equal to ours. It defaults to PEAR_LOG_INFO, which listens to
+    * everything except PEAR_LOG_DEBUG. 
     * @var string
     */
-    var $_priority = LOG_INFO;
+    var $_priority = PEAR_LOG_INFO;
 
 
     /**
@@ -31,7 +31,7 @@ class Log_observer {
      * @param string $priority priority level of message
      * @access public
      */
-    function Log_observer($priority = LOG_INFO)
+    function Log_observer($priority = PEAR_LOG_INFO)
     {
         $this->_priority = $priority;
     }
@@ -47,7 +47,7 @@ class Log_observer {
      * @return object Log_observer  The newly created concrete Log_observer
      * instance, or an false on an error.
      */
-    function factory($observer_type, $priority = LOG_INFO)
+    function factory($observer_type, $priority = PEAR_LOG_INFO)
     {
         $classfile = substr(__FILE__, 0, -(strlen(basename(__FILE__)))) . 'Log/' . $observer_type . '.php';
         if (file_exists($classfile)) {

@@ -53,7 +53,7 @@ class Log_mail extends Log {
      * @access public
      */
     function Log_mail($name, $ident = '', $conf = array(),
-                      $maxLevel = LOG_DEBUG)
+                      $maxLevel = PEAR_LOG_DEBUG)
     {
         $this->_recipient = $name;
         $this->_ident    = $ident;
@@ -113,12 +113,13 @@ class Log_mail extends Log {
      * 
      * @param string $message  The textual message to be logged.
      * @param string $priority The priority of the message.  Valid
-     *                  values are: LOG_EMERG, LOG_ALERT, LOG_CRIT,
-     *                  LOG_ERR, LOG_WARNING, LOG_NOTICE, LOG_INFO, and
-     *                  LOG_DEBUG. The default is LOG_INFO.
+     *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
+     *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
+     *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
+     *                  The default is PEAR_LOG_INFO.
      * @access public
      */
-    function log($message, $priority = LOG_INFO)
+    function log($message, $priority = PEAR_LOG_INFO)
     {
         /* Abort early if the priority is above the maximum logging level. */
         if ($priority > $this->_maxLevel) return;
