@@ -40,14 +40,14 @@ class Log {
 
 
     /**
-     * Attempts to return a concrete Log instance of $log_type.
+     * Attempts to return a concrete Log instance of $type.
      * 
-     * @param string $log_type  The type of concrete Log subclass to return.
+     * @param string $type      The type of concrete Log subclass to return.
      *                          Attempt to dynamically include the code for
      *                          this subclass. Currently, valid values are
      *                          'console', 'syslog', 'sql', 'file', and 'mcal'.
      *
-     * @param string $log_name  The name of the actually log file, table, or
+     * @param string $name      The name of the actually log file, table, or
      *                          other specific store to use. Defaults to an
      *                          empty string, with which the subclass will
      *                          attempt to do something intelligent.
@@ -61,21 +61,21 @@ class Log {
      *                          false on an error.
      * @access public
      */
-    function factory($log_type, $log_name = '', $ident = '', $conf = array())
+    function factory($type, $name = '', $ident = '', $conf = array())
     {
-        $log_type = strtolower($log_type);
-        $classfile = 'Log/' . $log_type . '.php';
+        $type = strtolower($type);
+        $classfile = 'Log/' . $type . '.php';
         if (@include_once $classfile) {
-            $class = 'Log_' . $log_type;
-            return new $class($log_name, $ident, $conf);
+            $class = 'Log_' . $type;
+            return new $class($name, $ident, $conf);
         } else {
             return false;
         }
     }
 
     /**
-     * Attempts to return a reference to a concrete Log instance of $log_type,
-     * only creating a new instance if no log instance with the same parameters
+     * Attempts to return a reference to a concrete Log instance of $type, only
+     * creating a new instance if no log instance with the same parameters
      * currently exists.
      *
      * You should use this if there are multiple places you might create a
@@ -87,12 +87,12 @@ class Log {
      * Without the ampersand (&) in front of the method name, you will not get
      * a reference, you will get a copy.</b>
      * 
-     * @param string $log_type  The type of concrete Log subclass to return.
+     * @param string $type      The type of concrete Log subclass to return.
      *                          Attempt to dynamically include the code for
      *                          this subclass. Currently, valid values are
      *                          'console', 'syslog', 'sql', 'file', and 'mcal'.
      *
-     * @param string $log_name  The name of the actually log file, table, or
+     * @param string $name      The name of the actually log file, table, or
      *                          other specific store to use.  Defaults to an
      *                          empty string, with which the subclass will
      *                          attempt to do something intelligent.
@@ -106,14 +106,14 @@ class Log {
      *                          false on an error.
      * @access public
      */
-    function &singleton($log_type, $log_name = '', $ident = '', $conf = array())
+    function &singleton($type, $name = '', $ident = '', $conf = array())
     {
         static $instances;
         if (!isset($instances)) $instances = array();
         
-        $signature = md5($log_type . '][' . $log_name . '][' . $ident . '][' . implode('][', $conf));
+        $signature = md5($type . '][' . $name . '][' . $ident . '][' . implode('][', $conf));
         if (!isset($instances[$signature])) {
-            $instances[$signature] = Log::factory($log_type, $log_name, $ident, $conf);
+            $instances[$signature] = Log::factory($type, $name, $ident, $conf);
         }
 
         return $instances[$signature];
@@ -178,8 +178,8 @@ class Log {
     }
 
     /**
-     * Sends any Log_observer objects listening to this Log the message
-     * that was just logged.
+     * Sends any Log_observer objects listening to this Log the message that
+     * was just logged.
      *
      * @param array $msgObj     The data structure holding all relevant log
      *                          information - the message, the priority, what

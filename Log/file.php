@@ -29,18 +29,18 @@ class Log_file extends Log {
     /**
      * Constructs a new logfile object.
      * 
-     * @param string $log_name The filename of the logfile.
+     * @param string $name     The filename of the logfile.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
      * @access public
      */
-    function Log_file($log_name, $ident = '', $conf = array())
+    function Log_file($name, $ident = '', $conf = array())
     {
         // bc compatibilty
         if( 0 == count( $conf )) {
             $conf = false ;
         }    
-        $this->filename = $log_name;
+        $this->filename = $name;
         $this->_ident = $ident;
     }
 

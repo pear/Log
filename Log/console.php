@@ -14,12 +14,12 @@ class Log_console extends Log
     /**
      * Constructs a new Log_console object.
      * 
-     * @param string $log_name Ignored.
+     * @param string $name     Ignored.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
      * @access public
      */
-    function Log_console($log_name, $ident = '', $conf = array())
+    function Log_console($name, $ident = '', $conf = array())
     {
         $this->_ident = $ident;
     }

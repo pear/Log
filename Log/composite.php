@@ -25,12 +25,12 @@ class Log_composite {
     /**
      * Constructs a new composite Log object.
      * 
-     * @param boolean $log_name This is ignored.
+     * @param boolean $name     This is ignored.
      * @param boolean $ident    This is ignored.
      * @param boolean $conf     This is ignored.
      * @access public
      */
-    function Log_composite($log_name = false, $ident = false, $conf = false)
+    function Log_composite($name = false, $ident = false, $conf = false)
     {
     }
     

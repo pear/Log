@@ -48,14 +48,14 @@ class Log_sql extends Log {
     /**
      * Constructs a new sql logging object.
      *
-     * @param string $log_name     The target SQL table.
+     * @param string $name         The target SQL table.
      * @param string $ident        The identification field.
      * @param array $conf          The connection configuration array.
      * @access public     
      */
-    function Log_sql($log_name, $ident = '', $conf)
+    function Log_sql($name, $ident = '', $conf)
     {
-        $this->table = $log_name;
+        $this->table = $name;
         $this->_ident = $ident;
         $this->dsn = $conf['dsn'];
     }

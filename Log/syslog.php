@@ -24,18 +24,18 @@ class Log_syslog extends Log {
     /**
      * Constructs a new syslog object.
      * 
-     * @param string $log_name The syslog facility.
+     * @param string $name     The syslog facility.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
      * @access public
      */
-    function Log_syslog($log_name = LOG_SYSLOG, $ident = '', $conf = array())
+    function Log_syslog($name, $ident = '', $conf = array())
     {    
         // bc compatibilty
         if( 0 == count( $conf )) {
             $conf = false ;
         }    
-        $this->name = $log_name;
+        $this->name = $name;
         $this->_ident = $ident;
     }
 

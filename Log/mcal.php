@@ -54,18 +54,18 @@ class Log_mcal extends Log {
     /**
      * Constructs a new Log_mcal object.
      * 
-     * @param string $log_name The category to use for our events.
+     * @param string $name     The category to use for our events.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
      * @access public
      */
-    function Log_mcal($log_name = LOG_SYSLOG, $ident = '', $conf = array())
+    function Log_mcal($name, $ident = '', $conf = array())
     {
         // bc compatibilty
         if( 0 == count( $conf )) {
             $conf = false ;
         }
-        $this->name = $log_name;
+        $this->name = $name;
         $this->_ident = $ident;
         $this->calendar = $conf['calendar'];
         $this->username = $conf['username'];
