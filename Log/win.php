@@ -172,7 +172,7 @@ win.document.writeln('<tr><th>Time</th><th>Ident</th><th>Message</th></tr>');
         /* Drain the buffer to the output window. */
         foreach ($this->_buffer as $line) {
             echo "<script language='JavaScript'>\n";
-            echo "win.document.writeln('$line');\n";
+            echo "win.document.writeln('" . addslashes($line) . "');\n";
             echo "self.focus();\n";
             echo "</script>\n";
         }
