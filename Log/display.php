@@ -89,7 +89,7 @@ class Log_display extends Log
         /* Build and output the complete log line. */
         echo $this->_error_prepend .
              '<b>' . ucfirst($this->priorityToString($priority)) . '</b>: '.
-             $message .
+             htmlspecialchars($message) .
              $this->_error_append . "<br />\n";
 
         /* Notify observers about this log message. */
