@@ -34,8 +34,8 @@ class Log_sql extends Log {
     var $_dsn = '';
 
     /** 
-     * Resource holding the database handle. 
-     * @var resource
+     * Object holding the database handle. 
+     * @var object
      */
     var $_db = null;
 
