@@ -170,7 +170,7 @@ class Log {
      */
     function priorityToString($priority)
     {
-        static $priorities = array(
+        $priorities = array(
             PEAR_LOG_EMERG   => 'emergency',
             PEAR_LOG_ALERT   => 'alert',
             PEAR_LOG_CRIT    => 'critical',
