@@ -63,6 +63,13 @@ class Log_sql extends Log {
      */
     var $_table = 'log_table';
 
+    /**
+     * String holding the name of the ID sequence.
+     * @var string
+     * @access private
+     */
+    var $_sequence = 'log_id';
+
 
     /**
      * Constructs a new sql logging object.
@@ -80,6 +87,9 @@ class Log_sql extends Log {
         $this->_table = $name;
         $this->_mask = Log::UPTO($level);
         $this->setIdent($ident);
+
+        /* If a specific sequence name was provided, use it. */
+        if (!empty($conf['sequence'])) $this->_sequence = $conf['sequence'];
 
         /* If an existing database connection was provided, use it. */
         if (isset($conf['db'])) {
@@ -178,7 +188,7 @@ class Log_sql extends Log {
         $message = $this->_extractMessage($message);
 
         /* Build the SQL query for this log entry insertion. */
-        $id = $this->_db->nextId(substr($this->_table, 0, 56) . '_id');
+        $id = $this->_db->nextId($this->_sequence);
         $q = sprintf('insert into %s (id, logtime, ident, priority, message)' .
                      'values(%d, CURRENT_TIMESTAMP, %s, %d, %s)',
                      $this->_table, $id, $this->_db->quote($this->_ident),
