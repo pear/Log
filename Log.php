@@ -2,6 +2,15 @@
 // $Id$
 // $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
 
+define('PEAR_LOG_EMERG',    0);                                                
+define('PEAR_LOG_ALERT',    1);                                                
+define('PEAR_LOG_CRIT',     2);                                                
+define('PEAR_LOG_ERR',      3);                                                
+define('PEAR_LOG_WARNING',  4);                                                
+define('PEAR_LOG_NOTICE',   5);                                                
+define('PEAR_LOG_INFO',     6);                                                
+define('PEAR_LOG_DEBUG',    7);
+
 /**
  * The Log:: class implements both an abstraction for various logging
  * mechanisms and the Subject end of a Subject-Observer pattern.
@@ -36,7 +45,7 @@ class Log {
      * @var int
      * @access private
      */
-    var $_maxLevel = LOG_DEBUG;
+    var $_maxLevel = PEAR_LOG_DEBUG;
 
     /** 
      * Holds all Log_observer objects that wish to be notified of new messages.
@@ -72,7 +81,7 @@ class Log {
      * @access public
      */
     function factory($type, $name = '', $ident = '', $conf = array(),
-                     $maxLevel = LOG_DEBUG)
+                     $maxLevel = PEAR_LOG_DEBUG)
     {
         $type = strtolower($type);
         $classfile = 'Log/' . $type . '.php';
@@ -120,7 +129,7 @@ class Log {
      * @access public
      */
     function &singleton($type, $name = '', $ident = '', $conf = array(),
-                        $maxLevel = LOG_DEBUG)
+                        $maxLevel = PEAR_LOG_DEBUG)
     {
         static $instances;
         if (!isset($instances)) $instances = array();
@@ -135,23 +144,23 @@ class Log {
     }
 
     /**
-     * Returns the string representation of a LOG_* integer constant.
+     * Returns the string representation of a PEAR_LOG_* integer constant.
      *
-     * @param int $priority     A LOG_* integer constant.
+     * @param int $priority     A PEAR_LOG_* integer constant.
      *
      * @return string           The string representation of $priority.
      */
     function priorityToString($priority)
     {
         $priorities = array(
-            LOG_EMERG   => 'emergency',
-            LOG_ALERT   => 'alert',
-            LOG_CRIT    => 'critical',
-            LOG_ERR     => 'error',
-            LOG_WARNING => 'warning',
-            LOG_NOTICE  => 'notice',
-            LOG_INFO    => 'info',
-            LOG_DEBUG   => 'debug'
+            PEAR_LOG_EMERG   => 'emergency',
+            PEAR_LOG_ALERT   => 'alert',
+            PEAR_LOG_CRIT    => 'critical',
+            PEAR_LOG_ERR     => 'error',
+            PEAR_LOG_WARNING => 'warning',
+            PEAR_LOG_NOTICE  => 'notice',
+            PEAR_LOG_INFO    => 'info',
+            PEAR_LOG_DEBUG   => 'debug'
         );
 
         return $priorities[$priority];

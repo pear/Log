@@ -68,12 +68,12 @@ class Log_syslog extends Log {
     }
 
     /**
-     * Sends $message to the currently open syslog * connection.  Calls
+     * Sends $message to the currently open syslog connection.  Calls
      * open() if necessary. Also passes the message along to any Log_observer
      * instances that are observing this Log.
      * 
      * @param string $message  The textual message to be logged.
-     * @param string $priority (optional) The priority of the message.  Valid
+     * @param int $priority (optional) The priority of the message.  Valid
      *                  values are: LOG_EMERG, LOG_ALERT, LOG_CRIT,
      *                  LOG_ERR, LOG_WARNING, LOG_NOTICE, LOG_INFO,
      *                  and LOG_DEBUG.  The default is LOG_INFO.
@@ -88,9 +88,39 @@ class Log_syslog extends Log {
             $this->open();
         }
 
-        syslog($priority, $message);
+        syslog($this->_toSyslog($priority), $message);
         $this->notifyAll(array('priority' => $priority, 'message' => $message));
     }
-}
 
+    /**
+     * Converts a PEAR_LOG_* constant into a syslog LOG_* constant.
+     *
+     * This function exists because, under Windows, not all of the LOG_*
+     * constants have unique values.  Instead, the PEAR_LOG_* were introduced
+     * for global use, with the conversion to the LOG_* constants kept local to
+     * to the syslog driver.
+     *
+     * @param int $priority     PEAR_LOG_* value to convert to LOG_* value.
+     *
+     * @return  The LOG_* representation of $priority.
+     *
+     * @access private
+     */
+    function _toSyslog($priority)
+    {
+        static $priorities = array(
+            PEAR_LOG_EMERG   => LOG_EMERG,
+            PEAR_LOG_ALERT   => LOG_ALERT,
+            PEAR_LOG_CRIT    => LOG_CRIT,
+            PEAR_LOG_ERR     => LOG_ERR,
+            PEAR_LOG_WARNING => LOG_WARNING,
+            PEAR_LOG_NOTICE  => LOG_NOTICE,
+            PEAR_LOG_INFO    => LOG_INFO,
+            PEAR_LOG_DEBUG   => LOG_DEBUG
+        );
+
+        return $priorities[$priority];
+    }
+
+}
 ?>
