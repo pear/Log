@@ -78,6 +78,12 @@ class Log_file extends Log {
 
         if ($this->fp) {
             fwrite($this->fp, $entry);
+
+            /*
+             * The file must be closed immediately, or we will run into
+             * concurrency blocking issues.
+             */
+            $this->close();
         }
 
         $this->notifyAll(array('priority' => $priority, 'message' => $message));
