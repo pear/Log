@@ -166,7 +166,7 @@ logged.
 "Shortcut" methods are also available for logging an event at a specific log
 level.  See the `Log Levels`_ table for the complete list.
 
-.. _serialized: http://www.php.net/manual/en/function.serialize.php
+.. _serialized: http://www.php.net/serialize
 
 
 Log Levels
@@ -294,7 +294,7 @@ Configuration
 +-------------------+-----------+---------------+---------------------------+
 
 .. _STDOUT: http://www.php.net/wrappers.php
-.. _strftime: http://www.php.net/manual/en/function.strftime.php
+.. _strftime: http://www.php.net/strftime
 
 Example
 ~~~~~~~
@@ -326,7 +326,7 @@ Configuration
 |                   |           |               | output.                   |
 +-------------------+-----------+---------------+---------------------------+
 
-.. _error handling values: http://www.php.net/manual/en/ref.errorfunc.php
+.. _error handling values: http://www.php.net/errorfunc
 
 Example
 ~~~~~~~
@@ -389,10 +389,10 @@ parameter.
 |                           | by the ``destination`` value.                 |
 +---------------------------+-----------------------------------------------+
 
-.. _error_log(): http://www.php.net/manual/en/function.error-log.php
-.. _mail(): http://www.php.net/manual/en/function.mail.php
-.. _error_log configuration directive: http://www.php.net/manual/en/ref.errorfunc.php#ini.error-log
-.. _remote debugging: http://www.php.net/manual/en/install.configure.php#install.configure.enable-debugger
+.. _error_log(): http://www.php.net/error_log
+.. _mail(): http://www.php.net/mail
+.. _error_log configuration directive: http://www.php.net/errorfunc#ini.error-log
+.. _remote debugging: http://www.php.net/install.configure#install.configure.enable-debugger
 
 Example
 ~~~~~~~
@@ -434,7 +434,7 @@ Configuration
 |                   |           | %H:%M:%S``    | (for strftime_).          |
 +-------------------+-----------+---------------+---------------------------+
 
-.. _strftime: http://www.php.net/manual/en/function.strftime.php
+.. _strftime: http://www.php.net/strftime
 
 Example
 ~~~~~~~
@@ -466,7 +466,7 @@ Configuration
 | ``preamble``      | String    | `` `(empty)`  | Preamble for the message. |
 +-------------------+-----------+---------------+---------------------------+
 
-.. _mail(): http://www.php.net/manual/en/function.mail.php
+.. _mail(): http://www.php.net/mail
 
 Example
 ~~~~~~~
@@ -649,7 +649,7 @@ Facilities
 | ``LOG_UUCP``      | UUCP subsystem                                        |
 +-------------------+-------------------------------------------------------+
 
-.. _syslog(): http://www.php.net/manual/en/function.syslog.php
+.. _syslog(): http://www.php.net/syslog
 
 Example
 ~~~~~~~
@@ -793,7 +793,7 @@ time.
     set_error_handler('errorHandler');
     trigger_error('This is an information log message.', E_USER_NOTICE);
 
-.. _set_error_handler(): http://www.php.net/manual/en/function.set-error-handler.php
+.. _set_error_handler(): http://www.php.net/set_error_handler
 
 Logging PEAR Errors
 -------------------
