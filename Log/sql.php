@@ -12,11 +12,11 @@ require_once 'DB.php';
  * This implementation uses PHP's PEAR database abstraction layer.
  *
  * CREATE TABLE log_table (
- *  unixtime    int NOT NULL,
+ *  logtime     TIMESTAMP NOT NULL,
  *  ident       char(16) NOT NULL,
  *  priority    int,
  *  message     varchar(200),
- *  primary key (unixtime, ident)
+ *  primary key (logtime, ident)
  * );
  *
  * @author  Jon Parise <jon@php.net>
@@ -120,8 +120,8 @@ class Log_sql extends Log {
         }
 
         /* Build the SQL query for this log entry insertion. */
-        $q = sprintf("insert into %s values(%d, %s, %d, %s)",
-            $this->_table, time(), $this->_db->quote($this->_ident),
+        $q = sprintf("insert into %s values(NOW(), %s, %d, %s)",
+            $this->_table, $this->_db->quote($this->_ident),
             $priority, $this->_db->quote($message));
 
         $this->_db->query($q);
