@@ -78,8 +78,8 @@ class Log_sql extends Log {
     {
         $this->_id = md5(microtime());
         $this->_table = $name;
-        $this->_ident = $ident;
         $this->_mask = Log::UPTO($level);
+        $this->setIdent($ident);
 
         /* If an existing database connection was provided, use it. */
         if (isset($conf['db'])) {
@@ -127,6 +127,21 @@ class Log_sql extends Log {
         }
 
         return ($this->_opened === false);
+    }
+
+    /**
+     * Sets this Log instance's identification string.  Note that this
+     * SQL-specific implementation will limit the length of the $ident string
+     * to sixteen (16) characters.
+     *
+     * @param string    $ident      The new identification string.
+     *
+     * @access  public
+     * @since   Log 1.8.5
+     */
+    function setIdent($ident)
+    {
+        $this->_ident = substr($ident, 0, 16);
     }
 
     /**
