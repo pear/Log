@@ -18,7 +18,7 @@ class Log_syslog extends Log {
     * Integer holding the log facility to use. 
     * @var string
     */
-    var $name = LOG_SYSLOG;
+    var $_name = LOG_SYSLOG;
 
     
     /**
@@ -37,7 +37,7 @@ class Log_syslog extends Log {
         if( 0 == count( $conf )) {
             $conf = false ;
         }    
-        $this->name = $name;
+        $this->_name = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;
     }
@@ -50,7 +50,7 @@ class Log_syslog extends Log {
     function open()
     {
         if (!$this->_opened) {
-            openlog($this->_ident, LOG_PID, $this->name);
+            openlog($this->_ident, LOG_PID, $this->_name);
             $this->_opened = true;
         }
     }

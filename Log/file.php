@@ -17,13 +17,13 @@ class Log_file extends Log {
     * String holding the filename of the logfile. 
     * @var string
     */
-    var $filename = '';
+    var $_filename = '';
 
     /**
     * Integer holding the file handle. 
     * @var integer
     */
-    var $fp = 0 ;
+    var $_fp = 0 ;
 
 
     /**
@@ -42,7 +42,7 @@ class Log_file extends Log {
         if( 0 == count( $conf )) {
             $conf = false ;
         }    
-        $this->filename = $name;
+        $this->_filename = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;
     }
@@ -56,9 +56,9 @@ class Log_file extends Log {
     function open()
     {
         if (!$this->_opened) {
-            $this->fp = fopen($this->filename, 'a');
-            flock($this->fp, LOCK_EX);
-            fseek($this->fp, 0, SEEK_END);
+            $this->_fp = fopen($this->_filename, 'a');
+            flock($this->_fp, LOCK_EX);
+            fseek($this->_fp, 0, SEEK_END);
             $this->_opened = true;
         }
     }
@@ -70,8 +70,8 @@ class Log_file extends Log {
     function close()
     {
         if ($this->_opened) {
-            flock($this->fp, LOCK_UN);
-            fclose($this->fp);
+            flock($this->_fp, LOCK_UN);
+            fclose($this->_fp);
             $this->_opened = false;
         }
     }
@@ -100,8 +100,8 @@ class Log_file extends Log {
         $entry = sprintf("%s %s [%s] %s\n", strftime('%b %d %H:%M:%S'),
             $this->_ident, Log::priorityToString($priority), $message);
 
-        if ($this->fp) {
-            fwrite($this->fp, $entry);
+        if ($this->_fp) {
+            fwrite($this->_fp, $entry);
 
             /*
              * The file must be closed immediately, or we will run into

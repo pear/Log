@@ -18,37 +18,37 @@ class Log_mcal extends Log {
     * holding the calendar specification to connect to. 
     * @var string
     */
-    var $calendar = '{localhost/mstore}';
+    var $_calendar = '{localhost/mstore}';
 
     /** 
     * holding the username to use. 
     * @var string
     */
-    var $username = '';
+    var $_username = '';
 
     /** 
     * holding the password to use. 
     * @var string
     */
-    var $password = '';
+    var $_password = '';
 
     /** 
     * holding the options to pass to the calendar stream. 
     * @var integer
     */
-    var $options = 0;
+    var $_options = 0;
 
     /** 
     * ResourceID of the MCAL stream. 
     * @var string
     */
-    var $stream = '';
+    var $_stream = '';
 
     /** 
     * Integer holding the log facility to use. 
     * @var string
     */
-    var $name = LOG_SYSLOG;
+    var $_name = LOG_SYSLOG;
 
 
     /**
@@ -67,13 +67,13 @@ class Log_mcal extends Log {
         if( 0 == count( $conf )) {
             $conf = false ;
         }
-        $this->name = $name;
+        $this->_name = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;
-        $this->calendar = $conf['calendar'];
-        $this->username = $conf['username'];
-        $this->password = $conf['password'];
-        $this->options = $conf['options'];
+        $this->_calendar = $conf['calendar'];
+        $this->_username = $conf['username'];
+        $this->_password = $conf['password'];
+        $this->_options = $conf['options'];
     }
 
     /**
@@ -84,7 +84,8 @@ class Log_mcal extends Log {
     function open()
     {
         if (!$this->_opened) {
-            $this->stream = mcal_open($this->calendar, $this->username, $this->password, $this->options);
+            $this->_stream = mcal_open($this->_calendar, $this->_username,
+                $this->_password, $this->_options);
             $this->_opened = true;
         }
     }
@@ -96,7 +97,7 @@ class Log_mcal extends Log {
     function close()
     {
         if ($this->_opened) {
-            mcal_close($this->stream);
+            mcal_close($this->_stream);
             $this->_opened = false;
         }
     }
@@ -126,14 +127,16 @@ class Log_mcal extends Log {
         $date_str = date('Y:n:j:G:i:s');
         $dates = explode(':', $date_str);
 
-        mcal_event_init($this->stream);
-        mcal_event_set_title($this->stream, $this->_ident);
-        mcal_event_set_category($this->stream, $this->name);
-        mcal_event_set_description($this->stream, $message);
-        mcal_event_add_attribute($this->stream, 'priority', $priority);
-        mcal_event_set_start($this->stream, $dates[0], $dates[1], $dates[2], $dates[3], $dates[4], $dates[5]);
-        mcal_event_set_end($this->stream, $dates[0], $dates[1], $dates[2], $dates[3], $dates[4], $dates[5]);
-        mcal_append_event($this->stream);
+        mcal_event_init($this->_stream);
+        mcal_event_set_title($this->_stream, $this->_ident);
+        mcal_event_set_category($this->_stream, $this->_name);
+        mcal_event_set_description($this->_stream, $message);
+        mcal_event_add_attribute($this->_stream, 'priority', $priority);
+        mcal_event_set_start($this->_stream, $dates[0], $dates[1], $dates[2],
+            $dates[3], $dates[4], $dates[5]);
+        mcal_event_set_end($this->_stream, $dates[0], $dates[1], $dates[2],
+            $dates[3], $dates[4], $dates[5]);
+        mcal_append_event($this->_stream);
 
         $this->notifyAll(array('priority' => $priority, 'message' => $message));
     }

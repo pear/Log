@@ -19,7 +19,7 @@ class Log_composite extends Log {
     * which should be sent events sent to the composite. 
     * @var array
     */
-    var $children = array();
+    var $_children = array();
 
 
     /**
@@ -44,8 +44,8 @@ class Log_composite extends Log {
     function open()
     {
         if (!$this->_opened) {
-            reset($this->children);
-            foreach ($this->children as $child) {
+            reset($this->_children);
+            foreach ($this->_children as $child) {
                 $child->open();
             }
         }
@@ -59,8 +59,8 @@ class Log_composite extends Log {
     function close()
     {
         if ($this->_opened) {
-            reset($this->children);
-            foreach ($this->children as $child) {
+            reset($this->_children);
+            foreach ($this->_children as $child) {
                 $child->close();
             }
         }
@@ -77,8 +77,8 @@ class Log_composite extends Log {
      */
     function log($message, $priority = LOG_INFO)
     {
-        reset($this->children);
-        foreach ($this->children as $child) {
+        reset($this->_children);
+        foreach ($this->_children as $child) {
             $child->log($message, $priority);
         }
         
@@ -112,7 +112,7 @@ class Log_composite extends Log {
 
         $child->_childID = uniqid(rand());
 
-        $this->children[$child->_childID] = &$child;
+        $this->_children[$child->_childID] = &$child;
     }
 
     /**
@@ -124,8 +124,8 @@ class Log_composite extends Log {
      */
     function removeChild($child)
     {
-        if (isset($this->children[$child->_childID])) {
-            unset($this->children[$child->_childID]);
+        if (isset($this->_children[$child->_childID])) {
+            unset($this->_children[$child->_childID]);
         }
     }
 }

@@ -30,19 +30,19 @@ class Log_sql extends Log {
     * Array containing the dsn information. 
     * @var string
     */
-    var $dsn = '';
+    var $_dsn = '';
 
     /** 
     * Object holding the database handle. 
     * @var string
     */
-    var $db = '';
+    var $_db = '';
 
     /** 
     * String holding the database table to use. 
     * @var string
     */
-    var $table = 'log_table';
+    var $_table = 'log_table';
 
 
     /**
@@ -56,10 +56,10 @@ class Log_sql extends Log {
      */
     function Log_sql($name, $ident = '', $conf = array(), $maxLevel = LOG_DEBUG)
     {
-        $this->table = $name;
+        $this->_table = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;
-        $this->dsn = $conf['dsn'];
+        $this->_dsn = $conf['dsn'];
     }
 
     /**
@@ -72,8 +72,8 @@ class Log_sql extends Log {
     function open()
     {
         if (!$this->_opened) {
-            $this->db = &DB::connect($this->dsn, true);
-            if (DB::isError($this->db)) {
+            $this->_db = &DB::connect($this->_dsn, true);
+            if (DB::isError($this->_db)) {
                 return false;
             }
             $this->_opened = true;
@@ -92,7 +92,7 @@ class Log_sql extends Log {
     {
         if ($this->_opened) {
             $this->_opened = false;
-            return $this->db->disconnect();
+            return $this->_db->disconnect();
         }
 
         return true;
@@ -120,9 +120,9 @@ class Log_sql extends Log {
         }
 
         $timestamp = time();
-        $q = "insert into $this->table
+        $q = "insert into $this->_table
               values($timestamp, '$this->_ident', $priority, '$message')";
-        $this->db->query($q);
+        $this->_db->query($q);
         $this->notifyAll(array('priority' => $priority, 'message' => $message));
     }
 }
