@@ -34,10 +34,10 @@ class Log_sql extends Log {
     var $_dsn = '';
 
     /** 
-     * Object holding the database handle. 
-     * @var string
+     * Resource holding the database handle. 
+     * @var resource
      */
-    var $_db = '';
+    var $_db = null;
 
     /**
      * Flag indicating that we're using an existing database connection.
