@@ -332,6 +332,8 @@ class Log
         if (is_object($message)) {
             if (method_exists($message, 'getmessage')) {
                 $message = $message->getMessage();
+            } else if (method_exists($message, 'tostring')) {
+                $message = $message->toString();
             } else {
                 $message = serialize($message);
             }
