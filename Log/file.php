@@ -42,6 +42,13 @@ class Log_file extends Log
     var $_append = true;
 
     /**
+     * Should advisory file locking (i.e., flock()) be used?
+     * @var boolean
+     * @access private
+     */
+    var $_locking = false;
+
+    /**
      * Integer (in octal) containing the log file's permissions mode.
      * @var integer
      * @access private
@@ -102,6 +109,10 @@ class Log_file extends Log
 
         if (isset($conf['append'])) {
             $this->_append = $conf['append'];
+        }
+
+        if (isset($conf['locking'])) {
+            $this->_locking = $conf['locking'];
         }
 
         if (!empty($conf['mode'])) {
@@ -273,8 +284,18 @@ class Log_file extends Log
                 $this->_ident, $this->priorityToString($priority),
                 $message) . $this->_eol;
 
+        /* If locking is enabled, acquire an exclusive lock on the file. */
+        if ($this->_locking) {
+            flock($this->_fp, LOCK_EX);
+        }
+
         /* Write the log line to the log file. */
         $success = (fwrite($this->_fp, $line) !== false);
+
+        /* Unlock the file now that we're finished writing to it. */ 
+        if ($this->_locking) {
+            flock($this->_fp, LOCK_UN);
+        }
 
         /* Notify observers about this log message. */
         $this->_announce(array('priority' => $priority, 'message' => $message));

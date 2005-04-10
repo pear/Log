@@ -6,11 +6,13 @@ $version = '1.9.0';
 $notes = <<<EOT
 Added stringToPriority() for converting priority names to PEAR_LOG_* constants.
 The mail mail handler now uses \\r\\n instead of \\n to terminate lines.
+The file handler will now perform file locking if the 'locking' parameter is set.
 EOT;
 
 $changelog = <<<EOT
 Added stringToPriority() for converting priority names to PEAR_LOG_* constants. (Bug 2853)
 The mail mail handler now uses \\r\\n instead of \\n to terminate lines, per RFC 821. (Bug 4107)
+The file handler will now perform advsitory file locking (using flock()) if the 'locking' configuration parameter is set. (Bug 4064)
 EOT;
 
 $package = new PEAR_PackageFileManager();
