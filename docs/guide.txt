@@ -420,6 +420,10 @@ Configuration
 |                   |           |               | log file overwrite an     |
 |                   |           |               | existing one?             |
 +-------------------+-----------+---------------+---------------------------+
+| ``locking``       | Boolean   | False         | Should advisory file      |
+|                   |           |               | locking (using flock_) be |
+|                   |           |               | used?                     |
++-------------------+-----------+---------------+---------------------------+
 | ``mode``          | Integer   | 0644          | Octal representation of   |
 |                   |           |               | the log file's permissions|
 |                   |           |               | mode.                     |
@@ -434,6 +438,7 @@ Configuration
 |                   |           | %H:%M:%S``    | (for strftime_).          |
 +-------------------+-----------+---------------+---------------------------+
 
+.. _flock: http://www.php.net/flock
 .. _strftime: http://www.php.net/strftime
 
 Example
