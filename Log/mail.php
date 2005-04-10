@@ -122,7 +122,7 @@ class Log_mail extends Log
     {
         if (!$this->_opened) {
             if (!empty($this->_preamble)) {
-                $this->_message = $this->_preamble . "\n\n";
+                $this->_message = $this->_preamble . "\r\n\r\n";
             }
             $this->_opened = true;
         }
@@ -140,7 +140,7 @@ class Log_mail extends Log
     {
         if ($this->_opened) {
             if (!empty($this->_message)) {
-                $headers = "From: $this->_from\n";
+                $headers = "From: $this->_from\r\n";
                 $headers .= "User-Agent: Log_mail";
 
                 if (mail($this->_recipient, $this->_subject, $this->_message,
@@ -207,7 +207,7 @@ class Log_mail extends Log
         /* Extract the string representation of the message. */
         $message = $this->_extractMessage($message);
 
-        $entry = sprintf("%s %s [%s] %s\n", strftime('%b %d %H:%M:%S'),
+        $entry = sprintf("%s %s [%s] %s\r\n", strftime('%b %d %H:%M:%S'),
                          $this->_ident, Log::priorityToString($priority),
                          $message);
 
@@ -217,5 +217,4 @@ class Log_mail extends Log
 
         return true;
     }
-
 }

@@ -14,10 +14,11 @@
   </maintainers>
   <release>
     <version>1.9.0</version>
-    <date>2005-01-09</date>
+    <date>2005-04-10</date>
     <license>PHP License</license>
     <state>stable</state>
-    <notes>Added stringToPriority() for converting priority names to PEAR_LOG_* constants.</notes>
+    <notes>Added stringToPriority() for converting priority names to PEAR_LOG_* constants.
+The mail mail handler now uses \r\n instead of \n to terminate lines.</notes>
     <deps>
       <dep type="pkg" rel="has" optional="yes">DB</dep>
       <dep type="ext" rel="has" optional="yes">sqlite</dep>
@@ -84,10 +85,11 @@
   <changelog>
     <release>
       <version>1.9.0</version>
-      <date>2005-01-09</date>
+      <date>2005-04-10</date>
       <license>PHP License</license>
       <state>stable</state>
-      <notes>Added stringToPriority() for converting priority names to PEAR_LOG_* constants. (Bug 2853)</notes>
+      <notes>Added stringToPriority() for converting priority names to PEAR_LOG_* constants. (Bug 2853)
+The mail mail handler now uses \r\n instead of \n to terminate lines, per RFC 821. (Bug 4107)</notes>
     </release>
     <release>
       <version>1.8.7</version>

@@ -5,10 +5,12 @@ require_once 'PEAR/PackageFileManager.php';
 $version = '1.9.0';
 $notes = <<<EOT
 Added stringToPriority() for converting priority names to PEAR_LOG_* constants.
+The mail mail handler now uses \\r\\n instead of \\n to terminate lines.
 EOT;
 
 $changelog = <<<EOT
 Added stringToPriority() for converting priority names to PEAR_LOG_* constants. (Bug 2853)
+The mail mail handler now uses \\r\\n instead of \\n to terminate lines, per RFC 821. (Bug 4107)
 EOT;
 
 $package = new PEAR_PackageFileManager();
