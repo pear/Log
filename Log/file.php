@@ -56,6 +56,14 @@ class Log_file extends Log
     var $_mode = 0644;
 
     /**
+     * Integer (in octal) specifying the file permission mode that will be
+     * used when creating directories that do not already exist.
+     * @var integer
+     * @access private
+     */
+    var $_dirmode = 0755;
+
+    /**
      * String containing the format of a log line.
      * @var string
      * @access private
@@ -117,6 +125,10 @@ class Log_file extends Log
 
         if (!empty($conf['mode'])) {
             $this->_mode = $conf['mode'];
+        }
+
+        if (!empty($conf['dirmode'])) {
+            $this->_dirmode = $conf['dirmode'];
         }
 
         if (!empty($conf['lineFormat'])) {
@@ -198,7 +210,7 @@ class Log_file extends Log
         if (!$this->_opened) {
             /* If the log file's directory doesn't exist, create it. */
             if (!is_dir(dirname($this->_filename))) {
-                $this->_mkpath($this->_filename);
+                $this->_mkpath($this->_filename, $this->_dirmode);
             }
 
             /* Obtain a handle to the log file. */

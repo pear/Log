@@ -7,12 +7,16 @@ $notes = <<<EOT
 Added stringToPriority() for converting priority names to PEAR_LOG_* constants.
 The mail mail handler now uses \\r\\n instead of \\n to terminate lines.
 The file handler will now perform file locking if the 'locking' parameter is set.
+The file hander's directory creation routines have been rewritten.
+The file handler will now set a created directory's permission mode based on the 'dirmode' parameter.
 EOT;
 
 $changelog = <<<EOT
 Added stringToPriority() for converting priority names to PEAR_LOG_* constants. (Bug 2853)
 The mail mail handler now uses \\r\\n instead of \\n to terminate lines, per RFC 821. (Bug 4107)
 The file handler will now perform advsitory file locking (using flock()) if the 'locking' configuration parameter is set. (Bug 4064)
+The file hander's directory creation routines have been rewritten. (Bug 3989)
+The file handler will now set a created directory's permission mode based on the 'dirmode' parameter. (Bug 4114)
 EOT;
 
 $package = new PEAR_PackageFileManager();

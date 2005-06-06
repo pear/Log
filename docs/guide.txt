@@ -428,6 +428,12 @@ Configuration
 |                   |           |               | the log file's permissions|
 |                   |           |               | mode.                     |
 +-------------------+-----------+---------------+---------------------------+
+| ``dirmode``       | Integer   | 0755          | Octal representation of   |
+|                   |           |               | the file permission mode  |
+|                   |           |               | that will be used when    |
+|                   |           |               | creating directories that |
+|                   |           |               | do not already exist.     |
++-------------------+-----------+---------------+---------------------------+
 | ``eol``           | String    | OS default    | The end-on-line character |
 |                   |           |               | sequence.                 |
 +-------------------+-----------+---------------+---------------------------+
