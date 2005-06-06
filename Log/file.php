@@ -152,6 +152,8 @@ class Log_file extends Log
      * Creates the given directory path.  If the parent directories don't
      * already exist, they will be created, too.
      *
+     * This implementation is inspired by Python's os.makedirs function.
+     *
      * @param   string  $path       The full directory path to create.
      * @param   integer $mode       The permissions mode with which the
      *                              directories will be created.
@@ -163,33 +165,23 @@ class Log_file extends Log
      */
     function _mkpath($path, $mode = 0700)
     {
-        static $depth = 0;
+        /* Separate the last pathname component from the rest of the path. */
+        $head = dirname($path);
+        $tail = basename($path);
 
-        /* Guard against potentially infinite recursion. */
-        if ($depth++ > 25) {
-            trigger_error("_mkpath(): Maximum recursion depth (25) exceeded",
-                          E_USER_WARNING);
-            return false;
+        /* Make sure we've split the path into two complete components. */
+        if (empty($tail)) {
+            $head = dirname($path);
+            $tail = basename($path);
         }
 
-        /* We're only interested in the directory component of the path. */
-        $path = dirname($path);
-
-        /* If the directory already exists, return success immediately. */
-        if (is_dir($path)) {
-            $depth = 0;
-            return true;
+        /* Recurse up the path if our current segment does not exist. */
+        if (!empty($head) && !empty($tail) && !is_dir($head)) {
+            $this->_mkpath($head, $mode);
         }
 
-        /*
-         * In order to understand recursion, you must first understand
-         * recursion ...
-         */
-        if ($this->_mkpath($path, $mode) === false) {
-            return false;
-        }
-
-        return @mkdir($path, $mode);
+        /* Create this segment of the path. */
+        return @mkdir($head, $mode);
     }
 
     /**
