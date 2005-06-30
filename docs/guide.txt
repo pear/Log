@@ -542,8 +542,10 @@ Configuration
 +-------------------+-----------+---------------+---------------------------+
 | Parameter         | Type      | Default       | Description               |
 +===================+===========+===============+===========================+
-| ``dsn``           | String    | '' `(empty)`  | A `Data Source Name`_.    |
+| ``dsn``           | Mixed     | '' `(empty)`  | A `Data Source Name`_.    |
 |                   |           |               | |required|                |
++-------------------+-----------+---------------+---------------------------+
+| ``options``       | Array     | ``persistent``| An array of `DB`_ options.|
 +-------------------+-----------+---------------+---------------------------+
 | ``db``            | Object    | NULL          | An existing `DB`_ object. |
 |                   |           |               | If specified, this object |

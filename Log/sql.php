@@ -36,11 +36,18 @@ require_once 'DB.php';
 class Log_sql extends Log
 {
     /**
-     * Array containing the dsn information.
-     * @var string
+     * Variable containing the DSN information.
+     * @var mixed
      * @access private
      */
     var $_dsn = '';
+
+    /**
+     * Array containing our set of DB configuration options.
+     * @var array
+     * @access private
+     */
+    var $_options = array('persistent' => true);
 
     /**
      * Object holding the database handle.
@@ -48,6 +55,13 @@ class Log_sql extends Log
      * @access private
      */
     var $_db = null;
+
+    /**
+     * Resource holding the prepared statement handle.
+     * @var resource
+     * @access private
+     */
+    var $_statement = null;
 
     /**
      * Flag indicating that we're using an existing database connection.
@@ -95,6 +109,12 @@ class Log_sql extends Log
         $this->_table = $name;
         $this->_mask = Log::UPTO($level);
 
+        /* If an options array was provided, use it. */
+        if (isset($conf['options']) && is_array($conf['options']))
+        {
+            $this->_options = $conf['options'];
+        }
+
         /* If a specific sequence name was provided, use it. */
         if (!empty($conf['sequence'])) {
             $this->_sequence = $conf['sequence'];
@@ -128,10 +148,22 @@ class Log_sql extends Log
     function open()
     {
         if (!$this->_opened) {
-            $this->_db = &DB::connect($this->_dsn, true);
+            /* Use the DSN and options to create a database connection. */
+            $this->_db = &DB::connect($this->_dsn, $this->_options);
             if (DB::isError($this->_db)) {
                 return false;
             }
+
+            /* Create a prepared statement for repeated use in log(). */
+            $this->_statement =
+                $this->_db->prepare('INSERT INTO ' . $this->_table .
+                                    ' (id, logtime, ident, priority, message)' .
+                                    ' VALUES(?, CURRENT_TIMESTAMP, ?, ?, ?)');
+            if (DB::isError($this->_statement)) {
+                return false;
+            }
+
+            /* We now consider out connection open. */
             $this->_opened = true;
         }
 
@@ -150,6 +182,7 @@ class Log_sql extends Log
     {
         if ($this->_opened && !$this->_existingConnection) {
             $this->_opened = false;
+            $this->_db->freePrepared($this->_statement);
             return $this->_db->disconnect();
         }
 
@@ -204,14 +237,12 @@ class Log_sql extends Log
         /* Extract the string representation of the message. */
         $message = $this->_extractMessage($message);
 
-        /* Build the SQL query for this log entry insertion. */
+        /* Build our set of values for this log entry. */
         $id = $this->_db->nextId($this->_sequence);
-        $q = sprintf('insert into %s (id, logtime, ident, priority, message)' .
-                     'values(%d, CURRENT_TIMESTAMP, %s, %d, %s)',
-                     $this->_table, $id, $this->_db->quote($this->_ident),
-                     $priority, $this->_db->quote($message));
+        $values = array($id, $this->_ident, $priority, $message);
 
-        $result = $this->_db->query($q);
+        /* Execute the SQL query for this log entry insertion. */
+        $result =& $this->_db->execute($this->_statement, $values);
         if (DB::isError($result)) {
             return false;
         }
