@@ -42,7 +42,7 @@ class Log_composite extends Log
      *
      * @access public
      */
-    function Log_composite($name = false, $ident = false, $conf = false,
+    function Log_composite($name, $ident = '', $conf = array(),
                            $level = PEAR_LOG_DEBUG)
     {
     }
