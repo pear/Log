@@ -12,6 +12,7 @@ The file handler will now set a created directory's permission mode based on the
 The SQL handler can now be configured with an array of DB 'options'.
 The SQL handler now uses prepared queries for improved performance.
 An MDB2 database handler has been added.
+Only variable references should be returned by reference in Log::factory().
 EOT;
 
 $changelog = <<<EOT
@@ -23,6 +24,7 @@ The file handler will now set a created directory's permission mode based on the
 The SQL handler can now be configured with an array of DB 'options'.
 The SQL handler now uses prepared queries for improved performance.
 An MDB2 database handler has been added. (Lukas Smith)
+Only variable references should be returned by reference in Log::factory(). (Bug 4768)
 EOT;
 
 $package = new PEAR_PackageFileManager();
