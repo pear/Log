@@ -14,7 +14,7 @@
   </maintainers>
   <release>
     <version>1.9.0</version>
-    <date>2005-07-17</date>
+    <date>2005-07-24</date>
     <license>PHP License</license>
     <state>stable</state>
     <notes>Added stringToPriority() for converting priority names to PEAR_LOG_* constants.
@@ -93,7 +93,7 @@ Only variable references should be returned by reference in Log::factory().</not
   <changelog>
     <release>
       <version>1.9.0</version>
-      <date>2005-07-17</date>
+      <date>2005-07-24</date>
       <license>PHP License</license>
       <state>stable</state>
       <notes>Added stringToPriority() for converting priority names to PEAR_LOG_* constants. (Bug 2853)

@@ -190,11 +190,15 @@ class Log_mdb2 extends Log
      */
     function close()
     {
+        /* If we have a statement object, free it. */
+        if (is_object($this->_statement)) {
+            $this->_statement->free();
+            $this->_statement = null;
+        }
+
+        /* If we opened the database connection, disconnect it. */
         if ($this->_opened && !$this->_existingConnection) {
             $this->_opened = false;
-            if (is_object($this->_statement)) {
-                $this->_statement->free();
-            }
             return $this->_db->disconnect();
         }
 
@@ -244,6 +248,14 @@ class Log_mdb2 extends Log
         /* If the connection isn't open and can't be opened, return failure. */
         if (!$this->_opened && !$this->open()) {
             return false;
+        }
+
+        /* If we don't already have a statement object, create one. */
+        if (!is_object($this->_statement)) {
+            $this->_statement = &$this->_prepareStatement();
+            if (PEAR::isError($this->_statement)) {
+                return false;
+            }
         }
 
         /* Extract the string representation of the message. */
