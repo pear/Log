@@ -13,6 +13,7 @@ The SQL handler can now be configured with an array of DB 'options'.
 The SQL handler now uses prepared queries for improved performance.
 An MDB2 database handler has been added.
 Only variable references should be returned by reference in Log::factory().
+The file handler can now handle file modes given as strings.
 EOT;
 
 $changelog = <<<EOT
@@ -25,6 +26,7 @@ The SQL handler can now be configured with an array of DB 'options'.
 The SQL handler now uses prepared queries for improved performance.
 An MDB2 database handler has been added. (Lukas Smith)
 Only variable references should be returned by reference in Log::factory(). (Bug 4768)
+The file handler can now handle file modes given as strings. (Bug 4948)
 EOT;
 
 $package = new PEAR_PackageFileManager();

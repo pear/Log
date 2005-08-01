@@ -124,11 +124,19 @@ class Log_file extends Log
         }
 
         if (!empty($conf['mode'])) {
-            $this->_mode = $conf['mode'];
+            if (is_string($conf['mode'])) {
+                $this->_mode = octdec($conf['mode']);
+            } else {
+                $this->_mode = $conf['mode'];
+            }
         }
 
         if (!empty($conf['dirmode'])) {
-            $this->_dirmode = $conf['dirmode'];
+            if (is_string($conf['dirmode'])) {
+                $this->_dirmode = octdec($conf['dirmode']);
+            } else {
+                $this->_dirmode = $conf['dirmode'];
+            }
         }
 
         if (!empty($conf['lineFormat'])) {
