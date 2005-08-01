@@ -387,7 +387,11 @@ class Log
             } else if (method_exists($message, 'tostring')) {
                 $message = $message->toString();
             } else if (method_exists($message, '__tostring')) {
-                $message = (string)$message;
+                if (version_compare(PHP_VERSION, '5.0.0', 'ge')) {
+                    $message = (string)$message;
+                } else {
+                    $message = $message->__toString();
+                }
             } else {
                 $message = print_r($message, true);
             }
