@@ -14,6 +14,7 @@ The SQL handler now uses prepared queries for improved performance.
 An MDB2 database handler has been added.
 Only variable references should be returned by reference in Log::factory().
 The file handler can now handle file modes given as strings.
+The display handler now offers a 'linebreak' configuration option.
 EOT;
 
 $changelog = <<<EOT
@@ -27,6 +28,7 @@ The SQL handler now uses prepared queries for improved performance.
 An MDB2 database handler has been added. (Lukas Smith)
 Only variable references should be returned by reference in Log::factory(). (Bug 4768)
 The file handler can now handle file modes given as strings. (Bug 4948)
+The display handler now offers a 'linebreak' configuration option. (Bug 5014)
 EOT;
 
 $package = new PEAR_PackageFileManager();

@@ -325,6 +325,9 @@ Configuration
 |                   |           |               | appended to the log       |
 |                   |           |               | output.                   |
 +-------------------+-----------+---------------+---------------------------+
+| ``linebreak``     | String    | ``<br />\n``  | This string is used to    |
+|                   |           |               | represent a line break.   |
++-------------------+-----------+---------------+---------------------------+
 
 .. _error handling values: http://www.php.net/errorfunc
 

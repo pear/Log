@@ -14,7 +14,7 @@
   </maintainers>
   <release>
     <version>1.9.0</version>
-    <date>2005-07-31</date>
+    <date>2005-08-06</date>
     <license>PHP License</license>
     <state>stable</state>
     <notes>Added stringToPriority() for converting priority names to PEAR_LOG_* constants.
@@ -26,7 +26,8 @@ The SQL handler can now be configured with an array of DB 'options'.
 The SQL handler now uses prepared queries for improved performance.
 An MDB2 database handler has been added.
 Only variable references should be returned by reference in Log::factory().
-The file handler can now handle file modes given as strings.</notes>
+The file handler can now handle file modes given as strings.
+The display handler now offers a 'linebreak' configuration option.</notes>
     <deps>
       <dep type="pkg" rel="ge" version="1.3" optional="yes">DB</dep>
       <dep type="ext" rel="has" optional="yes">sqlite</dep>
@@ -94,7 +95,7 @@ The file handler can now handle file modes given as strings.</notes>
   <changelog>
     <release>
       <version>1.9.0</version>
-      <date>2005-07-31</date>
+      <date>2005-08-06</date>
       <license>PHP License</license>
       <state>stable</state>
       <notes>Added stringToPriority() for converting priority names to PEAR_LOG_* constants. (Bug 2853)
@@ -106,7 +107,8 @@ The SQL handler can now be configured with an array of DB 'options'.
 The SQL handler now uses prepared queries for improved performance.
 An MDB2 database handler has been added. (Lukas Smith)
 Only variable references should be returned by reference in Log::factory(). (Bug 4768)
-The file handler can now handle file modes given as strings. (Bug 4948)</notes>
+The file handler can now handle file modes given as strings. (Bug 4948)
+The display handler now offers a 'linebreak' configuration option. (Bug 5014)</notes>
     </release>
     <release>
       <version>1.8.7</version>
