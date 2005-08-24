@@ -15,6 +15,14 @@ $composite->addChild($console2);
 
 $composite->log('This event will be logged to both handlers.');
 
+$composite->setIdent('IDENT');
+echo $composite->getIdent() . "\n";
+
+$composite->log('This event will be logged to both handlers.');
+
 --EXPECT--
 CONSOLE1 [info] This event will be logged to both handlers.
 CONSOLE2 [info] This event will be logged to both handlers.
+IDENT
+IDENT [info] This event will be logged to both handlers.
+IDENT [info] This event will be logged to both handlers.

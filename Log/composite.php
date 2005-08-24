@@ -45,6 +45,7 @@ class Log_composite extends Log
     function Log_composite($name, $ident = '', $conf = array(),
                            $level = PEAR_LOG_DEBUG)
     {
+        $this->_ident = $ident;
     }
 
     /**
@@ -146,6 +147,10 @@ class Log_composite extends Log
      */
     function setIdent($ident)
     {
+        /* Call our base class's setIdent() method. */
+        parent::setIdent($ident);
+
+        /* ... and then call setIdent() on all of our children. */
         foreach ($this->_children as $id => $child) {
             $this->_children[$id]->setIdent($ident);
         }
