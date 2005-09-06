@@ -224,10 +224,14 @@ class Log_file extends Log
             /* Obtain a handle to the log file. */
             $this->_fp = fopen($this->_filename, ($this->_append) ? 'a' : 'w');
 
+            /* We consider the file "opened" if we have a valid file pointer. */
             $this->_opened = ($this->_fp !== false);
 
-            /* Attempt to set the log file's mode. */
-            @chmod($this->_filename, $this->_mode);
+            /* Set the file's mode if we own it or are the superuser. */
+            $euid = posix_geteuid();
+            if ($euid === 0 || $euid === fileowner($this->_filename)) {
+                chmod($this->_filename, $this->_mode);
+            }
         }
 
         return $this->_opened;

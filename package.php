@@ -16,6 +16,7 @@ Only variable references should be returned by reference in Log::factory().
 The file handler can now handle file modes given as strings.
 The display handler now offers a 'linebreak' configuration option.
 The composite handler's getIdent() method now returns the correct value.
+The file handler now only attempts to set the log file's mode if it has permission.
 EOT;
 
 $changelog = <<<EOT
@@ -31,6 +32,7 @@ Only variable references should be returned by reference in Log::factory(). (Bug
 The file handler can now handle file modes given as strings. (Bug 4948)
 The display handler now offers a 'linebreak' configuration option. (Bug 5014)
 The composite handler's getIdent() method now returns the correct value. (Bug 5192)
+The file handler now only attempts to set the log file's mode if it has permission. (Bug 5273)
 EOT;
 
 $package = new PEAR_PackageFileManager();
