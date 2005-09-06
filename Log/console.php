@@ -115,6 +115,19 @@ class Log_console extends Log
      */
     function _Log_console()
     {
+        $this->close();
+    }
+
+    /**
+     * Closes the output stream.
+     *
+     * This results in a call to flush().
+     *
+     * @access public
+     * @since Log 1.9.0
+     */
+    function close()
+    {
         $this->flush();
     }
 
