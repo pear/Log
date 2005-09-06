@@ -29,7 +29,8 @@ Only variable references should be returned by reference in Log::factory().
 The file handler can now handle file modes given as strings.
 The display handler now offers a 'linebreak' configuration option.
 The composite handler's getIdent() method now returns the correct value.
-The file handler now only attempts to set the log file's mode if it has permission.</notes>
+The file handler now only attempts to set the log file's mode if it has permission.
+The factory() method will no longer attempt to include the handler file if the handler class has already been defined.</notes>
     <deps>
       <dep type="pkg" rel="ge" version="1.3" optional="yes">DB</dep>
       <dep type="ext" rel="has" optional="yes">sqlite</dep>
@@ -113,7 +114,8 @@ Only variable references should be returned by reference in Log::factory(). (Bug
 The file handler can now handle file modes given as strings. (Bug 4948)
 The display handler now offers a 'linebreak' configuration option. (Bug 5014)
 The composite handler's getIdent() method now returns the correct value. (Bug 5192)
-The file handler now only attempts to set the log file's mode if it has permission. (Bug 5273)</notes>
+The file handler now only attempts to set the log file's mode if it has permission. (Bug 5273)
+The factory() method will no longer attempt to include the handler file if the handler class has already been defined. (Bug 5182)</notes>
     </release>
     <release>
       <version>1.8.7</version>

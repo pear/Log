@@ -121,7 +121,9 @@ class Log
          * a failure as fatal.  The caller may have already included their own
          * version of the named class.
          */
-        @include_once $classfile;
+        if (!class_exists($class)) {
+            @include_once $classfile;
+        }
 
         /* If the class exists, return a new instance of it. */
         if (class_exists($class)) {

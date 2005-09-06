@@ -17,6 +17,7 @@ The file handler can now handle file modes given as strings.
 The display handler now offers a 'linebreak' configuration option.
 The composite handler's getIdent() method now returns the correct value.
 The file handler now only attempts to set the log file's mode if it has permission.
+The factory() method will no longer attempt to include the handler file if the handler class has already been defined.
 EOT;
 
 $changelog = <<<EOT
@@ -33,6 +34,7 @@ The file handler can now handle file modes given as strings. (Bug 4948)
 The display handler now offers a 'linebreak' configuration option. (Bug 5014)
 The composite handler's getIdent() method now returns the correct value. (Bug 5192)
 The file handler now only attempts to set the log file's mode if it has permission. (Bug 5273)
+The factory() method will no longer attempt to include the handler file if the handler class has already been defined. (Bug 5182)
 EOT;
 
 $package = new PEAR_PackageFileManager();
