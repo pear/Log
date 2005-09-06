@@ -14,7 +14,7 @@
   </maintainers>
   <release>
     <version>1.9.0</version>
-    <date>2005-08-23</date>
+    <date>2005-09-05</date>
     <license>PHP License</license>
     <state>stable</state>
     <notes>Added stringToPriority() for converting priority names to PEAR_LOG_* constants.
@@ -83,6 +83,7 @@ The composite handler's getIdent() method now returns the correct value.</notes>
         <file role="test" name="extract.phpt"/>
         <file role="test" name="extract2.phpt"/>
         <file role="test" name="factory.phpt"/>
+        <file role="test" name="file.phpt"/>
         <file role="test" name="null.phpt"/>
         <file role="test" name="priority.phpt"/>
         <file role="test" name="singleton.phpt"/>
@@ -96,7 +97,7 @@ The composite handler's getIdent() method now returns the correct value.</notes>
   <changelog>
     <release>
       <version>1.9.0</version>
-      <date>2005-08-23</date>
+      <date>2005-09-05</date>
       <license>PHP License</license>
       <state>stable</state>
       <notes>Added stringToPriority() for converting priority names to PEAR_LOG_* constants. (Bug 2853)
