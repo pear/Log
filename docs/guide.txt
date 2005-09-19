@@ -450,11 +450,8 @@ Configuration
 .. _flock: http://www.php.net/flock
 .. _strftime: http://www.php.net/strftime
 
-The file handler will only attempt to set the ``mode`` value if it thinks that
-is has permission to do so.  Per `chmod(2)`_, this is defined as effectively
-running as the user who owns the file or as the superuser.
-
-.. _chmod(2): http://www.opengroup.org/onlinepubs/007908799/xsh/chmod.html
+The file handler will only attempt to set the ``mode`` value if it was
+responsible for creating the file.
 
 Example
 ~~~~~~~

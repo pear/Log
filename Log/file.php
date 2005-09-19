@@ -221,15 +221,17 @@ class Log_file extends Log
                 $this->_mkpath($this->_filename, $this->_dirmode);
             }
 
+            /* Determine whether the log file needs to be created. */
+            $creating = !file_exists($this->_filename);
+
             /* Obtain a handle to the log file. */
             $this->_fp = fopen($this->_filename, ($this->_append) ? 'a' : 'w');
 
             /* We consider the file "opened" if we have a valid file pointer. */
             $this->_opened = ($this->_fp !== false);
 
-            /* Set the file's mode if we own it or are the superuser. */
-            $euid = posix_geteuid();
-            if ($euid === 0 || $euid === fileowner($this->_filename)) {
+            /* Attempt to set the file's permissions if we just created it. */
+            if ($creating && $this->_opened) {
                 chmod($this->_filename, $this->_mode);
             }
         }
