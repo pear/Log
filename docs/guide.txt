@@ -496,6 +496,50 @@ Example
     }
 
 
+The MDB2 Handler
+----------------
+The MDB2 handler is similar to `the SQL (DB) handler`_, but instead of using
+the PEAR DB package, it uses the `MDB2 database abstraction package`_.
+
+Configuration
+~~~~~~~~~~~~~
++-------------------+-----------+---------------+---------------------------+
+| Parameter         | Type      | Default       | Description               |
++===================+===========+===============+===========================+
+| ``dsn``           | Mixed     | '' `(empty)`  | A `Data Source Name`_.    |
+|                   |           |               | |required|                |
++-------------------+-----------+---------------+---------------------------+
+| ``options``       | Array     | ``persistent``| An array of `MDB2`_       |
+|                   |           |               | options.                  |
++-------------------+-----------+---------------+---------------------------+
+| ``db``            | Object    | NULL          | An existing `MDB2`_       |
+|                   |           |               | object.  If specified,    |
+|                   |           |               | this object will be used, |
+|                   |           |               | and ``dsn`` will be       |
+|                   |           |               | ignored.                  |
++-------------------+-----------+---------------+---------------------------+
+| ``sequence``      | String    | ``log_id``    | The name of the sequence  |
+|                   |           |               | to use when generating    |
+|                   |           |               | unique event IDs.   Under |
+|                   |           |               | many databases, this will |
+|                   |           |               | be used as the name of    |
+|                   |           |               | the sequence table.       |
++-------------------+-----------+---------------+---------------------------+
+| ``identLimit``    | Integer   | 16            | The maximum length of the |
+|                   |           |               | ``ident`` string.         |
+|                   |           |               | **Changing this value may |
+|                   |           |               | require updates to the SQL|
+|                   |           |               | schema, as well.**        |
++-------------------+-----------+---------------+---------------------------+
+| ``singleton``     | Boolean   | false         | Is true, use a singleton  |
+|                   |           |               | database object using     |
+|                   |           |               | `MDB2::singleton()`_.     |
++-------------------+-----------+---------------+---------------------------+
+
+.. _MDB2: http://pear.php.net/package/MDB2
+.. _MDB2 database abstraction package: MDB2_
+.. _MDB2::singleton(): http://pear.php.net/package/MDB2/docs/latest/MDB2/MDB2.html#methodsingleton
+
 The Null Handler
 ----------------
 The Null handler simply consumes log events (akin to sending them to
