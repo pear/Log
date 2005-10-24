@@ -19,6 +19,7 @@
   <license>PHP License</license>
   <state>stable</state>
   <notes>The SQL handler failed to prepare the SQL statement when an existing database connection was provided. (Bug 5702)
+The SQL handler now supports user-provided SQL insertion statements via the &apos;sql&apos; configuration parameter. (Request 5703)
   </notes>
   <deps>
    <dep type="pkg" rel="ge" version="1.3" optional="yes">DB</dep>
@@ -92,6 +93,7 @@
     <license>PHP License</license>
     <state>stable</state>
     <notes>The SQL handler failed to prepare the SQL statement when an existing database connection was provided. (Bug 5702)
+The SQL handler now supports user-provided SQL insertion statements via the &apos;sql&apos; configuration parameter. (Request 5703)
     </notes>
    </release>
    <release>

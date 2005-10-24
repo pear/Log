@@ -595,6 +595,8 @@ Configuration
 | ``dsn``           | Mixed     | '' `(empty)`  | A `Data Source Name`_.    |
 |                   |           |               | |required|                |
 +-------------------+-----------+---------------+---------------------------+
+| ``sql``           | String    | |sql-default| | SQL insertion statement.  |
++-------------------+-----------+---------------+---------------------------+
 | ``options``       | Array     | ``persistent``| An array of `DB`_ options.|
 +-------------------+-----------+---------------+---------------------------+
 | ``db``            | Object    | NULL          | An existing `DB`_ object. |
@@ -619,6 +621,8 @@ Configuration
 The name of the database table to which the log entries will be written is
 specified using the ``$name`` construction parameter (see `Configuring a
 Handler`_).
+
+.. |sql-default| replace:: ``INSERT INTO $table (id, logtime, ident, priority, message) VALUES(?, CURRENT_TIMESTAMP, ?, ?, ?)``
 
 .. _DB: http://pear.php.net/package/DB
 .. _PEAR's DB abstraction layer: DB_
