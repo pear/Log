@@ -155,11 +155,7 @@ class Log_sql extends Log
             }
 
             /* Create a prepared statement for repeated use in log(). */
-            $this->_statement =
-                $this->_db->prepare('INSERT INTO ' . $this->_table .
-                                    ' (id, logtime, ident, priority, message)' .
-                                    ' VALUES(?, CURRENT_TIMESTAMP, ?, ?, ?)');
-            if (DB::isError($this->_statement)) {
+            if (!$this->_prepareStatement()) {
                 return false;
             }
 
@@ -234,6 +230,11 @@ class Log_sql extends Log
             return false;
         }
 
+        /* If we don't already have our statement object yet, create it. */
+        if (!is_object($this->_statement) && !$this->_prepareStatement()) {
+            return false;
+        }
+
         /* Extract the string representation of the message. */
         $message = $this->_extractMessage($message);
 
@@ -252,4 +253,22 @@ class Log_sql extends Log
         return true;
     }
 
+    /**
+     * Prepare the SQL insertion statement.
+     *
+     * @return boolean  True if the statement was successfully created.
+     *
+     * @access  private
+     * @since   Log 1.9.1
+     */
+    function _prepareStatement()
+    {
+        $this->_statement =
+            $this->_db->prepare('INSERT INTO ' . $this->_table .
+                                ' (id, logtime, ident, priority, message)' .
+                                ' VALUES(?, CURRENT_TIMESTAMP, ?, ?, ?)');
+
+        /* Return success if we didn't generate an error. */
+        return (DB::isError($this->_statement) === false);
+    }
 }

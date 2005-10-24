@@ -1,335 +1,358 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
-<package version="1.0">
-  <name>Log</name>
-  <summary>Logging utilities</summary>
-  <description>The Log framework provides an abstracted logging system.  It supports logging to console, file, syslog, SQL, Sqlite, mail and mcal targets.  It also provides a subject - observer mechanism.</description>
-  <maintainers>
-    <maintainer>
-      <user>jon</user>
-      <name>Jon Parise</name>
-      <email>jon@php.net</email>
-      <role>lead</role>
-    </maintainer>
+<package version="1.0" packagerversion="1.4.2">
+ <name>Log</name>
+ <summary>Logging utilities</summary>
+ <description>The Log framework provides an abstracted logging system.  It supports logging to console, file, syslog, SQL, Sqlite, mail and mcal targets.  It also provides a subject - observer mechanism.
+ </description>
+ <maintainers>
+  <maintainer>
+   <user>jon</user>
+   <name>Jon Parise</name>
+   <email>jon@php.net</email>
+   <role>lead</role>
+  </maintainer>
   </maintainers>
-  <release>
+ <release>
+  <version>1.9.1</version>
+  <date>2005-10-23</date>
+  <license>PHP License</license>
+  <state>stable</state>
+  <notes>The SQL handler failed to prepare the SQL statement when an existing database connection was provided. (Bug 5702)
+  </notes>
+  <deps>
+   <dep type="pkg" rel="ge" version="1.3" optional="yes">DB</dep>
+   <dep type="ext" rel="has" optional="yes">sqlite</dep>
+   <dep type="php" rel="ge" version="4.3.0" optional="no"/>
+  </deps>
+  <filelist>
+   <dir name="/" baseinstalldir="/">
+    <dir name="docs">
+     <dir name="examples">
+      <file role="doc" name="composite.php"/>
+      <file role="doc" name="console.php"/>
+      <file role="doc" name="display.php"/>
+      <file role="doc" name="error_log.php"/>
+      <file role="doc" name="file.php"/>
+      <file role="doc" name="mail.php"/>
+      <file role="doc" name="null.php"/>
+      <file role="doc" name="observer_mail.php"/>
+      <file role="doc" name="pear_error_handler.php"/>
+      <file role="doc" name="php_error_handler.php"/>
+      <file role="doc" name="sql.php"/>
+      <file role="doc" name="sqlite.php"/>
+      <file role="doc" name="syslog.php"/>
+      <file role="doc" name="win.php"/>
+     </dir> <!-- /docs/examples -->
+     <file role="doc" name="guide.txt"/>
+    </dir> <!-- /docs -->
+    <dir name="Log">
+     <file role="php" name="composite.php"/>
+     <file role="php" name="console.php"/>
+     <file role="php" name="daemon.php"/>
+     <file role="php" name="display.php"/>
+     <file role="php" name="error_log.php"/>
+     <file role="php" name="file.php"/>
+     <file role="php" name="mail.php"/>
+     <file role="php" name="mcal.php"/>
+     <file role="php" name="mdb2.php"/>
+     <file role="php" name="null.php"/>
+     <file role="php" name="observer.php"/>
+     <file role="php" name="sql.php"/>
+     <file role="php" name="sqlite.php"/>
+     <file role="php" name="syslog.php"/>
+     <file role="php" name="win.php"/>
+    </dir> <!-- /Log -->
+    <dir name="misc">
+     <file role="data" name="log.sql"/>
+    </dir> <!-- /misc -->
+    <dir name="tests">
+     <file role="test" name="composite.phpt"/>
+     <file role="test" name="console.phpt"/>
+     <file role="test" name="display.phpt"/>
+     <file role="test" name="error_log.phpt"/>
+     <file role="test" name="extract.phpt"/>
+     <file role="test" name="extract2.phpt"/>
+     <file role="test" name="factory.phpt"/>
+     <file role="test" name="file.phpt"/>
+     <file role="test" name="null.phpt"/>
+     <file role="test" name="priority.phpt"/>
+     <file role="test" name="singleton.phpt"/>
+     <file role="test" name="sqlite.phpt"/>
+     <file role="test" name="sql_ident.phpt"/>
+    </dir> <!-- /tests -->
+    <file role="php" name="Log.php"/>
+   </dir> <!-- / -->
+  </filelist>
+ </release>
+ <changelog>
+   <release>
+    <version>1.9.1</version>
+    <date>2005-10-23</date>
+    <license>PHP License</license>
+    <state>stable</state>
+    <notes>The SQL handler failed to prepare the SQL statement when an existing database connection was provided. (Bug 5702)
+    </notes>
+   </release>
+   <release>
     <version>1.9.0</version>
     <date>2005-10-09</date>
     <license>PHP License</license>
     <state>stable</state>
-    <notes>Added stringToPriority() for converting priority names to PEAR_LOG_* constants.
-The mail handler now uses \r\n instead of \n to terminate lines.
-The file handler will now perform file locking if the 'locking' parameter is set.
-The file hander's directory creation routines have been rewritten.
-The file handler will now set a created directory's permission mode based on the 'dirmode' parameter.
-The SQL handler can now be configured with an array of DB 'options'.
-The SQL handler now uses prepared queries for improved performance.
-An MDB2 database handler has been added.
-Only variable references should be returned by reference in Log::factory().
-The file handler can now handle file modes given as strings.
-The display handler now offers a 'linebreak' configuration option.
-The composite handler's getIdent() method now returns the correct value.
-The file handler now only attempts to set the log file's mode if it created it.
-The factory() method will no longer attempt to include the handler file if the handler class has already been defined.</notes>
-    <deps>
-      <dep type="pkg" rel="ge" version="1.3" optional="yes">DB</dep>
-      <dep type="ext" rel="has" optional="yes">sqlite</dep>
-      <dep type="php" rel="ge" version="4.3.0" optional="no"/>
-    </deps>
-    <filelist>
-      <dir baseinstalldir="/" name="/">
-       <dir name="docs">
-        <file role="doc" name="guide.txt"/>
-        <dir name="examples">
-         <file role="doc" name="composite.php"/>
-         <file role="doc" name="console.php"/>
-         <file role="doc" name="display.php"/>
-         <file role="doc" name="error_log.php"/>
-         <file role="doc" name="file.php"/>
-         <file role="doc" name="mail.php"/>
-         <file role="doc" name="null.php"/>
-         <file role="doc" name="observer_mail.php"/>
-         <file role="doc" name="pear_error_handler.php"/>
-         <file role="doc" name="php_error_handler.php"/>
-         <file role="doc" name="sql.php"/>
-         <file role="doc" name="sqlite.php"/>
-         <file role="doc" name="syslog.php"/>
-         <file role="doc" name="win.php"/>
-        </dir> <!-- docs/examples -->
-       </dir> <!-- docs -->
-       <dir name="Log">
-        <file role="php" name="composite.php"/>
-        <file role="php" name="console.php"/>
-        <file role="php" name="daemon.php"/>
-        <file role="php" name="display.php"/>
-        <file role="php" name="error_log.php"/>
-        <file role="php" name="file.php"/>
-        <file role="php" name="mail.php"/>
-        <file role="php" name="mcal.php"/>
-        <file role="php" name="mdb2.php"/>
-        <file role="php" name="null.php"/>
-        <file role="php" name="observer.php"/>
-        <file role="php" name="sql.php"/>
-        <file role="php" name="sqlite.php"/>
-        <file role="php" name="syslog.php"/>
-        <file role="php" name="win.php"/>
-       </dir> <!-- Log -->
-       <dir name="misc">
-        <file role="data" name="log.sql"/>
-       </dir> <!-- misc -->
-       <dir name="tests">
-        <file role="test" name="composite.phpt"/>
-        <file role="test" name="console.phpt"/>
-        <file role="test" name="display.phpt"/>
-        <file role="test" name="error_log.phpt"/>
-        <file role="test" name="extract.phpt"/>
-        <file role="test" name="extract2.phpt"/>
-        <file role="test" name="factory.phpt"/>
-        <file role="test" name="file.phpt"/>
-        <file role="test" name="null.phpt"/>
-        <file role="test" name="priority.phpt"/>
-        <file role="test" name="singleton.phpt"/>
-        <file role="test" name="sqlite.phpt"/>
-        <file role="test" name="sql_ident.phpt"/>
-       </dir> <!-- tests -->
-       <file role="php" name="Log.php"/>
-      </dir> <!-- / -->
-    </filelist>
-  </release>
-  <changelog>
-    <release>
-      <version>1.9.0</version>
-      <date>2005-10-09</date>
-      <license>PHP License</license>
-      <state>stable</state>
-      <notes>Added stringToPriority() for converting priority names to PEAR_LOG_* constants. (Bug 2853)
+    <notes>Added stringToPriority() for converting priority names to PEAR_LOG_* constants. (Bug 2853)
 The mail handler now uses \r\n instead of \n to terminate lines, per RFC 821. (Bug 4107)
-The file handler will now perform advsitory file locking (using flock()) if the 'locking' configuration parameter is set. (Bug 4064)
-The file hander's directory creation routines have been rewritten. (Bug 3989)
-The file handler will now set a created directory's permission mode based on the 'dirmode' parameter. (Bug 4114)
-The SQL handler can now be configured with an array of DB 'options'.
+The file handler will now perform advsitory file locking (using flock()) if the &apos;locking&apos; configuration parameter is set. (Bug 4064)
+The file hander&apos;s directory creation routines have been rewritten. (Bug 3989)
+The file handler will now set a created directory&apos;s permission mode based on the &apos;dirmode&apos; parameter. (Bug 4114)
+The SQL handler can now be configured with an array of DB &apos;options&apos;.
 The SQL handler now uses prepared queries for improved performance.
 An MDB2 database handler has been added. (Lukas Smith)
 Only variable references should be returned by reference in Log::factory(). (Bug 4768)
 The file handler can now handle file modes given as strings. (Bug 4948)
-The display handler now offers a 'linebreak' configuration option. (Bug 5014)
-The composite handler's getIdent() method now returns the correct value. (Bug 5192)
-The file handler now only attempts to set the log file's mode if it created it. (Bug 5273, 5418)
-The factory() method will no longer attempt to include the handler file if the handler class has already been defined. (Bug 5182)</notes>
-    </release>
-    <release>
-      <version>1.8.7</version>
-      <date>2005-01-09</date>
-      <license>PHP License</license>
-      <state>stable</state>
-      <notes>The Log::_extractMessage() routine will now extract and use the value of an array's 'message' key if it exists. (Laurent Laville)
-The 'display' handler now preserves line breaks in its output. (Bug 2606)
-An experimental new syslog daemon log handler ('daemon') has been added to the Log distribution. (Bart van der Schans)</notes>
-    </release>
-    <release>
-      <version>1.8.6</version>
-      <date>2004-09-08</date>
-      <license>PHP License</license>
-      <state>stable</state>
-      <notes>The maximum length of the 'sql' handler's 'ident' string is now configurable via the 'identLimit' configuration parameter. (Bug 2137)
+The display handler now offers a &apos;linebreak&apos; configuration option. (Bug 5014)
+The composite handler&apos;s getIdent() method now returns the correct value. (Bug 5192)
+The file handler now only attempts to set the log file&apos;s mode if it created it. (Bug 5273, 5418)
+The factory() method will no longer attempt to include the handler file if the handler class has already been defined. (Bug 5182)
+    </notes>
+   </release>
+   <release>
+    <version>1.8.7</version>
+    <date>2005-01-09</date>
+    <license>PHP License</license>
+    <state>stable</state>
+    <notes>The Log::_extractMessage() routine will now extract and use the value of an array&apos;s &apos;message&apos; key if it exists. (Laurent Laville)
+The &apos;display&apos; handler now preserves line breaks in its output. (Bug 2606)
+An experimental new syslog daemon log handler (&apos;daemon&apos;) has been added to the Log distribution. (Bart van der Schans)
+    </notes>
+   </release>
+   <release>
+    <version>1.8.6</version>
+    <date>2004-09-08</date>
+    <license>PHP License</license>
+    <state>stable</state>
+    <notes>The maximum length of the &apos;sql&apos; handler&apos;s &apos;ident&apos; string is now configurable via the &apos;identLimit&apos; configuration parameter. (Bug 2137)
 
-Different instances of the 'win' handler can now address their own output windows. (Bug 2212)</notes>
-    </release>
-    <release>
-      <version>1.8.5</version>
-      <date>2004-08-09</date>
-      <license>PHP License</license>
-      <state>stable</state>
-      <notes>The 'sql' handler now enforces a maximum 'ident' length of 16 characters.
+Different instances of the &apos;win&apos; handler can now address their own output windows. (Bug 2212)
+    </notes>
+   </release>
+   <release>
+    <version>1.8.5</version>
+    <date>2004-08-09</date>
+    <license>PHP License</license>
+    <state>stable</state>
+    <notes>The &apos;sql&apos; handler now enforces a maximum &apos;ident&apos; length of 16 characters.
 
-The 'sql' handler can now use a user-defined sequence (via the 'sequence' configuration parameter).  This allows each log table to use its own sequence.  You will need to take appropriate steps to preserve your sequence numbering if that is important to your site; the ID sequence will be reinitialized to 0 the first time this updated handler is used.  You may also need to explicitly drop the 'log_id_seq' sequence before using this new code.
+The &apos;sql&apos; handler can now use a user-defined sequence (via the &apos;sequence&apos; configuration parameter).  This allows each log table to use its own sequence.  You will need to take appropriate steps to preserve your sequence numbering if that is important to your site; the ID sequence will be reinitialized to 0 the first time this updated handler is used.  You may also need to explicitly drop the &apos;log_id_seq&apos; sequence before using this new code.
 
-The 'composite' handler now properly closes all of its children when its close() method is called.  It also guards against multiple calls to open(). (Bug 1947)</notes>
-    </release>
-    <release>
-      <version>1.8.4</version>
-      <date>2004-02-16</date>
-      <license>PHP License</license>
-      <state>stable</state>
-      <notes>The Log package now requires PHP 4.3.0 or later.
+The &apos;composite&apos; handler now properly closes all of its children when its close() method is called.  It also guards against multiple calls to open(). (Bug 1947)
+    </notes>
+   </release>
+   <release>
+    <version>1.8.4</version>
+    <date>2004-02-16</date>
+    <license>PHP License</license>
+    <state>stable</state>
+    <notes>The Log package now requires PHP 4.3.0 or later.
 
-The _extractMessage() method no longer uses the serialize()'ed version of an event object if no string conversion method is available.  Instead, the human-readable (via print_r()) representation of the object will be used.
+The _extractMessage() method no longer uses the serialize()&apos;ed version of an event object if no string conversion method is available.  Instead, the human-readable (via print_r()) representation of the object will be used.
 
 _extractMessage() can now handle arrays.  Their human-readable representation will be used.
 
-Each Log instance now has a default priority level.  This priority will be used by the log() method when no specific priority parameter is provided.  It can be accessed using the new getPriority() and setPriority() methods.</notes>
-    </release>
-    <release>
-      <version>1.8.3</version>
-      <date>2004-01-11</date>
-      <license>PHP License</license>
-      <state>stable</state>
-      <notes>The open() and close() methods now consistently return success or failure.  Previously, some handlers' open() and close() methods did not return any result.  Also, the log() methods will return failure when the handler cannot be opened.
+Each Log instance now has a default priority level.  This priority will be used by the log() method when no specific priority parameter is provided.  It can be accessed using the new getPriority() and setPriority() methods.
+    </notes>
+   </release>
+   <release>
+    <version>1.8.3</version>
+    <date>2004-01-11</date>
+    <license>PHP License</license>
+    <state>stable</state>
+    <notes>The open() and close() methods now consistently return success or failure.  Previously, some handlers&apos; open() and close() methods did not return any result.  Also, the log() methods will return failure when the handler cannot be opened.
 
-Bertrand Mansion contributed a new handler that logs using the Sqlite extension.</notes>
-    </release>
-    <release>
-      <version>1.8.2</version>
-      <date>2004-01-01</date>
-      <license>PHP License</license>
-      <state>stable</state>
-      <notes>A new 'null' log handler that simply consumes log events has been added.  The 'null' handler will still respect log masks and attached observers.
+Bertrand Mansion contributed a new handler that logs using the Sqlite extension.
+    </notes>
+   </release>
+   <release>
+    <version>1.8.2</version>
+    <date>2004-01-01</date>
+    <license>PHP License</license>
+    <state>stable</state>
+    <notes>A new &apos;null&apos; log handler that simply consumes log events has been added.  The &apos;null&apos; handler will still respect log masks and attached observers.
 
 The public Log API has grown a flush() method.  This allows buffered log output to be explicitly flushed.  At this time, the flush() method is only implemented by the console, file and mail handlers.
 
-New unit tests for the Factory and Singleton construction methods have been added.</notes>
-    </release>
-    <release>
-      <version>1.8.1</version>
-      <date>2003-12-14</date>
-      <license>PHP License</license>
-      <state>stable</state>
-      <notes>The 'win' handler now handles newline sequences correctly (Bug 282).
+New unit tests for the Factory and Singleton construction methods have been added.
+    </notes>
+   </release>
+   <release>
+    <version>1.8.1</version>
+    <date>2003-12-14</date>
+    <license>PHP License</license>
+    <state>stable</state>
+    <notes>The &apos;win&apos; handler now handles newline sequences correctly (Bug 282).
 
-The Log_observer::factory() method has been updated to accept an optional associative array of configuration values, return the newly-created object by reference, and look for files named 'Log/observer_.php'.  Backwards compatibility for the old-style conventions has been preserved.</notes>
-    </release>
-    <release>
-      <version>1.8.0</version>
-      <date>2003-11-18</date>
-      <license>PHP License</license>
-      <state>stable</state>
-      <notes>The Log package now includes a users guide, example scripts and unit tests.
+The Log_observer::factory() method has been updated to accept an optional associative array of configuration values, return the newly-created object by reference, and look for files named &apos;Log/observer_.php&apos;.  Backwards compatibility for the old-style conventions has been preserved.
+    </notes>
+   </release>
+   <release>
+    <version>1.8.0</version>
+    <date>2003-11-18</date>
+    <license>PHP License</license>
+    <state>stable</state>
+    <notes>The Log package now includes a users guide, example scripts and unit tests.
 
-A number of small improvements have been made to the 'win' log handler (based on suggestions from Paul Yanchenko).
+A number of small improvements have been made to the &apos;win&apos; log handler (based on suggestions from Paul Yanchenko).
 
-A new 'display' log handler has been added to the distribution.  Contributed by Paul Yanchenko, this handler simply prints the error message back to the browser.  It respects the 'error_prepend_string' and 'error_append_string' PHP INI values and is useful when using PEAR::setErrorHandling()'s PEAR_ERROR_CALLBACK mechanism.</notes>
-    </release>
-    <release>
-      <version>1.7.1</version>
-      <date>2003-09-21</date>
-      <state>stable</state>
-      <notes>The mail handler now uses &quot;\n&quot; to terminate lines instead of &quot;\r\n&quot;.
+A new &apos;display&apos; log handler has been added to the distribution.  Contributed by Paul Yanchenko, this handler simply prints the error message back to the browser.  It respects the &apos;error_prepend_string&apos; and &apos;error_append_string&apos; PHP INI values and is useful when using PEAR::setErrorHandling()&apos;s PEAR_ERROR_CALLBACK mechanism.
+    </notes>
+   </release>
+   <release>
+    <version>1.7.1</version>
+    <date>2003-09-21</date>
+    <state>stable</state>
+    <notes>The mail handler now uses &quot;\n&quot; to terminate lines instead of &quot;\r\n&quot;.
 
-The file handler's path creation routines now guard against potentially infinite recursion.
+The file handler&apos;s path creation routines now guard against potentially infinite recursion.
 
-It is now possible to pass an object to the logging methods.  If the object offers a PEAR_Error-style getMessage() or PHP5 exception-style toString() method, it will be used to extract the message text.</notes>
-    </release>
-    <release>
-      <version>1.7.0</version>
-      <date>2003-08-02</date>
-      <state>stable</state>
-      <notes>It is now possible to specific a specific mask that dictates exactly which levels will be logged.  
+It is now possible to pass an object to the logging methods.  If the object offers a PEAR_Error-style getMessage() or PHP5 exception-style toString() method, it will be used to extract the message text.
+    </notes>
+   </release>
+   <release>
+    <version>1.7.0</version>
+    <date>2003-08-02</date>
+    <state>stable</state>
+    <notes>It is now possible to specific a specific mask that dictates exactly which levels will be logged.  
 
 A number of convenient &quot;shortcut&quot; functions have been added for logging messages at specific log messages.
 
-Two new log handers have been added: the 'error_log' handler wraps PHP's native error_log() function; and the 'win' handler outputs log messages to a separate browser window.
+Two new log handers have been added: the &apos;error_log&apos; handler wraps PHP&apos;s native error_log() function; and the &apos;win&apos; handler outputs log messages to a separate browser window.
 
 The file log handler has been completely rewritten based on suggestions from Roman Neuhauser.  It no longer buffers log output in memory before writing to the log file.
 
-Greg Beaver submitted a change that allows callers to provide their own Log classes (that existing outside of the PEAR file hierarchy) by including them before invoking a factory() method.</notes>
-    </release>
-    <release>
-      <version>1.6.7</version>
-      <date>2003-06-16</date>
-      <state>stable</state>
-      <notes>It is now possible to set the identification string for all of a composite's child instances.
+Greg Beaver submitted a change that allows callers to provide their own Log classes (that existing outside of the PEAR file hierarchy) by including them before invoking a factory() method.
+    </notes>
+   </release>
+   <release>
+    <version>1.6.7</version>
+    <date>2003-06-16</date>
+    <state>stable</state>
+    <notes>It is now possible to set the identification string for all of a composite&apos;s child instances.
 
-The preamble of the mail handler's message is now configurable.</notes>
-    </release>
-    <release>
-      <version>1.6.5</version>
-      <date>2003-04-26</date>
-      <state>stable</state>
-      <notes>The mail log handler needs to register its own destructer now that the Log class no longer inherits from the PEAR base class.</notes>
-    </release>
-    <release>
-      <version>1.6.4</version>
-      <date>2003-04-08</date>
-      <state>stable</state>
-      <notes>The Log classes no longer inherits from the PEAR base class.  Not including the PEAR base class gives us smaller, faster Log objects.
+The preamble of the mail handler&apos;s message is now configurable.
+    </notes>
+   </release>
+   <release>
+    <version>1.6.5</version>
+    <date>2003-04-26</date>
+    <state>stable</state>
+    <notes>The mail log handler needs to register its own destructer now that the Log class no longer inherits from the PEAR base class.
+    </notes>
+   </release>
+   <release>
+    <version>1.6.4</version>
+    <date>2003-04-08</date>
+    <state>stable</state>
+    <notes>The Log classes no longer inherits from the PEAR base class.  Not including the PEAR base class gives us smaller, faster Log objects.
 
 The Log_file class now registers its own destructor to ensure that the logfile is correctly closed upon shutdown.
 
-A ZendEngine 1 incompatibility was introduced in the previous release.  This has been corrrected.</notes>
-    </release>
-    <release>
-      <version>1.6.3</version>
-      <date>2003-04-07</date>
-      <state>stable</state>
-      <notes>A unique identifier is now stored inside each Log instance.  Both the composite and subject-observer mechanisms use this identifier to index their object lists.
+A ZendEngine 1 incompatibility was introduced in the previous release.  This has been corrrected.
+    </notes>
+   </release>
+   <release>
+    <version>1.6.3</version>
+    <date>2003-04-07</date>
+    <state>stable</state>
+    <notes>A unique identifier is now stored inside each Log instance.  Both the composite and subject-observer mechanisms use this identifier to index their object lists.
 
 The internals of the Log_observer system have been rewritten for general cleanliness.  The external interface remains unchanged.
 
-The Log class now offers public setIdent() and getIdent() members for setting and getting the Log instance's identification string during the object's lifetime.</notes>
-    </release>
-    <release>
-      <version>1.6.2</version>
-      <date>2003-04-06</date>
-      <state>stable</state>
-      <notes>In the Log_observer class, operate directly on the reference to the Log instance (instead of on a copy of the object).</notes>
-    </release>
-    <release>
-      <version>1.6.1</version>
-      <date>2003-04-02</date>
-      <state>stable</state>
-      <notes>- Fix a typo that broke the Log_Observer class.</notes>
-    </release>
-    <release>
-      <version>1.6.0</version>
-      <date>2003-02-17</date>
-      <state>stable</state>
-      <notes>- The SQL handler now uses sequences instead of timestamps as unique identifiers.
-- The time format used by the file handler is now configurable.</notes>
-    </release>
-    <release>
-      <version>1.5.3</version>
-      <date>2003-01-01</date>
-      <state>stable</state>
-      <notes>- Improved singleton()'s signature generation.
+The Log class now offers public setIdent() and getIdent() members for setting and getting the Log instance&apos;s identification string during the object&apos;s lifetime.
+    </notes>
+   </release>
+   <release>
+    <version>1.6.2</version>
+    <date>2003-04-06</date>
+    <state>stable</state>
+    <notes>In the Log_observer class, operate directly on the reference to the Log instance (instead of on a copy of the object).
+    </notes>
+   </release>
+   <release>
+    <version>1.6.1</version>
+    <date>2003-04-02</date>
+    <state>stable</state>
+    <notes>- Fix a typo that broke the Log_Observer class.
+    </notes>
+   </release>
+   <release>
+    <version>1.6.0</version>
+    <date>2003-02-17</date>
+    <state>stable</state>
+    <notes>- The SQL handler now uses sequences instead of timestamps as unique identifiers.
+- The time format used by the file handler is now configurable.
+    </notes>
+   </release>
+   <release>
+    <version>1.5.3</version>
+    <date>2003-01-01</date>
+    <state>stable</state>
+    <notes>- Improved singleton()&apos;s signature generation.
 - The SQL handler no longer closes existing database connections.
-- The log() method now returns a boolean result indicating success or failure.</notes>
-    </release>
-    <release>
-      <version>1.5.2</version>
-      <date>2002-11-28</date>
-      <state>stable</state>
-      <notes>- Altered the singleton's &quot;signature&quot; construction to be shorter and more array-friendly.</notes>
-    </release>
-    <release>
-      <version>1.5.1</version>
-      <date>2002-11-17</date>
-      <state>stable</state>
-      <notes>- The mail handler now implements a destructor to ensure close() is called.
-- The syslog handler now requires $name to be a valid syslog facility.</notes>
-    </release>
-    <release>
-      <version>1.5</version>
-      <date>2002-10-24</date>
-      <state>stable</state>
-      <notes>- Adding the ability to set the mode of the logfile in the Log_file.
+- The log() method now returns a boolean result indicating success or failure.
+    </notes>
+   </release>
+   <release>
+    <version>1.5.2</version>
+    <date>2002-11-28</date>
+    <state>stable</state>
+    <notes>- Altered the singleton&apos;s &quot;signature&quot; construction to be shorter and more array-friendly.
+    </notes>
+   </release>
+   <release>
+    <version>1.5.1</version>
+    <date>2002-11-17</date>
+    <state>stable</state>
+    <notes>- The mail handler now implements a destructor to ensure close() is called.
+- The syslog handler now requires $name to be a valid syslog facility.
+    </notes>
+   </release>
+   <release>
+    <version>1.5</version>
+    <date>2002-10-24</date>
+    <state>stable</state>
+    <notes>- Adding the ability to set the mode of the logfile in the Log_file.
 - mail() failures in Log_mail are logged via error_log().
-- Replaced all remaining LOG_* constants with the PEAR_LOG_* versions.</notes>
-    </release>
-    <release>
-      <version>1.4</version>
-      <date>2002-09-28</date>
-      <state>stable</state>
-      <notes>- Altered the format of the SQL logging table to use a TIMESTAMP field.
+- Replaced all remaining LOG_* constants with the PEAR_LOG_* versions.
+    </notes>
+   </release>
+   <release>
+    <version>1.4</version>
+    <date>2002-09-28</date>
+    <state>stable</state>
+    <notes>- Altered the format of the SQL logging table to use a TIMESTAMP field.
 - The Log class now extends the PEAR base class.
-- New file logger that keeps the log file open for the life of the request.</notes>
-    </release>
-    <release>
-      <version>1.3</version>
-      <date>2002-09-15</date>
-      <state>stable</state>
-      <notes>Adding a mail logging target.</notes>
-    </release>
-    <release>
-      <version>1.2</version>
-      <date>2002-07-24</date>
-      <state>stable</state>
-      <notes>Introduce the PEAR_LOG_* constants.</notes>
-    </release>
-    <release>
-      <version>1.1</version>
-      <date>2002-04-12</date>
-      <state>stable</state>
-      <notes>Adding a new console logging target.</notes>
-    </release>
-  </changelog>
+- New file logger that keeps the log file open for the life of the request.
+    </notes>
+   </release>
+   <release>
+    <version>1.3</version>
+    <date>2002-09-15</date>
+    <state>stable</state>
+    <notes>Adding a mail logging target.
+    </notes>
+   </release>
+   <release>
+    <version>1.2</version>
+    <date>2002-07-24</date>
+    <state>stable</state>
+    <notes>Introduce the PEAR_LOG_* constants.
+    </notes>
+   </release>
+   <release>
+    <version>1.1</version>
+    <date>2002-04-12</date>
+    <state>stable</state>
+    <notes>Adding a new console logging target.
+    </notes>
+   </release>
+ </changelog>
 </package>

@@ -168,8 +168,7 @@ class Log_mdb2 extends Log
             }
 
             /* Create a prepared statement for repeated use in log(). */
-            $this->_statement = &$this->_prepareStatement();
-            if (PEAR::isError($this->_statement)) {
+            if (!$this->_prepareStatement()) {
                 return false;
             }
 
@@ -251,11 +250,8 @@ class Log_mdb2 extends Log
         }
 
         /* If we don't already have a statement object, create one. */
-        if (!is_object($this->_statement)) {
-            $this->_statement = &$this->_prepareStatement();
-            if (PEAR::isError($this->_statement)) {
-                return false;
-            }
+        if (!is_object($this->_statement) && !$this->_prepareStatement()) {
+            return false;
         }
 
         /* Extract the string representation of the message. */
@@ -289,8 +285,7 @@ class Log_mdb2 extends Log
 
             /* Recreate our prepared statement resource. */
             $this->_statement->free();
-            $this->_statement = &$this->_prepareStatement();
-            if (PEAR::isError($this->_statement)) {
+            if (!$this->_prepareStatement()) {
                 return false;
             }
 
@@ -344,18 +339,20 @@ class Log_mdb2 extends Log
     /**
      * Prepare the SQL insertion statement.
      *
-     * @return object statement instance
-     * @access private
+     * @return boolean  True if the statement was successfully created.
+     *
+     * @access  private
+     * @since   Log 1.9.0
      */
-    function &_prepareStatement()
+    function _prepareStatement()
     {
-        /* Create a prepared statement for repeated use in log(). */
-        $statement = &$this->_db->prepare(
+        $this->_statement = &$this->_db->prepare(
                 'INSERT INTO ' . $this->_table .
                 ' (id, logtime, ident, priority, message)' .
                 ' VALUES(:id, :logtime, :ident, :priority, :message)',
                 $this->_types);
 
-        return $statement;
+        /* Return success if we didn't generate an error. */
+        return (PEAR::isError($this->_statement) === false);
     }
 }
