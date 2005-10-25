@@ -2,10 +2,9 @@
 
 require_once 'PEAR/PackageFileManager.php';
 
-$version = '1.9.1';
+$version = '1.9.2';
 $notes = <<<EOT
-The SQL handler failed to prepare the SQL statement when an existing database connection was provided. (Bug 5702)
-The SQL handler now supports user-provided SQL insertion statements via the 'sql' configuration parameter. (Request 5703)
+Fixing a syntax error in the SQL handler that occured when a custom SQL statement was not provided. (Bug 5777)
 EOT;
 
 $changelog = $notes;

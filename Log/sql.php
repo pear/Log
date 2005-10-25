@@ -121,9 +121,9 @@ class Log_sql extends Log
         if (!empty($this->_sql)) {
             $this->_sql = $conf['sql'];
         } else {
-            $this->_sql('INSERT INTO ' . $this->_table .
-                        ' (id, logtime, ident, priority, message)' .
-                        ' VALUES(?, CURRENT_TIMESTAMP, ?, ?, ?)');
+            $this->_sql = 'INSERT INTO ' . $this->_table .
+                          ' (id, logtime, ident, priority, message)' .
+                          ' VALUES(?, CURRENT_TIMESTAMP, ?, ?, ?)';
         }
 
         /* If an options array was provided, use it. */
