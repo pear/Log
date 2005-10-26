@@ -2,9 +2,10 @@
 
 require_once 'PEAR/PackageFileManager.php';
 
-$version = '1.9.2';
+$version = '1.9.3';
 $notes = <<<EOT
-Fixing a syntax error in the SQL handler that occured when a custom SQL statement was not provided. (Bug 5777)
+The Observer code is now PHP 4.4 compliant. (Bug 5776)
+Log::factory(), Log::singleton(), and Log_observer::factory() now return null instead of false on failure.  This is more consistent with the model that these methods return object references.  Backwards compatibility is only violated if users were explicitly testing for a literal 'false' result.
 EOT;
 
 $changelog = $notes;

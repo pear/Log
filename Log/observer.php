@@ -65,7 +65,7 @@ class Log_observer
      *                              configuration values.
      *
      * @return object               The newly created concrete Log_observer
-     *                              instance, or an false on an error.
+     *                              instance, or null on an error.
      */
     function &factory($type, $priority = PEAR_LOG_INFO, $conf = array())
     {
@@ -99,27 +99,17 @@ class Log_observer
         if (class_exists($class)) {
             /* Support both new-style and old-style construction. */
             if ($newstyle) {
-                return new $class($priority, $conf);
+                $object =& new $class($priority, $conf);
             } else {
-                return new $class($priority);
+                $object =& new $class($priority);
             }
+            return $object;
         }
 
-        return false;
+        return null;
     }
 
     /**
-<<<<<<< observer.php
-     * This is a stub method to make sure that Log_observer classes do
-     * something when they are notified of a message. The default
-     * behavior is to just print the message, which is obviously not
-     * desireable in practically any situation - which is why you need
-     * to override this method. :)
-     *
-     * @param array $messageOb    A hash containing all information - the text
-     *                      message itself, the priority, what log it came
-     *                      from, etc.
-=======
      * This is a stub method to make sure that Log_Observer classes do
      * something when they are notified of a message.  The default behavior
      * is to just print the message, which is obviously not desireable in
@@ -127,11 +117,9 @@ class Log_observer
      * method. :)
      *
      * @param array     $event      A hash describing the log event.
->>>>>>> 1.5
      */
     function notify($event)
     {
         print_r($event);
     }
-
 }

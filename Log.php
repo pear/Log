@@ -104,8 +104,8 @@ class Log
      *
      * @param int $level        Log messages up to and including this level.
      *
-     * @return object Log       The newly created concrete Log instance, or an
-     *                          false on an error.
+     * @return object Log       The newly created concrete Log instance, or
+     *                          null on an error.
      * @access public
      * @since Log 1.0
      */
@@ -131,7 +131,7 @@ class Log
             return $obj;
         }
 
-        return false;
+        return null;
     }
 
     /**
@@ -165,8 +165,8 @@ class Log
      *
      * @param int $level        Log messages up to and including this level.
      *
-     * @return object Log       The newly created concrete Log instance, or an
-     *                          false on an error.
+     * @return object Log       The newly created concrete Log instance, or
+     *                          null on an error.
      * @access public
      * @since Log 1.0
      */
