@@ -72,6 +72,16 @@ class Log_observer
         $type = strtolower($type);
         $class = 'Log_observer_' . $type;
 
+        /*
+         * If the desired class already exists (because the caller has supplied
+         * it from some custom location), simply instantiate and return a new
+         * instance.
+         */
+        if (class_exist($class)) {
+            $object = new $class($priority, $conf);
+            return $object;
+        }
+
         /* Support both the new-style and old-style file naming conventions. */
         if (file_exists(dirname(__FILE__) . '/observer_' . $type . '.php')) {
             $classfile = 'Log/observer_' . $type . '.php';
@@ -82,8 +92,7 @@ class Log_observer
         }
 
         /* Issue a warning if the old-style conventions are being used. */
-        if (!$newstyle)
-        {
+        if (!$newstyle) {
             trigger_error('Using old-style Log_observer conventions',
                           E_USER_WARNING);
         }
