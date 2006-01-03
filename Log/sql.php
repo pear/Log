@@ -7,8 +7,15 @@
  * @package Log
  */
 
-/** PEAR's DB package */
-require_once 'DB.php';
+/*
+ * We require the PEAR DB class.  This is generally defined in the DB.php file,
+ * but it's possible that the caller may have provided the DB class, or a
+ * compatible wrapper (such as the one shipped with MDB2), so we first check
+ * for an existing 'DB' class before including 'DB.php'.
+ */
+if (!class_exists('DB')) {
+    require_once 'DB.php';
+}
 
 /**
  * The Log_sql class is a concrete implementation of the Log::
