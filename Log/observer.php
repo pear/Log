@@ -99,14 +99,15 @@ class Log_observer
         if (class_exists($class)) {
             /* Support both new-style and old-style construction. */
             if ($newstyle) {
-                $object =& new $class($priority, $conf);
+                $object = new $class($priority, $conf);
             } else {
-                $object =& new $class($priority);
+                $object = new $class($priority);
             }
             return $object;
         }
 
-        return null;
+        $null = null;
+        return $null;
     }
 
     /**
