@@ -350,7 +350,7 @@ class Log_mdb2 extends Log
                 'INSERT INTO ' . $this->_table .
                 ' (id, logtime, ident, priority, message)' .
                 ' VALUES(:id, :logtime, :ident, :priority, :message)',
-                $this->_types);
+                $this->_types, MDB2_PREPARE_MANIP);
 
         /* Return success if we didn't generate an error. */
         return (PEAR::isError($this->_statement) === false);
