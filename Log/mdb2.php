@@ -309,7 +309,7 @@ class Log_mdb2 extends Log
      */
     function _createTable()
     {
-        $this->_db->loadModule('Manager');
+        $this->_db->loadModule('Manager', null, true);
         $result = $this->_db->manager->createTable(
             $this->_table,
             array(
