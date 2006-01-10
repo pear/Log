@@ -7,10 +7,13 @@ $desc = <<<EOT
 The Log framework provides an abstracted logging system. It supports logging to console, file, syslog, SQL, Sqlite, mail, and mcal targets. It also provides a subject - observer mechanism.
 EOT;
 
-$version = '1.9.3';
+$version = '1.9.4';
 $notes = <<<EOT
-The Observer code is now PHP 4.4 compliant. (Bug 5776)
-Log::factory(), Log::singleton(), and Log_observer::factory() now return null instead of false on failure.  This is more consistent with the model that these methods return object references.  Backwards compatibility is only violated if users were explicitly testing for a literal 'false' result.
+If a 'DB' class already exists, the SQL handler won't attempt to require DB.php. (Bug 6214)
+When creating the Log instance in factory(), return a proper reference to the object. (Bug 5261)
+When preparing the MDB2 statement, mark it as MDB2_PREPARE_MANIP. (Bug 6323)
+If the desired Log class already exists (because the caller has supplied it
+from some custom location), simply instantiate and return a new instance. (Mads Danquah)
 EOT;
 
 $package = new PEAR_PackageFileManager2();
@@ -18,8 +21,9 @@ $package = new PEAR_PackageFileManager2();
 $result = $package->setOptions(array(
     'filelistgenerator' => 'cvs',
     'changelogoldtonew' => false,
-	'simpleoutput'		=> true,
+    'simpleoutput'		=> true,
     'baseinstalldir'    => '/',
+    'packagefile'       => 'package2.xml',
     'packagedirectory'  => '.'));
 
 if (PEAR::isError($result)) {
@@ -41,7 +45,10 @@ $package->setNotes($notes);
 $package->setPhpDep('4.3.0');
 $package->setPearinstallerDep('1.4.3');
 $package->addMaintainer('lead',  'jon', 'Jon Parise', 'jon@php.net');
-$package->addIgnore(array('package.php', 'phpdoc.sh'));
+$package->addIgnore(array('package.php', 'phpdoc.sh', 'package.xml', 'package2.xml'));
+$package->addPackageDepWithChannel('optional', 'DB', 'pear.php.net', '1.3');
+$package->addPackageDepWithChannel('optional', 'MDB2', 'pear.php.net', '2.0.0RC1');
+$package->addExtensionDep('optional', 'sqlite');
 
 $package->generateContents();
 $package1 = &$package->exportCompatiblePackageFile1();
