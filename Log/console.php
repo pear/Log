@@ -56,18 +56,6 @@ class Log_console extends Log
     var $_timeFormat = '%b %d %H:%M:%S';
 
     /**
-     * Hash that maps canonical format keys to position arguments for the
-     * "line format" string.
-     * @var array
-     * @access private
-     */
-    var $_formatMap = array('%{timestamp}'  => '%1$s',
-                            '%{ident}'      => '%2$s',
-                            '%{priority}'   => '%3$s',
-                            '%{message}'    => '%4$s',
-                            '%\{'           => '%%{');
-
-    /**
      * Constructs a new Log_console object.
      * 
      * @param string $name     Ignored.
@@ -179,9 +167,9 @@ class Log_console extends Log
         $message = $this->_extractMessage($message);
 
         /* Build the string containing the complete log line. */
-        $line = sprintf($this->_lineFormat, strftime($this->_timeFormat),
-                $this->_ident, $this->priorityToString($priority),
-                $message) . "\n";
+        $line = $this->_format($this->_lineFormat,
+                               strftime($this->_timeFormat),
+                               $priority, $message) . "\n";
 
         /*
          * If buffering is enabled, append this line to the output buffer.

@@ -70,6 +70,7 @@ class Log
 
     /**
      * The bitmask of allowed log levels.
+     *
      * @var integer
      * @access private
      */
@@ -83,6 +84,22 @@ class Log
      */
     var $_listeners = array();
 
+    /**
+     * Maps canonical format keys to position arguments for use in building
+     * "line format" strings.
+     *
+     * @var array
+     * @access private
+     */
+    var $_formatMap = array('%{timestamp}'  => '%1$s',
+                            '%{ident}'      => '%2$s',
+                            '%{priority}'   => '%3$s',
+                            '%{message}'    => '%4$s',
+                            '%{file}'       => '%5$s',
+                            '%{line}'       => '%6$s',
+                            '%{function}'   => '%7$s',
+                            '%\{'           => '%%{');
+    
 
     /**
      * Attempts to return a concrete Log instance of type $handler.
@@ -408,6 +425,92 @@ class Log
 
         /* Otherwise, we assume the message is a string. */
         return $message;
+    }
+
+    /**
+     * Using debug_backtrace(), returns the file, line, and enclosing function
+     * name of the source code context from which log() was invokved.
+     *
+     * @param   int     $depth  The initial number of frames we should step
+     *                          back into the trace.
+     *
+     * @return  array   Array containing three strings: the filename, the line,
+     *                  and the function name from which log() was called.
+     *
+     * @access  private
+     * @since   Log 1.9.4
+     */
+    function _getBacktraceVars($depth)
+    {
+        /* Start by generating a backtrace from the current call (here). */
+        $backtrace = debug_backtrace();
+
+        /*
+         * We're interested in the frame which invoked the log() function, so
+         * we need to walk back some number of frames into the backtrace.  The
+         * $depth parameter tells us where to start looking.   We go one step
+         * further back to find the name of the encapsulating function from
+         * which log() was called.
+         */
+        $file = @$backtrace[$depth]['file'];
+        $line = @$backtrace[$depth]['line'];
+        $func = @$backtrace[$depth + 1]['function'];
+
+        /*
+         * However, if log() was called from one of our "shortcut" functions,
+         * we're going to need to go back an additional step.
+         */
+        if (in_array($func, array('emerg', 'alert', 'crit', 'err', 'warning',
+                                  'notice', 'info', 'debug'))) {
+            $file = @$backtrace[$depth + 1]['file'];
+            $line = @$backtrace[$depth + 1]['line'];
+            $func = @$backtrace[$depth + 2]['function'];
+        }
+
+        /*
+         * If we couldn't extract a function name (perhaps because we were
+         * executed from the "main" context), provide a default value.
+         */
+        if (is_null($func)) {
+            $func = '(none)';
+        }
+
+        /* Return a 3-tuple containing (file, line, function). */
+        return array($file, $line, $func);
+    }
+
+    /**
+     * Produces a formatted log line based on a format string and a set of
+     * variables representing the current log record and state.
+     *
+     * @return  string  Formatted log string.
+     *
+     * @access  private
+     * @since   Log 1.9.4
+     */
+    function _format($format, $timestamp, $priority, $message)
+    {
+        /*
+         * If the format string references any of the backtrace-driven
+         * variables (%5, %6, %7), generate the backtrace and fetch them.
+         */
+        if (preg_match('/%[567]/', $format)) {
+            list($file, $line, $func) = $this->_getBacktraceVars(2);
+        }
+
+        /*
+         * Build the formatted string.  We use the sprintf() function's
+         * "argument swapping" capability to dynamically select and position
+         * the variables which will ultimately appear in the log string.
+         */
+        return sprintf($format,
+                       $timestamp,
+                       $this->_ident,
+                       $this->priorityToString($priority),
+                       $message,
+                       isset($file) ? $file : '',
+                       isset($line) ? $line : '',
+                       isset($func) ? $func : '');
     }
 
     /**
