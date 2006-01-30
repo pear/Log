@@ -56,6 +56,22 @@ class Log_mail extends Log
     var $_preamble = '';
 
     /**
+     * String containing the format of a log line.
+     * @var string
+     * @access private
+     */
+    var $_lineFormat = '%1$s %2$s [%3$s] %4$s';
+
+    /**
+     * String containing the timestamp format.  It will be passed directly to
+     * strftime().  Note that the timestamp string will generated using the
+     * current locale.
+     * @var string
+     * @access private
+     */
+    var $_timeFormat = '%b %d %H:%M:%S';
+
+    /**
      * String holding the mail message body.
      * @var string
      * @access private
@@ -96,6 +112,16 @@ class Log_mail extends Log
 
         if (!empty($conf['preamble'])) {
             $this->_preamble = $conf['preamble'];
+        }
+
+        if (!empty($conf['lineFormat'])) {
+            $this->_lineFormat = str_replace(array_keys($this->_formatMap),
+                                             array_values($this->_formatMap),
+                                             $conf['lineFormat']);
+        }
+
+        if (!empty($conf['timeFormat'])) {
+            $this->_timeFormat = $conf['timeFormat'];
         }
 
         /* register the destructor */
@@ -207,12 +233,12 @@ class Log_mail extends Log
         /* Extract the string representation of the message. */
         $message = $this->_extractMessage($message);
 
-        $entry = sprintf("%s %s [%s] %s\r\n", strftime('%b %d %H:%M:%S'),
-                         $this->_ident, Log::priorityToString($priority),
-                         $message);
+        /* Build the string containing the complete log line. */
+        $this->_message .= $this->_format($this->_lineFormat,
+                                          strftime($this->_timeFormat),
+                                          $priority, $message) . "\r\n";
 
-        $this->_message .= $entry;
-
+        /* Notify observers about this log message. */
         $this->_announce(array('priority' => $priority, 'message' => $message));
 
         return true;
