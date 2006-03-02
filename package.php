@@ -12,8 +12,8 @@ $notes = <<<EOT
 If a 'DB' class already exists, the SQL handler won't attempt to require DB.php. (Bug 6214)
 When creating the Log instance in factory(), return a proper reference to the object. (Bug 5261)
 When preparing the MDB2 statement, mark it as MDB2_PREPARE_MANIP. (Bug 6323)
-If the desired Log class already exists (because the caller has supplied it
-from some custom location), simply instantiate and return a new instance. (Mads Danquah)
+If the desired Log class already exists (because the caller has supplied it from some custom location), simply instantiate and return a new instance. (Mads Danquah)
+The observer's factory method now provides more robust file location logic. (Bug 6831)
 EOT;
 
 $package = new PEAR_PackageFileManager2();

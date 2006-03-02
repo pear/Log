@@ -13,8 +13,8 @@
   <email>jon@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-01-09</date>
- <time>23:27:57</time>
+ <date>2006-03-01</date>
+ <time>19:24:49</time>
  <version>
   <release>1.9.4</release>
   <api>1.0.0</api>
@@ -27,8 +27,8 @@
  <notes>If a &apos;DB&apos; class already exists, the SQL handler won&apos;t attempt to require DB.php. (Bug 6214)
 When creating the Log instance in factory(), return a proper reference to the object. (Bug 5261)
 When preparing the MDB2 statement, mark it as MDB2_PREPARE_MANIP. (Bug 6323)
-If the desired Log class already exists (because the caller has supplied it
-from some custom location), simply instantiate and return a new instance. (Mads Danquah)</notes>
+If the desired Log class already exists (because the caller has supplied it from some custom location), simply instantiate and return a new instance. (Mads Danquah)
+The observer&apos;s factory method now provides more robust file location logic. (Bug 6831)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -124,13 +124,13 @@ from some custom location), simply instantiate and return a new instance. (Mads 
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2006-01-09</date>
+   <date>2006-03-01</date>
    <license>PHP License</license>
    <notes>If a &apos;DB&apos; class already exists, the SQL handler won&apos;t attempt to require DB.php. (Bug 6214)
 When creating the Log instance in factory(), return a proper reference to the object. (Bug 5261)
 When preparing the MDB2 statement, mark it as MDB2_PREPARE_MANIP. (Bug 6323)
-If the desired Log class already exists (because the caller has supplied it
-from some custom location), simply instantiate and return a new instance. (Mads Danquah)</notes>
+If the desired Log class already exists (because the caller has supplied it from some custom location), simply instantiate and return a new instance. (Mads Danquah)
+The observer&apos;s factory method now provides more robust file location logic. (Bug 6831)</notes>
   </release>
   <release>
    <version>

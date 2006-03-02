@@ -15,14 +15,14 @@
   </maintainers>
  <release>
   <version>1.9.4</version>
-  <date>2006-01-09</date>
+  <date>2006-03-01</date>
   <license>PHP License</license>
   <state>stable</state>
   <notes>If a &apos;DB&apos; class already exists, the SQL handler won&apos;t attempt to require DB.php. (Bug 6214)
 When creating the Log instance in factory(), return a proper reference to the object. (Bug 5261)
 When preparing the MDB2 statement, mark it as MDB2_PREPARE_MANIP. (Bug 6323)
-If the desired Log class already exists (because the caller has supplied it
-from some custom location), simply instantiate and return a new instance. (Mads Danquah)
+If the desired Log class already exists (because the caller has supplied it from some custom location), simply instantiate and return a new instance. (Mads Danquah)
+The observer&apos;s factory method now provides more robust file location logic. (Bug 6831)
   </notes>
   <deps>
    <dep type="php" rel="ge" version="4.3.0" optional="no"/>
@@ -93,14 +93,14 @@ from some custom location), simply instantiate and return a new instance. (Mads 
  <changelog>
    <release>
     <version>1.9.4</version>
-    <date>2006-01-09</date>
+    <date>2006-03-01</date>
     <license>PHP License</license>
     <state>stable</state>
     <notes>If a &apos;DB&apos; class already exists, the SQL handler won&apos;t attempt to require DB.php. (Bug 6214)
 When creating the Log instance in factory(), return a proper reference to the object. (Bug 5261)
 When preparing the MDB2 statement, mark it as MDB2_PREPARE_MANIP. (Bug 6323)
-If the desired Log class already exists (because the caller has supplied it
-from some custom location), simply instantiate and return a new instance. (Mads Danquah)
+If the desired Log class already exists (because the caller has supplied it from some custom location), simply instantiate and return a new instance. (Mads Danquah)
+The observer&apos;s factory method now provides more robust file location logic. (Bug 6831)
     </notes>
    </release>
    <release>

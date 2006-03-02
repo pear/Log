@@ -77,24 +77,18 @@ class Log_observer
          * it from some custom location), simply instantiate and return a new
          * instance.
          */
-        if (class_exist($class)) {
+        if (class_exists($class)) {
             $object = new $class($priority, $conf);
             return $object;
         }
 
         /* Support both the new-style and old-style file naming conventions. */
-        if (file_exists(dirname(__FILE__) . '/observer_' . $type . '.php')) {
-            $classfile = 'Log/observer_' . $type . '.php';
-            $newstyle = true;
-        } else {
+        $newstyle = true;
+        $classfile = dirname(__FILE__) . '/observer_' . $type . '.php';
+
+        if (!file_exists($classfile)) {
             $classfile = 'Log/' . $type . '.php';
             $newstyle = false;
-        }
-
-        /* Issue a warning if the old-style conventions are being used. */
-        if (!$newstyle) {
-            trigger_error('Using old-style Log_observer conventions',
-                          E_USER_WARNING);
         }
 
         /*
