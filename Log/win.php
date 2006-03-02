@@ -127,6 +127,7 @@ $win.document.writeln('body { font-family: monospace; font-size: 8pt; }');
 $win.document.writeln('td,th { font-size: 8pt; }');
 $win.document.writeln('td,th { border-bottom: #999999 solid 1px; }');
 $win.document.writeln('td,th { border-right: #999999 solid 1px; }');
+$win.document.writeln('tr { text-align: left; vertical-align: top; }');
 $win.document.writeln('</style>');
 $win.document.writeln('</head>');
 $win.document.writeln('<body>');
@@ -233,7 +234,7 @@ END_OF_SCRIPT;
         list($usec, $sec) = explode(' ', microtime());
 
         /* Build the output line that contains the log entry row. */
-        $line  = '<tr align="left" valign="top">';
+        $line  = '<tr>';
         $line .= sprintf('<td>%s.%s</td>',
                          strftime('%T', $sec), substr($usec, 2, 2));
         if (!empty($this->_ident)) {
