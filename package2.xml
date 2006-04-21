@@ -13,8 +13,8 @@
   <email>jon@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-03-01</date>
- <time>19:24:49</time>
+ <date>2006-04-20</date>
+ <time>22:23:57</time>
  <version>
   <release>1.9.4</release>
   <api>1.0.0</api>
@@ -28,7 +28,8 @@
 When creating the Log instance in factory(), return a proper reference to the object. (Bug 5261)
 When preparing the MDB2 statement, mark it as MDB2_PREPARE_MANIP. (Bug 6323)
 If the desired Log class already exists (because the caller has supplied it from some custom location), simply instantiate and return a new instance. (Mads Danquah)
-The observer&apos;s factory method now provides more robust file location logic. (Bug 6831)</notes>
+The observer&apos;s factory method now provides more robust file location logic. (Bug 6831)
+Added MIN() and MAX() functions for calculating the minimum and maximum log masks based on a given priority.  MAX() superceeds the existing UPTO() function, which is now deprecated.</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -124,13 +125,14 @@ The observer&apos;s factory method now provides more robust file location logic.
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2006-03-01</date>
+   <date>2006-04-20</date>
    <license>PHP License</license>
    <notes>If a &apos;DB&apos; class already exists, the SQL handler won&apos;t attempt to require DB.php. (Bug 6214)
 When creating the Log instance in factory(), return a proper reference to the object. (Bug 5261)
 When preparing the MDB2 statement, mark it as MDB2_PREPARE_MANIP. (Bug 6323)
 If the desired Log class already exists (because the caller has supplied it from some custom location), simply instantiate and return a new instance. (Mads Danquah)
-The observer&apos;s factory method now provides more robust file location logic. (Bug 6831)</notes>
+The observer&apos;s factory method now provides more robust file location logic. (Bug 6831)
+Added MIN() and MAX() functions for calculating the minimum and maximum log masks based on a given priority.  MAX() superceeds the existing UPTO() function, which is now deprecated.</notes>
   </release>
   <release>
    <version>

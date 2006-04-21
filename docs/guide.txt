@@ -208,10 +208,15 @@ mask, use the static ``Log::MASK()`` method::
 
     $mask = Log::MASK(PEAR_LOG_INFO);
 
-To compute the mask for all priorities up to a certain level, use the
-``Log::UPTO()`` method::
+To compute the mask for all priorities up to, and including, a certain level,
+use the ``Log::MAX()`` static method::
 
-    $mask = Log::UPTO(PEAR_LOG_INFO);
+    $mask = Log::MAX(PEAR_LOG_INFO);
+
+To compute the mask for all priorities greater than or equal to a certain
+level, use the ``Log::MIN()`` static method::
+
+    $mask = Log::MIN(PEAR_LOG_INFO);
 
 The apply the mask, use the ``setMask()`` method::
 

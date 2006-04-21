@@ -99,7 +99,7 @@ class Log
                             '%{line}'       => '%6$s',
                             '%{function}'   => '%7$s',
                             '%\{'           => '%%{');
-    
+
 
     /**
      * Attempts to return a concrete Log instance of type $handler.
@@ -569,6 +569,8 @@ class Log
     /**
      * Calculate the log mask for the given priority.
      *
+     * This method may be called statically.
+     *
      * @param integer   $priority   The priority whose mask will be calculated.
      *
      * @return integer  The calculated log mask.
@@ -584,14 +586,56 @@ class Log
     /**
      * Calculate the log mask for all priorities up to the given priority.
      *
+     * This method may be called statically.
+     *
      * @param integer   $priority   The maximum priority covered by this mask.
      *
-     * @return integer  The calculated log mask.
+     * @return integer  The resulting log mask.
      *
      * @access  public
      * @since   Log 1.7.0
+     *
+     * @deprecated deprecated since Log 1.9.4; use Log::MAX() instead
      */
     function UPTO($priority)
+    {
+        return MAX($priority);
+    }
+
+    /**
+     * Calculate the log mask for all priorities greater than or equal to the
+     * given priority.  In other words, $priority will be the lowest priority
+     * matched by the resulting mask.
+     *
+     * This method may be called statically.
+     *
+     * @param integer   $priority   The minimum priority covered by this mask.
+     *
+     * @return integer  The resulting log mask.
+     *
+     * @access  public
+     * @since   Log 1.9.4
+     */
+    function MIN($priority)
+    {
+        return PEAR_LOG_ALL ^ ((1 << $priority) - 1);
+    }
+
+    /**
+     * Calculate the log mask for all priorities less than or equal to the
+     * given priority.  In other words, $priority will be the highests priority
+     * matched by the resulting mask.
+     *
+     * This method may be called statically.
+     *
+     * @param integer   $priority   The maximum priority covered by this mask.
+     *
+     * @return integer  The resulting log mask.
+     *
+     * @access  public
+     * @since   Log 1.9.4
+     */
+    function MAX($priority)
     {
         return ((1 << ($priority + 1)) - 1);
     }
