@@ -599,7 +599,7 @@ class Log
      */
     function UPTO($priority)
     {
-        return MAX($priority);
+        return Log::MAX($priority);
     }
 
     /**
