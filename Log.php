@@ -139,7 +139,7 @@ class Log
          * version of the named class.
          */
         if (!class_exists($class)) {
-            @include_once $classfile;
+            include_once $classfile;
         }
 
         /* If the class exists, return a new instance of it. */
