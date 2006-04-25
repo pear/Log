@@ -15,6 +15,7 @@ When preparing the MDB2 statement, mark it as MDB2_PREPARE_MANIP. (Bug 6323)
 If the desired Log class already exists (because the caller has supplied it from some custom location), simply instantiate and return a new instance. (Mads Danquah)
 The observer's factory method now provides more robust file location logic. (Bug 6831)
 Added MIN() and MAX() functions for calculating the minimum and maximum log masks based on a given priority.  MAX() superceeds the existing UPTO() function, which is now deprecated.
+Settled on the PHP4-style "return object by reference" notation for good, even though it results in a E_STRICT warning under PHP5. (Bug 6689)
 EOT;
 
 $package = new PEAR_PackageFileManager2();

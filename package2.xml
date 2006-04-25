@@ -13,8 +13,8 @@
   <email>jon@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-04-20</date>
- <time>22:23:57</time>
+ <date>2006-04-24</date>
+ <time>23:00:13</time>
  <version>
   <release>1.9.4</release>
   <api>1.0.0</api>
@@ -29,7 +29,8 @@ When creating the Log instance in factory(), return a proper reference to the ob
 When preparing the MDB2 statement, mark it as MDB2_PREPARE_MANIP. (Bug 6323)
 If the desired Log class already exists (because the caller has supplied it from some custom location), simply instantiate and return a new instance. (Mads Danquah)
 The observer&apos;s factory method now provides more robust file location logic. (Bug 6831)
-Added MIN() and MAX() functions for calculating the minimum and maximum log masks based on a given priority.  MAX() superceeds the existing UPTO() function, which is now deprecated.</notes>
+Added MIN() and MAX() functions for calculating the minimum and maximum log masks based on a given priority.  MAX() superceeds the existing UPTO() function, which is now deprecated.
+Settled on the PHP4-style &quot;return object by reference&quot; notation for good, even though it results in a E_STRICT warning under PHP5. (Bug 6689)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -80,6 +81,7 @@ Added MIN() and MAX() functions for calculating the minimum and maximum log mask
     <file name="extract2.phpt" role="test" />
     <file name="factory.phpt" role="test" />
     <file name="file.phpt" role="test" />
+    <file name="levels.phpt" role="test" />
     <file name="null.phpt" role="test" />
     <file name="priority.phpt" role="test" />
     <file name="singleton.phpt" role="test" />
@@ -125,14 +127,15 @@ Added MIN() and MAX() functions for calculating the minimum and maximum log mask
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2006-04-20</date>
+   <date>2006-04-24</date>
    <license>PHP License</license>
    <notes>If a &apos;DB&apos; class already exists, the SQL handler won&apos;t attempt to require DB.php. (Bug 6214)
 When creating the Log instance in factory(), return a proper reference to the object. (Bug 5261)
 When preparing the MDB2 statement, mark it as MDB2_PREPARE_MANIP. (Bug 6323)
 If the desired Log class already exists (because the caller has supplied it from some custom location), simply instantiate and return a new instance. (Mads Danquah)
 The observer&apos;s factory method now provides more robust file location logic. (Bug 6831)
-Added MIN() and MAX() functions for calculating the minimum and maximum log masks based on a given priority.  MAX() superceeds the existing UPTO() function, which is now deprecated.</notes>
+Added MIN() and MAX() functions for calculating the minimum and maximum log masks based on a given priority.  MAX() superceeds the existing UPTO() function, which is now deprecated.
+Settled on the PHP4-style &quot;return object by reference&quot; notation for good, even though it results in a E_STRICT warning under PHP5. (Bug 6689)</notes>
   </release>
   <release>
    <version>
