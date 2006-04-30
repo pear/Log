@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.4.6" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+<package packagerversion="1.4.9" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
     http://pear.php.net/dtd/tasks-1.0.xsd
     http://pear.php.net/dtd/package-2.0
     http://pear.php.net/dtd/package-2.0.xsd">
@@ -13,10 +13,10 @@
   <email>jon@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-04-24</date>
- <time>23:00:13</time>
+ <date>2006-04-30</date>
+ <time>14:59:54</time>
  <version>
-  <release>1.9.4</release>
+  <release>1.9.5</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -24,13 +24,7 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>If a &apos;DB&apos; class already exists, the SQL handler won&apos;t attempt to require DB.php. (Bug 6214)
-When creating the Log instance in factory(), return a proper reference to the object. (Bug 5261)
-When preparing the MDB2 statement, mark it as MDB2_PREPARE_MANIP. (Bug 6323)
-If the desired Log class already exists (because the caller has supplied it from some custom location), simply instantiate and return a new instance. (Mads Danquah)
-The observer&apos;s factory method now provides more robust file location logic. (Bug 6831)
-Added MIN() and MAX() functions for calculating the minimum and maximum log masks based on a given priority.  MAX() superceeds the existing UPTO() function, which is now deprecated.
-Settled on the PHP4-style &quot;return object by reference&quot; notation for good, even though it results in a E_STRICT warning under PHP5. (Bug 6689)</notes>
+ <notes>Correcting the sqlite dependency.  It is now optional. (Bug 7523)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -118,6 +112,19 @@ Settled on the PHP4-style &quot;return object by reference&quot; notation for go
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.5</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-04-30</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>Correcting the sqlite dependency.  It is now optional. (Bug 7523)</notes>
+  </release>
   <release>
    <version>
     <release>1.9.4</release>
