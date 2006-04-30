@@ -30,7 +30,7 @@ Settled on the PHP4-style &quot;return object by reference&quot; notation for go
    <dep type="php" rel="ge" version="4.3.0" optional="no"/>
    <dep type="pkg" rel="ge" version="1.3" optional="yes">DB</dep>
    <dep type="pkg" rel="ge" version="2.0.0RC1" optional="yes">MDB2</dep>
-   <dep type="ext" rel="has" optional="no">sqlite</dep>
+   <dep type="ext" rel="has" optional="yes">sqlite</dep>
   </deps>
   <filelist>
    <dir name="/" baseinstalldir="/">
