@@ -429,7 +429,7 @@ class Log
 
     /**
      * Using debug_backtrace(), returns the file, line, and enclosing function
-     * name of the source code context from which log() was invokved.
+     * name of the source code context from which log() was invoked.
      *
      * @param   int     $depth  The initial number of frames we should step
      *                          back into the trace.
@@ -446,7 +446,7 @@ class Log
         $backtrace = debug_backtrace();
 
         /*
-         * If we were ultimately invokved by the composite handler, we need to
+         * If we were ultimately invoked by the composite handler, we need to
          * increase our depth one additional level to compensate.
          */
         if (strcasecmp(@$backtrace[$depth+1]['class'], 'Log_composite') == 0) {
