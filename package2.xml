@@ -13,10 +13,10 @@
   <email>jon@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-04-30</date>
- <time>14:59:54</time>
+ <date>2006-05-14</date>
+ <time>17:24:14</time>
  <version>
-  <release>1.9.5</release>
+  <release>1.9.6</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -24,7 +24,7 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>Correcting the sqlite dependency.  It is now optional. (Bug 7523)</notes>
+ <notes>_getBacktraceVars() now works with composite handlers. (Bug 7602)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -112,6 +112,19 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.6</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-05-14</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>_getBacktraceVars() now works with composite handlers. (Bug 7602)</notes>
+  </release>
   <release>
    <version>
     <release>1.9.5</release>

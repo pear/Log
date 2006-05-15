@@ -14,11 +14,11 @@
   </maintainer>
   </maintainers>
  <release>
-  <version>1.9.5</version>
-  <date>2006-04-30</date>
+  <version>1.9.6</version>
+  <date>2006-05-14</date>
   <license>PHP License</license>
   <state>stable</state>
-  <notes>Correcting the sqlite dependency.  It is now optional. (Bug 7523)
+  <notes>_getBacktraceVars() now works with composite handlers. (Bug 7602)
   </notes>
   <deps>
    <dep type="php" rel="ge" version="4.3.0" optional="no"/>
@@ -89,6 +89,14 @@
  </release>
  <changelog>
    <release>
+    <version>1.9.6</version>
+    <date>2006-05-14</date>
+    <license>PHP License</license>
+    <state>stable</state>
+    <notes>_getBacktraceVars() now works with composite handlers. (Bug 7602)
+    </notes>
+   </release>
+   <release>
     <version>1.9.5</version>
     <date>2006-04-30</date>
     <license>PHP License</license>
@@ -108,114 +116,6 @@ If the desired Log class already exists (because the caller has supplied it from
 The observer&apos;s factory method now provides more robust file location logic. (Bug 6831)
 Added MIN() and MAX() functions for calculating the minimum and maximum log masks based on a given priority.  MAX() superceeds the existing UPTO() function, which is now deprecated.
 Settled on the PHP4-style &quot;return object by reference&quot; notation for good, even though it results in a E_STRICT warning under PHP5. (Bug 6689)
-    </notes>
-   </release>
-   <release>
-    <version>1.9.3</version>
-    <date>2005-12-04</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>The Observer code is now PHP 4.4 compliant. (Bug 5776)
-Log::factory(), Log::singleton(), and Log_observer::factory() now return null instead of false on failure.  This is more consistent with the model that these methods return object references.  Backwards compatibility is only violated if users were explicitly testing for a literal &apos;false&apos; result.
-    </notes>
-   </release>
-   <release>
-    <version>1.9.3</version>
-    <date>2005-12-04</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>The Observer code is now PHP 4.4 compliant. (Bug 5776)
-Log::factory(), Log::singleton(), and Log_observer::factory() now return null instead of false on failure.  This is more consistent with the model that these methods return object references.  Backwards compatibility is only violated if users were explicitly testing for a literal &apos;false&apos; result.
-    </notes>
-   </release>
-   <release>
-    <version>1.9.3</version>
-    <date>2005-12-04</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>The Observer code is now PHP 4.4 compliant. (Bug 5776)
-Log::factory(), Log::singleton(), and Log_observer::factory() now return null instead of false on failure.  This is more consistent with the model that these methods return object references.  Backwards compatibility is only violated if users were explicitly testing for a literal &apos;false&apos; result.
-    </notes>
-   </release>
-   <release>
-    <version>1.9.3</version>
-    <date>2005-12-04</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>The Observer code is now PHP 4.4 compliant. (Bug 5776)
-Log::factory(), Log::singleton(), and Log_observer::factory() now return null instead of false on failure.  This is more consistent with the model that these methods return object references.  Backwards compatibility is only violated if users were explicitly testing for a literal &apos;false&apos; result.
-    </notes>
-   </release>
-   <release>
-    <version>1.9.3</version>
-    <date>2005-12-04</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>The Observer code is now PHP 4.4 compliant. (Bug 5776)
-Log::factory(), Log::singleton(), and Log_observer::factory() now return null instead of false on failure.  This is more consistent with the model that these methods return object references.  Backwards compatibility is only violated if users were explicitly testing for a literal &apos;false&apos; result.
-    </notes>
-   </release>
-   <release>
-    <version>1.9.3</version>
-    <date>2005-12-04</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>The Observer code is now PHP 4.4 compliant. (Bug 5776)
-Log::factory(), Log::singleton(), and Log_observer::factory() now return null instead of false on failure.  This is more consistent with the model that these methods return object references.  Backwards compatibility is only violated if users were explicitly testing for a literal &apos;false&apos; result.
-    </notes>
-   </release>
-   <release>
-    <version>1.9.3</version>
-    <date>2005-12-04</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>The Observer code is now PHP 4.4 compliant. (Bug 5776)
-Log::factory(), Log::singleton(), and Log_observer::factory() now return null instead of false on failure.  This is more consistent with the model that these methods return object references.  Backwards compatibility is only violated if users were explicitly testing for a literal &apos;false&apos; result.
-    </notes>
-   </release>
-   <release>
-    <version>1.9.3</version>
-    <date>2005-12-04</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>The Observer code is now PHP 4.4 compliant. (Bug 5776)
-Log::factory(), Log::singleton(), and Log_observer::factory() now return null instead of false on failure.  This is more consistent with the model that these methods return object references.  Backwards compatibility is only violated if users were explicitly testing for a literal &apos;false&apos; result.
-    </notes>
-   </release>
-   <release>
-    <version>1.9.3</version>
-    <date>2005-12-04</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>The Observer code is now PHP 4.4 compliant. (Bug 5776)
-Log::factory(), Log::singleton(), and Log_observer::factory() now return null instead of false on failure.  This is more consistent with the model that these methods return object references.  Backwards compatibility is only violated if users were explicitly testing for a literal &apos;false&apos; result.
-    </notes>
-   </release>
-   <release>
-    <version>1.9.3</version>
-    <date>2005-12-04</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>The Observer code is now PHP 4.4 compliant. (Bug 5776)
-Log::factory(), Log::singleton(), and Log_observer::factory() now return null instead of false on failure.  This is more consistent with the model that these methods return object references.  Backwards compatibility is only violated if users were explicitly testing for a literal &apos;false&apos; result.
-    </notes>
-   </release>
-   <release>
-    <version>1.9.3</version>
-    <date>2005-12-04</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>The Observer code is now PHP 4.4 compliant. (Bug 5776)
-Log::factory(), Log::singleton(), and Log_observer::factory() now return null instead of false on failure.  This is more consistent with the model that these methods return object references.  Backwards compatibility is only violated if users were explicitly testing for a literal &apos;false&apos; result.
-    </notes>
-   </release>
-   <release>
-    <version>1.9.3</version>
-    <date>2005-12-04</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>The Observer code is now PHP 4.4 compliant. (Bug 5776)
-Log::factory(), Log::singleton(), and Log_observer::factory() now return null instead of false on failure.  This is more consistent with the model that these methods return object references.  Backwards compatibility is only violated if users were explicitly testing for a literal &apos;false&apos; result.
     </notes>
    </release>
    <release>

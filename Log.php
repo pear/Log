@@ -446,6 +446,14 @@ class Log
         $backtrace = debug_backtrace();
 
         /*
+         * If we were ultimately invokved by the composite handler, we need to
+         * increase our depth one additional level to compensate.
+         */
+        if (strcasecmp(@$backtrace[$depth+1]['class'], 'Log_composite') == 0) {
+            $depth++;
+        }
+
+        /*
          * We're interested in the frame which invoked the log() function, so
          * we need to walk back some number of frames into the backtrace.  The
          * $depth parameter tells us where to start looking.   We go one step
