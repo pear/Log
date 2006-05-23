@@ -447,9 +447,12 @@ class Log
 
         /*
          * If we were ultimately invoked by the composite handler, we need to
-         * increase our depth one additional level to compensate.
+         * increase our depth one additional level to compensate.  We test two
+         * earlier frames in order to also handle the case in which we were
+         * invoked by a "shortcut" function (see below).
          */
-        if (strcasecmp(@$backtrace[$depth+1]['class'], 'Log_composite') == 0) {
+        if (strcasecmp(@$backtrace[$depth+1]['class'], 'Log_composite') == 0 ||
+            strcasecmp(@$backtrace[$depth+2]['class'], 'Log_composite') == 0) {
             $depth++;
         }
 
