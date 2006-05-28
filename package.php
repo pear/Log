@@ -10,6 +10,7 @@ EOT;
 $version = '1.9.6';
 $notes = <<<EOT
 _getBacktraceVars() now works with composite handlers. (Bug 7602)
+Instances of strftime('%T') have been replaced with '%H:%M:%S'. (Bug 7629)
 EOT;
 
 $package = new PEAR_PackageFileManager2();
