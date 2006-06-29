@@ -107,6 +107,18 @@ class Log_console extends Log
     }
 
     /**
+     * Open the output stream.
+     *
+     * @access public
+     * @since Log 1.9.7
+     */
+    function open()
+    {
+        $this->_opened = true;
+        return true;
+    }
+
+    /**
      * Closes the output stream.
      *
      * This results in a call to flush().
@@ -117,6 +129,8 @@ class Log_console extends Log
     function close()
     {
         $this->flush();
+        $this->_opened = false;
+        return true;
     }
 
     /**

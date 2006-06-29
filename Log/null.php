@@ -36,6 +36,30 @@ class Log_null extends Log
     }
 
     /**
+     * Opens the handler.
+     *
+     * @access  public
+     * @since   Log 1.9.6
+     */
+    function open()
+    {
+        $this->_opened = true;
+        return true;
+    }
+
+    /**
+     * Closes the handler.
+     *
+     * @access  public
+     * @since   Log 1.9.6
+     */
+    function close()
+    {
+        $this->_opened = false;
+        return true;
+    }
+
+    /**
      * Simply consumes the log event.  The message will still be passed
      * along to any Log_observer instances that are observing this Log.
      *

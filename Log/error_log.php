@@ -66,6 +66,30 @@ class Log_error_log extends Log
     }
 
     /**
+     * Opens the handler.
+     *
+     * @access  public
+     * @since   Log 1.9.6
+     */
+    function open()
+    {
+        $this->_opened = true;
+        return true;
+    }
+
+    /**
+     * Closes the handler.
+     *
+     * @access  public
+     * @since   Log 1.9.6
+     */
+    function close()
+    {
+        $this->_opened = false;
+        return true;
+    }
+
+    /**
      * Logs $message using PHP's error_log() function.  The message is also
      * passed along to any Log_observer instances that are observing this Log.
      *
