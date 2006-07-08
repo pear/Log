@@ -14,7 +14,7 @@
   <active>yes</active>
  </lead>
  <date>2006-07-07</date>
- <time>20:00:05</time>
+ <time>20:04:28</time>
  <version>
   <release>1.9.7</release>
   <api>1.0.0</api>
@@ -26,8 +26,8 @@
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
  <notes>Provided documentation on logging PHP assertions and exceptions.
 All stock handlers now provide stubbed open() and close() method.
-The composite handler now tracks the success of its child handler&apos;s operations.
-The composite handler&apos;s log() method now opens its child handler&apos;s if they&apos;re not already open.</notes>
+The composite handler now tracks the success of its child handlers&apos; operations.
+The composite handler&apos;s log() method now opens its child handlers if they&apos;re not already open.</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -128,8 +128,8 @@ The composite handler&apos;s log() method now opens its child handler&apos;s if 
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
    <notes>Provided documentation on logging PHP assertions and exceptions.
 All stock handlers now provide stubbed open() and close() method.
-The composite handler now tracks the success of its child handler&apos;s operations.
-The composite handler&apos;s log() method now opens its child handler&apos;s if they&apos;re not already open.</notes>
+The composite handler now tracks the success of its child handlers&apos; operations.
+The composite handler&apos;s log() method now opens its child handlers if they&apos;re not already open.</notes>
   </release>
   <release>
    <version>

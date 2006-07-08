@@ -11,8 +11,8 @@ $version = '1.9.7';
 $notes = <<<EOT
 Provided documentation on logging PHP assertions and exceptions.
 All stock handlers now provide stubbed open() and close() method.
-The composite handler now tracks the success of its child handler's operations.
-The composite handler's log() method now opens its child handler's if they're not already open.
+The composite handler now tracks the success of its child handlers' operations.
+The composite handler's log() method now opens its child handlers if they're not already open.
 EOT;
 
 $package = new PEAR_PackageFileManager2();
