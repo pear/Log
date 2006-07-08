@@ -13,10 +13,10 @@
   <email>jon@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-05-27</date>
- <time>17:38:42</time>
+ <date>2006-07-07</date>
+ <time>20:00:05</time>
  <version>
-  <release>1.9.6</release>
+  <release>1.9.7</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -24,8 +24,10 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>_getBacktraceVars() now works with composite handlers. (Bug 7602)
-Instances of strftime(&apos;%T&apos;) have been replaced with &apos;%H:%M:%S&apos;. (Bug 7629)</notes>
+ <notes>Provided documentation on logging PHP assertions and exceptions.
+All stock handlers now provide stubbed open() and close() method.
+The composite handler now tracks the success of its child handler&apos;s operations.
+The composite handler&apos;s log() method now opens its child handler&apos;s if they&apos;re not already open.</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -115,6 +117,22 @@ Instances of strftime(&apos;%T&apos;) have been replaced with &apos;%H:%M:%S&apo
  <changelog>
   <release>
    <version>
+    <release>1.9.7</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-07-07</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>Provided documentation on logging PHP assertions and exceptions.
+All stock handlers now provide stubbed open() and close() method.
+The composite handler now tracks the success of its child handler&apos;s operations.
+The composite handler&apos;s log() method now opens its child handler&apos;s if they&apos;re not already open.</notes>
+  </release>
+  <release>
+   <version>
     <release>1.9.6</release>
     <api>1.0.0</api>
    </version>
@@ -122,10 +140,11 @@ Instances of strftime(&apos;%T&apos;) have been replaced with &apos;%H:%M:%S&apo
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2006-05-27</date>
+   <date>2006-07-07</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
    <notes>_getBacktraceVars() now works with composite handlers. (Bug 7602)
-Instances of strftime(&apos;%T&apos;) have been replaced with &apos;%H:%M:%S&apos;. (Bug 7629)</notes>
+Instances of strftime(&apos;%T&apos;) have been replaced with &apos;%H:%M:%S&apos;. (Bug 7629)
+Provided documentation on logging PHP assertions and exceptions.</notes>
   </release>
   <release>
    <version>

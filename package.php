@@ -7,10 +7,12 @@ $desc = <<<EOT
 The Log framework provides an abstracted logging system. It supports logging to console, file, syslog, SQL, Sqlite, mail, and mcal targets. It also provides a subject - observer mechanism.
 EOT;
 
-$version = '1.9.6';
+$version = '1.9.7';
 $notes = <<<EOT
-_getBacktraceVars() now works with composite handlers. (Bug 7602)
-Instances of strftime('%T') have been replaced with '%H:%M:%S'. (Bug 7629)
+Provided documentation on logging PHP assertions and exceptions.
+All stock handlers now provide stubbed open() and close() method.
+The composite handler now tracks the success of its child handler's operations.
+The composite handler's log() method now opens its child handler's if they're not already open.
 EOT;
 
 $package = new PEAR_PackageFileManager2();
