@@ -20,8 +20,8 @@
   <state>stable</state>
   <notes>Provided documentation on logging PHP assertions and exceptions.
 All stock handlers now provide stubbed open() and close() method.
-The composite handler now tracks the success of its child handler&apos;s operations.
-The composite handler&apos;s log() method now opens its child handler&apos;s if they&apos;re not already open.
+The composite handler now tracks the success of its child handlers&apos; operations.
+The composite handler&apos;s log() method now opens its child handlers if they&apos;re not already open.
   </notes>
   <deps>
    <dep type="php" rel="ge" version="4.3.0" optional="no"/>
@@ -91,6 +91,17 @@ The composite handler&apos;s log() method now opens its child handler&apos;s if 
   </filelist>
  </release>
  <changelog>
+   <release>
+    <version>1.9.7</version>
+    <date>2006-07-07</date>
+    <license>PHP License</license>
+    <state>stable</state>
+    <notes>Provided documentation on logging PHP assertions and exceptions.
+All stock handlers now provide stubbed open() and close() method.
+The composite handler now tracks the success of its child handlers&apos; operations.
+The composite handler&apos;s log() method now opens its child handlers if they&apos;re not already open.
+    </notes>
+   </release>
    <release>
     <version>1.9.7</version>
     <date>2006-07-07</date>
