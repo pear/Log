@@ -795,8 +795,8 @@ Configuration
 | ``title``         | String    | ``Log Output  | The title of the output   |
 |                   |           | Window``      | window.                   |
 +-------------------+-----------+---------------+---------------------------+
-| ``colors``        | Array     | `ROY G BIV`_  | Mapping of log priorities |
-|                   |           | (high to low) | to colors.                |
+| ``styles``        | Array     | `ROY G BIV`_  | Mapping of log priorities |
+|                   |           | (high to low) | to CSS styles.            |
 +-------------------+-----------+---------------+---------------------------+
 
 .. _"JavaScript Power PHP Debugging": http://www.zend.com/zend/tut/tutorial-DebugLib.php
