@@ -903,7 +903,7 @@ time.
             $priority = PEAR_LOG_ERR;
             break;
         default:
-            $priotity = PEAR_LOG_INFO;
+            $priority = PEAR_LOG_INFO;
         }
 
         $logger->log($message . ' in ' . $file . ' at line ' . $line,
