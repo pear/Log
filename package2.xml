@@ -13,8 +13,8 @@
   <email>jon@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-07-25</date>
- <time>22:20:02</time>
+ <date>2006-07-31</date>
+ <time>22:07:35</time>
  <version>
   <release>1.9.8</release>
   <api>1.0.0</api>
@@ -121,7 +121,7 @@
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2006-07-25</date>
+   <date>2006-07-31</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
    <notes>The window handler now allows the entire CSS style to be set instead of just the text color.</notes>
   </release>
