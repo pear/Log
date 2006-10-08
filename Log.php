@@ -502,7 +502,7 @@ class Log
          * If the format string references any of the backtrace-driven
          * variables (%5, %6, %7), generate the backtrace and fetch them.
          */
-        if (preg_match('/%[567]/', $format)) {
+        if (strpos($format, '%5') || strpos($format, '%6') || strpos($format, '%7')) {
             list($file, $line, $func) = $this->_getBacktraceVars(2);
         }
 

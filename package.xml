@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
-<package version="1.0" packagerversion="1.4.10">
+<package version="1.0" packagerversion="1.4.11">
  <name>Log</name>
  <summary>Logging utilities</summary>
  <description>The Log framework provides an abstracted logging system. It supports logging to console, file, syslog, SQL, Sqlite, mail, and mcal targets. It also provides a subject - observer mechanism.
@@ -14,11 +14,11 @@
   </maintainer>
   </maintainers>
  <release>
-  <version>1.9.8</version>
-  <date>2006-07-31</date>
+  <version>1.9.9</version>
+  <date>2006-10-08</date>
   <license>PHP License</license>
   <state>stable</state>
-  <notes>The window handler now allows the entire CSS style to be set instead of just the text color.
+  <notes>Improving the performance of line format parsing. (Bug 8766)
   </notes>
   <deps>
    <dep type="php" rel="ge" version="4.3.0" optional="no"/>
@@ -89,8 +89,16 @@
  </release>
  <changelog>
    <release>
+    <version>1.9.9</version>
+    <date>2006-10-08</date>
+    <license>PHP License</license>
+    <state>stable</state>
+    <notes>Improving the performance of line format parsing. (Bug 8766)
+    </notes>
+   </release>
+   <release>
     <version>1.9.8</version>
-    <date>2006-07-25</date>
+    <date>2006-07-31</date>
     <license>PHP License</license>
     <state>stable</state>
     <notes>The window handler now allows the entire CSS style to be set instead of just the text color.

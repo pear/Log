@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.4.10" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+<package packagerversion="1.4.11" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
     http://pear.php.net/dtd/tasks-1.0.xsd
     http://pear.php.net/dtd/package-2.0
     http://pear.php.net/dtd/package-2.0.xsd">
@@ -13,10 +13,10 @@
   <email>jon@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-07-31</date>
- <time>22:07:35</time>
+ <date>2006-10-08</date>
+ <time>16:01:09</time>
  <version>
-  <release>1.9.8</release>
+  <release>1.9.9</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -24,7 +24,7 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>The window handler now allows the entire CSS style to be set instead of just the text color.</notes>
+ <notes>Improving the performance of line format parsing. (Bug 8766)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -112,6 +112,19 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.9</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-10-08</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>Improving the performance of line format parsing. (Bug 8766)</notes>
+  </release>
   <release>
    <version>
     <release>1.9.8</release>
