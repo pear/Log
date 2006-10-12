@@ -14,13 +14,19 @@
   <active>yes</active>
  </lead>
  <lead>
+  <name>Chuck Hagenbuch</name>
+  <user>chagenbu</user>
+  <email>chuck@horde.org</email>
+  <active>yes</active>
+ </lead>
+ <lead>
   <name>Jan Schneider</name>
   <user>yunosh</user>
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
  <date>2006-10-11</date>
- <time>23:27:29</time>
+ <time>23:33:14</time>
  <version>
   <release>1.9.9</release>
   <api>1.0.0</api>
