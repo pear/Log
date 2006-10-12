@@ -13,8 +13,14 @@
   <email>jon@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-10-08</date>
- <time>16:01:09</time>
+ <lead>
+  <name>Jan Schneider</name>
+  <user>yunosh</user>
+  <email>jan@horde.org</email>
+  <active>yes</active>
+ </lead>
+ <date>2006-10-11</date>
+ <time>23:27:29</time>
  <version>
   <release>1.9.9</release>
   <api>1.0.0</api>
@@ -121,7 +127,7 @@
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2006-10-08</date>
+   <date>2006-10-11</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
    <notes>Improving the performance of line format parsing. (Bug 8766)</notes>
   </release>
