@@ -28,11 +28,12 @@
 class Log_mail extends Log
 {
     /**
-     * String holding the recipient's email address.
+     * String holding the recipients' email addresses.  Multiple addresses
+     * should be separated with commas.
      * @var string
      * @access private
      */
-    var $_recipient = '';
+    var $_recipients = '';
 
     /**
      * String holding the sender's email address.
@@ -86,7 +87,7 @@ class Log_mail extends Log
      *   $conf['from']    : the mail's "From" header line,
      *   $conf['subject'] : the mail's "Subject" line.
      *
-     * @param string $name      The filename of the logfile.
+     * @param string $name      The message's recipients.
      * @param string $ident     The identity string.
      * @param array  $conf      The configuration array.
      * @param int    $level     Log messages up to and including this level.
@@ -96,7 +97,7 @@ class Log_mail extends Log
                       $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
-        $this->_recipient = $name;
+        $this->_recipients = $name;
         $this->_ident = $ident;
         $this->_mask = Log::UPTO($level);
 
@@ -169,7 +170,7 @@ class Log_mail extends Log
                 $headers = "From: $this->_from\r\n";
                 $headers .= "User-Agent: Log_mail";
 
-                if (mail($this->_recipient, $this->_subject, $this->_message,
+                if (mail($this->_recipients, $this->_subject, $this->_message,
                          $headers) == false) {
                     error_log("Log_mail: Failure executing mail()", 0);
                     return false;

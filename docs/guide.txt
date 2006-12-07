@@ -474,6 +474,9 @@ The Mail Handler
 The Mail handler aggregates a session's log events and sends them in the body
 of an email message using PHP's `mail()`_ function.
 
+Multiple recipients can be specified by separating their email addresses with
+commas in the ``$name`` construction parameter.
+
 Configuration
 ~~~~~~~~~~~~~
 +-------------------+-----------+---------------+---------------------------+
