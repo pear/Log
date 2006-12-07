@@ -250,7 +250,11 @@ class Log_file extends Log
      */
     function flush()
     {
-        return fflush($this->_fp);
+        if (is_resource($this->_fp)) {
+            return fflush($this->_fp);
+        }
+
+        return false;
     }
 
     /**

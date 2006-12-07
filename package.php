@@ -7,9 +7,9 @@ $desc = <<<EOT
 The Log framework provides an abstracted logging system. It supports logging to console, file, syslog, SQL, Sqlite, mail, and mcal targets. It also provides a subject - observer mechanism.
 EOT;
 
-$version = '1.9.9';
+$version = '1.9.10';
 $notes = <<<EOT
-Improving the performance of line format parsing. (Bug 8766)
+fflush() is now always called with a valid resource. (Bug 9388)
 EOT;
 
 $package = new PEAR_PackageFileManager2();

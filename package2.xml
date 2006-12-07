@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2006-10-11</date>
- <time>23:33:14</time>
+ <date>2006-12-06</date>
+ <time>20:12:18</time>
  <version>
-  <release>1.9.9</release>
+  <release>1.9.10</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -36,7 +36,7 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>Improving the performance of line format parsing. (Bug 8766)</notes>
+ <notes>fflush() is now always called with a valid resource. (Bug 9388)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -124,6 +124,19 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.10</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-12-06</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>fflush() is now always called with a valid resource. (Bug 9388)</notes>
+  </release>
   <release>
    <version>
     <release>1.9.9</release>

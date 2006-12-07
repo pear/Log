@@ -150,7 +150,11 @@ class Log_console extends Log
             $this->_buffer = '';
         }
  
-        return fflush($this->_stream);
+        if (is_resource($this->_stream)) {
+            return fflush($this->_stream);
+        }
+
+        return false;
     }
 
     /**
