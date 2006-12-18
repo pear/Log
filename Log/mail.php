@@ -79,6 +79,13 @@ class Log_mail extends Log
      */
     var $_message = '';
 
+    /**
+     * Flag used to indicated that log lines have been written to the message
+     * body and the message should be sent on close().
+     * @var boolean
+     * @access private
+     */
+    var $_shouldSend = false;
 
     /**
      * Constructs a new Log_mail object.
@@ -152,6 +159,7 @@ class Log_mail extends Log
                 $this->_message = $this->_preamble . "\r\n\r\n";
             }
             $this->_opened = true;
+            $_shouldSend = false;
         }
 
         return $this->_opened;
@@ -166,7 +174,7 @@ class Log_mail extends Log
     function close()
     {
         if ($this->_opened) {
-            if (!empty($this->_message)) {
+            if ($this->_shouldSend && !empty($this->_message)) {
                 $headers = "From: $this->_from\r\n";
                 $headers .= "User-Agent: Log_mail";
 
@@ -178,6 +186,7 @@ class Log_mail extends Log
 
                 /* Clear the message string now that the email has been sent. */
                 $this->_message = '';
+                $this->_shouldSend = false;
             }
             $this->_opened = false;
         }
@@ -234,10 +243,11 @@ class Log_mail extends Log
         /* Extract the string representation of the message. */
         $message = $this->_extractMessage($message);
 
-        /* Build the string containing the complete log line. */
+        /* Append the string containing the complete log line. */
         $this->_message .= $this->_format($this->_lineFormat,
                                           strftime($this->_timeFormat),
                                           $priority, $message) . "\r\n";
+        $this->_shouldSend = true;
 
         /* Notify observers about this log message. */
         $this->_announce(array('priority' => $priority, 'message' => $message));

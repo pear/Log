@@ -27,10 +27,11 @@
   </maintainers>
  <release>
   <version>1.9.10</version>
-  <date>2006-12-06</date>
+  <date>2006-12-17</date>
   <license>PHP License</license>
   <state>stable</state>
   <notes>fflush() is now always called with a valid resource. (Bug 9388)
+The mail handler, when composited, could send empoty messages. (Bug 8865)
   </notes>
   <deps>
    <dep type="php" rel="ge" version="4.3.0" optional="no"/>

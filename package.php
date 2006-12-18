@@ -10,6 +10,7 @@ EOT;
 $version = '1.9.10';
 $notes = <<<EOT
 fflush() is now always called with a valid resource. (Bug 9388)
+The mail handler, when composited, could send empoty messages. (Bug 8865)
 EOT;
 
 $package = new PEAR_PackageFileManager2();
