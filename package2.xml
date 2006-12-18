@@ -26,7 +26,7 @@
   <active>yes</active>
  </lead>
  <date>2006-12-17</date>
- <time>16:48:25</time>
+ <time>17:55:26</time>
  <version>
   <release>1.9.10</release>
   <api>1.0.0</api>
@@ -84,8 +84,9 @@ The mail handler, when composited, could send empoty messages. (Bug 8865)</notes
     <file name="console.phpt" role="test" />
     <file name="display.phpt" role="test" />
     <file name="error_log.phpt" role="test" />
-    <file name="extract.phpt" role="test" />
-    <file name="extract2.phpt" role="test" />
+    <file name="extract-zend1.phpt" role="test" />
+    <file name="extract-zend2.0.phpt" role="test" />
+    <file name="extract-zend2.2.phpt" role="test" />
     <file name="factory.phpt" role="test" />
     <file name="file.phpt" role="test" />
     <file name="levels.phpt" role="test" />

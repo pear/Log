@@ -85,8 +85,9 @@ The mail handler, when composited, could send empoty messages. (Bug 8865)
      <file role="test" name="console.phpt"/>
      <file role="test" name="display.phpt"/>
      <file role="test" name="error_log.phpt"/>
-     <file role="test" name="extract.phpt"/>
-     <file role="test" name="extract2.phpt"/>
+     <file role="test" name="extract-zend1.phpt"/>
+     <file role="test" name="extract-zend2.0.phpt"/>
+     <file role="test" name="extract-zend2.2.phpt"/>
      <file role="test" name="factory.phpt"/>
      <file role="test" name="file.phpt"/>
      <file role="test" name="levels.phpt"/>
@@ -103,10 +104,11 @@ The mail handler, when composited, could send empoty messages. (Bug 8865)
  <changelog>
    <release>
     <version>1.9.10</version>
-    <date>2006-12-06</date>
+    <date>2006-12-17</date>
     <license>PHP License</license>
     <state>stable</state>
     <notes>fflush() is now always called with a valid resource. (Bug 9388)
+The mail handler, when composited, could send empoty messages. (Bug 8865)
     </notes>
    </release>
    <release>
