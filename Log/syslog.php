@@ -13,6 +13,7 @@
  * (PHP emulates this with the Event Log on Windows machines).
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
+ * @author  Jon Parise <jon@php.net>
  * @since   Horde 1.3
  * @since   Log 1.0
  * @package Log
@@ -22,11 +23,19 @@
 class Log_syslog extends Log
 {
     /**
-    * Integer holding the log facility to use.
-    * @var string
-    * @access private
-    */
+     * Integer holding the log facility to use.
+     * @var integer
+     * @access private
+     */
     var $_name = LOG_SYSLOG;
+
+    /**
+     * Should we inherit the current syslog connection for this process, or
+     * should we call openlog() to start a new syslog connection?
+     * @var boolean
+     * @access private
+     */
+    var $_inherit = false;
 
     /**
      * Constructs a new syslog object.
@@ -45,6 +54,11 @@ class Log_syslog extends Log
             $name = LOG_SYSLOG;
         }
 
+        if (isset($conf['inherit'])) {
+            $this->_inherit = $conf['inherit'];
+            $this->_opened = $this->_inherit;
+        }
+
         $this->_id = md5(microtime());
         $this->_name = $name;
         $this->_ident = $ident;
@@ -59,8 +73,7 @@ class Log_syslog extends Log
     function open()
     {
         if (!$this->_opened) {
-            openlog($this->_ident, LOG_PID, $this->_name);
-            $this->_opened = true;
+            $this->_opened = openlog($this->_ident, LOG_PID, $this->_name);
         }
 
         return $this->_opened;
@@ -72,12 +85,12 @@ class Log_syslog extends Log
      */
     function close()
     {
-        if ($this->_opened) {
+        if ($this->_opened && !$this->_inherit) {
             closelog();
             $this->_opened = false;
         }
 
-        return ($this->_opened === false);
+        return true;
     }
 
     /**
