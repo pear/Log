@@ -126,7 +126,13 @@ class Log_syslog extends Log
         /* Extract the string representation of the message. */
         $message = $this->_extractMessage($message);
 
-        if (!syslog($this->_toSyslog($priority), $message)) {
+        /* Build a syslog priority value based on our current configuration. */
+        $priority = $this->_toSyslog($priority);
+        if ($this->_inherit) {
+            $priority |= $this->_name;
+        }
+
+        if (!syslog($priority, $message)) {
             return false;
         }
 
