@@ -26,7 +26,7 @@
   <active>yes</active>
  </lead>
  <date>2007-02-04</date>
- <time>23:32:36</time>
+ <time>23:36:07</time>
  <version>
   <release>1.9.10</release>
   <api>1.0.0</api>
@@ -38,7 +38,7 @@
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
  <notes>The syslog handler now has an &apos;inherit&apos; configuration parameter which controls whether or openlog() is called to create a new syslog environment. (Bug 9822)
 fflush() is now always called with a valid resource. (Bug 9388)
-The mail handler, when composited, could send empoty messages. (Bug 8865)</notes>
+The mail handler, when composited, no longer sends empty messages. (Bug 8865)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -140,7 +140,7 @@ The mail handler, when composited, could send empoty messages. (Bug 8865)</notes
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
    <notes>The syslog handler now has an &apos;inherit&apos; configuration parameter which controls whether or openlog() is called to create a new syslog environment. (Bug 9822)
 fflush() is now always called with a valid resource. (Bug 9388)
-The mail handler, when composited, could send empoty messages. (Bug 8865)</notes>
+The mail handler, when composited, no longer sends empty messages. (Bug 8865)</notes>
   </release>
  </changelog>
 </package>
