@@ -21,7 +21,7 @@ $result = $package->setOptions(array(
     'changelogoldtonew' => false,
     'simpleoutput'		=> true,
     'baseinstalldir'    => '/',
-    'packagefile'       => 'package2.xml',
+    'packagefile'       => 'package.xml',
     'packagedirectory'  => '.'));
 
 if (PEAR::isError($result)) {
@@ -45,20 +45,17 @@ $package->setPearinstallerDep('1.4.3');
 $package->addMaintainer('lead', 'jon', 'Jon Parise', 'jon@php.net');
 $package->addMaintainer('lead', 'chagenbu', 'Chuck Hagenbuch', 'chuck@horde.org');
 $package->addMaintainer('lead', 'yunosh', 'Jan Schneider', 'jan@horde.org');
-$package->addIgnore(array('package.php', 'phpdoc.sh', 'package.xml', 'package2.xml'));
+$package->addIgnore(array('package.php', 'phpdoc.sh', 'package.xml'));
 $package->addPackageDepWithChannel('optional', 'DB', 'pear.php.net', '1.3');
 $package->addPackageDepWithChannel('optional', 'MDB2', 'pear.php.net', '2.0.0RC1');
 $package->addExtensionDep('optional', 'sqlite');
 
 $package->generateContents();
-$package1 = &$package->exportCompatiblePackageFile1();
 
 if ($_SERVER['argv'][1] == 'commit') {
     $result = $package->writePackageFile();
-    $result = $package1->writePackageFile();
 } else {
     $result = $package->debugPackageFile();
-    $result = $package1->debugPackageFile();
 }
 
 if (PEAR::isError($result)) {

@@ -1,185 +1,146 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
-<package version="1.0" packagerversion="1.5.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.5.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
  <name>Log</name>
+ <channel>pear.php.net</channel>
  <summary>Logging utilities</summary>
- <description>The Log framework provides an abstracted logging system. It supports logging to console, file, syslog, SQL, Sqlite, mail, and mcal targets. It also provides a subject - observer mechanism.
- </description>
- <maintainers>
-  <maintainer>
-   <user>jon</user>
-   <name>Jon Parise</name>
-   <email>jon@php.net</email>
-   <role>lead</role>
-  </maintainer>
-  <maintainer>
-   <user>chagenbu</user>
-   <name>Chuck Hagenbuch</name>
-   <email>chuck@horde.org</email>
-   <role>lead</role>
-  </maintainer>
-  <maintainer>
-   <user>yunosh</user>
-   <name>Jan Schneider</name>
-   <email>jan@horde.org</email>
-   <role>lead</role>
-  </maintainer>
-  </maintainers>
- <release>
-  <version>1.9.10</version>
-  <date>2007-01-28</date>
-  <license>PHP License</license>
-  <state>stable</state>
-  <notes>The syslog handler now has an &apos;inherit&apos; configuration parameter which controls whether or openlog() is called to create a new syslog environment. (Bug 9822)
+ <description>The Log framework provides an abstracted logging system. It supports logging to console, file, syslog, SQL, Sqlite, mail, and mcal targets. It also provides a subject - observer mechanism.</description>
+ <lead>
+  <name>Jon Parise</name>
+  <user>jon</user>
+  <email>jon@php.net</email>
+  <active>yes</active>
+ </lead>
+ <lead>
+  <name>Chuck Hagenbuch</name>
+  <user>chagenbu</user>
+  <email>chuck@horde.org</email>
+  <active>yes</active>
+ </lead>
+ <lead>
+  <name>Jan Schneider</name>
+  <user>yunosh</user>
+  <email>jan@horde.org</email>
+  <active>yes</active>
+ </lead>
+ <date>2007-02-04</date>
+ <time>23:32:36</time>
+ <version>
+  <release>1.9.10</release>
+  <api>1.0.0</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+ <notes>The syslog handler now has an &apos;inherit&apos; configuration parameter which controls whether or openlog() is called to create a new syslog environment. (Bug 9822)
 fflush() is now always called with a valid resource. (Bug 9388)
-The mail handler, when composited, could send empoty messages. (Bug 8865)
-  </notes>
-  <deps>
-   <dep type="php" rel="ge" version="4.3.0" optional="no"/>
-   <dep type="pkg" rel="ge" version="1.3" optional="yes">DB</dep>
-   <dep type="pkg" rel="ge" version="2.0.0RC1" optional="yes">MDB2</dep>
-   <dep type="ext" rel="has" optional="yes">sqlite</dep>
-  </deps>
-  <filelist>
-   <dir name="/" baseinstalldir="/">
-    <dir name="docs">
-     <dir name="examples">
-      <file role="doc" name="composite.php"/>
-      <file role="doc" name="console.php"/>
-      <file role="doc" name="display.php"/>
-      <file role="doc" name="error_log.php"/>
-      <file role="doc" name="file.php"/>
-      <file role="doc" name="mail.php"/>
-      <file role="doc" name="null.php"/>
-      <file role="doc" name="observer_mail.php"/>
-      <file role="doc" name="pear_error_handler.php"/>
-      <file role="doc" name="php_error_handler.php"/>
-      <file role="doc" name="sql.php"/>
-      <file role="doc" name="sqlite.php"/>
-      <file role="doc" name="syslog.php"/>
-      <file role="doc" name="win.php"/>
-     </dir> <!-- /docs/examples -->
-     <file role="doc" name="guide.txt"/>
-    </dir> <!-- /docs -->
-    <dir name="Log">
-     <file role="php" name="composite.php"/>
-     <file role="php" name="console.php"/>
-     <file role="php" name="daemon.php"/>
-     <file role="php" name="display.php"/>
-     <file role="php" name="error_log.php"/>
-     <file role="php" name="file.php"/>
-     <file role="php" name="mail.php"/>
-     <file role="php" name="mcal.php"/>
-     <file role="php" name="mdb2.php"/>
-     <file role="php" name="null.php"/>
-     <file role="php" name="observer.php"/>
-     <file role="php" name="sql.php"/>
-     <file role="php" name="sqlite.php"/>
-     <file role="php" name="syslog.php"/>
-     <file role="php" name="win.php"/>
-    </dir> <!-- /Log -->
-    <dir name="misc">
-     <file role="data" name="log.sql"/>
-    </dir> <!-- /misc -->
-    <dir name="tests">
-     <file role="test" name="composite.phpt"/>
-     <file role="test" name="console.phpt"/>
-     <file role="test" name="display.phpt"/>
-     <file role="test" name="error_log.phpt"/>
-     <file role="test" name="extract-zend1.phpt"/>
-     <file role="test" name="extract-zend2.0.phpt"/>
-     <file role="test" name="extract-zend2.2.phpt"/>
-     <file role="test" name="factory.phpt"/>
-     <file role="test" name="file.phpt"/>
-     <file role="test" name="levels.phpt"/>
-     <file role="test" name="null.phpt"/>
-     <file role="test" name="priority.phpt"/>
-     <file role="test" name="singleton.phpt"/>
-     <file role="test" name="sqlite.phpt"/>
-     <file role="test" name="sql_ident.phpt"/>
-    </dir> <!-- /tests -->
-    <file role="php" name="Log.php"/>
-   </dir> <!-- / -->
-  </filelist>
- </release>
+The mail handler, when composited, could send empoty messages. (Bug 8865)</notes>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+   <dir name="docs">
+    <dir name="examples">
+     <file name="composite.php" role="doc" />
+     <file name="console.php" role="doc" />
+     <file name="display.php" role="doc" />
+     <file name="error_log.php" role="doc" />
+     <file name="file.php" role="doc" />
+     <file name="mail.php" role="doc" />
+     <file name="null.php" role="doc" />
+     <file name="observer_mail.php" role="doc" />
+     <file name="pear_error_handler.php" role="doc" />
+     <file name="php_error_handler.php" role="doc" />
+     <file name="sql.php" role="doc" />
+     <file name="sqlite.php" role="doc" />
+     <file name="syslog.php" role="doc" />
+     <file name="win.php" role="doc" />
+    </dir> <!-- /docs/examples -->
+    <file name="guide.txt" role="doc" />
+   </dir> <!-- /docs -->
+   <dir name="Log">
+    <file name="composite.php" role="php" />
+    <file name="console.php" role="php" />
+    <file name="daemon.php" role="php" />
+    <file name="display.php" role="php" />
+    <file name="error_log.php" role="php" />
+    <file name="file.php" role="php" />
+    <file name="mail.php" role="php" />
+    <file name="mcal.php" role="php" />
+    <file name="mdb2.php" role="php" />
+    <file name="null.php" role="php" />
+    <file name="observer.php" role="php" />
+    <file name="sql.php" role="php" />
+    <file name="sqlite.php" role="php" />
+    <file name="syslog.php" role="php" />
+    <file name="win.php" role="php" />
+   </dir> <!-- /Log -->
+   <dir name="misc">
+    <file name="log.sql" role="data" />
+   </dir> <!-- /misc -->
+   <dir name="tests">
+    <file name="composite.phpt" role="test" />
+    <file name="console.phpt" role="test" />
+    <file name="display.phpt" role="test" />
+    <file name="error_log.phpt" role="test" />
+    <file name="extract-zend1.phpt" role="test" />
+    <file name="extract-zend2.0.phpt" role="test" />
+    <file name="extract-zend2.2.phpt" role="test" />
+    <file name="factory.phpt" role="test" />
+    <file name="file.phpt" role="test" />
+    <file name="levels.phpt" role="test" />
+    <file name="null.phpt" role="test" />
+    <file name="priority.phpt" role="test" />
+    <file name="singleton.phpt" role="test" />
+    <file name="sqlite.phpt" role="test" />
+    <file name="sql_ident.phpt" role="test" />
+   </dir> <!-- /tests -->
+   <file name="Log.php" role="php" />
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>4.3.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.3</min>
+   </pearinstaller>
+  </required>
+  <optional>
+   <package>
+    <name>DB</name>
+    <channel>pear.php.net</channel>
+    <min>1.3</min>
+   </package>
+   <package>
+    <name>MDB2</name>
+    <channel>pear.php.net</channel>
+    <min>2.0.0RC1</min>
+   </package>
+   <extension>
+    <name>sqlite</name>
+   </extension>
+  </optional>
+ </dependencies>
+ <phprelease />
  <changelog>
-   <release>
-    <version>1.9.10</version>
-    <date>2007-01-28</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>The syslog handler now has an &apos;inherit&apos; configuration parameter which controls whether or openlog() is called to create a new syslog environment. (Bug 9822)
+  <release>
+   <version>
+    <release>1.9.10</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2007-02-04</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>The syslog handler now has an &apos;inherit&apos; configuration parameter which controls whether or openlog() is called to create a new syslog environment. (Bug 9822)
 fflush() is now always called with a valid resource. (Bug 9388)
-The mail handler, when composited, could send empoty messages. (Bug 8865)
-    </notes>
-   </release>
-   <release>
-    <version>1.9.9</version>
-    <date>2006-10-11</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>Improving the performance of line format parsing. (Bug 8766)
-    </notes>
-   </release>
-   <release>
-    <version>1.9.8</version>
-    <date>2006-07-31</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>The window handler now allows the entire CSS style to be set instead of just the text color.
-    </notes>
-   </release>
-   <release>
-    <version>1.9.7</version>
-    <date>2006-07-07</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>Provided documentation on logging PHP assertions and exceptions.
-All stock handlers now provide stubbed open() and close() method.
-The composite handler now tracks the success of its child handlers&apos; operations.
-The composite handler&apos;s log() method now opens its child handlers if they&apos;re not already open.
-    </notes>
-   </release>
-   <release>
-    <version>1.9.6</version>
-    <date>2006-07-07</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>_getBacktraceVars() now works with composite handlers. (Bug 7602)
-Instances of strftime(&apos;%T&apos;) have been replaced with &apos;%H:%M:%S&apos;. (Bug 7629)
-Provided documentation on logging PHP assertions and exceptions.
-    </notes>
-   </release>
-   <release>
-    <version>1.9.5</version>
-    <date>2006-04-30</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>Correcting the sqlite dependency.  It is now optional. (Bug 7523)
-    </notes>
-   </release>
-   <release>
-    <version>1.9.4</version>
-    <date>2006-04-24</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>If a &apos;DB&apos; class already exists, the SQL handler won&apos;t attempt to require DB.php. (Bug 6214)
-When creating the Log instance in factory(), return a proper reference to the object. (Bug 5261)
-When preparing the MDB2 statement, mark it as MDB2_PREPARE_MANIP. (Bug 6323)
-If the desired Log class already exists (because the caller has supplied it from some custom location), simply instantiate and return a new instance. (Mads Danquah)
-The observer&apos;s factory method now provides more robust file location logic. (Bug 6831)
-Added MIN() and MAX() functions for calculating the minimum and maximum log masks based on a given priority.  MAX() superceeds the existing UPTO() function, which is now deprecated.
-Settled on the PHP4-style &quot;return object by reference&quot; notation for good, even though it results in a E_STRICT warning under PHP5. (Bug 6689)
-    </notes>
-   </release>
-   <release>
-    <version>1.9.3</version>
-    <date>2005-12-04</date>
-    <license>PHP License</license>
-    <state>stable</state>
-    <notes>The Observer code is now PHP 4.4 compliant. (Bug 5776)
-Log::factory(), Log::singleton(), and Log_observer::factory() now return null instead of false on failure.  This is more consistent with the model that these methods return object references.  Backwards compatibility is only violated if users were explicitly testing for a literal &apos;false&apos; result.
-    </notes>
-   </release>
+The mail handler, when composited, could send empoty messages. (Bug 8865)</notes>
+  </release>
  </changelog>
 </package>
