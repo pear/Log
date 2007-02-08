@@ -129,6 +129,17 @@ class Log_firebug extends Log
      */
     function close()
     {
+        $this->flush();
+        $this->_opened = false;
+        return true;
+    }
+
+    /**
+     * Flushes all pending ("buffered") data.
+     *
+     * @access public
+     */
+    function flush() {
         if (count($this->_buffer)) {
             print '<script type="text/javascript">' . "\n";
             foreach ($this->_buffer as $line) {
@@ -136,8 +147,7 @@ class Log_firebug extends Log
             }
             print "</script>\n";
         };
-        $this->_opened = false;
-        return true;
+        $this->_buffer = array();
     }
 
     /**
