@@ -469,6 +469,39 @@ Example
     }
 
 
+The Firebug Handler
+-------------------
+The Firebug handler outputs log events to Firebug_ console. It supports
+output buffering and configurable string formats.
+
+Configuration
+~~~~~~~~~~~~~
++-------------------+-----------+---------------+---------------------------+
+| Parameter         | Type      | Default       | Description               |
++===================+===========+===============+===========================+
+| ``buffering``     | Boolean   | False         | Should the output be      |
+|                   |           |               | buffered until shutdown?  |
++-------------------+-----------+---------------+---------------------------+
+| ``lineFormat``    | String    | ``%2$s [%3$s] | Log line format           |
+|                   |           | %4$s``        | specification.            |
++-------------------+-----------+---------------+---------------------------+
+| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
+|                   |           | %H:%M:%S``    | (for strftime_).          |
++-------------------+-----------+---------------+---------------------------+
+
+.. _Firebug: http://www.getfirebug.com/
+.. _strftime: http://www.php.net/strftime
+
+Example
+~~~~~~~
+::
+
+    $logger = &Log::singleton('firebug', '', 'ident');
+    for ($i = 0; $i < 10; $i++) {
+        $logger->log("Log entry $i");
+    }
+
+
 The Mail Handler
 ----------------
 The Mail handler aggregates a session's log events and sends them in the body
