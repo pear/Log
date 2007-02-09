@@ -471,7 +471,7 @@ Example
 
 The Firebug Handler
 -------------------
-The Firebug handler outputs log events to Firebug_ console. It supports
+The Firebug handler outputs log events to the Firebug_ console. It supports
 output buffering and configurable string formats.
 
 Configuration
