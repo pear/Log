@@ -7,11 +7,9 @@ $desc = <<<EOT
 The Log framework provides an abstracted logging system. It supports logging to console, file, syslog, SQL, Sqlite, mail, and mcal targets. It also provides a subject - observer mechanism.
 EOT;
 
-$version = '1.9.10';
+$version = '1.9.11';
 $notes = <<<EOT
-The syslog handler now has an 'inherit' configuration parameter which controls whether or openlog() is called to create a new syslog environment. (Bug 9822)
-fflush() is now always called with a valid resource. (Bug 9388)
-The mail handler, when composited, no longer sends empty messages. (Bug 8865)
+A Firebug log handler has been added.
 EOT;
 
 $package = new PEAR_PackageFileManager2();

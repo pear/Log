@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.5.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+<package packagerversion="1.5.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
     http://pear.php.net/dtd/tasks-1.0.xsd
     http://pear.php.net/dtd/package-2.0
     http://pear.php.net/dtd/package-2.0.xsd">
@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2007-02-04</date>
- <time>23:36:07</time>
+ <date>2007-05-13</date>
+ <time>23:39:17</time>
  <version>
-  <release>1.9.10</release>
+  <release>1.9.11</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -36,9 +36,7 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>The syslog handler now has an &apos;inherit&apos; configuration parameter which controls whether or openlog() is called to create a new syslog environment. (Bug 9822)
-fflush() is now always called with a valid resource. (Bug 9388)
-The mail handler, when composited, no longer sends empty messages. (Bug 8865)</notes>
+ <notes>A Firebug log handler has been added.</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -48,6 +46,7 @@ The mail handler, when composited, no longer sends empty messages. (Bug 8865)</n
      <file name="display.php" role="doc" />
      <file name="error_log.php" role="doc" />
      <file name="file.php" role="doc" />
+     <file name="firebug.php" role="doc" />
      <file name="mail.php" role="doc" />
      <file name="null.php" role="doc" />
      <file name="observer_mail.php" role="doc" />
@@ -67,6 +66,7 @@ The mail handler, when composited, no longer sends empty messages. (Bug 8865)</n
     <file name="display.php" role="php" />
     <file name="error_log.php" role="php" />
     <file name="file.php" role="php" />
+    <file name="firebug.php" role="php" />
     <file name="mail.php" role="php" />
     <file name="mcal.php" role="php" />
     <file name="mdb2.php" role="php" />
@@ -90,6 +90,7 @@ The mail handler, when composited, no longer sends empty messages. (Bug 8865)</n
     <file name="extract-zend2.2.phpt" role="test" />
     <file name="factory.phpt" role="test" />
     <file name="file.phpt" role="test" />
+    <file name="firebug.phpt" role="test" />
     <file name="levels.phpt" role="test" />
     <file name="null.phpt" role="test" />
     <file name="priority.phpt" role="test" />
@@ -127,6 +128,19 @@ The mail handler, when composited, no longer sends empty messages. (Bug 8865)</n
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.11</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2007-05-13</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>A Firebug log handler has been added.</notes>
+  </release>
   <release>
    <version>
     <release>1.9.10</release>
