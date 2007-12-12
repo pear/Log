@@ -1081,8 +1081,9 @@ it.
 
 Writing New Handlers
 --------------------
-Writing a new Log handler is as simple as authoring a new class which extends
-the ``Log`` class and implements a relatively small set of standard methods.
+Writing a new Log handler is as simple as authoring a new class that extends
+the ``Log`` class and that implements a relatively small set of standard
+methods.
 
 Every handler's class name must start with ``Log_`` in order for it to be
 recognized by the Log package.
@@ -1092,7 +1093,7 @@ recognized by the Log package.
     class Log_custom extends Log
 
 The handler's constructor will be called with four parameters.  These values
-are discused in detail in the `Configuring a Handler`_ section.
+are discussed in detail in the `Configuring a Handler`_ section.
 
 ::
 
@@ -1101,30 +1102,31 @@ are discused in detail in the `Configuring a Handler`_ section.
 The constructor is responsible for configuring the handler based on these
 values.  Handler-specific parameters are passed as part of the ``$conf``
 array.  At a minimum, the handler's constructor must set the following values
-in the ``Log`` base class::
+defined by the ``Log`` base class::
 
         $this->_id = md5(microtime());
         $this->_name = $name;
         $this->_ident = $ident;
         $this->_mask = Log::UPTO($level);
 
-The `Handler Methods`_ section details the various standard methods that can
-be implemented by a log handler.  The `Utility Methods`_ section describes
+The `Handler Methods`_ section below details the various standard methods that
+can be implemented by a log handler.  The `Utility Methods`_ section describes
 some useful utility methods provided by the ``Log`` base class which may be
 useful when implementing a log handler.
 
 
 Extending Existing Handlers
 ---------------------------
-Extending existing handlers is very similar to `writing new handlers`_ except,
-instead of inheriting from the ``Log`` base class directly, the handler
-extends an existing handler's class.  This is a useful way of adding some
-custom behavior to an existing handler without writing an entirely new class.
+Extending existing handlers is very similar to `writing new handlers`_ with
+the exception that, instead of inheriting from the ``Log`` base class
+directly, the handler extends an existing handler's class.  This is a useful
+way of adding some custom behavior to an existing handler without writing an
+entirely new class (in the spirit of object-oriented programming).
 
 For example, `the mail handler`_ could be extended to support sending messages
 with MIME-encoded attachments simply by authoring a new ``Log_mail_mime``
-class with a constructor and custom ``log()`` method.  The rest of the
-standard methods would fall back on the standard ``Log_mail`` class's
+class with a compliant constructor and a custom ``log()`` method.  The rest of
+the standard methods would fall back on the ``Log_mail`` base class's
 implementations.
 
 Obviously, the specific details involved in extending an existing handler
