@@ -40,7 +40,7 @@ class Log
      * Indicates whether or not the log can been opened / connected.
      *
      * @var boolean
-     * @access private
+     * @access protected
      */
     var $_opened = false;
 
@@ -48,7 +48,7 @@ class Log
      * Instance-specific unique identification number.
      *
      * @var integer
-     * @access private
+     * @access protected
      */
     var $_id = 0;
 
@@ -56,7 +56,7 @@ class Log
      * The label that uniquely identifies this set of log messages.
      *
      * @var string
-     * @access private
+     * @access protected
      */
     var $_ident = '';
 
@@ -64,7 +64,7 @@ class Log
      * The default priority to use when logging an event.
      *
      * @var integer
-     * @access private
+     * @access protected
      */
     var $_priority = PEAR_LOG_INFO;
 
@@ -72,7 +72,7 @@ class Log
      * The bitmask of allowed log levels.
      *
      * @var integer
-     * @access private
+     * @access protected
      */
     var $_mask = PEAR_LOG_ALL;
 
@@ -80,7 +80,7 @@ class Log
      * Holds all Log_observer objects that wish to be notified of new messages.
      *
      * @var array
-     * @access private
+     * @access protected
      */
     var $_listeners = array();
 
@@ -89,7 +89,7 @@ class Log
      * "line format" strings.
      *
      * @var array
-     * @access private
+     * @access protected
      */
     var $_formatMap = array('%{timestamp}'  => '%1$s',
                             '%{ident}'      => '%2$s',
@@ -390,7 +390,7 @@ class Log
      *
      * @return string           The string representation of the message.
      *
-     * @access private
+     * @access protected
      */
     function _extractMessage($message)
     {
@@ -493,7 +493,7 @@ class Log
      *
      * @return  string  Formatted log string.
      *
-     * @access  private
+     * @access  protected
      * @since   Log 1.9.4
      */
     function _format($format, $timestamp, $priority, $message)
@@ -528,6 +528,7 @@ class Log
      *
      * @return string           The string representation of $level.
      *
+     * @access  public
      * @since   Log 1.0
      */
     function priorityToString($priority)
@@ -556,6 +557,7 @@ class Log
      * @return string           The PEAR_LOG_* integer contstant corresponding
      *                          the the specified priority name.
      *
+     * @access  public
      * @since   Log 1.9.0
      */
     function stringToPriority($name)
@@ -686,7 +688,7 @@ class Log
      * @return boolean  True if the given priority is included in the current
      *                  log mask.
      *
-     * @access  private
+     * @access  protected
      * @since   Log 1.7.0
      */
     function _isMasked($priority)
@@ -772,7 +774,7 @@ class Log
      *
      * @param array     $event      A hash describing the log event.
      *
-     * @access private
+     * @access protected
      */
     function _announce($event)
     {
