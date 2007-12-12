@@ -270,7 +270,8 @@ calling their ``flush()`` method::
     $logger->close();
 
 At this time, the ``flush()`` method is only implemented by `the console
-handler`_, `the file handler`_ and `the mail handler`_.
+handler`_, `the file handler`_, `the Firebug handler`_, and `the mail
+handler`_.
 
 
 Standard Log Handlers
@@ -847,8 +848,12 @@ Configuration
 |                   |           | (high to low) | to CSS styles.            |
 +-------------------+-----------+---------------+---------------------------+
 
+**Note:** The Window handler may not work reliably when PHP's `output
+buffering`_ system is enabled.
+
 .. _"JavaScript Power PHP Debugging": http://www.zend.com/zend/tut/tutorial-DebugLib.php
 .. _ROY G BIV: http://www.cis.rit.edu/
+.. _output buffering: http://www.php.net/outcontrol
 
 Example
 ~~~~~~~
