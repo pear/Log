@@ -4,12 +4,13 @@ require_once 'PEAR/PackageFileManager2.php';
 PEAR::setErrorHandling(PEAR_ERROR_DIE);
 
 $desc = <<<EOT
-The Log framework provides an abstracted logging system. It supports logging to console, file, syslog, SQL, Sqlite, mail, and mcal targets. It also provides a subject - observer mechanism.
+The Log framework provides an abstracted logging system. It supports logging to console, file, Firebug, syslog, SQL, Sqlite, mail, mcal, and window targets. It also provides composite and subject - observer mechanisms.
 EOT;
 
-$version = '1.9.11';
+$version = '1.9.12';
 $notes = <<<EOT
-A Firebug log handler has been added.
+- The Firebug handler no longer generates Javascript errors in IE. (Bug 12607)
+- The users guide has been updated with information on writing custom handlers.
 EOT;
 
 $package = new PEAR_PackageFileManager2();
@@ -29,7 +30,7 @@ if (PEAR::isError($result)) {
 
 $package->setPackage('Log');
 $package->setPackageType('php');
-$package->setSummary('Logging utilities');
+$package->setSummary('Logging Framework');
 $package->setDescription($desc);
 $package->setChannel('pear.php.net');
 $package->setLicense('PHP License', 'http://www.php.net/license/3_01.txt');

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.5.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+<package packagerversion="1.6.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
     http://pear.php.net/dtd/tasks-1.0.xsd
     http://pear.php.net/dtd/package-2.0
     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Log</name>
  <channel>pear.php.net</channel>
- <summary>Logging utilities</summary>
- <description>The Log framework provides an abstracted logging system. It supports logging to console, file, syslog, SQL, Sqlite, mail, and mcal targets. It also provides a subject - observer mechanism.</description>
+ <summary>Logging Framework</summary>
+ <description>The Log framework provides an abstracted logging system. It supports logging to console, file, Firebug, syslog, SQL, Sqlite, mail, mcal, and window targets. It also provides composite and subject - observer mechanisms.</description>
  <lead>
   <name>Jon Parise</name>
   <user>jon</user>
@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2007-05-13</date>
- <time>23:39:17</time>
+ <date>2007-12-11</date>
+ <time>23:12:11</time>
  <version>
-  <release>1.9.11</release>
+  <release>1.9.12</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -36,7 +36,8 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>A Firebug log handler has been added.</notes>
+ <notes>- The Firebug handler no longer generates Javascript errors in IE. (Bug 12607)
+- The users guide has been updated with information on writing custom handlers.</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -128,6 +129,20 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.12</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2007-12-11</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>- The Firebug handler no longer generates Javascript errors in IE. (Bug 12607)
+- The users guide has been updated with information on writing custom handlers.</notes>
+  </release>
   <release>
    <version>
     <release>1.9.11</release>
