@@ -25,7 +25,7 @@ handler.
 A wide variety of handlers are distributed with the Log package, and, should
 none of them fit your application's needs, it's easy to `write your own`__.
 
-.. _Log class: http://cvs.php.net/co.php/pear/Log/Log.php
+.. _Log class: http://cvs.php.net/viewvc.cgi/pear/Log/Log.php
 __ `Custom Handlers`_
 
 Creating a Log Object
@@ -56,7 +56,7 @@ The new ``Log`` instance is returned by reference.
     $file = &Log::factory('file', 'out.log', 'TEST');
     $file->log('Logging to out.log.');
 
-.. _Factory Pattern: http://www.phppatterns.com/index.php/article/articleview/49/1/1/
+.. _Factory Pattern: http://wikipedia.org/wiki/Factory_method_pattern
 
 The Singleton Method
 ~~~~~~~~~~~~~~~~~~~~
@@ -91,7 +91,7 @@ method.  The new ``Log`` instance is returned by reference.
         echo '$c and $d point to different Log instances.' . "\n";
     }
 
-.. _Singleton Pattern: http://www.phppatterns.com/index.php/article/articleview/6/1/1/
+.. _Singleton Pattern: http://wikipedia.org/wiki/Singleton_pattern
 
 Direct Instantiation
 ~~~~~~~~~~~~~~~~~~~~
@@ -915,7 +915,7 @@ Observers can be detached using the ``detach()`` method::
 At this time, no concrete ``Log_observer`` implementations are distributed
 with the Log package.
 
-.. _observer pattern: http://phppatterns.com/index.php/article/articleview/27/1/1/
+.. _observer pattern: http://wikipedia.org/wiki/Observer_pattern
 
 
 Logging From Standard Error Handlers
