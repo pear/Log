@@ -10,6 +10,7 @@ EOT;
 $version = '1.9.13';
 $notes = <<<EOT
 - The Firebug handler's unit test now passes. (Bug 12674)
+- Fixed a PHP4 compatibility problem involving class_exists(). (Bug 12675)
 EOT;
 
 $package = new PEAR_PackageFileManager2();

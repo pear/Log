@@ -26,7 +26,7 @@
   <active>yes</active>
  </lead>
  <date>2007-12-12</date>
- <time>22:04:46</time>
+ <time>22:46:03</time>
  <version>
   <release>1.9.13</release>
   <api>1.0.0</api>
@@ -36,7 +36,8 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>- The Firebug handler&apos;s unit test now passes. (Bug 12674)</notes>
+ <notes>- The Firebug handler&apos;s unit test now passes. (Bug 12674)
+- Fixed a PHP4 compatibility problem involving class_exists(). (Bug 12675)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -139,7 +140,8 @@
    </stability>
    <date>2007-12-12</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>- The Firebug handler&apos;s unit test now passes. (Bug 12674)</notes>
+   <notes>- The Firebug handler&apos;s unit test now passes. (Bug 12674)
+- Fixed a PHP4 compatibility problem involving class_exists(). (Bug 12675)</notes>
   </release>
   <release>
    <version>
