@@ -34,27 +34,63 @@ $logger->log('Alert',     PEAR_LOG_ALERT);
 $logger->log('Emergency', PEAR_LOG_EMERG);
 --EXPECT--
 ** UNBUFFERED **
-<script type="text/javascript">console.debug("PHP [debug] Debug");</script>
-<script type="text/javascript">console.info("PHP [info] Info");</script>
-<script type="text/javascript">console.info("PHP [notice] Notice");</script>
-<script type="text/javascript">console.warn("PHP [warning] Warning");</script>
-<script type="text/javascript">console.error("PHP [error] Error");</script>
-<script type="text/javascript">console.error("PHP [critical] Critical");</script>
-<script type="text/javascript">console.error("PHP [alert] Alert");</script>
-<script type="text/javascript">console.error("PHP [emergency] Emergency");</script>
+<script type="text/javascript">
+if (('console' in window) || ('firebug' in console)) {
+  console.debug("PHP [debug] Debug");
+}
+</script>
+<script type="text/javascript">
+if (('console' in window) || ('firebug' in console)) {
+  console.info("PHP [info] Info");
+}
+</script>
+<script type="text/javascript">
+if (('console' in window) || ('firebug' in console)) {
+  console.info("PHP [notice] Notice");
+}
+</script>
+<script type="text/javascript">
+if (('console' in window) || ('firebug' in console)) {
+  console.warn("PHP [warning] Warning");
+}
+</script>
+<script type="text/javascript">
+if (('console' in window) || ('firebug' in console)) {
+  console.error("PHP [error] Error");
+}
+</script>
+<script type="text/javascript">
+if (('console' in window) || ('firebug' in console)) {
+  console.error("PHP [critical] Critical");
+}
+</script>
+<script type="text/javascript">
+if (('console' in window) || ('firebug' in console)) {
+  console.error("PHP [alert] Alert");
+}
+</script>
+<script type="text/javascript">
+if (('console' in window) || ('firebug' in console)) {
+  console.error("PHP [emergency] Emergency");
+}
+</script>
 
 ** START BUFFERING **
 <script type="text/javascript">
-console.debug("PHP [debug] Debug");
-console.info("PHP [info] Info");
-console.info("PHP [notice] Notice");
-console.warn("PHP [warning] Warning");
+if (('console' in window) || ('firebug' in console)) {
+  console.debug("PHP [debug] Debug");
+  console.info("PHP [info] Info");
+  console.info("PHP [notice] Notice");
+  console.warn("PHP [warning] Warning");
+}
 </script>
 ** FLUSHED **
 ** REST OF BUFFERED **
 <script type="text/javascript">
-console.error("PHP [error] Error");
-console.error("PHP [critical] Critical");
-console.error("PHP [alert] Alert");
-console.error("PHP [emergency] Emergency");
+if (('console' in window) || ('firebug' in console)) {
+  console.error("PHP [error] Error");
+  console.error("PHP [critical] Critical");
+  console.error("PHP [alert] Alert");
+  console.error("PHP [emergency] Emergency");
+}
 </script>

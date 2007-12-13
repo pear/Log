@@ -7,10 +7,9 @@ $desc = <<<EOT
 The Log framework provides an abstracted logging system. It supports logging to console, file, Firebug, syslog, SQL, Sqlite, mail, mcal, and window targets. It also provides composite and subject - observer mechanisms.
 EOT;
 
-$version = '1.9.12';
+$version = '1.9.13';
 $notes = <<<EOT
-- The Firebug handler no longer generates Javascript errors in IE. (Bug 12607)
-- The users guide has been updated with information on writing custom handlers.
+- The Firebug handler's unit test now passes. (Bug 12674)
 EOT;
 
 $package = new PEAR_PackageFileManager2();

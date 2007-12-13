@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2007-12-11</date>
- <time>23:12:11</time>
+ <date>2007-12-12</date>
+ <time>22:04:46</time>
  <version>
-  <release>1.9.12</release>
+  <release>1.9.13</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -36,8 +36,7 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>- The Firebug handler no longer generates Javascript errors in IE. (Bug 12607)
-- The users guide has been updated with information on writing custom handlers.</notes>
+ <notes>- The Firebug handler&apos;s unit test now passes. (Bug 12674)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -129,6 +128,19 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.13</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2007-12-12</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>- The Firebug handler&apos;s unit test now passes. (Bug 12674)</notes>
+  </release>
   <release>
    <version>
     <release>1.9.12</release>
