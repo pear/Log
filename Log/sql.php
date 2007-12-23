@@ -125,7 +125,7 @@ class Log_sql extends Log
         $this->_mask = Log::UPTO($level);
 
         /* Now that we have a table name, assign our SQL statement. */
-        if (!empty($this->_sql)) {
+        if (!empty($conf['sql'])) {
             $this->_sql = $conf['sql'];
         } else {
             $this->_sql = 'INSERT INTO ' . $this->_table .
