@@ -10,6 +10,7 @@ EOT;
 $version = '1.9.14';
 $notes = <<<EOT
 - The sql handler wasn't honoring custom SQL insertion statements. (Bug 12734)
+- The display handler now has a configurable line format. (Request 12781)
 EOT;
 
 $package = new PEAR_PackageFileManager2();

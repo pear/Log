@@ -323,13 +323,19 @@ Configuration
 +-------------------+-----------+---------------+---------------------------+
 | Parameter         | Type      | Default       | Description               |
 +===================+===========+===============+===========================+
+| ``lineFormat``    | String    | ``<b>%3$s</b>:| Log line format           |
+|                   |           | %4$s``        | specification.            |
++-------------------+-----------+---------------+---------------------------+
+| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
+|                   |           | %H:%M:%S``    | (for strftime_).          |
++-------------------+-----------+---------------+---------------------------+
 | ``error_prepend`` | String    | PHP INI value | This string will be       |
-|                   |           |               | prepended to the log      |
-|                   |           |               | output.                   |
+|                   |           |               | prepended to the line     |
+|                   |           |               | format.                   |
 +-------------------+-----------+---------------+---------------------------+
 | ``error_append``  | String    | PHP INI value | This string will be       |
-|                   |           |               | appended to the log       |
-|                   |           |               | output.                   |
+|                   |           |               | appended to the line      |
+|                   |           |               | format.                   |
 +-------------------+-----------+---------------+---------------------------+
 | ``linebreak``     | String    | ``<br />\n``  | This string is used to    |
 |                   |           |               | represent a line break.   |

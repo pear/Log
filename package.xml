@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2007-12-12</date>
- <time>22:46:03</time>
+ <date>2007-12-29</date>
+ <time>16:48:00</time>
  <version>
-  <release>1.9.13</release>
+  <release>1.9.14</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -36,8 +36,8 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>- The Firebug handler&apos;s unit test now passes. (Bug 12674)
-- Fixed a PHP4 compatibility problem involving class_exists(). (Bug 12675)</notes>
+ <notes>- The sql handler wasn&apos;t honoring custom SQL insertion statements. (Bug 12734)
+- The display handler now has a configurable line format. (Request 12781)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -129,6 +129,20 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.14</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2007-12-29</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>- The sql handler wasn&apos;t honoring custom SQL insertion statements. (Bug 12734)
+- The display handler now has a configurable line format. (Request 12781)</notes>
+  </release>
   <release>
    <version>
     <release>1.9.13</release>

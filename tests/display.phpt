@@ -10,14 +10,14 @@ $conf = array('error_prepend' => '<tt>',
               'linebreak'     => "<br /><br />\n");
 $logger = &Log::singleton('display', '', '', $conf);
 for ($i = 0; $i < 3; $i++) {
-	$logger->log("Log entry $i");
+    $logger->log("Log entry $i");
 }
 $logger->log("Multi\nLine\nEntry");
 
 --EXPECT--
-<tt><b>Info</b>: Log entry 0</tt><br /><br />
-<tt><b>Info</b>: Log entry 1</tt><br /><br />
-<tt><b>Info</b>: Log entry 2</tt><br /><br />
-<tt><b>Info</b>: Multi<br />
+<tt><b>info</b>: Log entry 0</tt><br /><br />
+<tt><b>info</b>: Log entry 1</tt><br /><br />
+<tt><b>info</b>: Log entry 2</tt><br /><br />
+<tt><b>info</b>: Multi<br />
 Line<br />
 Entry</tt><br /><br />
