@@ -6,7 +6,7 @@
  <name>Log</name>
  <channel>pear.php.net</channel>
  <summary>Logging Framework</summary>
- <description>The Log framework provides an abstracted logging system. It supports logging to console, file, Firebug, syslog, SQL, Sqlite, mail, mcal, and window targets. It also provides composite and subject - observer mechanisms.</description>
+ <description>The Log package provides an abstracted logging framework.  It includes output handlers for log files, databases, syslog, email, Firebug, and the console.  It also provides composite and subject-observer logging mechanisms.</description>
  <lead>
   <name>Jon Parise</name>
   <user>jon</user>
@@ -25,8 +25,8 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2007-12-29</date>
- <time>16:48:00</time>
+ <date>2008-01-01</date>
+ <time>16:42:37</time>
  <version>
   <release>1.9.14</release>
   <api>1.0.0</api>
@@ -138,7 +138,7 @@
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2007-12-29</date>
+   <date>2008-01-01</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
    <notes>- The sql handler wasn&apos;t honoring custom SQL insertion statements. (Bug 12734)
 - The display handler now has a configurable line format. (Request 12781)</notes>
