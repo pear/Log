@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2008-01-01</date>
- <time>16:42:37</time>
+ <date>2008-01-08</date>
+ <time>08:21:23</time>
  <version>
-  <release>1.9.14</release>
+  <release>1.9.15</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -36,8 +36,7 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>- The sql handler wasn&apos;t honoring custom SQL insertion statements. (Bug 12734)
-- The display handler now has a configurable line format. (Request 12781)</notes>
+ <notes>- The Firebug handler now avoids more Javascript errors in IE. (Bug 12810)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -129,6 +128,19 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.15</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-01-08</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>- The Firebug handler now avoids more Javascript errors in IE. (Bug 12810)</notes>
+  </release>
   <release>
    <version>
     <release>1.9.14</release>
