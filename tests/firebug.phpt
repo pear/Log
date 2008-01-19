@@ -35,49 +35,49 @@ $logger->log('Emergency', PEAR_LOG_EMERG);
 --EXPECT--
 ** UNBUFFERED **
 <script type="text/javascript">
-if (('console' in window) || ('firebug' in console)) {
+if (('console' in window) && ('firebug' in console)) {
   console.debug("PHP [debug] Debug");
 }
 </script>
 <script type="text/javascript">
-if (('console' in window) || ('firebug' in console)) {
+if (('console' in window) && ('firebug' in console)) {
   console.info("PHP [info] Info");
 }
 </script>
 <script type="text/javascript">
-if (('console' in window) || ('firebug' in console)) {
+if (('console' in window) && ('firebug' in console)) {
   console.info("PHP [notice] Notice");
 }
 </script>
 <script type="text/javascript">
-if (('console' in window) || ('firebug' in console)) {
+if (('console' in window) && ('firebug' in console)) {
   console.warn("PHP [warning] Warning");
 }
 </script>
 <script type="text/javascript">
-if (('console' in window) || ('firebug' in console)) {
+if (('console' in window) && ('firebug' in console)) {
   console.error("PHP [error] Error");
 }
 </script>
 <script type="text/javascript">
-if (('console' in window) || ('firebug' in console)) {
+if (('console' in window) && ('firebug' in console)) {
   console.error("PHP [critical] Critical");
 }
 </script>
 <script type="text/javascript">
-if (('console' in window) || ('firebug' in console)) {
+if (('console' in window) && ('firebug' in console)) {
   console.error("PHP [alert] Alert");
 }
 </script>
 <script type="text/javascript">
-if (('console' in window) || ('firebug' in console)) {
+if (('console' in window) && ('firebug' in console)) {
   console.error("PHP [emergency] Emergency");
 }
 </script>
 
 ** START BUFFERING **
 <script type="text/javascript">
-if (('console' in window) || ('firebug' in console)) {
+if (('console' in window) && ('firebug' in console)) {
   console.debug("PHP [debug] Debug");
   console.info("PHP [info] Info");
   console.info("PHP [notice] Notice");
@@ -87,7 +87,7 @@ if (('console' in window) || ('firebug' in console)) {
 ** FLUSHED **
 ** REST OF BUFFERED **
 <script type="text/javascript">
-if (('console' in window) || ('firebug' in console)) {
+if (('console' in window) && ('firebug' in console)) {
   console.error("PHP [error] Error");
   console.error("PHP [critical] Critical");
   console.error("PHP [alert] Alert");
