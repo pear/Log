@@ -25,8 +25,8 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2008-01-08</date>
- <time>08:21:23</time>
+ <date>2008-01-19</date>
+ <time>13:46:58</time>
  <version>
   <release>1.9.15</release>
   <api>1.0.0</api>
@@ -137,7 +137,7 @@
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2008-01-08</date>
+   <date>2008-01-19</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
    <notes>- The Firebug handler now avoids more Javascript errors in IE. (Bug 12810)</notes>
   </release>
