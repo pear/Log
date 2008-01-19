@@ -229,7 +229,7 @@ only those events marked as ``PEAR_LOG_NOTICE`` or ``PEAR_LOG_DEBUG``::
     $logger->setMask($mask);
 
 For convenience, two special masks are predefined: ``PEAR_LOG_NONE`` and
-``PEAR_LOG_ALL``.  ``PEAR_LOG_ALL`` is especially useful for exluding only
+``PEAR_LOG_ALL``.  ``PEAR_LOG_ALL`` is especially useful for excluding only
 specific priorities::
 
     $mask = PEAR_LOG_ALL ^ Log::MASK(PEAR_LOG_NOTICE);
@@ -707,7 +707,6 @@ Using an existing `DB`_ object::
 The Sqlite Handler
 ------------------
 :Author:        Bertrand Mansion
-:Contact:       bmansion@mamasam.com
 
 The Sqlite handler sends log events to an Sqlite database using the `native
 PHP sqlite functions`_.
@@ -1219,7 +1218,7 @@ be written to the handler's log.
 void _announce($event)
 ~~~~~~~~~~~~~~~~~~~~~~
 This method informs any registered `log observers`_ that a new event has been
-logged.  ``$event`` is an array containg two named elements::
+logged.  ``$event`` is an array containing two named elements::
 
     array('priority' => $priority, 'message' => $message)
 
