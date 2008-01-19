@@ -13,7 +13,7 @@
  * http://www.getfirebug.com/
  *
  * @author  Mika Tuupola <tuupola@appelsiini.net>
- * @since   Log 1.x.x
+ * @since   Log 1.9.11
  * @package Log
  *
  * @example firebug.php     Using the firebug handler.
