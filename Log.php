@@ -16,8 +16,8 @@ define('PEAR_LOG_NOTICE',   5);     /* Normal but significant */
 define('PEAR_LOG_INFO',     6);     /* Informational */
 define('PEAR_LOG_DEBUG',    7);     /* Debug-level messages */
 
-define('PEAR_LOG_ALL',      bindec('11111111'));  /* All messages */
-define('PEAR_LOG_NONE',     bindec('00000000'));  /* No message */
+define('PEAR_LOG_ALL',      0xffffffff);    /* All messages */
+define('PEAR_LOG_NONE',     0x00000000);    /* No message */
 
 /* Log types for PHP's native error_log() function. */
 define('PEAR_LOG_TYPE_SYSTEM',  0); /* Use PHP's system logger */
