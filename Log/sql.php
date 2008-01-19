@@ -7,7 +7,7 @@
  * @package Log
  */
 
-/*
+/**
  * We require the PEAR DB class.  This is generally defined in the DB.php file,
  * but it's possible that the caller may have provided the DB class, or a
  * compatible wrapper (such as the one shipped with MDB2), so we first check
