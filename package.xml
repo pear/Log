@@ -26,7 +26,7 @@
   <active>yes</active>
  </lead>
  <date>2008-01-19</date>
- <time>14:22:07</time>
+ <time>14:30:26</time>
  <version>
   <release>1.9.16</release>
   <api>1.0.0</api>
@@ -43,25 +43,25 @@
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
-    <dir name="examples">
-     <file name="composite.php" role="doc" />
-     <file name="console.php" role="doc" />
-     <file name="display.php" role="doc" />
-     <file name="error_log.php" role="doc" />
-     <file name="file.php" role="doc" />
-     <file name="firebug.php" role="doc" />
-     <file name="mail.php" role="doc" />
-     <file name="null.php" role="doc" />
-     <file name="observer_mail.php" role="doc" />
-     <file name="pear_error_handler.php" role="doc" />
-     <file name="php_error_handler.php" role="doc" />
-     <file name="sql.php" role="doc" />
-     <file name="sqlite.php" role="doc" />
-     <file name="syslog.php" role="doc" />
-     <file name="win.php" role="doc" />
-    </dir> <!-- /docs/examples -->
     <file name="guide.txt" role="doc" />
    </dir> <!-- /docs -->
+   <dir name="examples">
+    <file name="composite.php" role="doc" />
+    <file name="console.php" role="doc" />
+    <file name="display.php" role="doc" />
+    <file name="error_log.php" role="doc" />
+    <file name="file.php" role="doc" />
+    <file name="firebug.php" role="doc" />
+    <file name="mail.php" role="doc" />
+    <file name="null.php" role="doc" />
+    <file name="observer_mail.php" role="doc" />
+    <file name="pear_error_handler.php" role="doc" />
+    <file name="php_error_handler.php" role="doc" />
+    <file name="sql.php" role="doc" />
+    <file name="sqlite.php" role="doc" />
+    <file name="syslog.php" role="doc" />
+    <file name="win.php" role="doc" />
+   </dir> <!-- /examples -->
    <dir name="Log">
     <file name="composite.php" role="php" />
     <file name="console.php" role="php" />
