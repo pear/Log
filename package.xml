@@ -26,9 +26,9 @@
   <active>yes</active>
  </lead>
  <date>2008-01-19</date>
- <time>13:46:58</time>
+ <time>14:22:07</time>
  <version>
-  <release>1.9.15</release>
+  <release>1.9.16</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -36,7 +36,10 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>- The Firebug handler now avoids more Javascript errors in IE. (Bug 12810)</notes>
+ <notes>- Corrected some PHPDoc syntax problems.
+- Correcting some spelling errors in the users guide.
+- Fixed the firebug unit test.
+- Simplified the PEAR_LOG_ALL and PEAR_LOG_NONE constants.</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -128,6 +131,22 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.16</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-01-19</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>- Corrected some PHPDoc syntax problems.
+- Correcting some spelling errors in the users guide.
+- Fixed the firebug unit test.
+- Simplified the PEAR_LOG_ALL and PEAR_LOG_NONE constants.</notes>
+  </release>
   <release>
    <version>
     <release>1.9.15</release>
