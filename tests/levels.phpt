@@ -14,7 +14,7 @@ function verify($exp, $msg)
 
 function testLevels($mask)
 {
-    echo "Mask: $mask\n";
+    echo "Mask: " . ($mask & 0xffff) . "\n";
 
     for ($priority = PEAR_LOG_EMERG; $priority <= PEAR_LOG_DEBUG; $priority++) {
         $masked = (Log::MASK($priority) & $mask);
@@ -33,7 +33,7 @@ testLevels(Log::MIN(PEAR_LOG_WARNING));
 testLevels(Log::MAX(PEAR_LOG_WARNING));
 
 --EXPECT--
-Mask: -1
+Mask: 65535
 Priority 0: masked
 Priority 1: masked
 Priority 2: masked
@@ -53,7 +53,7 @@ Priority 5: unmasked
 Priority 6: unmasked
 Priority 7: unmasked
 
-Mask: 2147483647
+Mask: 65535
 Priority 0: masked
 Priority 1: masked
 Priority 2: masked
@@ -73,7 +73,7 @@ Priority 5: unmasked
 Priority 6: unmasked
 Priority 7: unmasked
 
-Mask: -16
+Mask: 65520
 Priority 0: unmasked
 Priority 1: unmasked
 Priority 2: unmasked
