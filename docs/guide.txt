@@ -511,8 +511,13 @@ Example
 
 The Mail Handler
 ----------------
+
 The Mail handler aggregates a session's log events and sends them in the body
-of an email message using PHP's `mail()`_ function.
+of an email message using either the `PEAR Mail`_ package or PHP's native
+`mail()`_ function.
+
+If an empty ``mailBackend`` value is specified, the `mail()`_ function will be
+used instead of the `PEAR Mail`_ package.
 
 Multiple recipients can be specified by separating their email addresses with
 commas in the ``$name`` construction parameter.
@@ -536,7 +541,15 @@ Configuration
 | ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
 |                   |           | %H:%M:%S``    | (for strftime_).          |
 +-------------------+-----------+---------------+---------------------------+
+| ``mailBackend``   | String    | `` `(empty)`  | Name of the Mail package  |
+|                   |           |               | backend to use.           |
++-------------------+-----------+---------------+---------------------------+
+| ``mailParams``    | Array     | `(empty)`     | Array of parameters that  |
+|                   |           |               | will be passed to the     |
+|                   |           |               | Mail package backend.     |
++-------------------+-----------+---------------+---------------------------+
 
+.. _PEAR Mail: http://pear.php.net/package/Mail
 .. _mail(): http://www.php.net/mail
 
 Example
