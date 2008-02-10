@@ -149,19 +149,6 @@
   </release>
   <release>
    <version>
-    <release>1.9.17</release>
-    <api>1.0.0</api>
-   </version>
-   <stability>
-    <release>stable</release>
-    <api>stable</api>
-   </stability>
-   <date>2008-01-20</date>
-   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>- The level masking test now passed on 64-bit platforms. (Bug 12933)</notes>
-  </release>
-  <release>
-   <version>
     <release>1.9.16</release>
     <api>1.0.0</api>
    </version>
