@@ -25,8 +25,8 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2008-02-09</date>
- <time>16:14:24</time>
+ <date>2008-02-10</date>
+ <time>14:53:37</time>
  <version>
   <release>1.10.0</release>
   <api>1.0.0</api>
@@ -142,7 +142,7 @@
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2008-02-09</date>
+   <date>2008-02-10</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
    <notes>- The level masking test now passed on 64-bit platforms. (Bug 12933)
 - The mail handler can now optionally use the PEAR Mail package. (Request 12839)</notes>
