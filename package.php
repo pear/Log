@@ -7,10 +7,9 @@ $desc = <<<EOT
 The Log package provides an abstracted logging framework.  It includes output handlers for log files, databases, syslog, email, Firebug, and the console.  It also provides composite and subject-observer logging mechanisms.
 EOT;
 
-$version = '1.10.0';
+$version = '1.10.1';
 $notes = <<<EOT
-- The level masking test now passed on 64-bit platforms. (Bug 12933)
-- The mail handler can now optionally use the PEAR Mail package. (Request 12839)
+- The default value for the display handler's lineBreak configuration value wasn't being applied. (Bug 13436)
 EOT;
 
 $package = new PEAR_PackageFileManager2();
