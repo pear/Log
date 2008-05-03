@@ -29,9 +29,13 @@ test('Prepend / Append', array('error_prepend' => '<tt>',
 --EXPECT--
 Testing Default Configuration
 ------------------------------------------------------
-<b>info</b>: Info<b>error</b>: Error<b>debug</b>: Debug<b>info</b>: Multi<br />
+<b>info</b>: Info<br />
+<b>error</b>: Error<br />
+<b>debug</b>: Debug<br />
+<b>info</b>: Multi<br />
 Line<br />
-Entry
+Entry<br />
+
 
 Testing Line Break Configuration
 ------------------------------------------------------
@@ -45,12 +49,19 @@ Entry
 
 Testing Format Configuration
 ------------------------------------------------------
-<!-- Info --><!-- Error --><!-- Debug --><!-- Multi<br />
+<!-- Info --><br />
+<!-- Error --><br />
+<!-- Debug --><br />
+<!-- Multi<br />
 Line<br />
-Entry -->
+Entry --><br />
+
 
 Testing Prepend / Append Configuration
 ------------------------------------------------------
-<tt><b>info</b>: Info</tt><tt><b>error</b>: Error</tt><tt><b>debug</b>: Debug</tt><tt><b>info</b>: Multi<br />
+<tt><b>info</b>: Info</tt><br />
+<tt><b>error</b>: Error</tt><br />
+<tt><b>debug</b>: Debug</tt><br />
+<tt><b>info</b>: Multi<br />
 Line<br />
-Entry</tt>
+Entry</tt><br />
