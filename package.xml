@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2008-02-10</date>
- <time>14:53:37</time>
+ <date>2008-05-03</date>
+ <time>12:19:43</time>
  <version>
-  <release>1.10.0</release>
+  <release>1.10.1</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -36,8 +36,7 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>- The level masking test now passed on 64-bit platforms. (Bug 12933)
-- The mail handler can now optionally use the PEAR Mail package. (Request 12839)</notes>
+ <notes>- The default value for the display handler&apos;s lineBreak configuration value wasn&apos;t being applied. (Bug 13436)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -133,6 +132,19 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.10.1</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-05-03</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>- The default value for the display handler&apos;s lineBreak configuration value wasn&apos;t being applied. (Bug 13436)</notes>
+  </release>
   <release>
    <version>
     <release>1.10.0</release>
