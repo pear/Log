@@ -7,9 +7,9 @@ $desc = <<<EOT
 The Log package provides an abstracted logging framework.  It includes output handlers for log files, databases, syslog, email, Firebug, and the console.  It also provides composite and subject-observer logging mechanisms.
 EOT;
 
-$version = '1.10.1';
+$version = '1.11.0';
 $notes = <<<EOT
-- The default value for the display handler's lineBreak configuration value wasn't being applied. (Bug 13436)
+Relicensing the Log package under the MIT license.
 EOT;
 
 $package = new PEAR_PackageFileManager2();
@@ -32,7 +32,7 @@ $package->setPackageType('php');
 $package->setSummary('Logging Framework');
 $package->setDescription($desc);
 $package->setChannel('pear.php.net');
-$package->setLicense('PHP License', 'http://www.php.net/license/3_01.txt');
+$package->setLicense('MIT License', 'http://www.opensource.org/licenses/mit-license.php');
 $package->setAPIVersion('1.0.0');
 $package->setAPIStability('stable');
 $package->setReleaseVersion($version);
