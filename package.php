@@ -7,9 +7,9 @@ $desc = <<<EOT
 The Log package provides an abstracted logging framework.  It includes output handlers for log files, databases, syslog, email, Firebug, and the console.  It also provides composite and subject-observer logging mechanisms.
 EOT;
 
-$version = '1.11.0';
+$version = '1.11.1';
 $notes = <<<EOT
-Relicensing the Log package under the MIT license.
+- Log::_getBacktraceVars() no longer produces notices. (Bug 14398)
 EOT;
 
 $package = new PEAR_PackageFileManager2();

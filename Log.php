@@ -464,13 +464,14 @@ class Log
     function _getBacktraceVars($depth)
     {
         /* Start by generating a backtrace from the current call (here). */
-        $backtrace = debug_backtrace();
+        $bt = debug_backtrace();
 
         /*
          * If we were ultimately invoked by the composite handler, we need to
          * increase our depth one additional level to compensate.
          */
-        if (strcasecmp(@$backtrace[$depth+1]['class'], 'Log_composite') == 0) {
+        $class = isset($bt[$depth + 1]) ? $bt[$depth + 1] : null;
+        if ($class !== null && strcasecmp($class, 'Log_composite') == 0) {
             $depth++;
         }
 
@@ -481,9 +482,9 @@ class Log
          * further back to find the name of the encapsulating function from
          * which log() was called.
          */
-        $file = @$backtrace[$depth]['file'];
-        $line = @$backtrace[$depth]['line'];
-        $func = @$backtrace[$depth + 1]['function'];
+        $file = isset($bt[$depth])     ? $bt[$depth]['file'] : null;
+        $line = isset($bt[$depth])     ? $bt[$depth]['line'] : 0;
+        $func = isset($bt[$depth + 1]) ? $bt[$depth + 1]['function'] : null;
 
         /*
          * However, if log() was called from one of our "shortcut" functions,
@@ -491,9 +492,9 @@ class Log
          */
         if (in_array($func, array('emerg', 'alert', 'crit', 'err', 'warning',
                                   'notice', 'info', 'debug'))) {
-            $file = @$backtrace[$depth + 1]['file'];
-            $line = @$backtrace[$depth + 1]['line'];
-            $func = @$backtrace[$depth + 2]['function'];
+            $file = isset($bt[$depth + 1]) ? $bt[$depth + 1]['file'] : null;
+            $line = isset($bt[$depth + 1]) ? $bt[$depth + 1]['line'] : 0;
+            $func = isset($bt[$depth + 2]) ? $bt[$depth + 2]['function'] : null;
         }
 
         /*

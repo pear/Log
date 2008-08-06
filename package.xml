@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2008-06-14</date>
- <time>13:48:55</time>
+ <date>2008-08-05</date>
+ <time>21:04:23</time>
  <version>
-  <release>1.11.0</release>
+  <release>1.11.1</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -36,7 +36,7 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
- <notes>Relicensing the Log package under the MIT license.</notes>
+ <notes>- Log::_getBacktraceVars() no longer produces notices. (Bug 14398)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -132,6 +132,19 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.11.1</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-08-05</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>- Log::_getBacktraceVars() no longer produces notices. (Bug 14398)</notes>
+  </release>
   <release>
    <version>
     <release>1.11.0</release>
