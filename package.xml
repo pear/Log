@@ -26,7 +26,7 @@
   <active>yes</active>
  </lead>
  <date>2008-08-05</date>
- <time>21:04:23</time>
+ <time>22:18:27</time>
  <version>
   <release>1.11.1</release>
   <api>1.0.0</api>
@@ -36,7 +36,8 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
- <notes>- Log::_getBacktraceVars() no longer produces notices. (Bug 14398)</notes>
+ <notes>- Log::_getBacktraceVars() no longer produces notices. (Bug 14398)
+- Log::_extractMessage() now uses var_export() instead of print_r(). (Bug 14430)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -143,7 +144,8 @@
    </stability>
    <date>2008-08-05</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
-   <notes>- Log::_getBacktraceVars() no longer produces notices. (Bug 14398)</notes>
+   <notes>- Log::_getBacktraceVars() no longer produces notices. (Bug 14398)
+- Log::_extractMessage() now uses var_export() instead of print_r(). (Bug 14430)</notes>
   </release>
   <release>
    <version>

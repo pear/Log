@@ -41,19 +41,15 @@ $logger->log(array('message' => 'Message Key'));
 
 --EXPECT--
 ident [info] String
-ident [info] BareObject Object
-(
-)
-
+ident [info] BareObject::__set_state(array(
+))
 ident [info] getMessage
 ident [info] toString
 ident [info] __toString
 ident [info] PEAR_Error object
-ident [info] Array
-(
-    [0] => 1
-    [1] => 2
-    [three] => 3
+ident [info] array (
+  0 => 1,
+  1 => 2,
+  'three' => 3,
 )
-
 ident [info] Message Key

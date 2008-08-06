@@ -434,14 +434,16 @@ class Log
                     $message = $message->__toString();
                 }
             } else {
-                $message = print_r($message, true);
+                $message = var_export($message, true);
             }
         } else if (is_array($message)) {
             if (isset($message['message'])) {
                 $message = $message['message'];
             } else {
-                $message = print_r($message, true);
+                $message = var_export($message, true);
             }
+        } else if (is_bool($message) || $message === NULL) {
+            $message = var_export($message, true);
         }
 
         /* Otherwise, we assume the message is a string. */

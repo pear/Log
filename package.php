@@ -10,6 +10,7 @@ EOT;
 $version = '1.11.1';
 $notes = <<<EOT
 - Log::_getBacktraceVars() no longer produces notices. (Bug 14398)
+- Log::_extractMessage() now uses var_export() instead of print_r(). (Bug 14430)
 EOT;
 
 $package = new PEAR_PackageFileManager2();
