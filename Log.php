@@ -472,7 +472,7 @@ class Log
          * If we were ultimately invoked by the composite handler, we need to
          * increase our depth one additional level to compensate.
          */
-        $class = isset($bt[$depth + 1]) ? $bt[$depth + 1] : null;
+        $class = isset($bt[$depth+1]['class']) ? $bt[$depth+1]['class'] : null;
         if ($class !== null && strcasecmp($class, 'Log_composite') == 0) {
             $depth++;
         }
