@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2008-09-04</date>
- <time>22:01:12</time>
+ <date>2008-09-20</date>
+ <time>12:35:58</time>
  <version>
-  <release>1.11.2</release>
+  <release>1.11.3</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -36,7 +36,7 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
- <notes>- Correcting some breakage in Log::_getBacktraceVars(). (Bug 14595)</notes>
+ <notes>- It is now possible to configure the error_log handler&apos;s line and timestamp formats. (Bug #14655)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -133,6 +133,19 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.11.3</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-09-20</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>- It is now possible to configure the error_log handler&apos;s line and timestamp formats. (Bug #14655)</notes>
+  </release>
   <release>
    <version>
     <release>1.11.2</release>

@@ -7,12 +7,23 @@ Log: Error_Log Handler
 
 require_once 'Log.php';
 
-$logger = &Log::singleton('error_log', PEAR_LOG_TYPE_SYSTEM, 'ident');
+/* Default Configuration */
+$logger1 = &Log::singleton('error_log', PEAR_LOG_TYPE_SYSTEM, 'ident');
 for ($i = 0; $i < 3; $i++) {
-	$logger->log("Log entry $i");
+	$logger1->log("Log entry $i");
+}
+
+/* Custom line format */
+$conf = array('lineFormat' => '%2$s: [%3$s] %4$s');
+$logger2 = &Log::singleton('error_log', PEAR_LOG_TYPE_SYSTEM, 'ident', $conf);
+for ($i = 0; $i < 3; $i++) {
+	$logger2->log("Log entry $i");
 }
 
 --EXPECT--
 ident: Log entry 0
 ident: Log entry 1
 ident: Log entry 2
+ident: [info] Log entry 0
+ident: [info] Log entry 1
+ident: [info] Log entry 2
