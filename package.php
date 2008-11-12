@@ -10,6 +10,7 @@ EOT;
 $version = '1.11.3';
 $notes = <<<EOT
 - It is now possible to configure the error_log handler's line and timestamp formats. (Bug #14655)
+- Added _extractMessage() support for non-scalar array('message' => ...) values.
 EOT;
 
 $package = new PEAR_PackageFileManager2();

@@ -438,7 +438,11 @@ class Log
             }
         } else if (is_array($message)) {
             if (isset($message['message'])) {
-                $message = $message['message'];
+                if (is_scalar($message['message'])) {
+                    $message = $message['message'];
+                } else {
+                    $message = var_export($message['message'], true);
+                }
             } else {
                 $message = var_export($message, true);
             }
