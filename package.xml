@@ -26,7 +26,7 @@
   <active>yes</active>
  </lead>
  <date>2008-11-11</date>
- <time>18:15:23</time>
+ <time>21:06:55</time>
  <version>
   <release>1.11.3</release>
   <api>1.0.0</api>
@@ -37,7 +37,8 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>- It is now possible to configure the error_log handler&apos;s line and timestamp formats. (Bug #14655)
-- Added _extractMessage() support for non-scalar array(&apos;message&apos; =&gt; ...) values.</notes>
+- Added _extractMessage() support for non-scalar array(&apos;message&apos; =&gt; ...) values.
+- Spaces in &apos;win&apos; handler window names are now replaced with underscores.</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -146,7 +147,8 @@
    <date>2008-11-11</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
    <notes>- It is now possible to configure the error_log handler&apos;s line and timestamp formats. (Bug #14655)
-- Added _extractMessage() support for non-scalar array(&apos;message&apos; =&gt; ...) values.</notes>
+- Added _extractMessage() support for non-scalar array(&apos;message&apos; =&gt; ...) values.
+- Spaces in &apos;win&apos; handler window names are now replaced with underscores.</notes>
   </release>
   <release>
    <version>

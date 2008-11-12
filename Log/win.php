@@ -73,7 +73,7 @@ class Log_win extends Log
                           $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
-        $this->_name = $name;
+        $this->_name = str_replace(' ', '_', $name);
         $this->_ident = $ident;
         $this->_mask = Log::UPTO($level);
 
