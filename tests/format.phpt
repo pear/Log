@@ -5,9 +5,9 @@ Log: Line Format
 
 require_once 'Log.php';
 
-$conf = array('timeFormat' => '%T', 'lineFormat' => '%{timestamp} %{ident} %{priority} %{message} %{file} %{line} %{function} %{class}');
+$conf = array('lineFormat' => '%{timestamp} %{ident} %{priority} %{message} %{file} %{line} %{function} %{class}');
 $logger = &Log::singleton('console', '', 'ident', $conf);
 $logger->log('Message');
 
 --EXPECTREGEX--
-^\d{2}:\d{2}:\d{2} ident info Message .*format\.php \d+ [\(\)\w]+$
+^\w{3} \d+ \d{2}:\d{2}:\d{2} ident info Message .*format\.php \d+ [\(\)\w]+$
