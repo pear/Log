@@ -26,7 +26,7 @@
   <active>yes</active>
  </lead>
  <date>2008-11-18</date>
- <time>20:13:30</time>
+ <time>21:17:43</time>
  <version>
   <release>1.11.3</release>
   <api>1.0.0</api>
@@ -95,6 +95,7 @@
     <file name="factory.phpt" role="test" />
     <file name="file.phpt" role="test" />
     <file name="firebug.phpt" role="test" />
+    <file name="format.phpt" role="test" />
     <file name="levels.phpt" role="test" />
     <file name="null.phpt" role="test" />
     <file name="priority.phpt" role="test" />
