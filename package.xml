@@ -25,8 +25,8 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2008-11-11</date>
- <time>21:06:55</time>
+ <date>2008-11-18</date>
+ <time>20:13:30</time>
  <version>
   <release>1.11.3</release>
   <api>1.0.0</api>
@@ -38,7 +38,8 @@
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>- It is now possible to configure the error_log handler&apos;s line and timestamp formats. (Bug #14655)
 - Added _extractMessage() support for non-scalar array(&apos;message&apos; =&gt; ...) values.
-- Spaces in &apos;win&apos; handler window names are now replaced with underscores.</notes>
+- Spaces in &apos;win&apos; handler window names are now replaced with underscores.
+- Added a class name format token: %8$s</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -144,11 +145,12 @@
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2008-11-11</date>
+   <date>2008-11-18</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
    <notes>- It is now possible to configure the error_log handler&apos;s line and timestamp formats. (Bug #14655)
 - Added _extractMessage() support for non-scalar array(&apos;message&apos; =&gt; ...) values.
-- Spaces in &apos;win&apos; handler window names are now replaced with underscores.</notes>
+- Spaces in &apos;win&apos; handler window names are now replaced with underscores.
+- Added a class name format token: %8$s</notes>
   </release>
   <release>
    <version>

@@ -12,6 +12,7 @@ $notes = <<<EOT
 - It is now possible to configure the error_log handler's line and timestamp formats. (Bug #14655)
 - Added _extractMessage() support for non-scalar array('message' => ...) values.
 - Spaces in 'win' handler window names are now replaced with underscores.
+- Added a class name format token: %8$s
 EOT;
 
 $package = new PEAR_PackageFileManager2();

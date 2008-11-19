@@ -98,6 +98,7 @@ class Log
                             '%{file}'       => '%5$s',
                             '%{line}'       => '%6$s',
                             '%{function}'   => '%7$s',
+                            '%{class}'      => '%8$s',
                             '%\{'           => '%%{');
 
     /**
@@ -461,8 +462,9 @@ class Log
      * @param   int     $depth  The initial number of frames we should step
      *                          back into the trace.
      *
-     * @return  array   Array containing three strings: the filename, the line,
-     *                  and the function name from which log() was called.
+     * @return  array   Array containing four strings: the filename, the line,
+     *                  the function name, and the class name from which log()
+     *                  was called.
      *
      * @access  private
      * @since   Log 1.9.4
@@ -479,6 +481,7 @@ class Log
         $class = isset($bt[$depth+1]['class']) ? $bt[$depth+1]['class'] : null;
         if ($class !== null && strcasecmp($class, 'Log_composite') == 0) {
             $depth++;
+            $class = isset($bt[$depth + 1]) ? $bt[$depth + 1]['class'] : null;
         }
 
         /*
@@ -511,8 +514,8 @@ class Log
             $func = '(none)';
         }
 
-        /* Return a 3-tuple containing (file, line, function). */
-        return array($file, $line, $func);
+        /* Return a 4-tuple containing (file, line, function, class). */
+        return array($file, $line, $func, $class);
     }
 
     /**
@@ -528,10 +531,10 @@ class Log
     {
         /*
          * If the format string references any of the backtrace-driven
-         * variables (%5, %6, %7), generate the backtrace and fetch them.
+         * variables (%5 %6,%7,%8), generate the backtrace and fetch them.
          */
-        if (strpos($format, '%5') || strpos($format, '%6') || strpos($format, '%7')) {
-            list($file, $line, $func) = $this->_getBacktraceVars(2);
+        if (preg_match('/%[5678]/', $format)) {
+            list($file, $line, $func, $class) = $this->_getBacktraceVars(2);
         }
 
         /*
@@ -546,7 +549,8 @@ class Log
                        $message,
                        isset($file) ? $file : '',
                        isset($line) ? $line : '',
-                       isset($func) ? $func : '');
+                       isset($func) ? $func : '',
+                       isset($class) ? $class : '');
     }
 
     /**
