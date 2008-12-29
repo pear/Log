@@ -1,5 +1,5 @@
 --TEST--
-Log: Console Handler
+Log: Window Handler
 --FILE--
 <?php
 
