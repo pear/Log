@@ -143,8 +143,14 @@ $win.document.writeln('td.l5 { $styles[5] }');
 $win.document.writeln('td.l6 { $styles[6] }');
 $win.document.writeln('td.l7 { $styles[7] }');
 $win.document.writeln('</style>');
+$win.document.writeln('<script type="text/javascript">');
+$win.document.writeln('function scroll() {');
+$win.document.writeln(' body = document.getElementById("{$this->_name}");');
+$win.document.writeln(' body.scrollTop = body.scrollHeight;');
+$win.document.writeln('}');
+$win.document.writeln('<\/script>');
 $win.document.writeln('</head>');
-$win.document.writeln('<body>');
+$win.document.writeln('<body id="{$this->_name}" onclick="scroll()">');
 $win.document.writeln('<table border="0" cellpadding="2" cellspacing="0">');
 $win.document.writeln('<tr><th>Time</th>');
 $identHeader

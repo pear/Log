@@ -35,8 +35,14 @@ test.document.writeln('td.l5 { color: indigo; }');
 test.document.writeln('td.l6 { color: violet; }');
 test.document.writeln('td.l7 { color: black; }');
 test.document.writeln('</style>');
+test.document.writeln('<script type="text/javascript">');
+test.document.writeln('function scroll() {');
+test.document.writeln(' body = document.getElementById("test");');
+test.document.writeln(' body.scrollTop = body.scrollHeight;');
+test.document.writeln('}');
+test.document.writeln('<\/script>');
 test.document.writeln('</head>');
-test.document.writeln('<body>');
+test.document.writeln('<body id="test" onclick="scroll()">');
 test.document.writeln('<table border="0" cellpadding="2" cellspacing="0">');
 test.document.writeln('<tr><th>Time</th>');
 test.document.writeln('<th>Ident</th>')

@@ -10,6 +10,7 @@ EOT;
 $version = '1.11.4';
 $notes = <<<EOT
 - The window handler now works when output buffering is enabled. (Bug 15379)
+- The window handler will now scroll to the bottom when clicked. (Kevin Wood)
 EOT;
 
 $package = new PEAR_PackageFileManager2();

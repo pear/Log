@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.7.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+<package packagerversion="1.7.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
     http://pear.php.net/dtd/tasks-1.0.xsd
     http://pear.php.net/dtd/package-2.0
     http://pear.php.net/dtd/package-2.0.xsd">
@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2008-11-18</date>
- <time>21:17:43</time>
+ <date>2009-03-29</date>
+ <time>17:48:52</time>
  <version>
-  <release>1.11.3</release>
+  <release>1.11.4</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -36,10 +36,8 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
- <notes>- It is now possible to configure the error_log handler&apos;s line and timestamp formats. (Bug #14655)
-- Added _extractMessage() support for non-scalar array(&apos;message&apos; =&gt; ...) values.
-- Spaces in &apos;win&apos; handler window names are now replaced with underscores.
-- Added a class name format token: %8$s</notes>
+ <notes>- The window handler now works when output buffering is enabled. (Bug 15379)
+- The window handler will now scroll to the bottom when clicked. (Kevin Wood)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -97,11 +95,14 @@
     <file name="firebug.phpt" role="test" />
     <file name="format.phpt" role="test" />
     <file name="levels.phpt" role="test" />
+    <file name="masks.phpt" role="test" />
     <file name="null.phpt" role="test" />
     <file name="priority.phpt" role="test" />
     <file name="singleton.phpt" role="test" />
     <file name="sqlite.phpt" role="test" />
     <file name="sql_ident.phpt" role="test" />
+    <file name="win-ob.phpt" role="test" />
+    <file name="win.phpt" role="test" />
    </dir> <!-- /tests -->
    <file name="Log.php" role="php" />
   </dir> <!-- / -->
@@ -137,6 +138,20 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.11.4</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2009-03-29</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>- The window handler now works when output buffering is enabled. (Bug 15379)
+- The window handler will now scroll to the bottom when clicked. (Kevin Wood)</notes>
+  </release>
   <release>
    <version>
     <release>1.11.3</release>
