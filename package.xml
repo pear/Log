@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.7.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+<package packagerversion="1.8.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
     http://pear.php.net/dtd/tasks-1.0.xsd
     http://pear.php.net/dtd/package-2.0
     http://pear.php.net/dtd/package-2.0.xsd">
@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2009-03-29</date>
- <time>17:48:52</time>
+ <date>2009-07-18</date>
+ <time>17:33:10</time>
  <version>
-  <release>1.11.4</release>
+  <release>1.11.5</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -36,8 +36,9 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
- <notes>- The window handler now works when output buffering is enabled. (Bug 15379)
-- The window handler will now scroll to the bottom when clicked. (Kevin Wood)</notes>
+ <notes>
+- The class name is now reported correctly when the shortcut functions are used. (Bug #16452)
+ </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="docs">
@@ -140,6 +141,21 @@
  <changelog>
   <release>
    <version>
+    <release>1.11.5</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2009-07-18</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+- The class name is now reported correctly when the shortcut functions are used. (Bug #16452)
+   </notes>
+  </release>
+  <release>
+   <version>
     <release>1.11.4</release>
     <api>1.0.0</api>
    </version>
@@ -149,8 +165,10 @@
    </stability>
    <date>2009-03-29</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
-   <notes>- The window handler now works when output buffering is enabled. (Bug 15379)
-- The window handler will now scroll to the bottom when clicked. (Kevin Wood)</notes>
+   <notes>
+- The window handler now works when output buffering is enabled. (Bug 15379)
+- The window handler will now scroll to the bottom when clicked. (Kevin Wood)
+   </notes>
   </release>
   <release>
    <version>
@@ -163,10 +181,12 @@
    </stability>
    <date>2008-11-18</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
-   <notes>- It is now possible to configure the error_log handler&apos;s line and timestamp formats. (Bug #14655)
+   <notes>
+- It is now possible to configure the error_log handler&apos;s line and timestamp formats. (Bug #14655)
 - Added _extractMessage() support for non-scalar array(&apos;message&apos; =&gt; ...) values.
 - Spaces in &apos;win&apos; handler window names are now replaced with underscores.
-- Added a class name format token: %8$s</notes>
+- Added a class name format token: %8$s
+   </notes>
   </release>
   <release>
    <version>
@@ -179,7 +199,9 @@
    </stability>
    <date>2008-09-04</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
-   <notes>- Correcting some breakage in Log::_getBacktraceVars(). (Bug 14595)</notes>
+   <notes>
+- Correcting some breakage in Log::_getBacktraceVars(). (Bug 14595)
+   </notes>
   </release>
   <release>
    <version>
@@ -192,8 +214,10 @@
    </stability>
    <date>2008-08-05</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
-   <notes>- Log::_getBacktraceVars() no longer produces notices. (Bug 14398)
-- Log::_extractMessage() now uses var_export() instead of print_r(). (Bug 14430)</notes>
+   <notes>
+- Log::_getBacktraceVars() no longer produces notices. (Bug 14398)
+- Log::_extractMessage() now uses var_export() instead of print_r(). (Bug 14430)
+   </notes>
   </release>
   <release>
    <version>
@@ -206,7 +230,9 @@
    </stability>
    <date>2008-06-14</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
-   <notes>Relicensing the Log package under the MIT license.</notes>
+   <notes>
+Relicensing the Log package under the MIT license.
+   </notes>
   </release>
   <release>
    <version>
@@ -219,7 +245,9 @@
    </stability>
    <date>2008-05-03</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>- The default value for the display handler&apos;s lineBreak configuration value wasn&apos;t being applied. (Bug 13436)</notes>
+   <notes>
+- The default value for the display handler&apos;s lineBreak configuration value wasn&apos;t being applied. (Bug 13436)
+   </notes>
   </release>
   <release>
    <version>
@@ -232,8 +260,10 @@
    </stability>
    <date>2008-02-10</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>- The level masking test now passed on 64-bit platforms. (Bug 12933)
-- The mail handler can now optionally use the PEAR Mail package. (Request 12839)</notes>
+   <notes>
+- The level masking test now passed on 64-bit platforms. (Bug 12933)
+- The mail handler can now optionally use the PEAR Mail package. (Request 12839)
+   </notes>
   </release>
   <release>
    <version>
@@ -246,10 +276,12 @@
    </stability>
    <date>2008-01-19</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>- Corrected some PHPDoc syntax problems.
+   <notes>
+- Corrected some PHPDoc syntax problems.
 - Correcting some spelling errors in the users guide.
 - Fixed the firebug unit test.
-- Simplified the PEAR_LOG_ALL and PEAR_LOG_NONE constants.</notes>
+- Simplified the PEAR_LOG_ALL and PEAR_LOG_NONE constants.
+   </notes>
   </release>
   <release>
    <version>
@@ -262,7 +294,9 @@
    </stability>
    <date>2008-01-19</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>- The Firebug handler now avoids more Javascript errors in IE. (Bug 12810)</notes>
+   <notes>
+- The Firebug handler now avoids more Javascript errors in IE. (Bug 12810)
+   </notes>
   </release>
   <release>
    <version>
@@ -275,8 +309,10 @@
    </stability>
    <date>2008-01-01</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>- The sql handler wasn&apos;t honoring custom SQL insertion statements. (Bug 12734)
-- The display handler now has a configurable line format. (Request 12781)</notes>
+   <notes>
+- The sql handler wasn&apos;t honoring custom SQL insertion statements. (Bug 12734)
+- The display handler now has a configurable line format. (Request 12781)
+   </notes>
   </release>
   <release>
    <version>
@@ -289,8 +325,10 @@
    </stability>
    <date>2007-12-12</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>- The Firebug handler&apos;s unit test now passes. (Bug 12674)
-- Fixed a PHP4 compatibility problem involving class_exists(). (Bug 12675)</notes>
+   <notes>
+- The Firebug handler&apos;s unit test now passes. (Bug 12674)
+- Fixed a PHP4 compatibility problem involving class_exists(). (Bug 12675)
+   </notes>
   </release>
   <release>
    <version>
@@ -303,8 +341,10 @@
    </stability>
    <date>2007-12-11</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>- The Firebug handler no longer generates Javascript errors in IE. (Bug 12607)
-- The users guide has been updated with information on writing custom handlers.</notes>
+   <notes>
+- The Firebug handler no longer generates Javascript errors in IE. (Bug 12607)
+- The users guide has been updated with information on writing custom handlers.
+   </notes>
   </release>
   <release>
    <version>
@@ -317,7 +357,9 @@
    </stability>
    <date>2007-05-13</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>A Firebug log handler has been added.</notes>
+   <notes>
+A Firebug log handler has been added.
+   </notes>
   </release>
   <release>
    <version>
@@ -330,9 +372,11 @@
    </stability>
    <date>2007-02-04</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>The syslog handler now has an &apos;inherit&apos; configuration parameter which controls whether or openlog() is called to create a new syslog environment. (Bug 9822)
+   <notes>
+The syslog handler now has an &apos;inherit&apos; configuration parameter which controls whether or openlog() is called to create a new syslog environment. (Bug 9822)
 fflush() is now always called with a valid resource. (Bug 9388)
-The mail handler, when composited, no longer sends empty messages. (Bug 8865)</notes>
+The mail handler, when composited, no longer sends empty messages. (Bug 8865)
+   </notes>
   </release>
  </changelog>
 </package>

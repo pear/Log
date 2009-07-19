@@ -504,6 +504,7 @@ class Log
             $file = isset($bt[$depth + 1]) ? $bt[$depth + 1]['file'] : null;
             $line = isset($bt[$depth + 1]) ? $bt[$depth + 1]['line'] : 0;
             $func = isset($bt[$depth + 2]) ? $bt[$depth + 2]['function'] : null;
+            $class = isset($bt[$depth + 2]) ? $bt[$depth + 2]['class'] : null;
         }
 
         /*

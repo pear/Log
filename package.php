@@ -7,16 +7,15 @@ $desc = <<<EOT
 The Log package provides an abstracted logging framework.  It includes output handlers for log files, databases, syslog, email, Firebug, and the console.  It also provides composite and subject-observer logging mechanisms.
 EOT;
 
-$version = '1.11.4';
+$version = '1.11.5';
 $notes = <<<EOT
-- The window handler now works when output buffering is enabled. (Bug 15379)
-- The window handler will now scroll to the bottom when clicked. (Kevin Wood)
+- The class name is now reported correctly when the shortcut functions are used. (Bug #16452)
 EOT;
 
 $package = new PEAR_PackageFileManager2();
 
 $result = $package->setOptions(array(
-    'filelistgenerator' => 'cvs',
+    'filelistgenerator' => 'svn',
     'changelogoldtonew' => false,
     'simpleoutput'		=> true,
     'baseinstalldir'    => '/',
