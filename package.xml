@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.8.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
     http://pear.php.net/dtd/tasks-1.0.xsd
     http://pear.php.net/dtd/package-2.0
     http://pear.php.net/dtd/package-2.0.xsd">
@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2009-07-23</date>
- <time>19:42:04</time>
+ <date>2009-12-06</date>
+ <time>13:02:40</time>
  <version>
-  <release>1.11.5</release>
+  <release>1.11.6</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -37,7 +37,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-- The class name is now reported correctly when the shortcut functions are used. (Bug #16452)
+The syslog handler&apos;s maximum message length is now configurable via a new &apos;maxLength&apos; configuration variable.  If the handler receives a message longer than this length limit, it will be split into multiple syslog() calls.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -139,6 +139,21 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.11.6</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2009-12-06</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+The syslog handler&apos;s maximum message length is now configurable via a new &apos;maxLength&apos; configuration variable.  If the handler receives a message longer than this length limit, it will be split into multiple syslog() calls.
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.11.5</release>

@@ -836,6 +836,13 @@ Configuration
 |                   |           |               | process, or start a new   |
 |                   |           |               | one via `openlog()`_?     |
 +-------------------+-----------+---------------+---------------------------+
+| ``maxLength``     | Integer   | 500           | Maximum message length    |
+|                   |           |               | that will be sent to the  |
+|                   |           |               | `syslog()`_ function.     |
+|                   |           |               | Longer messages will be   |
+|                   |           |               | split across multiple     |
+|                   |           |               | `syslog()`_ calls.        |
++-------------------+-----------+---------------+---------------------------+
 
 Facilities
 ~~~~~~~~~~

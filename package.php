@@ -7,9 +7,9 @@ $desc = <<<EOT
 The Log package provides an abstracted logging framework.  It includes output handlers for log files, databases, syslog, email, Firebug, and the console.  It also provides composite and subject-observer logging mechanisms.
 EOT;
 
-$version = '1.11.5';
+$version = '1.11.6';
 $notes = <<<EOT
-- The class name is now reported correctly when the shortcut functions are used. (Bug #16452)
+The syslog handler's maximum message length is now configurable via a new 'maxLength' configuration variable.  If the handler receives a message longer than this length limit, it will be split into multiple syslog() calls.
 EOT;
 
 $package = new PEAR_PackageFileManager2();
