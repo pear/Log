@@ -25,8 +25,8 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2009-12-06</date>
- <time>13:02:40</time>
+ <date>2009-12-26</date>
+ <time>08:57:06</time>
  <version>
   <release>1.11.6</release>
   <api>1.0.0</api>
@@ -148,7 +148,7 @@ The syslog handler&apos;s maximum message length is now configurable via a new &
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2009-12-06</date>
+   <date>2009-12-26</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
    <notes>
 The syslog handler&apos;s maximum message length is now configurable via a new &apos;maxLength&apos; configuration variable.  If the handler receives a message longer than this length limit, it will be split into multiple syslog() calls.
