@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2009-12-26</date>
- <time>08:57:06</time>
+ <date>2009-12-27</date>
+ <time>10:50:47</time>
  <version>
-  <release>1.11.6</release>
+  <release>1.12.0a1</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -37,7 +37,11 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-The syslog handler&apos;s maximum message length is now configurable via a new &apos;maxLength&apos; configuration variable.  If the handler receives a message longer than this length limit, it will be split into multiple syslog() calls.
+This release drops PHP4 compatibility (enforced by the package dependencies).  
+
+There is unfortunately no way to support both PHP4 and PHP5 in the same code base when running under E_ALL.  Because it appears that the majority of Log package users have moved to PHP5, the Log package now targets that audience.
+
+Given the fact that the Log package is now largely in maintenance mode, existing PHP4 users shouldn&apos;t feel adandoned.  If necessary, important fixes, etc. can be merged back into the 1.11.* release line, which will retain PHP4 compatibility.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -88,7 +92,6 @@ The syslog handler&apos;s maximum message length is now configurable via a new &
     <file name="console.phpt" role="test" />
     <file name="display.phpt" role="test" />
     <file name="error_log.phpt" role="test" />
-    <file name="extract-zend1.phpt" role="test" />
     <file name="extract-zend2.0.phpt" role="test" />
     <file name="extract-zend2.2.phpt" role="test" />
     <file name="factory.phpt" role="test" />
@@ -111,7 +114,7 @@ The syslog handler&apos;s maximum message length is now configurable via a new &
  <dependencies>
   <required>
    <php>
-    <min>4.3.0</min>
+    <min>5.0.0</min>
    </php>
    <pearinstaller>
     <min>1.4.3</min>
@@ -139,6 +142,25 @@ The syslog handler&apos;s maximum message length is now configurable via a new &
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.12.0a1</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2009-12-27</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+This release drops PHP4 compatibility (enforced by the package dependencies).  
+
+There is unfortunately no way to support both PHP4 and PHP5 in the same code base when running under E_ALL.  Because it appears that the majority of Log package users have moved to PHP5, the Log package now targets that audience.
+
+Given the fact that the Log package is now largely in maintenance mode, existing PHP4 users shouldn&apos;t feel adandoned.  If necessary, important fixes, etc. can be merged back into the 1.11.* release line, which will retain PHP4 compatibility.
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.11.6</release>

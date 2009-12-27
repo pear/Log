@@ -102,28 +102,6 @@ class Log
                             '%\{'           => '%%{');
 
     /**
-     * Utility function which wraps PHP's class_exists() function to ensure
-     * consistent behavior between PHP versions 4 and 5.  Autoloading behavior
-     * is always disabled.
-     *
-     * @param string $class     The name of the class whose existence should
-     *                          be tested.
-     *
-     * @return bool             True if the class exists.
-     *
-     * @access private
-     * @since Log 1.9.13
-     */
-    function _classExists($class)
-    {
-        if (version_compare(PHP_VERSION, '5.0.0', 'ge')) {
-            return class_exists($class, false);
-        }
-
-        return class_exists($class);
-    }
-
-    /**
      * Attempts to return a concrete Log instance of type $handler.
      *
      * @param string $handler   The type of concrete Log subclass to return.
@@ -160,13 +138,13 @@ class Log
          * a failure as fatal.  The caller may have already included their own
          * version of the named class.
          */
-        if (!Log::_classExists($class)) {
+        if (!class_exists($class, false)) {
             include_once $classfile;
         }
 
         /* If the class exists, return a new instance of it. */
-        if (Log::_classExists($class)) {
-            $obj = &new $class($name, $ident, $conf, $level);
+        if (class_exists($class, false)) {
+            $obj = new $class($name, $ident, $conf, $level);
             return $obj;
         }
 
@@ -429,11 +407,7 @@ class Log
             } else if (method_exists($message, 'tostring')) {
                 $message = $message->toString();
             } else if (method_exists($message, '__tostring')) {
-                if (version_compare(PHP_VERSION, '5.0.0', 'ge')) {
-                    $message = (string)$message;
-                } else {
-                    $message = $message->__toString();
-                }
+                $message = (string)$message;
             } else {
                 $message = var_export($message, true);
             }

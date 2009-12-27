@@ -7,9 +7,13 @@ $desc = <<<EOT
 The Log package provides an abstracted logging framework.  It includes output handlers for log files, databases, syslog, email, Firebug, and the console.  It also provides composite and subject-observer logging mechanisms.
 EOT;
 
-$version = '1.11.6';
+$version = '1.12.0a1';
 $notes = <<<EOT
-The syslog handler's maximum message length is now configurable via a new 'maxLength' configuration variable.  If the handler receives a message longer than this length limit, it will be split into multiple syslog() calls.
+This release drops PHP4 compatibility (enforced by the package dependencies).  
+
+There is unfortunately no way to support both PHP4 and PHP5 in the same code base when running under E_ALL.  Because it appears that the majority of Log package users have moved to PHP5, the Log package now targets that audience.
+
+Given the fact that the Log package is now largely in maintenance mode, existing PHP4 users shouldn't feel adandoned.  If necessary, important fixes, etc. can be merged back into the 1.11.* release line, which will retain PHP4 compatibility.
 EOT;
 
 $package = new PEAR_PackageFileManager2();
@@ -38,7 +42,7 @@ $package->setAPIStability('stable');
 $package->setReleaseVersion($version);
 $package->setReleaseStability('stable');
 $package->setNotes($notes);
-$package->setPhpDep('4.3.0');
+$package->setPhpDep('5.0.0');
 $package->setPearinstallerDep('1.4.3');
 $package->addMaintainer('lead', 'jon', 'Jon Parise', 'jon@php.net');
 $package->addMaintainer('lead', 'chagenbu', 'Chuck Hagenbuch', 'chuck@horde.org');
