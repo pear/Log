@@ -7,7 +7,7 @@ $desc = <<<EOT
 The Log package provides an abstracted logging framework.  It includes output handlers for log files, databases, syslog, email, Firebug, and the console.  It also provides composite and subject-observer logging mechanisms.
 EOT;
 
-$version = '1.12.0a1';
+$version = '1.12.0RC1';
 $notes = <<<EOT
 This release drops PHP4 compatibility (enforced by the package dependencies).  
 
@@ -40,7 +40,7 @@ $package->setLicense('MIT License', 'http://www.opensource.org/licenses/mit-lice
 $package->setAPIVersion('1.0.0');
 $package->setAPIStability('stable');
 $package->setReleaseVersion($version);
-$package->setReleaseStability('stable');
+$package->setReleaseStability('beta');
 $package->setNotes($notes);
 $package->setPhpDep('5.0.0');
 $package->setPearinstallerDep('1.4.3');
