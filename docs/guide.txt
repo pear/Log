@@ -437,6 +437,9 @@ parameter.
 | ``PEAR_LOG_TYPE_FILE``    | Log events will be appended to the file named |
 |                           | by the ``destination`` value.                 |
 +---------------------------+-----------------------------------------------+
+| ``PEAR_LOG_TYPE_SAPI``    | Log events will be sent directly to the SAPI  |
+|                           | logging handler.                              |
++---------------------------+-----------------------------------------------+
 
 .. _error_log(): http://www.php.net/error_log
 .. _mail(): http://www.php.net/mail

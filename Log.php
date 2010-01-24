@@ -24,6 +24,7 @@ define('PEAR_LOG_TYPE_SYSTEM',  0); /* Use PHP's system logger */
 define('PEAR_LOG_TYPE_MAIL',    1); /* Use PHP's mail() function */
 define('PEAR_LOG_TYPE_DEBUG',   2); /* Use PHP's debugging connection */
 define('PEAR_LOG_TYPE_FILE',    3); /* Append to a file */
+define('PEAR_LOG_TYPE_SAPI',    4); /* Use the SAPI logging handler */
 
 /**
  * The Log:: class implements both an abstraction for various logging
