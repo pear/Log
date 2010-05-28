@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2010-01-24</date>
- <time>11:48:17</time>
+ <date>2010-05-28</date>
+ <time>09:57:16</time>
  <version>
-  <release>1.12.0</release>
+  <release>1.12.1</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -37,14 +37,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-This release drops PHP4 compatibility (enforced by the package dependencies).  
-
-There is unfortunately no way to support both PHP4 and PHP5 in the same code base when running under E_ALL.  Because it appears that the majority of Log package users have moved to PHP5, the Log package now targets that audience.
-
-Given the fact that the Log package is now largely in maintenance mode, existing PHP4 users shouldn&apos;t feel adandoned.  If necessary, important fixes, etc. can be merged back into the 1.11.* release line, which will retain PHP4 compatibility.
-
-Also:
-- Added a PEAR_LOG_TYPE_SAPI constant for use by with error_log handler.
+Fixing a rare notice when extracting the class name from a backtrace involving the composite handler. (Bug 17356)
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -145,6 +138,21 @@ Also:
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.12.1</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-05-28</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+Fixing a rare notice when extracting the class name from a backtrace involving the composite handler. (Bug 17356)
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.12.0</release>

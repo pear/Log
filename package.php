@@ -7,16 +7,9 @@ $desc = <<<EOT
 The Log package provides an abstracted logging framework.  It includes output handlers for log files, databases, syslog, email, Firebug, and the console.  It also provides composite and subject-observer logging mechanisms.
 EOT;
 
-$version = '1.12.0';
+$version = '1.12.1';
 $notes = <<<EOT
-This release drops PHP4 compatibility (enforced by the package dependencies).  
-
-There is unfortunately no way to support both PHP4 and PHP5 in the same code base when running under E_ALL.  Because it appears that the majority of Log package users have moved to PHP5, the Log package now targets that audience.
-
-Given the fact that the Log package is now largely in maintenance mode, existing PHP4 users shouldn't feel adandoned.  If necessary, important fixes, etc. can be merged back into the 1.11.* release line, which will retain PHP4 compatibility.
-
-Also:
-- Added a PEAR_LOG_TYPE_SAPI constant for use by with error_log handler.
+Fixing a rare notice when extracting the class name from a backtrace involving the composite handler. (Bug 17356)
 EOT;
 
 $package = new PEAR_PackageFileManager2();

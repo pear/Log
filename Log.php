@@ -456,7 +456,7 @@ class Log
         $class = isset($bt[$depth+1]['class']) ? $bt[$depth+1]['class'] : null;
         if ($class !== null && strcasecmp($class, 'Log_composite') == 0) {
             $depth++;
-            $class = isset($bt[$depth + 1]) ? $bt[$depth + 1]['class'] : null;
+            $class = isset($bt[$depth+1]['class']) ? $bt[$depth+1]['class'] : null;
         }
 
         /*
