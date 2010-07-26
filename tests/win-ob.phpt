@@ -8,7 +8,7 @@ output_buffering=on
 require_once 'Log.php';
 
 $conf = array('title' => 'Test Output');
-$logger = &Log::singleton('win', 'test', 'ident', $conf);
+$logger = Log::singleton('win', 'test', 'ident', $conf);
 
 for ($i = 0; $i < 3; $i++) {
 	$logger->log("Log entry $i");

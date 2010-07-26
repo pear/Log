@@ -127,8 +127,8 @@ class Log
      * @access public
      * @since Log 1.0
      */
-    function &factory($handler, $name = '', $ident = '', $conf = array(),
-                      $level = PEAR_LOG_DEBUG)
+    public static function factory($handler, $name = '', $ident = '',
+                                   $conf = array(), $level = PEAR_LOG_DEBUG)
     {
         $handler = strtolower($handler);
         $class = 'Log_' . $handler;
@@ -189,16 +189,16 @@ class Log
      * @access public
      * @since Log 1.0
      */
-    function &singleton($handler, $name = '', $ident = '', $conf = array(),
-                        $level = PEAR_LOG_DEBUG)
+    public static function singleton($handler, $name = '', $ident = '',
+                                     $conf = array(), $level = PEAR_LOG_DEBUG)
     {
         static $instances;
         if (!isset($instances)) $instances = array();
 
         $signature = serialize(array($handler, $name, $ident, $conf, $level));
         if (!isset($instances[$signature])) {
-            $instances[$signature] = &Log::factory($handler, $name, $ident,
-                                                   $conf, $level);
+            $instances[$signature] = Log::factory($handler, $name, $ident,
+                                                  $conf, $level);
         }
 
         return $instances[$signature];
@@ -596,7 +596,7 @@ class Log
      * @access  public
      * @since   Log 1.7.0
      */
-    function MASK($priority)
+    public static function MASK($priority)
     {
         return (1 << $priority);
     }
@@ -615,7 +615,7 @@ class Log
      *
      * @deprecated deprecated since Log 1.9.4; use Log::MAX() instead
      */
-    function UPTO($priority)
+    public static function UPTO($priority)
     {
         return Log::MAX($priority);
     }
@@ -634,7 +634,7 @@ class Log
      * @access  public
      * @since   Log 1.9.4
      */
-    function MIN($priority)
+    public static function MIN($priority)
     {
         return PEAR_LOG_ALL ^ ((1 << $priority) - 1);
     }
@@ -653,7 +653,7 @@ class Log
      * @access  public
      * @since   Log 1.9.4
      */
-    function MAX($priority)
+    public static function MAX($priority)
     {
         return ((1 << ($priority + 1)) - 1);
     }

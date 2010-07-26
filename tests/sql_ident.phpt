@@ -14,7 +14,7 @@ require_once 'Log.php';
 
 $ident = '12345678901234567890';
 
-$logger = &Log::singleton('sql', 'log_table', $ident, array('dsn' => ''));
+$logger = Log::singleton('sql', 'log_table', $ident, array('dsn' => ''));
 echo $logger->getIdent() . "\n";
 
 $logger->setIdent($ident);

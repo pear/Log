@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+<package packagerversion="1.9.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
     http://pear.php.net/dtd/tasks-1.0.xsd
     http://pear.php.net/dtd/package-2.0
     http://pear.php.net/dtd/package-2.0.xsd">
@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2010-05-28</date>
- <time>09:57:16</time>
+ <date>2010-07-25</date>
+ <time>23:33:15</time>
  <version>
-  <release>1.12.1</release>
+  <release>1.12.2</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -37,7 +37,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-Fixing a rare notice when extracting the class name from a backtrace involving the composite handler. (Bug 17356)
+Use PHP5-specific static method notation to avoid strict warnings. (Bug: 17509)
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -138,6 +138,21 @@ Fixing a rare notice when extracting the class name from a backtrace involving t
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.12.2</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-07-25</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+Use PHP5-specific static method notation to avoid strict warnings. (Bug: 17509)
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.12.1</release>

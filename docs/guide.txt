@@ -50,10 +50,10 @@ The new ``Log`` instance is returned by reference.
 
     require_once 'Log.php';
 
-    $console = &Log::factory('console', '', 'TEST');
+    $console = Log::factory('console', '', 'TEST');
     $console->log('Logging to the console.');
 
-    $file = &Log::factory('file', 'out.log', 'TEST');
+    $file = Log::factory('file', 'out.log', 'TEST');
     $file->log('Logging to out.log.');
 
 .. _Factory Pattern: http://wikipedia.org/wiki/Factory_method_pattern
@@ -76,16 +76,16 @@ method.  The new ``Log`` instance is returned by reference.
     require_once 'Log.php';
 
     /* Same construction parameters */
-    $a = &Log::singleton('console', '', 'TEST');
-    $b = &Log::singleton('console', '', 'TEST');
+    $a = Log::singleton('console', '', 'TEST');
+    $b = Log::singleton('console', '', 'TEST');
 
     if ($a === $b) {
         echo '$a and $b point to the same Log instance.' . "\n";
     }
 
     /* Different construction parameters */
-    $c = &Log::singleton('console', '', 'TEST1');
-    $d = &Log::singleton('console', '', 'TEST2');
+    $c = Log::singleton('console', '', 'TEST1');
+    $d = Log::singleton('console', '', 'TEST2');
 
     if ($c !== $d) {
         echo '$c and $d point to different Log instances.' . "\n";
@@ -108,10 +108,10 @@ A log handler's configuration is determined by the arguments used in its
 construction.  Here's an overview of those parameters::
 
     /* Using the factory method ... */
-    &Log::factory($handler, $name, $ident, $conf, $maxLevel);
+    Log::factory($handler, $name, $ident, $conf, $maxLevel);
 
     /* Using the singleton method ... */
-    &Log::singleton($handler, $name, $ident, $conf, $maxLevel);
+    Log::singleton($handler, $name, $ident, $conf, $maxLevel);
 
     /* Using direct instantiation ... */
     new Log_handler($name, $ident, $conf, $maxLevel);
@@ -281,7 +281,7 @@ It's possible to force these handlers to flush their output, however, by
 calling their ``flush()`` method::
 
     $conf = array('buffering' => true);
-    $logger = &Log::singleton('console', '', 'test', $conf);
+    $logger = Log::singleton('console', '', 'test', $conf);
 
     for ($i = 0; $i < 10; $i++) {
         $logger->log('This event will be buffered.');
@@ -334,7 +334,7 @@ Example
 ~~~~~~~
 ::
 
-    $logger = &Log::singleton('console', '', 'ident');
+    $logger = Log::singleton('console', '', 'ident');
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
     }
@@ -377,7 +377,7 @@ Example
 
     $conf = array('error_prepend' => '<font color="#ff0000"><tt>',
                   'error_append'  => '</tt></font>');
-    $logger = &Log::singleton('display', '', '', $conf, PEAR_LOG_DEBUG);
+    $logger = Log::singleton('display', '', '', $conf, PEAR_LOG_DEBUG);
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
     }
@@ -450,7 +450,7 @@ Example
 ~~~~~~~
 ::
 
-    $logger = &Log::singleton('error_log', PEAR_LOG_TYPE_SYSTEM, 'ident');
+    $logger = Log::singleton('error_log', PEAR_LOG_TYPE_SYSTEM, 'ident');
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
     }
@@ -507,7 +507,7 @@ Example
 ::
 
     $conf = array('mode' => 0600, 'timeFormat' => '%X %x');
-    $logger = &Log::singleton('file', 'out.log', 'ident', $conf);
+    $logger = Log::singleton('file', 'out.log', 'ident', $conf);
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
     }
@@ -540,7 +540,7 @@ Example
 ~~~~~~~
 ::
 
-    $logger = &Log::singleton('firebug', '', 'ident');
+    $logger = Log::singleton('firebug', '', 'ident');
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
     }
@@ -594,7 +594,7 @@ Example
 ::
 
     $conf = array('subject' => 'Important Log Events');
-    $logger = &Log::singleton('mail', 'webmaster@example.com', 'ident', $conf);
+    $logger = Log::singleton('mail', 'webmaster@example.com', 'ident', $conf);
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
     }
@@ -654,7 +654,7 @@ Example
 ~~~~~~~
 ::
 
-    $logger = &Log::singleton('null');
+    $logger = Log::singleton('null');
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
     }
@@ -737,7 +737,7 @@ Examples
 Using a `Data Source Name`_ to create a new database connection::
 
     $conf = array('dsn' => 'pgsql://jon@localhost+unix/logs');
-    $logger = &Log::singleton('sql', 'log_table', 'ident', $conf);
+    $logger = Log::singleton('sql', 'log_table', 'ident', $conf);
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
     }
@@ -748,7 +748,7 @@ Using an existing `DB`_ object::
     $db = &DB::connect('pgsql://jon@localhost+unix/logs');
 
     $conf['db'] = $db;
-    $logger = &Log::singleton('sql', 'log_table', 'ident', $conf);
+    $logger = Log::singleton('sql', 'log_table', 'ident', $conf);
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
     }
@@ -812,13 +812,13 @@ Examples
 Using a configuration to create a new database connection::
 
     $conf = array('filename' => 'log.db', 'mode' => 0666, 'persistent' => true);
-    $logger =& Log::factory('sqlite', 'log_table', 'ident', $conf);
+    $logger = Log::factory('sqlite', 'log_table', 'ident', $conf);
     $logger->log('logging an event', PEAR_LOG_WARNING);
 
 Using an existing connection::
 
     $db = sqlite_open('log.db', 0666, $error);
-    $logger =& Log::factory('sqlite', 'log_table', 'ident', $db);
+    $logger = Log::factory('sqlite', 'log_table', 'ident', $db);
     $logger->log('logging an event', PEAR_LOG_WARNING);
     sqlite_close($db);
 
@@ -886,7 +886,7 @@ Example
 ~~~~~~~
 ::
 
-    $logger = &Log::singleton('syslog', LOG_LOCAL0, 'ident');
+    $logger = Log::singleton('syslog', LOG_LOCAL0, 'ident');
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
     }
@@ -922,7 +922,7 @@ Example
 ::
 
     $conf = array('title' => 'Sample Log Output');
-    $logger = &Log::singleton('win', 'LogWindow', 'ident', $conf);
+    $logger = Log::singleton('win', 'LogWindow', 'ident', $conf);
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
     }
@@ -935,13 +935,13 @@ provides a compositing system that marks this task trivial.
 
 Start by creating the individual log handlers::
 
-    $console = &Log::singleton('console', '', 'TEST');
-    $file = &Log::singleton('file', 'out.log', 'TEST');
+    $console = Log::singleton('console', '', 'TEST');
+    $file = Log::singleton('file', 'out.log', 'TEST');
 
 Then, construct a composite handler and add the individual handlers as
 children of the composite::
 
-    $composite = &Log::singleton('composite');
+    $composite = Log::singleton('composite');
     $composite->addChild($console);
     $composite->addChild($file);
 
@@ -972,7 +972,7 @@ information in any way it likes.
 
 Log observers are attached to ``Log`` instances via the ``attach()`` method::
 
-    $observer = &Log_observer::factory('yourType');
+    $observer = Log_observer::factory('yourType');
     $logger->attach($observer);
 
 Observers can be detached using the ``detach()`` method::
@@ -1124,7 +1124,7 @@ your handler is named ``custom`` (and therefore implemented by a class named
 
     require_once 'Log.php';
 
-    $logger = &Log::factory('custom', '', 'CUSTOM');
+    $logger = Log::factory('custom', '', 'CUSTOM');
 
 
 Method 2: Handler in a Custom Location
@@ -1138,7 +1138,7 @@ it.
     require_once 'Log.php';
     require_once 'LocalHandlers/custom.php';
 
-    $logger = &Log::factory('custom', '', 'CUSTOM');
+    $logger = Log::factory('custom', '', 'CUSTOM');
 
 
 Writing New Handlers

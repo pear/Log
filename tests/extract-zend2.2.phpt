@@ -8,7 +8,7 @@ Log: _extractMessage() [Zend Engine 2.2]
 require_once 'Log.php';
 
 $conf = array('lineFormat' => '%2$s [%3$s] %4$s');
-$logger = &Log::singleton('console', '', 'ident', $conf);
+$logger = Log::singleton('console', '', 'ident', $conf);
 
 /* Logging a regular string. */
 $logger->log('String');

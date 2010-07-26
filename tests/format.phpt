@@ -6,7 +6,7 @@ Log: Line Format
 require_once 'Log.php';
 
 $conf = array('lineFormat' => '%{timestamp} %{ident} %{priority} %{message} %{file} %{line} %{function} %{class}');
-$logger = &Log::singleton('console', '', 'ident', $conf);
+$logger = Log::singleton('console', '', 'ident', $conf);
 $logger->log('Message');
 
 --EXPECTREGEX--

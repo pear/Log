@@ -10,7 +10,7 @@ function test($name, $conf)
     echo "\nTesting $name Configuration\n";
     echo "------------------------------------------------------\n";
 
-    $logger = &Log::factory('display', '', $name, $conf);
+    $logger = Log::factory('display', '', $name, $conf);
 
     $logger->log("Info", PEAR_LOG_INFO);
     $logger->log("Error", PEAR_LOG_ERR);

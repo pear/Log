@@ -11,7 +11,7 @@ if (version_compare(zend_version(), "2.0.0", "<") ||
 require_once 'Log.php';
 
 $conf = array('lineFormat' => '%2$s [%3$s] %4$s');
-$logger = &Log::singleton('console', '', 'ident', $conf);
+$logger = Log::singleton('console', '', 'ident', $conf);
 
 /* Logging a regular string. */
 $logger->log('String');

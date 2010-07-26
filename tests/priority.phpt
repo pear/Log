@@ -6,7 +6,7 @@ Log: Priorities
 require_once 'Log.php';
 
 $conf = array('lineFormat' => '[%3$s] %4$s');
-$logger = &Log::singleton('console', '', 'ident', $conf);
+$logger = Log::singleton('console', '', 'ident', $conf);
 
 /* Log at the default PEAR_LOG_INFO level. */
 $logger->log('Log message');

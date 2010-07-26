@@ -7,9 +7,9 @@ $desc = <<<EOT
 The Log package provides an abstracted logging framework.  It includes output handlers for log files, databases, syslog, email, Firebug, and the console.  It also provides composite and subject-observer logging mechanisms.
 EOT;
 
-$version = '1.12.1';
+$version = '1.12.2';
 $notes = <<<EOT
-Fixing a rare notice when extracting the class name from a backtrace involving the composite handler. (Bug 17356)
+Use PHP5-specific static method notation to avoid strict warnings. (Bug: 17509)
 EOT;
 
 $package = new PEAR_PackageFileManager2();

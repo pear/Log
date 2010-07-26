@@ -7,7 +7,7 @@ require_once 'Log.php';
 
 $conf = array();
 print "** UNBUFFERED **\n";
-$logger = &Log::singleton('firebug', '', 'PHP', $conf);
+$logger = Log::singleton('firebug', '', 'PHP', $conf);
 $logger->log('Debug',     PEAR_LOG_DEBUG);
 $logger->log('Info',      PEAR_LOG_INFO);
 $logger->log('Notice',    PEAR_LOG_NOTICE);
@@ -20,7 +20,7 @@ unset($logger);
 
 print "\n** START BUFFERING **\n";
 $conf = array('buffering' => true);
-$logger = &Log::singleton('firebug', '', 'PHP', $conf);
+$logger = Log::singleton('firebug', '', 'PHP', $conf);
 $logger->log('Debug',     PEAR_LOG_DEBUG);
 $logger->log('Info',      PEAR_LOG_INFO);
 $logger->log('Notice',    PEAR_LOG_NOTICE);

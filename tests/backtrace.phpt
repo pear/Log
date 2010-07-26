@@ -6,7 +6,7 @@ Log: Backtrace Vars
 require_once 'Log.php';
 
 $conf = array('lineFormat' => '%6$s [%8$s::%7$s] %4$s');
-$logger = &Log::singleton('console', '', 'ident', $conf);
+$logger = Log::singleton('console', '', 'ident', $conf);
 
 # Top-level Logger
 #
@@ -37,7 +37,7 @@ $classLogger->log($logger);
 
 # Composite Logger
 #
-$composite = &Log::singleton('composite');
+$composite = Log::singleton('composite');
 $composite->addChild($logger);
 
 $composite->log("Composite Logger - log()");

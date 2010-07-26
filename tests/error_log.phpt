@@ -8,14 +8,14 @@ Log: Error_Log Handler
 require_once 'Log.php';
 
 /* Default Configuration */
-$logger1 = &Log::singleton('error_log', PEAR_LOG_TYPE_SYSTEM, 'ident');
+$logger1 = Log::singleton('error_log', PEAR_LOG_TYPE_SYSTEM, 'ident');
 for ($i = 0; $i < 3; $i++) {
 	$logger1->log("Log entry $i");
 }
 
 /* Custom line format */
 $conf = array('lineFormat' => '%2$s: [%3$s] %4$s');
-$logger2 = &Log::singleton('error_log', PEAR_LOG_TYPE_SYSTEM, 'ident', $conf);
+$logger2 = Log::singleton('error_log', PEAR_LOG_TYPE_SYSTEM, 'ident', $conf);
 for ($i = 0; $i < 3; $i++) {
 	$logger2->log("Log entry $i");
 }

@@ -5,8 +5,8 @@ Log: Factory
 
 require_once 'Log.php';
 
-$console1 = &Log::factory('console');
-$console2 = &Log::factory('console');
+$console1 = Log::factory('console');
+$console2 = Log::factory('console');
 
 if (is_a($console1, 'Log_console') && is_a($console2, 'Log_console'))
 {

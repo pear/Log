@@ -5,8 +5,8 @@ Log: Singleton
 
 require_once 'Log.php';
 
-$console1 = &Log::singleton('console');
-$console2 = &Log::singleton('console');
+$console1 = Log::singleton('console');
+$console2 = Log::singleton('console');
 
 if (is_a($console1, 'Log_console') && is_a($console2, 'Log_console'))
 {

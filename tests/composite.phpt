@@ -6,10 +6,10 @@ Log: Composite Handler
 require_once 'Log.php';
 
 $conf = array('lineFormat' => '%2$s [%3$s] %4$s');
-$console1 = &Log::singleton('console', '', 'CONSOLE1', $conf);
-$console2 = &Log::singleton('console', '', 'CONSOLE2', $conf);
+$console1 = Log::singleton('console', '', 'CONSOLE1', $conf);
+$console2 = Log::singleton('console', '', 'CONSOLE2', $conf);
 
-$composite = &Log::singleton('composite');
+$composite = Log::singleton('composite');
 $composite->addChild($console1);
 $composite->addChild($console2);
 

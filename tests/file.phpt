@@ -10,7 +10,7 @@ if (file_exists($filename)) unlink($filename);
 
 /* Write some entries to the log file. */
 $conf = array('lineFormat' => '%2$s [%3$s] %4$s');
-$logger = &Log::singleton('file', $filename, '', $conf);
+$logger = Log::singleton('file', $filename, '', $conf);
 
 for ($i = 0; $i < 3; $i++) {
 	$logger->log("Log entry $i");
