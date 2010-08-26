@@ -47,6 +47,22 @@ class Log_syslog extends Log
     var $_maxLength = 500;
 
     /**
+     * String containing the format of a message.
+     * @var string
+     * @access private
+     */
+    var $_lineFormat = '%4$s';
+
+    /**
+     * String containing the timestamp format.  It will be passed directly to
+     * strftime().  Note that the timestamp string will generated using the
+     * current locale.
+     * @var string
+     * @access private
+     */
+    var $_timeFormat = '%b %d %H:%M:%S';
+
+    /**
      * Constructs a new syslog object.
      *
      * @param string $name     The syslog facility.
@@ -69,6 +85,14 @@ class Log_syslog extends Log
         }
         if (isset($conf['maxLength'])) {
             $this->_maxLength = $conf['maxLength'];
+        }
+        if (!empty($conf['lineFormat'])) {
+            $this->_lineFormat = str_replace(array_keys($this->_formatMap),
+                                             array_values($this->_formatMap),
+                                             $conf['lineFormat']);
+        }
+        if (!empty($conf['timeFormat'])) {
+            $this->_timeFormat = $conf['timeFormat'];
         }
 
         $this->_id = md5(microtime());
@@ -143,6 +167,11 @@ class Log_syslog extends Log
         if ($this->_inherit) {
             $priority |= $this->_name;
         }
+
+        /* Apply the configured line format to the message string. */
+        $message = $this->_format($this->_lineFormat,
+                                  strftime($this->_timeFormat),
+                                  $priority, $message);
 
         /* Split the string into parts based on our maximum length setting. */
         $parts = str_split($message, $this->_maxLength);

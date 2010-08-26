@@ -26,7 +26,7 @@
   <active>yes</active>
  </lead>
  <date>2010-08-26</date>
- <time>00:02:10</time>
+ <time>00:29:26</time>
  <version>
   <release>1.12.2</release>
   <api>1.0.0</api>
@@ -39,6 +39,7 @@
  <notes>
 - Use PHP5-specific static method notation to avoid strict warnings. (Bug: 17509)
 - Fixing some potential undefined backtrace references. (Bug: 17738)
+- Adding `lineFormat` and `timeFormat` configuration variables to the syslog handler. (Request: 17753)
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -102,6 +103,7 @@
     <file name="singleton.phpt" role="test" />
     <file name="sqlite.phpt" role="test" />
     <file name="sql_ident.phpt" role="test" />
+    <file name="syslog.phpt" role="test" />
     <file name="win-ob.phpt" role="test" />
     <file name="win.phpt" role="test" />
    </dir> <!-- /tests -->
@@ -153,6 +155,7 @@
    <notes>
 - Use PHP5-specific static method notation to avoid strict warnings. (Bug: 17509)
 - Fixing some potential undefined backtrace references. (Bug: 17738)
+- Adding `lineFormat` and `timeFormat` configuration variables to the syslog handler. (Request: 17753)
    </notes>
   </release>
   <release>
