@@ -25,8 +25,8 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2010-07-25</date>
- <time>23:33:15</time>
+ <date>2010-08-26</date>
+ <time>00:02:10</time>
  <version>
   <release>1.12.2</release>
   <api>1.0.0</api>
@@ -37,7 +37,8 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-Use PHP5-specific static method notation to avoid strict warnings. (Bug: 17509)
+- Use PHP5-specific static method notation to avoid strict warnings. (Bug: 17509)
+- Fixing some potential undefined backtrace references. (Bug: 17738)
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -147,10 +148,11 @@ Use PHP5-specific static method notation to avoid strict warnings. (Bug: 17509)
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2010-07-25</date>
+   <date>2010-08-26</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
    <notes>
-Use PHP5-specific static method notation to avoid strict warnings. (Bug: 17509)
+- Use PHP5-specific static method notation to avoid strict warnings. (Bug: 17509)
+- Fixing some potential undefined backtrace references. (Bug: 17738)
    </notes>
   </release>
   <release>

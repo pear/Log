@@ -10,13 +10,15 @@ $logger = Log::singleton('console', '', 'ident', $conf);
 
 # Top-level Logger
 #
-$logger->log("Top-level Logger");
+$logger->log("Top-level Logger - log()");
+$logger->info("Top-level Logger - info()");
 
 # Function Logger
 #
 function functionLog($logger)
 {
-	$logger->log("Function Logger");
+	$logger->log("Function Logger - log()");
+	$logger->info("Function Logger - info()");
 }
 
 functionLog($logger);
@@ -48,11 +50,13 @@ $composite->info("Composite Logger - info()");
 $classLogger->log($composite);
 
 --EXPECT--
-10 [::(none)] Top-level Logger
-16 [::functionLog] Function Logger
-27 [ClassLogger::log] Class Logger - log()
-28 [ClassLogger::log] Class Logger - info()
-40 [::(none)] Composite Logger - log()
-41 [::(none)] Composite Logger - info()
-27 [ClassLogger::log] Class Logger - log()
-28 [ClassLogger::log] Class Logger - info()
+10 [::(none)] Top-level Logger - log()
+11 [::(none)] Top-level Logger - info()
+17 [::functionLog] Function Logger - log()
+18 [::functionLog] Function Logger - info()
+29 [ClassLogger::log] Class Logger - log()
+30 [ClassLogger::log] Class Logger - info()
+42 [::(none)] Composite Logger - log()
+43 [::(none)] Composite Logger - info()
+29 [ClassLogger::log] Class Logger - log()
+30 [ClassLogger::log] Class Logger - info()

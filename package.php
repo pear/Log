@@ -9,7 +9,8 @@ EOT;
 
 $version = '1.12.2';
 $notes = <<<EOT
-Use PHP5-specific static method notation to avoid strict warnings. (Bug: 17509)
+- Use PHP5-specific static method notation to avoid strict warnings. (Bug: 17509)
+- Fixing some potential undefined backtrace references. (Bug: 17738)
 EOT;
 
 $package = new PEAR_PackageFileManager2();
