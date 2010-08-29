@@ -1,5 +1,7 @@
 --TEST--
 Log: Priorities
+--INI--
+date.timezone=UTC
 --FILE--
 <?php
 

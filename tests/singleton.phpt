@@ -1,5 +1,7 @@
 --TEST--
 Log: Singleton
+--INI--
+date.timezone=UTC
 --FILE--
 <?php
 

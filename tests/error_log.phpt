@@ -2,6 +2,8 @@
 Log: Error_Log Handler
 --SKIPIF--
 <?php if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') die("skip\n"); ?>
+--INI--
+date.timezone=UTC
 --FILE--
 <?php
 

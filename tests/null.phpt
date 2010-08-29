@@ -1,5 +1,7 @@
 --TEST--
 Log: Null Handler
+--INI--
+date.timezone=UTC
 --FILE--
 <?php
 

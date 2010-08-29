@@ -1,5 +1,7 @@
 --TEST--
 Log: Backtrace Vars
+--INI--
+date.timezone=UTC
 --FILE--
 <?php
 

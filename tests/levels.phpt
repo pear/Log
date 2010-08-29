@@ -1,5 +1,7 @@
 --TEST--
 Log: Levels
+--INI--
+date.timezone=UTC
 --FILE--
 <?php
 

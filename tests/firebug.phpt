@@ -1,5 +1,7 @@
 --TEST--
 Log: Firebug Handler
+--INI--
+date.timezone=UTC
 --FILE--
 <?php
 

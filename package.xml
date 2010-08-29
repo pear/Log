@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2010-08-28</date>
- <time>19:29:13</time>
+ <date>2010-08-29</date>
+ <time>14:48:56</time>
  <version>
-  <release>1.12.2</release>
+  <release>1.12.3</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -37,9 +37,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-- Use PHP5-specific static method notation to avoid strict warnings. (Bug: 17509)
-- Fixing some potential undefined backtrace references. (Bug: 17738)
-- Adding `lineFormat` and `timeFormat` configuration variables to the syslog handler. (Request: 17753)
+- The unit tests now set the timezone. (Bug 17830)
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -141,6 +139,21 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.12.3</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-08-29</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+- The unit tests now set the timezone. (Bug 17830)
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.12.2</release>

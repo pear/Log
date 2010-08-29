@@ -1,5 +1,7 @@
 --TEST--
 Log: Console Handler
+--INI--
+date.timezone=UTC
 --FILE--
 <?php
 

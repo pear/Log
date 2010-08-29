@@ -1,5 +1,7 @@
 --TEST--
 Log: Line Format
+--INI--
+date.timezone=UTC
 --FILE--
 <?php
 

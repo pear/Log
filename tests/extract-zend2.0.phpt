@@ -5,6 +5,8 @@ Log: _extractMessage() [Zend Engine 2.0]
 if (version_compare(zend_version(), "2.0.0", "<") ||
     version_compare(zend_version(), "2.2.0", ">=")) die('skip');
 ?>
+--INI--
+date.timezone=UTC
 --FILE--
 <?php
 

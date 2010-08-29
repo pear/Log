@@ -1,5 +1,7 @@
 --TEST--
 Log: Composite Handler
+--INI--
+date.timezone=UTC
 --FILE--
 <?php
 

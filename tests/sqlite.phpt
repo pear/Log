@@ -2,6 +2,8 @@
 Log: Sqlite Handler
 --SKIPIF--
 <?php if (!function_exists('sqlite_open')) die("skip\n"); ?>
+--INI--
+date.timezone=UTC
 --FILE--
 <?php
 

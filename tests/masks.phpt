@@ -1,5 +1,7 @@
 --TEST--
 Log: Masks
+--INI--
+date.timezone=UTC
 --FILE--
 <?php
 

@@ -1,5 +1,7 @@
 --TEST--
 Log: Syslog Handler
+--INI--
+date.timezone=UTC
 --FILE--
 <?php
 
