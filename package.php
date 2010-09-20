@@ -10,6 +10,7 @@ EOT;
 $version = '1.12.3';
 $notes = <<<EOT
 - The unit tests now set the timezone. (Bug 17830)
+- The composite handler now opens child handlers lazily (on demand). (Bug 17785)
 EOT;
 
 $package = new PEAR_PackageFileManager2();
