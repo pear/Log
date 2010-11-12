@@ -7,10 +7,9 @@ $desc = <<<EOT
 The Log package provides an abstracted logging framework.  It includes output handlers for log files, databases, syslog, email, Firebug, and the console.  It also provides composite and subject-observer logging mechanisms.
 EOT;
 
-$version = '1.12.3';
+$version = '1.12.4';
 $notes = <<<EOT
-- The unit tests now set the timezone. (Bug 17830)
-- The composite handler now opens child handlers lazily (on demand). (Bug 17785)
+- The display handler now has a 'rawText' configuration option that disables HTML-safe message text conversion.
 EOT;
 
 $package = new PEAR_PackageFileManager2();

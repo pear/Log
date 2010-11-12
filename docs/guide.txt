@@ -368,6 +368,12 @@ Configuration
 | ``linebreak``     | String    | ``<br />\n``  | This string is used to    |
 |                   |           |               | represent a line break.   |
 +-------------------+-----------+---------------+---------------------------+
+| ``rawText``       | Boolean   | False         | Should message text be    |
+|                   |           |               | passed directly to the log|
+|                   |           |               | system?  Otherwise, it    |
+|                   |           |               | will be converted to an   |
+|                   |           |               | HTML-safe representation. |
++-------------------+-----------+---------------+---------------------------+
 
 .. _error handling values: http://www.php.net/errorfunc
 
