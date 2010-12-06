@@ -10,6 +10,7 @@ EOT;
 $version = '1.12.4';
 $notes = <<<EOT
 - The display handler now has a 'rawText' configuration option that disables HTML-safe message text conversion.
+- Improved the way that the composite handler stores references its children.
 EOT;
 
 $package = new PEAR_PackageFileManager2();

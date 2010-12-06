@@ -25,8 +25,8 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2010-11-11</date>
- <time>23:53:01</time>
+ <date>2010-12-05</date>
+ <time>20:51:10</time>
  <version>
   <release>1.12.4</release>
   <api>1.0.0</api>
@@ -38,6 +38,7 @@
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
 - The display handler now has a &apos;rawText&apos; configuration option that disables HTML-safe message text conversion.
+- Improved the way that the composite handler stores references its children.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -148,10 +149,11 @@
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2010-11-11</date>
+   <date>2010-12-05</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
    <notes>
 - The display handler now has a &apos;rawText&apos; configuration option that disables HTML-safe message text conversion.
+- Improved the way that the composite handler stores references its children.
    </notes>
   </release>
   <release>
