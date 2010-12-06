@@ -246,7 +246,7 @@ class Log_composite extends Log
             return false;
         }
 
-        $this->_children[$child->_id] = &$child;
+        $this->_children[$child->_id] = $child;
 
         return true;
     }
