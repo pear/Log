@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2010-12-05</date>
- <time>20:51:10</time>
+ <date>2010-12-12</date>
+ <time>19:18:50</time>
  <version>
-  <release>1.12.4</release>
+  <release>1.12.5</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -37,8 +37,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-- The display handler now has a &apos;rawText&apos; configuration option that disables HTML-safe message text conversion.
-- Improved the way that the composite handler stores references its children.
+- Corrected the &quot;levels&quot; unit test on 32-bit systems. (Bug 18099)
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -140,6 +139,21 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.12.5</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-12-12</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+- Corrected the &quot;levels&quot; unit test on 32-bit systems. (Bug 18099)
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.12.4</release>
