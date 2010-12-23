@@ -10,6 +10,7 @@ EOT;
 $version = '1.12.5';
 $notes = <<<EOT
 - Corrected the "levels" unit test on 32-bit systems. (Bug 18099)
+- Corrected quote handling in Firebug console output. (Bug 18141)
 EOT;
 
 $package = new PEAR_PackageFileManager2();

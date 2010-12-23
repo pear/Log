@@ -179,15 +179,9 @@ class Log_firebug extends Log
         /* Extract the string representation of the message. */
         $message = $this->_extractMessage($message);
         $method  = $this->_methods[$priority];
-        
-        /* normalize line breaks */
-        $message = str_replace("\r\n", "\n", $message);
-        
-        /* escape line breaks */
-        $message = str_replace("\n", "\\n\\\n", $message);
-        
-        /* escape quotes */
-        $message = str_replace('"', '\\"', $message);
+
+        /* normalize line breaks and escape quotes*/
+        $message = preg_replace("/\r?\n/", "\\n", addslashes($message));
         
         /* Build the string containing the complete log line. */
         $line = $this->_format($this->_lineFormat,
@@ -210,5 +204,4 @@ class Log_firebug extends Log
 
         return true;
     }
-
 }
