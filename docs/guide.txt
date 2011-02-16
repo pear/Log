@@ -845,6 +845,10 @@ Configuration
 |                   |           |               | process, or start a new   |
 |                   |           |               | one via `openlog()`_?     |
 +-------------------+-----------+---------------+---------------------------+
+| ``reopen``        | Boolean   | false         | Reopen the syslog         |
+|                   |           |               | connection for each log   |
+|                   |           |               | event?                    |
++-------------------+-----------+---------------+---------------------------+
 | ``maxLength``     | Integer   | 500           | Maximum message length    |
 |                   |           |               | that will be sent to the  |
 |                   |           |               | `syslog()`_ function.     |

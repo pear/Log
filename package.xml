@@ -25,8 +25,8 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2010-12-23</date>
- <time>15:21:49</time>
+ <date>2011-02-15</date>
+ <time>21:11:28</time>
  <version>
   <release>1.12.6</release>
   <api>1.0.0</api>
@@ -38,6 +38,7 @@
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
 - Improved the console handler&apos;s stream handling. (Bug 17874)
+- Added a &apos;reopen&apos; configuration parameter to the syslog handler. (Request 18185)
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -148,10 +149,11 @@
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2010-12-23</date>
+   <date>2011-02-15</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
    <notes>
 - Improved the console handler&apos;s stream handling. (Bug 17874)
+- Added a &apos;reopen&apos; configuration parameter to the syslog handler. (Request 18185)
    </notes>
   </release>
   <release>

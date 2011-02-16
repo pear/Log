@@ -10,6 +10,7 @@ EOT;
 $version = '1.12.6';
 $notes = <<<EOT
 - Improved the console handler's stream handling. (Bug 17874)
+- Added a 'reopen' configuration parameter to the syslog handler. (Request 18185)
 EOT;
 
 $package = new PEAR_PackageFileManager2();
