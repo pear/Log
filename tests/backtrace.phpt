@@ -51,6 +51,16 @@ $composite->info("Composite Logger - info()");
 #
 $classLogger->log($composite);
 
+# Deeper Backtrace
+function deeperLog($logger)
+{
+	$logger->log("Deeper Logger - log()");
+	$logger->info("Deeper Logger - info()");
+}
+
+$logger->setBacktraceDepth(1);
+deeperLog($logger);
+
 --EXPECT--
 10 [::(none)] Top-level Logger - log()
 11 [::(none)] Top-level Logger - info()
@@ -62,3 +72,5 @@ $classLogger->log($composite);
 43 [::(none)] Composite Logger - info()
 29 [ClassLogger::log] Class Logger - log()
 30 [ClassLogger::log] Class Logger - info()
+57 [::(none)] Deeper Logger - log()
+53 [::deeperLog] Deeper Logger - info()

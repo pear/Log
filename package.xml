@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2011-02-15</date>
- <time>21:11:28</time>
+ <date>2011-04-15</date>
+ <time>07:18:21</time>
  <version>
-  <release>1.12.6</release>
+  <release>1.12.7</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -37,8 +37,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-- Improved the console handler&apos;s stream handling. (Bug 17874)
-- Added a &apos;reopen&apos; configuration parameter to the syslog handler. (Request 18185)
+- The backtrace depth is now configurable via setBacktraceDepth(). (Request 18423)
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -140,6 +139,21 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.12.7</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2011-04-15</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+- The backtrace depth is now configurable via setBacktraceDepth(). (Request 18423)
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.12.6</release>
