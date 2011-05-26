@@ -45,7 +45,7 @@ $package->setPearinstallerDep('1.4.3');
 $package->addMaintainer('lead', 'jon', 'Jon Parise', 'jon@php.net');
 $package->addMaintainer('lead', 'chagenbu', 'Chuck Hagenbuch', 'chuck@horde.org');
 $package->addMaintainer('lead', 'yunosh', 'Jan Schneider', 'jan@horde.org');
-$package->addIgnore(array('package.php', 'phpdoc.sh', 'package.xml'));
+$package->addIgnore(array('.gitignore', 'package.php', 'phpdoc.sh', 'package.xml'));
 $package->addPackageDepWithChannel('optional', 'DB', 'pear.php.net', '1.3');
 $package->addPackageDepWithChannel('optional', 'MDB2', 'pear.php.net', '2.0.0RC1');
 $package->addPackageDepWithChannel('optional', 'Mail', 'pear.php.net');
