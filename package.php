@@ -7,11 +7,9 @@ $desc = <<<EOT
 The Log package provides an abstracted logging framework.  It includes output handlers for log files, databases, syslog, email, Firebug, and the console.  It also provides composite and subject-observer logging mechanisms.
 EOT;
 
-$version = '1.12.6';
+$version = '1.12.7';
 $notes = <<<EOT
-- Improved the console handler's stream handling. (Bug 17874)
-- Added a 'reopen' configuration parameter to the syslog handler. (Request 18185)
-- The backtrace depth is now configurable via setBacktraceDepth(). (Request 18423)
+- The 'firebug' handler is now usable with Chrome, as well. (Request 18617)
 EOT;
 
 $package = new PEAR_PackageFileManager2();
