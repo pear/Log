@@ -25,8 +25,8 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2011-07-16</date>
- <time>19:04:29</time>
+ <date>2011-09-18</date>
+ <time>16:55:38</time>
  <version>
   <release>1.12.7</release>
   <api>1.0.0</api>
@@ -38,6 +38,7 @@
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
 - The &apos;firebug&apos; handler is now usable with Chrome, as well. (Request 18617)
+- The &apos;observer&apos; code now longer generates deprecated return value reference notices. (Bug 18830)
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -148,10 +149,11 @@
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2011-07-16</date>
+   <date>2011-09-18</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
    <notes>
 - The &apos;firebug&apos; handler is now usable with Chrome, as well. (Request 18617)
+- The &apos;observer&apos; code now longer generates deprecated return value reference notices. (Bug 18830)
    </notes>
   </release>
   <release>

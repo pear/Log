@@ -10,6 +10,7 @@ EOT;
 $version = '1.12.7';
 $notes = <<<EOT
 - The 'firebug' handler is now usable with Chrome, as well. (Request 18617)
+- The 'observer' code now longer generates deprecated return value reference notices. (Bug 18830)
 EOT;
 
 $package = new PEAR_PackageFileManager2();
