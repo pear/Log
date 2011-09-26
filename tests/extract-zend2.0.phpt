@@ -60,7 +60,7 @@ ident [info] array (
   0 => 1,
   1 => 2,
   'three' => 3,
-
+)
 ident [info] Message Key
 ident [info] 50
 ident [info] array (
