@@ -8,8 +8,6 @@
 
 :Author:        Jon Parise
 :Contact:       jon@php.net
-:Date:          $Date$
-:Revision:      $Revision$
 
 .. contents:: Contents
 .. section-numbering::
