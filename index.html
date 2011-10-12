@@ -1,0 +1,1862 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.8.1: http://docutils.sourceforge.net/" />
+<title>The Log Package</title>
+<style type="text/css">
+
+body {
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	font-size: 0.8em;
+	letter-spacing: 0.01em;
+	line-height: 1.5em;
+	text-align: justify;
+	margin: 0 auto;
+	width: 48em;
+}
+
+a:link, a:visited {
+	color: #00c;
+	padding-bottom: 0;
+	text-decoration: none;
+	border-bottom: 1px solid #dbd5c5;
+}
+
+a:hover {
+	padding-bottom: 0;
+	border-bottom: 2px solid #dbd5c5;
+}
+
+h1, h2, h3 {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-weight: normal;
+	line-height: normal;
+}
+
+h1 {
+	font-size: 2.1em;
+	letter-spacing: -0.02em;
+	margin-top: 30px;
+	text-align: center;
+}
+
+h2 {
+	font-size: 1.6em;
+	font-style: italic;
+	margin: 30px 0 10px 0;
+}
+
+h3 {
+	font-size: 1.3em;
+	font-style: italic;
+	margin-top: 20px;
+}
+
+li {
+	line-height: 135%;
+}
+
+ul, ol {
+	margin: 0 0 1em 2em;
+	padding: 0 0 0 1em;
+}
+
+hr {
+	background-color: #ccc;
+	border: 0px none;
+	color: #eee;
+	height: 1px;
+	margin: 30px 0px;
+}
+
+blockquote, pre {
+	background-color: #f9f9f9;
+	border: 1px solid #eee;
+	border-left: 2px solid #ccc;
+	padding: 1em;
+}
+
+blockquote {
+	color: #666;
+	line-height: 1.3em;
+}
+
+pre {
+	line-height: normal;
+	overflow: auto;
+}
+
+pre.code-block {
+	padding-bottom: 0;
+}
+
+tt, pre, code, samp, kbd {
+	color: #333;
+	font-family: Consolas, 'Lucida Console', monospace;
+	font-size: 13px;
+}
+
+label em {
+	font-weight: normal;
+}
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+.code-block .err { border: 1px solid #FF0000 } /* Error */
+.code-block .k,.kn { color: #369 } /* Keywords */
+.code-block .c,.cm,.cp,.c1 { color: #666; font-style: italic } /* Comments */
+.code-block .n { color: #000 } /* Names */
+.code-block .p { color: #000 } /* Punctuation */
+.code-block .nc,.nf,.nn { color: #333; font-weight: bold } /* Symbol Names */
+.code-block .s { color: #933 } /* Literal.String */
+.code-block .sd { color: #666 } /* Literal.String.Doc */
+
+</style>
+</head>
+<body>
+<div class="document" id="the-log-package">
+<h1 class="title">The Log Package</h1>
+<h2 class="subtitle" id="user-documentation">User Documentation</h2>
+
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Jon Parise</td>
+</tr>
+<tr class="field"><th class="field-name">Contact:</th><td class="field-body"><a class="reference external" href="mailto:jon&#37;&#52;&#48;php&#46;net">jon<span>&#64;</span>php<span>&#46;</span>net</a></td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="auto-toc simple">
+<li><a class="reference internal" href="#using-log-handlers" id="id25">1&nbsp;&nbsp;&nbsp;Using Log Handlers</a><ul class="auto-toc">
+<li><a class="reference internal" href="#creating-a-log-object" id="id26">1.1&nbsp;&nbsp;&nbsp;Creating a Log Object</a><ul class="auto-toc">
+<li><a class="reference internal" href="#the-factory-method" id="id27">1.1.1&nbsp;&nbsp;&nbsp;The Factory Method</a></li>
+<li><a class="reference internal" href="#the-singleton-method" id="id28">1.1.2&nbsp;&nbsp;&nbsp;The Singleton Method</a></li>
+<li><a class="reference internal" href="#direct-instantiation" id="id29">1.1.3&nbsp;&nbsp;&nbsp;Direct Instantiation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuring-a-handler" id="id30">1.2&nbsp;&nbsp;&nbsp;Configuring a Handler</a></li>
+<li><a class="reference internal" href="#logging-an-event" id="id31">1.3&nbsp;&nbsp;&nbsp;Logging an Event</a></li>
+<li><a class="reference internal" href="#log-levels" id="id32">1.4&nbsp;&nbsp;&nbsp;Log Levels</a></li>
+<li><a class="reference internal" href="#log-level-masks" id="id33">1.5&nbsp;&nbsp;&nbsp;Log Level Masks</a></li>
+<li><a class="reference internal" href="#log-line-format" id="id34">1.6&nbsp;&nbsp;&nbsp;Log Line Format</a></li>
+<li><a class="reference internal" href="#flushing-log-events" id="id35">1.7&nbsp;&nbsp;&nbsp;Flushing Log Events</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#standard-log-handlers" id="id36">2&nbsp;&nbsp;&nbsp;Standard Log Handlers</a><ul class="auto-toc">
+<li><a class="reference internal" href="#the-console-handler" id="id37">2.1&nbsp;&nbsp;&nbsp;The Console Handler</a><ul class="auto-toc">
+<li><a class="reference internal" href="#configuration" id="id38">2.1.1&nbsp;&nbsp;&nbsp;Configuration</a></li>
+<li><a class="reference internal" href="#example" id="id39">2.1.2&nbsp;&nbsp;&nbsp;Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-display-handler" id="id40">2.2&nbsp;&nbsp;&nbsp;The Display Handler</a><ul class="auto-toc">
+<li><a class="reference internal" href="#id2" id="id41">2.2.1&nbsp;&nbsp;&nbsp;Configuration</a></li>
+<li><a class="reference internal" href="#id3" id="id42">2.2.2&nbsp;&nbsp;&nbsp;Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-error-log-handler" id="id43">2.3&nbsp;&nbsp;&nbsp;The Error_Log Handler</a><ul class="auto-toc">
+<li><a class="reference internal" href="#id4" id="id44">2.3.1&nbsp;&nbsp;&nbsp;Configuration</a></li>
+<li><a class="reference internal" href="#error-log-types" id="id45">2.3.2&nbsp;&nbsp;&nbsp;Error_Log Types</a></li>
+<li><a class="reference internal" href="#id5" id="id46">2.3.3&nbsp;&nbsp;&nbsp;Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-file-handler" id="id47">2.4&nbsp;&nbsp;&nbsp;The File Handler</a><ul class="auto-toc">
+<li><a class="reference internal" href="#id6" id="id48">2.4.1&nbsp;&nbsp;&nbsp;Configuration</a></li>
+<li><a class="reference internal" href="#id8" id="id49">2.4.2&nbsp;&nbsp;&nbsp;Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-firebug-handler" id="id50">2.5&nbsp;&nbsp;&nbsp;The Firebug Handler</a><ul class="auto-toc">
+<li><a class="reference internal" href="#id9" id="id51">2.5.1&nbsp;&nbsp;&nbsp;Configuration</a></li>
+<li><a class="reference internal" href="#id11" id="id52">2.5.2&nbsp;&nbsp;&nbsp;Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-mail-handler" id="id53">2.6&nbsp;&nbsp;&nbsp;The Mail Handler</a><ul class="auto-toc">
+<li><a class="reference internal" href="#id12" id="id54">2.6.1&nbsp;&nbsp;&nbsp;Configuration</a></li>
+<li><a class="reference internal" href="#id14" id="id55">2.6.2&nbsp;&nbsp;&nbsp;Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-mdb2-handler" id="id56">2.7&nbsp;&nbsp;&nbsp;The MDB2 Handler</a><ul class="auto-toc">
+<li><a class="reference internal" href="#id15" id="id57">2.7.1&nbsp;&nbsp;&nbsp;Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-null-handler" id="id58">2.8&nbsp;&nbsp;&nbsp;The Null Handler</a><ul class="auto-toc">
+<li><a class="reference internal" href="#id16" id="id59">2.8.1&nbsp;&nbsp;&nbsp;Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-sql-db-handler" id="id60">2.9&nbsp;&nbsp;&nbsp;The SQL (DB) Handler</a><ul class="auto-toc">
+<li><a class="reference internal" href="#the-log-table" id="id61">2.9.1&nbsp;&nbsp;&nbsp;The Log Table</a></li>
+<li><a class="reference internal" href="#id17" id="id62">2.9.2&nbsp;&nbsp;&nbsp;Configuration</a></li>
+<li><a class="reference internal" href="#examples" id="id63">2.9.3&nbsp;&nbsp;&nbsp;Examples</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-sqlite-handler" id="id64">2.10&nbsp;&nbsp;&nbsp;The Sqlite Handler</a><ul class="auto-toc">
+<li><a class="reference internal" href="#id18" id="id65">2.10.1&nbsp;&nbsp;&nbsp;Configuration</a></li>
+<li><a class="reference internal" href="#id19" id="id66">2.10.2&nbsp;&nbsp;&nbsp;Examples</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-syslog-handler" id="id67">2.11&nbsp;&nbsp;&nbsp;The Syslog Handler</a><ul class="auto-toc">
+<li><a class="reference internal" href="#id20" id="id68">2.11.1&nbsp;&nbsp;&nbsp;Configuration</a></li>
+<li><a class="reference internal" href="#facilities" id="id69">2.11.2&nbsp;&nbsp;&nbsp;Facilities</a></li>
+<li><a class="reference internal" href="#id21" id="id70">2.11.3&nbsp;&nbsp;&nbsp;Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-window-handler" id="id71">2.12&nbsp;&nbsp;&nbsp;The Window Handler</a><ul class="auto-toc">
+<li><a class="reference internal" href="#id22" id="id72">2.12.1&nbsp;&nbsp;&nbsp;Configuration</a></li>
+<li><a class="reference internal" href="#id23" id="id73">2.12.2&nbsp;&nbsp;&nbsp;Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#composite-handlers" id="id74">3&nbsp;&nbsp;&nbsp;Composite Handlers</a></li>
+<li><a class="reference internal" href="#log-observers" id="id75">4&nbsp;&nbsp;&nbsp;Log Observers</a></li>
+<li><a class="reference internal" href="#logging-from-standard-error-handlers" id="id76">5&nbsp;&nbsp;&nbsp;Logging From Standard Error Handlers</a><ul class="auto-toc">
+<li><a class="reference internal" href="#logging-php-errors" id="id77">5.1&nbsp;&nbsp;&nbsp;Logging PHP Errors</a></li>
+<li><a class="reference internal" href="#logging-php-assertions" id="id78">5.2&nbsp;&nbsp;&nbsp;Logging PHP Assertions</a></li>
+<li><a class="reference internal" href="#logging-php-exceptions" id="id79">5.3&nbsp;&nbsp;&nbsp;Logging PHP Exceptions</a></li>
+<li><a class="reference internal" href="#logging-pear-errors" id="id80">5.4&nbsp;&nbsp;&nbsp;Logging PEAR Errors</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#custom-handlers" id="id81">6&nbsp;&nbsp;&nbsp;Custom Handlers</a><ul class="auto-toc">
+<li><a class="reference internal" href="#using-a-custom-handler" id="id82">6.1&nbsp;&nbsp;&nbsp;Using a Custom Handler</a><ul class="auto-toc">
+<li><a class="reference internal" href="#method-1-handler-in-the-standard-location" id="id83">6.1.1&nbsp;&nbsp;&nbsp;Method 1: Handler in the Standard Location</a></li>
+<li><a class="reference internal" href="#method-2-handler-in-a-custom-location" id="id84">6.1.2&nbsp;&nbsp;&nbsp;Method 2: Handler in a Custom Location</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#writing-new-handlers" id="id85">6.2&nbsp;&nbsp;&nbsp;Writing New Handlers</a></li>
+<li><a class="reference internal" href="#extending-existing-handlers" id="id86">6.3&nbsp;&nbsp;&nbsp;Extending Existing Handlers</a></li>
+<li><a class="reference internal" href="#handler-methods" id="id87">6.4&nbsp;&nbsp;&nbsp;Handler Methods</a><ul class="auto-toc">
+<li><a class="reference internal" href="#bool-open" id="id88">6.4.1&nbsp;&nbsp;&nbsp;bool open()</a></li>
+<li><a class="reference internal" href="#bool-close" id="id89">6.4.2&nbsp;&nbsp;&nbsp;bool close()</a></li>
+<li><a class="reference internal" href="#bool-flush" id="id90">6.4.3&nbsp;&nbsp;&nbsp;bool flush()</a></li>
+<li><a class="reference internal" href="#bool-log-message-priority-null" id="id91">6.4.4&nbsp;&nbsp;&nbsp;bool log($message, $priority = null)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#utility-methods" id="id92">6.5&nbsp;&nbsp;&nbsp;Utility Methods</a><ul class="auto-toc">
+<li><a class="reference internal" href="#string-extractmessage-message" id="id93">6.5.1&nbsp;&nbsp;&nbsp;string _extractMessage($message)</a></li>
+<li><a class="reference internal" href="#string-format-format-timestamp-priority-message" id="id94">6.5.2&nbsp;&nbsp;&nbsp;string _format($format, $timestamp, $priority, $message)</a></li>
+<li><a class="reference internal" href="#bool-ismasked-priority" id="id95">6.5.3&nbsp;&nbsp;&nbsp;bool _isMasked($priority)</a></li>
+<li><a class="reference internal" href="#void-announce-event" id="id96">6.5.4&nbsp;&nbsp;&nbsp;void _announce($event)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="using-log-handlers">
+<h2>1&nbsp;&nbsp;&nbsp;Using Log Handlers</h2>
+<p>The Log package is implemented as a framework that supports the notion of
+backend-specific log handlers.  The base logging object (defined by the <a class="reference external" href="http://cvs.php.net/viewvc.cgi/pear/Log/Log.php">Log
+class</a>) is primarily an abstract interface to the currently configured
+handler.</p>
+<p>A wide variety of handlers are distributed with the Log package, and, should
+none of them fit your application's needs, it's easy to <a class="reference internal" href="#custom-handlers">write your own</a>.</p>
+<div class="section" id="creating-a-log-object">
+<h3>1.1&nbsp;&nbsp;&nbsp;Creating a Log Object</h3>
+<p>There are three ways to create Log objects:</p>
+<blockquote>
+<ul class="simple">
+<li>Using the <tt class="docutils literal"><span class="pre">Log::factory()</span></tt> method</li>
+<li>Using the <tt class="docutils literal"><span class="pre">Log::singleton()</span></tt> method</li>
+<li>Direct instantiation</li>
+</ul>
+</blockquote>
+<div class="section" id="the-factory-method">
+<h4>1.1.1&nbsp;&nbsp;&nbsp;The Factory Method</h4>
+<p>The <tt class="docutils literal"><span class="pre">Log::factory()</span></tt> method implements the <a class="reference external" href="http://wikipedia.org/wiki/Factory_method_pattern">Factory Pattern</a>.  It allows
+for the parameterized construction of concrete Log instances at runtime.  The
+first parameter to the <tt class="docutils literal"><span class="pre">Log::factory()</span></tt> method indicates the name of the
+concrete handler to create.  The rest of the parameters will be passed on to
+the handler's constructor (see <a class="reference internal" href="#configuring-a-handler">Configuring a Handler</a> below).</p>
+<p>The new <tt class="docutils literal">Log</tt> instance is returned by reference.</p>
+<pre class="literal-block">
+require_once 'Log.php';
+
+$console = Log::factory('console', '', 'TEST');
+$console-&gt;log('Logging to the console.');
+
+$file = Log::factory('file', 'out.log', 'TEST');
+$file-&gt;log('Logging to out.log.');
+</pre>
+</div>
+<div class="section" id="the-singleton-method">
+<h4>1.1.2&nbsp;&nbsp;&nbsp;The Singleton Method</h4>
+<p>The <tt class="docutils literal"><span class="pre">Log::singleton()</span></tt> method implements the <a class="reference external" href="http://wikipedia.org/wiki/Singleton_pattern">Singleton Pattern</a>.  The
+singleton pattern ensures that only a single instance of a given log type and
+configuration is ever created.  This has two benefits: first, it prevents
+duplicate <tt class="docutils literal">Log</tt> instances from being constructed, and, second, it gives all
+of your code access to the same <tt class="docutils literal">Log</tt> instance.  The latter is especially
+important when logging to files because only a single file handler will need
+to be managed.</p>
+<p>The <tt class="docutils literal"><span class="pre">Log::singleton()</span></tt> method's parameters match the <tt class="docutils literal"><span class="pre">Log::factory()</span></tt>
+method.  The new <tt class="docutils literal">Log</tt> instance is returned by reference.</p>
+<pre class="literal-block">
+require_once 'Log.php';
+
+/* Same construction parameters */
+$a = Log::singleton('console', '', 'TEST');
+$b = Log::singleton('console', '', 'TEST');
+
+if ($a === $b) {
+    echo '$a and $b point to the same Log instance.' . &quot;\n&quot;;
+}
+
+/* Different construction parameters */
+$c = Log::singleton('console', '', 'TEST1');
+$d = Log::singleton('console', '', 'TEST2');
+
+if ($c !== $d) {
+    echo '$c and $d point to different Log instances.' . &quot;\n&quot;;
+}
+</pre>
+</div>
+<div class="section" id="direct-instantiation">
+<h4>1.1.3&nbsp;&nbsp;&nbsp;Direct Instantiation</h4>
+<p>It is also possible to directly instantiate concrete <tt class="docutils literal">Log</tt> handler
+instances.  However, this method is <strong>not recommended</strong> because it creates a
+tighter coupling between your application code and the Log package than is
+necessary.  Use of <a class="reference internal" href="#the-factory-method">the factory method</a> or <a class="reference internal" href="#the-singleton-method">the singleton method</a> is
+preferred.</p>
+</div>
+</div>
+<div class="section" id="configuring-a-handler">
+<h3>1.2&nbsp;&nbsp;&nbsp;Configuring a Handler</h3>
+<p>A log handler's configuration is determined by the arguments used in its
+construction.  Here's an overview of those parameters:</p>
+<pre class="literal-block">
+/* Using the factory method ... */
+Log::factory($handler, $name, $ident, $conf, $maxLevel);
+
+/* Using the singleton method ... */
+Log::singleton($handler, $name, $ident, $conf, $maxLevel);
+
+/* Using direct instantiation ... */
+new Log_handler($name, $ident, $conf, $maxLevel);
+</pre>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="15%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">$handler</tt></td>
+<td>String</td>
+<td>The type of Log handler to construct.  This
+parameter is only available when <a class="reference internal" href="#the-factory-method">the factory
+method</a> or <a class="reference internal" href="#the-singleton-method">the singleton method</a> are used.</td>
+</tr>
+<tr><td><tt class="docutils literal">$name</tt></td>
+<td>String</td>
+<td>The name of the log resource to which the
+events will be logged.  The use of this value
+is determined by the handler's implementation.
+It defaults to an empty string.</td>
+</tr>
+<tr><td><tt class="docutils literal">$ident</tt></td>
+<td>String</td>
+<td>An identification string that will be included
+in all log events logged by this handler.
+This value defaults to an empty string and can
+be changed at runtime using the <tt class="docutils literal">setIdent()</tt>
+method.</td>
+</tr>
+<tr><td><tt class="docutils literal">$conf</tt></td>
+<td>Array</td>
+<td>Associative array of key-value pairs that are
+used to specify any handler-specific settings.</td>
+</tr>
+<tr><td><tt class="docutils literal">$level</tt></td>
+<td>Integer</td>
+<td>Log messages up to and including this level.
+This value defaults to <tt class="docutils literal">PEAR_LOG_DEBUG</tt>.
+See <a class="reference internal" href="#log-levels">Log Levels</a> and <a class="reference internal" href="#log-level-masks">Log Level Masks</a>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="logging-an-event">
+<h3>1.3&nbsp;&nbsp;&nbsp;Logging an Event</h3>
+<p>Events are logged using the <tt class="docutils literal">log()</tt> method:</p>
+<pre class="literal-block">
+$logger-&gt;log('Message', PEAR_LOG_NOTICE);
+</pre>
+<p>The first argument contains the log event's message.  Even though the event is
+always logged as a string, it is possible to pass an object to the <tt class="docutils literal">log()</tt>
+method.  If the object implements a <tt class="docutils literal">getString()</tt> method, a <tt class="docutils literal">toString()</tt>
+method or Zend Engine 2's special <tt class="docutils literal">__toString()</tt> casting method, it will be
+used to determine the object's string representation.  Otherwise, the
+<a class="reference external" href="http://www.php.net/serialize">serialized</a> form of the object will be logged.</p>
+<p>The second, optional argument specifies the log event's priority.  See the
+<a class="reference internal" href="#log-levels">Log Levels</a> table for the complete list of priorities.  The default priority
+is PEAR_LOG_INFO.</p>
+<p>The <tt class="docutils literal">log()</tt> method will return <tt class="docutils literal">true</tt> if the event was successfully
+logged.</p>
+<p>&quot;Shortcut&quot; methods are also available for logging an event at a specific log
+level.  See the <a class="reference internal" href="#log-levels">Log Levels</a> table for the complete list.</p>
+</div>
+<div class="section" id="log-levels">
+<h3>1.4&nbsp;&nbsp;&nbsp;Log Levels</h3>
+<p>This table is ordered by highest priority (<tt class="docutils literal">PEAR_LOG_EMERG</tt>) to lowest
+priority (<tt class="docutils literal">PEAR_LOG_DEBUG</tt>).</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="21%" />
+<col width="48%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Level</th>
+<th class="head">Shortcut</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">PEAR_LOG_EMERG</tt></td>
+<td><tt class="docutils literal">emerg()</tt></td>
+<td>System is unusable</td>
+</tr>
+<tr><td><tt class="docutils literal">PEAR_LOG_ALERT</tt></td>
+<td><tt class="docutils literal">alert()</tt></td>
+<td>Immediate action required</td>
+</tr>
+<tr><td><tt class="docutils literal">PEAR_LOG_CRIT</tt></td>
+<td><tt class="docutils literal">crit()</tt></td>
+<td>Critical conditions</td>
+</tr>
+<tr><td><tt class="docutils literal">PEAR_LOG_ERR</tt></td>
+<td><tt class="docutils literal">err()</tt></td>
+<td>Error conditions</td>
+</tr>
+<tr><td><tt class="docutils literal">PEAR_LOG_WARNING</tt></td>
+<td><tt class="docutils literal">warning()</tt></td>
+<td>Warning conditions</td>
+</tr>
+<tr><td><tt class="docutils literal">PEAR_LOG_NOTICE</tt></td>
+<td><tt class="docutils literal">notice()</tt></td>
+<td>Normal but significant</td>
+</tr>
+<tr><td><tt class="docutils literal">PEAR_LOG_INFO</tt></td>
+<td><tt class="docutils literal">info()</tt></td>
+<td>Informational</td>
+</tr>
+<tr><td><tt class="docutils literal">PEAR_LOG_DEBUG</tt></td>
+<td><tt class="docutils literal">debug()</tt></td>
+<td>Debug-level messages</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="log-level-masks">
+<h3>1.5&nbsp;&nbsp;&nbsp;Log Level Masks</h3>
+<p>Defining a log level mask allows you to include and/or exclude specific levels
+of events from being logged.  The <tt class="docutils literal">$level</tt> construction parameter (see
+<a class="reference internal" href="#configuring-a-handler">Configuring a Handler</a>) uses this mechanism to exclude log events below a
+certain priority, and it's possible to define more complex masks once the Log
+object has been constructed.</p>
+<p>Each priority has a specific mask associated with it.  To compute a priority's
+mask, use the static <tt class="docutils literal"><span class="pre">Log::MASK()</span></tt> method:</p>
+<pre class="literal-block">
+$mask = Log::MASK(PEAR_LOG_INFO);
+</pre>
+<p>To compute the mask for all priorities up to, and including, a certain level,
+use the <tt class="docutils literal"><span class="pre">Log::MAX()</span></tt> static method:</p>
+<pre class="literal-block">
+$mask = Log::MAX(PEAR_LOG_INFO);
+</pre>
+<p>To compute the mask for all priorities greater than or equal to a certain
+level, use the <tt class="docutils literal"><span class="pre">Log::MIN()</span></tt> static method:</p>
+<pre class="literal-block">
+$mask = Log::MIN(PEAR_LOG_INFO);
+</pre>
+<p>The apply the mask, use the <tt class="docutils literal">setMask()</tt> method:</p>
+<pre class="literal-block">
+$logger-&gt;setMask($mask);
+</pre>
+<p>Masks can be be combined using bitwise operations.  To restrict logging to
+only those events marked as <tt class="docutils literal">PEAR_LOG_NOTICE</tt> or <tt class="docutils literal">PEAR_LOG_DEBUG</tt>:</p>
+<pre class="literal-block">
+$mask = Log::MASK(PEAR_LOG_NOTICE) | Log::MASK(PEAR_LOG_DEBUG);
+$logger-&gt;setMask($mask);
+</pre>
+<p>For convenience, two special masks are predefined: <tt class="docutils literal">PEAR_LOG_NONE</tt> and
+<tt class="docutils literal">PEAR_LOG_ALL</tt>.  <tt class="docutils literal">PEAR_LOG_ALL</tt> is especially useful for excluding only
+specific priorities:</p>
+<pre class="literal-block">
+$mask = PEAR_LOG_ALL ^ Log::MASK(PEAR_LOG_NOTICE);
+$logger-&gt;setMask($mask);
+</pre>
+<p>It is also possible to retrieve and modify a Log object's existing mask:</p>
+<pre class="literal-block">
+$mask = $logger-&gt;getMask() | Log::MASK(PEAR_LOG_INFO);
+$logger-&gt;setMask($mask);
+</pre>
+</div>
+<div class="section" id="log-line-format">
+<h3>1.6&nbsp;&nbsp;&nbsp;Log Line Format</h3>
+<p>Most log handlers support configurable line formats.  The following is a list
+of special tokens that will be expanded at runtime with contextual information
+related to the log event.  Each token has an alternate shorthand notation, as
+well.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="15%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Token</th>
+<th class="head">Alternate</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">%{timestamp}</tt></td>
+<td><tt class="docutils literal">%1$s</tt></td>
+<td>Timestamp.  This is often configurable.</td>
+</tr>
+<tr><td><tt class="docutils literal">%{ident}</tt></td>
+<td><tt class="docutils literal">%2$s</tt></td>
+<td>The log handler's identification string.</td>
+</tr>
+<tr><td><tt class="docutils literal">%{priority}</tt></td>
+<td><tt class="docutils literal">%3$s</tt></td>
+<td>The log event's priority.</td>
+</tr>
+<tr><td><tt class="docutils literal">%{message}</tt></td>
+<td><tt class="docutils literal">%4$s</tt></td>
+<td>The log event's message text.</td>
+</tr>
+<tr><td><tt class="docutils literal">%{file}</tt></td>
+<td><tt class="docutils literal">%5$s</tt></td>
+<td>The full filename of the logging file.</td>
+</tr>
+<tr><td><tt class="docutils literal">%{line}</tt></td>
+<td><tt class="docutils literal">%6$s</tt></td>
+<td>The line number on which the event occured.</td>
+</tr>
+<tr><td><tt class="docutils literal">%{function}</tt></td>
+<td><tt class="docutils literal">%7$s</tt></td>
+<td>The function from which the event occurred.</td>
+</tr>
+<tr><td><tt class="docutils literal">%{class}</tt></td>
+<td><tt class="docutils literal">%8$s</tt></td>
+<td>The class in which the event occurred.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="flushing-log-events">
+<h3>1.7&nbsp;&nbsp;&nbsp;Flushing Log Events</h3>
+<p>Some log handlers (such as <a class="reference internal" href="#the-console-handler">the console handler</a>) support explicit
+&quot;buffering&quot;.  When buffering is enabled, log events won't actually be written
+to the output stream until the handler is closed.  Other handlers (such as
+<a class="reference internal" href="#the-file-handler">the file handler</a>) support implicit buffering because they use the operating
+system's IO routines, which may buffer the output.</p>
+<p>It's possible to force these handlers to flush their output, however, by
+calling their <tt class="docutils literal">flush()</tt> method:</p>
+<pre class="literal-block">
+$conf = array('buffering' =&gt; true);
+$logger = Log::singleton('console', '', 'test', $conf);
+
+for ($i = 0; $i &lt; 10; $i++) {
+    $logger-&gt;log('This event will be buffered.');
+}
+
+/* Flush all of the buffered log events. */
+$logger-&gt;flush();
+
+for ($i = 0; $i &lt; 10; $i++) {
+    $logger-&gt;log('This event will be buffered.');
+}
+
+/* Implicitly flush the buffered events on close. */
+$logger-&gt;close();
+</pre>
+<p>At this time, the <tt class="docutils literal">flush()</tt> method is only implemented by <a class="reference internal" href="#the-console-handler">the console
+handler</a>, <a class="reference internal" href="#the-file-handler">the file handler</a>, <a class="reference internal" href="#the-firebug-handler">the Firebug handler</a>, and <a class="reference internal" href="#the-mail-handler">the mail
+handler</a>.</p>
+</div>
+</div>
+<div class="section" id="standard-log-handlers">
+<h2>2&nbsp;&nbsp;&nbsp;Standard Log Handlers</h2>
+<div class="section" id="the-console-handler">
+<h3>2.1&nbsp;&nbsp;&nbsp;The Console Handler</h3>
+<p>The Console handler outputs log events directly to the console.  It supports
+output buffering and configurable string formats.</p>
+<div class="section" id="configuration">
+<h4>2.1.1&nbsp;&nbsp;&nbsp;Configuration</h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="15%" />
+<col width="21%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Type</th>
+<th class="head">Default</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">stream</tt></td>
+<td>File</td>
+<td><a class="reference external" href="http://www.php.net/wrappers.php">STDOUT</a></td>
+<td>The output stream to use.</td>
+</tr>
+<tr><td><tt class="docutils literal">buffering</tt></td>
+<td>Boolean</td>
+<td>False</td>
+<td>Should the output be
+buffered until shutdown?</td>
+</tr>
+<tr><td><tt class="docutils literal">lineFormat</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">%1$s %2$s
+[%3$s] %4$s</tt></td>
+<td><a class="reference internal" href="#log-line-format">Log line format</a>
+specification.</td>
+</tr>
+<tr><td><tt class="docutils literal">timeFormat</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">%b %d
+<span class="pre">%H:%M:%S</span></tt></td>
+<td>Time stamp format
+(for <a class="reference external" href="http://www.php.net/strftime">strftime</a>).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="example">
+<h4>2.1.2&nbsp;&nbsp;&nbsp;Example</h4>
+<pre class="literal-block">
+$logger = Log::singleton('console', '', 'ident');
+for ($i = 0; $i &lt; 10; $i++) {
+    $logger-&gt;log(&quot;Log entry $i&quot;);
+}
+</pre>
+</div>
+</div>
+<div class="section" id="the-display-handler">
+<h3>2.2&nbsp;&nbsp;&nbsp;The Display Handler</h3>
+<p>The Display handler simply prints the log events back to the browser.  It
+respects the <tt class="docutils literal">error_prepend_string</tt> and <tt class="docutils literal">error_append_string</tt> <a class="reference external" href="http://www.php.net/errorfunc">error
+handling values</a> and is useful when <a class="reference internal" href="#logging-from-standard-error-handlers">logging from standard error handlers</a>.</p>
+<div class="section" id="id2">
+<h4>2.2.1&nbsp;&nbsp;&nbsp;Configuration</h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="15%" />
+<col width="21%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Type</th>
+<th class="head">Default</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">lineFormat</tt></td>
+<td>String</td>
+<td><tt class="docutils literal"><span class="pre">&lt;b&gt;%3$s&lt;/b&gt;:</span>
+%4$s</tt></td>
+<td><a class="reference internal" href="#log-line-format">Log line format</a>
+specification.</td>
+</tr>
+<tr><td><tt class="docutils literal">timeFormat</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">%b %d
+<span class="pre">%H:%M:%S</span></tt></td>
+<td>Time stamp format
+(for <a class="reference external" href="http://www.php.net/strftime">strftime</a>).</td>
+</tr>
+<tr><td><tt class="docutils literal">error_prepend</tt></td>
+<td>String</td>
+<td>PHP INI value</td>
+<td>This string will be
+prepended to the line
+format.</td>
+</tr>
+<tr><td><tt class="docutils literal">error_append</tt></td>
+<td>String</td>
+<td>PHP INI value</td>
+<td>This string will be
+appended to the line
+format.</td>
+</tr>
+<tr><td><tt class="docutils literal">linebreak</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">&lt;br <span class="pre">/&gt;\n</span></tt></td>
+<td>This string is used to
+represent a line break.</td>
+</tr>
+<tr><td><tt class="docutils literal">rawText</tt></td>
+<td>Boolean</td>
+<td>False</td>
+<td>Should message text be
+passed directly to the log
+system?  Otherwise, it
+will be converted to an
+HTML-safe representation.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id3">
+<h4>2.2.2&nbsp;&nbsp;&nbsp;Example</h4>
+<pre class="literal-block">
+$conf = array('error_prepend' =&gt; '&lt;font color=&quot;#ff0000&quot;&gt;&lt;tt&gt;',
+              'error_append'  =&gt; '&lt;/tt&gt;&lt;/font&gt;');
+$logger = Log::singleton('display', '', '', $conf, PEAR_LOG_DEBUG);
+for ($i = 0; $i &lt; 10; $i++) {
+    $logger-&gt;log(&quot;Log entry $i&quot;);
+}
+</pre>
+</div>
+</div>
+<div class="section" id="the-error-log-handler">
+<h3>2.3&nbsp;&nbsp;&nbsp;The Error_Log Handler</h3>
+<p>The Error_Log handler sends log events to PHP's <a class="reference external" href="http://www.php.net/error_log">error_log()</a> function.</p>
+<div class="section" id="id4">
+<h4>2.3.1&nbsp;&nbsp;&nbsp;Configuration</h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="15%" />
+<col width="21%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Type</th>
+<th class="head">Default</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">destination</tt></td>
+<td>String</td>
+<td>'' <cite>(empty)</cite></td>
+<td>Optional destination value
+for <a class="reference external" href="http://www.php.net/error_log">error_log()</a>.  See
+<a class="reference internal" href="#error-log-types">Error_Log Types</a> for
+more details.</td>
+</tr>
+<tr><td><tt class="docutils literal">extra_headers</tt></td>
+<td>String</td>
+<td>'' <cite>(empty)</cite></td>
+<td>Additional headers to pass
+to the <a class="reference external" href="http://www.php.net/mail">mail()</a> function
+when the
+<tt class="docutils literal">PEAR_LOG_TYPE_MAIL</tt>
+type is specified.</td>
+</tr>
+<tr><td><tt class="docutils literal">lineFormat</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">%2$s: %4$s</tt></td>
+<td><a class="reference internal" href="#log-line-format">Log line format</a>
+specification.</td>
+</tr>
+<tr><td><tt class="docutils literal">timeFormat</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">%b %d
+<span class="pre">%H:%M:%S</span></tt></td>
+<td>Time stamp format
+(for <a class="reference external" href="http://www.php.net/strftime">strftime</a>).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="error-log-types">
+<h4>2.3.2&nbsp;&nbsp;&nbsp;Error_Log Types</h4>
+<p>All of the available log types are detailed in the <a class="reference external" href="http://www.php.net/error_log">error_log()</a> section of
+the PHP manual.  For your convenience, the Log package also defines the
+following constants that can be used for the <tt class="docutils literal">$name</tt> handler construction
+parameter.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Constant</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">PEAR_LOG_TYPE_SYSTEM</tt></td>
+<td>Log events are sent to PHP's system logger,
+which uses the operating system's logging
+mechanism or a file (depending on the value
+of the <a class="reference external" href="http://www.php.net/errorfunc#ini.error-log">error_log configuration directive</a>).</td>
+</tr>
+<tr><td><tt class="docutils literal">PEAR_LOG_TYPE_MAIL</tt></td>
+<td>Log events are sent via email to the address
+specified in the <tt class="docutils literal">destination</tt> value.</td>
+</tr>
+<tr><td><tt class="docutils literal">PEAR_LOG_TYPE_DEBUG</tt></td>
+<td>Log events are sent through PHP's debugging
+connection.  This will only work if
+<a class="reference external" href="http://www.php.net/install.configure#install.configure.enable-debugger">remote debugging</a> has been enabled.  The
+<tt class="docutils literal">destination</tt> value is used to specify the
+host name or IP address of the target socket.</td>
+</tr>
+<tr><td><tt class="docutils literal">PEAR_LOG_TYPE_FILE</tt></td>
+<td>Log events will be appended to the file named
+by the <tt class="docutils literal">destination</tt> value.</td>
+</tr>
+<tr><td><tt class="docutils literal">PEAR_LOG_TYPE_SAPI</tt></td>
+<td>Log events will be sent directly to the SAPI
+logging handler.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id5">
+<h4>2.3.3&nbsp;&nbsp;&nbsp;Example</h4>
+<pre class="literal-block">
+$logger = Log::singleton('error_log', PEAR_LOG_TYPE_SYSTEM, 'ident');
+for ($i = 0; $i &lt; 10; $i++) {
+    $logger-&gt;log(&quot;Log entry $i&quot;);
+}
+</pre>
+</div>
+</div>
+<div class="section" id="the-file-handler">
+<h3>2.4&nbsp;&nbsp;&nbsp;The File Handler</h3>
+<p>The File handler writes log events to a text file using configurable string
+formats.</p>
+<div class="section" id="id6">
+<h4>2.4.1&nbsp;&nbsp;&nbsp;Configuration</h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="15%" />
+<col width="21%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Type</th>
+<th class="head">Default</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">append</tt></td>
+<td>Boolean</td>
+<td>True</td>
+<td>Should new log entries be
+append to an existing log
+file, or should the a new
+log file overwrite an
+existing one?</td>
+</tr>
+<tr><td><tt class="docutils literal">locking</tt></td>
+<td>Boolean</td>
+<td>False</td>
+<td>Should advisory file
+locking (using <a class="reference external" href="http://www.php.net/flock">flock</a>) be
+used?</td>
+</tr>
+<tr><td><tt class="docutils literal">mode</tt></td>
+<td>Integer</td>
+<td>0644</td>
+<td>Octal representation of
+the log file's permissions
+mode.</td>
+</tr>
+<tr><td><tt class="docutils literal">dirmode</tt></td>
+<td>Integer</td>
+<td>0755</td>
+<td>Octal representation of
+the file permission mode
+that will be used when
+creating directories that
+do not already exist.</td>
+</tr>
+<tr><td><tt class="docutils literal">eol</tt></td>
+<td>String</td>
+<td>OS default</td>
+<td>The end-of-line character
+sequence.</td>
+</tr>
+<tr><td><tt class="docutils literal">lineFormat</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">%1$s %2$s
+[%3$s] %4$s</tt></td>
+<td><a class="reference internal" href="#log-line-format">Log line format</a>
+specification.</td>
+</tr>
+<tr><td><tt class="docutils literal">timeFormat</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">%b %d
+<span class="pre">%H:%M:%S</span></tt></td>
+<td>Time stamp format
+(for <a class="reference external" href="http://www.php.net/strftime">strftime</a>).</td>
+</tr>
+</tbody>
+</table>
+<p>The file handler will only attempt to set the <tt class="docutils literal">mode</tt> value if it was
+responsible for creating the file.</p>
+</div>
+<div class="section" id="id8">
+<h4>2.4.2&nbsp;&nbsp;&nbsp;Example</h4>
+<pre class="literal-block">
+$conf = array('mode' =&gt; 0600, 'timeFormat' =&gt; '%X %x');
+$logger = Log::singleton('file', 'out.log', 'ident', $conf);
+for ($i = 0; $i &lt; 10; $i++) {
+    $logger-&gt;log(&quot;Log entry $i&quot;);
+}
+</pre>
+</div>
+</div>
+<div class="section" id="the-firebug-handler">
+<h3>2.5&nbsp;&nbsp;&nbsp;The Firebug Handler</h3>
+<p>The Firebug handler outputs log events to the <a class="reference external" href="http://www.getfirebug.com/">Firebug</a> console. It supports
+output buffering and configurable string formats.</p>
+<div class="section" id="id9">
+<h4>2.5.1&nbsp;&nbsp;&nbsp;Configuration</h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="15%" />
+<col width="21%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Type</th>
+<th class="head">Default</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">buffering</tt></td>
+<td>Boolean</td>
+<td>False</td>
+<td>Should the output be
+buffered until shutdown?</td>
+</tr>
+<tr><td><tt class="docutils literal">lineFormat</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">%2$s [%3$s]
+%4$s</tt></td>
+<td><a class="reference internal" href="#log-line-format">Log line format</a>
+specification.</td>
+</tr>
+<tr><td><tt class="docutils literal">timeFormat</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">%b %d
+<span class="pre">%H:%M:%S</span></tt></td>
+<td>Time stamp format
+(for <a class="reference external" href="http://www.php.net/strftime">strftime</a>).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id11">
+<h4>2.5.2&nbsp;&nbsp;&nbsp;Example</h4>
+<pre class="literal-block">
+$logger = Log::singleton('firebug', '', 'ident');
+for ($i = 0; $i &lt; 10; $i++) {
+    $logger-&gt;log(&quot;Log entry $i&quot;);
+}
+</pre>
+</div>
+</div>
+<div class="section" id="the-mail-handler">
+<h3>2.6&nbsp;&nbsp;&nbsp;The Mail Handler</h3>
+<p>The Mail handler aggregates a session's log events and sends them in the body
+of an email message using either the <a class="reference external" href="http://pear.php.net/package/Mail">PEAR Mail</a> package or PHP's native
+<a class="reference external" href="http://www.php.net/mail">mail()</a> function.</p>
+<p>If an empty <tt class="docutils literal">mailBackend</tt> value is specified, the <a class="reference external" href="http://www.php.net/mail">mail()</a> function will be
+used instead of the <a class="reference external" href="http://pear.php.net/package/Mail">PEAR Mail</a> package.</p>
+<p>Multiple recipients can be specified by separating their email addresses with
+commas in the <tt class="docutils literal">$name</tt> construction parameter.</p>
+<div class="section" id="id12">
+<h4>2.6.1&nbsp;&nbsp;&nbsp;Configuration</h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="15%" />
+<col width="21%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Type</th>
+<th class="head">Default</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">from</tt></td>
+<td>String</td>
+<td>sendmail_from
+INI value</td>
+<td>Value for the message's
+<tt class="docutils literal">From:</tt> header.</td>
+</tr>
+<tr><td><tt class="docutils literal">subject</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">[Log_mail]
+Log message</tt></td>
+<td>Value for the message's
+<tt class="docutils literal">Subject:</tt> header.</td>
+</tr>
+<tr><td><tt class="docutils literal">preamble</tt></td>
+<td>String</td>
+<td>`` <cite>(empty)</cite></td>
+<td>Preamble for the message.</td>
+</tr>
+<tr><td><tt class="docutils literal">lineFormat</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">%1$s %2$s
+[%3$s] %4$s</tt></td>
+<td><a class="reference internal" href="#log-line-format">Log line format</a>
+specification.</td>
+</tr>
+<tr><td><tt class="docutils literal">timeFormat</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">%b %d
+<span class="pre">%H:%M:%S</span></tt></td>
+<td>Time stamp format
+(for <a class="reference external" href="http://www.php.net/strftime">strftime</a>).</td>
+</tr>
+<tr><td><tt class="docutils literal">mailBackend</tt></td>
+<td>String</td>
+<td>`` <cite>(empty)</cite></td>
+<td>Name of the Mail package
+backend to use.</td>
+</tr>
+<tr><td><tt class="docutils literal">mailParams</tt></td>
+<td>Array</td>
+<td><cite>(empty)</cite></td>
+<td>Array of parameters that
+will be passed to the
+Mail package backend.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id14">
+<h4>2.6.2&nbsp;&nbsp;&nbsp;Example</h4>
+<pre class="literal-block">
+$conf = array('subject' =&gt; 'Important Log Events');
+$logger = Log::singleton('mail', 'webmaster&#64;example.com', 'ident', $conf);
+for ($i = 0; $i &lt; 10; $i++) {
+    $logger-&gt;log(&quot;Log entry $i&quot;);
+}
+</pre>
+</div>
+</div>
+<div class="section" id="the-mdb2-handler">
+<h3>2.7&nbsp;&nbsp;&nbsp;The MDB2 Handler</h3>
+<p>The MDB2 handler is similar to <a class="reference internal" href="#the-sql-db-handler">the SQL (DB) handler</a>, but instead of using
+the PEAR DB package, it uses the <a class="reference external" href="http://pear.php.net/package/MDB2">MDB2 database abstraction package</a>.</p>
+<div class="section" id="id15">
+<h4>2.7.1&nbsp;&nbsp;&nbsp;Configuration</h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="15%" />
+<col width="21%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Type</th>
+<th class="head">Default</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">dsn</tt></td>
+<td>Mixed</td>
+<td>'' <cite>(empty)</cite></td>
+<td>A <a class="reference external" href="http://pear.php.net/manual/en/package.database.db.intro-dsn.php">Data Source Name</a>.
+<strong>[required]</strong></td>
+</tr>
+<tr><td><tt class="docutils literal">options</tt></td>
+<td>Array</td>
+<td><tt class="docutils literal">persistent</tt></td>
+<td>An array of <a class="reference external" href="http://pear.php.net/package/MDB2">MDB2</a>
+options.</td>
+</tr>
+<tr><td><tt class="docutils literal">db</tt></td>
+<td>Object</td>
+<td>NULL</td>
+<td>An existing <a class="reference external" href="http://pear.php.net/package/MDB2">MDB2</a>
+object.  If specified,
+this object will be used,
+and <tt class="docutils literal">dsn</tt> will be
+ignored.</td>
+</tr>
+<tr><td><tt class="docutils literal">sequence</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">log_id</tt></td>
+<td>The name of the sequence
+to use when generating
+unique event IDs.   Under
+many databases, this will
+be used as the name of
+the sequence table.</td>
+</tr>
+<tr><td><tt class="docutils literal">identLimit</tt></td>
+<td>Integer</td>
+<td>16</td>
+<td>The maximum length of the
+<tt class="docutils literal">ident</tt> string.
+<strong>Changing this value may
+require updates to the SQL
+schema, as well.</strong></td>
+</tr>
+<tr><td><tt class="docutils literal">singleton</tt></td>
+<td>Boolean</td>
+<td>false</td>
+<td>Is true, use a singleton
+database object using
+<a class="reference external" href="http://pear.php.net/package/MDB2/docs/latest/MDB2/MDB2.html#methodsingleton">MDB2::singleton()</a>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="the-null-handler">
+<h3>2.8&nbsp;&nbsp;&nbsp;The Null Handler</h3>
+<p>The Null handler simply consumes log events (akin to sending them to
+<tt class="docutils literal">/dev/null</tt>).  <a class="reference internal" href="#log-level-masks">Log level masks</a> are respected, and the event will still be
+sent to any registered <a class="reference internal" href="#log-observers">log observers</a>.</p>
+<div class="section" id="id16">
+<h4>2.8.1&nbsp;&nbsp;&nbsp;Example</h4>
+<pre class="literal-block">
+$logger = Log::singleton('null');
+for ($i = 0; $i &lt; 10; $i++) {
+    $logger-&gt;log(&quot;Log entry $i&quot;);
+}
+</pre>
+</div>
+</div>
+<div class="section" id="the-sql-db-handler">
+<h3>2.9&nbsp;&nbsp;&nbsp;The SQL (DB) Handler</h3>
+<p>The SQL handler sends log events to a database using <a class="reference external" href="http://pear.php.net/package/DB">PEAR's DB abstraction
+layer</a>.</p>
+<p><strong>Note:</strong> Due to the constraints of the default database schema, the SQL
+handler limits the length of the <tt class="docutils literal">$ident</tt> string to sixteen (16) characters.
+This limit can be adjusted using the <tt class="docutils literal">identLimit</tt> configuration parameter.</p>
+<div class="section" id="the-log-table">
+<h4>2.9.1&nbsp;&nbsp;&nbsp;The Log Table</h4>
+<p>The default SQL table used by this handler looks like this:</p>
+<pre class="literal-block">
+CREATE TABLE log_table (
+    id          INT NOT NULL,
+    logtime     TIMESTAMP NOT NULL,
+    ident       CHAR(16) NOT NULL,
+    priority    INT NOT NULL,
+    message     VARCHAR(200),
+    PRIMARY KEY (id)
+);
+</pre>
+<p>This is the &quot;lowest common denominator&quot; that should work across all SQL
+compliant database.  You may want to make database- or site-specific changes
+to this schema to support your specific needs, however.  For example,
+<a class="reference external" href="http://www.postgresql.org/">PostgreSQL</a> users may prefer to use a <tt class="docutils literal">TEXT</tt> type for the <tt class="docutils literal">message</tt>
+field.</p>
+</div>
+<div class="section" id="id17">
+<h4>2.9.2&nbsp;&nbsp;&nbsp;Configuration</h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="15%" />
+<col width="21%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Type</th>
+<th class="head">Default</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">dsn</tt></td>
+<td>Mixed</td>
+<td>'' <cite>(empty)</cite></td>
+<td>A <a class="reference external" href="http://pear.php.net/manual/en/package.database.db.intro-dsn.php">Data Source Name</a>.
+<strong>[required]</strong></td>
+</tr>
+<tr><td><tt class="docutils literal">sql</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">INSERT INTO $table (id, logtime, ident, priority, message) <span class="pre">VALUES(?,</span> CURRENT_TIMESTAMP, <span class="pre">?,</span> <span class="pre">?,</span> <span class="pre">?)</span></tt></td>
+<td>SQL insertion statement.</td>
+</tr>
+<tr><td><tt class="docutils literal">options</tt></td>
+<td>Array</td>
+<td><tt class="docutils literal">persistent</tt></td>
+<td>An array of <a class="reference external" href="http://pear.php.net/package/DB">DB</a> options.</td>
+</tr>
+<tr><td><tt class="docutils literal">db</tt></td>
+<td>Object</td>
+<td>NULL</td>
+<td>An existing <a class="reference external" href="http://pear.php.net/package/DB">DB</a> object.
+If specified, this object
+will be used, and <tt class="docutils literal">dsn</tt>
+will be ignored.</td>
+</tr>
+<tr><td><tt class="docutils literal">sequence</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">log_id</tt></td>
+<td>The name of the sequence
+to use when generating
+unique event IDs.   Under
+many databases, this will
+be used as the name of
+the sequence table.</td>
+</tr>
+<tr><td><tt class="docutils literal">identLimit</tt></td>
+<td>Integer</td>
+<td>16</td>
+<td>The maximum length of the
+<tt class="docutils literal">ident</tt> string.
+<strong>Changing this value may
+require updates to the SQL
+schema, as well.</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The name of the database table to which the log entries will be written is
+specified using the <tt class="docutils literal">$name</tt> construction parameter (see <a class="reference internal" href="#configuring-a-handler">Configuring a
+Handler</a>).</p>
+</div>
+<div class="section" id="examples">
+<h4>2.9.3&nbsp;&nbsp;&nbsp;Examples</h4>
+<p>Using a <a class="reference external" href="http://pear.php.net/manual/en/package.database.db.intro-dsn.php">Data Source Name</a> to create a new database connection:</p>
+<pre class="literal-block">
+$conf = array('dsn' =&gt; 'pgsql://jon&#64;localhost+unix/logs');
+$logger = Log::singleton('sql', 'log_table', 'ident', $conf);
+for ($i = 0; $i &lt; 10; $i++) {
+    $logger-&gt;log(&quot;Log entry $i&quot;);
+}
+</pre>
+<p>Using an existing <a class="reference external" href="http://pear.php.net/package/DB">DB</a> object:</p>
+<pre class="literal-block">
+require_once 'DB.php';
+$db = &amp;DB::connect('pgsql://jon&#64;localhost+unix/logs');
+
+$conf['db'] = $db;
+$logger = Log::singleton('sql', 'log_table', 'ident', $conf);
+for ($i = 0; $i &lt; 10; $i++) {
+    $logger-&gt;log(&quot;Log entry $i&quot;);
+}
+</pre>
+</div>
+</div>
+<div class="section" id="the-sqlite-handler">
+<h3>2.10&nbsp;&nbsp;&nbsp;The Sqlite Handler</h3>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Bertrand Mansion</td>
+</tr>
+</tbody>
+</table>
+<p>The Sqlite handler sends log events to an Sqlite database using the <a class="reference external" href="http://www.php.net/sqlite">native
+PHP sqlite functions</a>.</p>
+<p>It is faster than <a class="reference internal" href="#the-sql-db-handler">the SQL (DB) handler</a> because requests are made directly
+to the database without using an abstraction layer.  It is also interesting to
+note that Sqlite database files can be moved, copied, and deleted on your
+system just like any other files, which makes log management easier.  Last but
+not least, using a database to log your events allows you to use SQL queries
+to create reports and statistics.</p>
+<p>When using a database and logging a lot of events, it is recommended to split
+the database into smaller databases.  This is allowed by Sqlite, and you can
+later use the Sqlite <a class="reference external" href="http://www.sqlite.org/lang.html#attach">ATTACH</a> statement to query your log database files
+globally.</p>
+<p>If the database does not exist when the log is opened, sqlite will try to
+create it automatically. If the log table does not exist, it will also be
+automatically created.  The table creation uses the following SQL request:</p>
+<pre class="literal-block">
+CREATE TABLE log_table (
+    id          INTEGER PRIMARY KEY NOT NULL,
+    logtime     NOT NULL,
+    ident       CHAR(16) NOT NULL,
+    priority    INT NOT NULL,
+    message
+);
+</pre>
+<div class="section" id="id18">
+<h4>2.10.1&nbsp;&nbsp;&nbsp;Configuration</h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="15%" />
+<col width="21%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Type</th>
+<th class="head">Default</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">filename</tt></td>
+<td>String</td>
+<td>'' <cite>(empty)</cite></td>
+<td>Path to an Sqlite
+database. <strong>[required]</strong></td>
+</tr>
+<tr><td><tt class="docutils literal">mode</tt></td>
+<td>Integer</td>
+<td>0666</td>
+<td>Octal mode used to open
+the database.</td>
+</tr>
+<tr><td><tt class="docutils literal">persistent</tt></td>
+<td>Boolean</td>
+<td>false</td>
+<td>Use a persistent
+connection.</td>
+</tr>
+</tbody>
+</table>
+<p>An already opened database connection can also be passed as parameter instead
+of the above configuration.  In this case, closing the database connection is
+up to the user.</p>
+</div>
+<div class="section" id="id19">
+<h4>2.10.2&nbsp;&nbsp;&nbsp;Examples</h4>
+<p>Using a configuration to create a new database connection:</p>
+<pre class="literal-block">
+$conf = array('filename' =&gt; 'log.db', 'mode' =&gt; 0666, 'persistent' =&gt; true);
+$logger = Log::factory('sqlite', 'log_table', 'ident', $conf);
+$logger-&gt;log('logging an event', PEAR_LOG_WARNING);
+</pre>
+<p>Using an existing connection:</p>
+<pre class="literal-block">
+$db = sqlite_open('log.db', 0666, $error);
+$logger = Log::factory('sqlite', 'log_table', 'ident', $db);
+$logger-&gt;log('logging an event', PEAR_LOG_WARNING);
+sqlite_close($db);
+</pre>
+</div>
+</div>
+<div class="section" id="the-syslog-handler">
+<h3>2.11&nbsp;&nbsp;&nbsp;The Syslog Handler</h3>
+<p>The Syslog handler sends log events to the system logging service (syslog on
+Unix-like environments or the Event Log on Windows systems).  The events are
+sent using PHP's <a class="reference external" href="http://www.php.net/syslog">syslog()</a> function.</p>
+<div class="section" id="id20">
+<h4>2.11.1&nbsp;&nbsp;&nbsp;Configuration</h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="15%" />
+<col width="21%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Type</th>
+<th class="head">Default</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">inherit</tt></td>
+<td>Boolean</td>
+<td>false</td>
+<td>Inherit the current syslog
+connection for this
+process, or start a new
+one via <a class="reference external" href="http://www.php.net/openlog">openlog()</a>?</td>
+</tr>
+<tr><td><tt class="docutils literal">reopen</tt></td>
+<td>Boolean</td>
+<td>false</td>
+<td>Reopen the syslog
+connection for each log
+event?</td>
+</tr>
+<tr><td><tt class="docutils literal">maxLength</tt></td>
+<td>Integer</td>
+<td>500</td>
+<td>Maximum message length
+that will be sent to the
+<a class="reference external" href="http://www.php.net/syslog">syslog()</a> function.
+Longer messages will be
+split across multiple
+<a class="reference external" href="http://www.php.net/syslog">syslog()</a> calls.</td>
+</tr>
+<tr><td><tt class="docutils literal">lineFormat</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">%4$s</tt></td>
+<td><a class="reference internal" href="#log-line-format">Log line format</a>
+specification.</td>
+</tr>
+<tr><td><tt class="docutils literal">timeFormat</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">%b %d
+<span class="pre">%H:%M:%S</span></tt></td>
+<td>Time stamp format
+(for <a class="reference external" href="http://www.php.net/strftime">strftime</a>).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="facilities">
+<h4>2.11.2&nbsp;&nbsp;&nbsp;Facilities</h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="74%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Constant</th>
+<th class="head">Category Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">LOG_AUTH</tt></td>
+<td>Security / authorization messages; <tt class="docutils literal">LOG_AUTHPRIV</tt> is
+preferred on systems where it is defined.</td>
+</tr>
+<tr><td><tt class="docutils literal">LOG_AUTHPRIV</tt></td>
+<td>Private security / authorization messages</td>
+</tr>
+<tr><td><tt class="docutils literal">LOG_CRON</tt></td>
+<td>Clock daemon (<tt class="docutils literal">cron</tt> and <tt class="docutils literal">at</tt>)</td>
+</tr>
+<tr><td><tt class="docutils literal">LOG_DAEMON</tt></td>
+<td>System daemon processes</td>
+</tr>
+<tr><td><tt class="docutils literal">LOG_KERN</tt></td>
+<td>Kernel messages</td>
+</tr>
+<tr><td><tt class="docutils literal">LOG_LOCAL0</tt> ..
+<tt class="docutils literal">LOG_LOCAL7</tt></td>
+<td>Reserved for local use; <strong>not</strong> available under
+Windows.</td>
+</tr>
+<tr><td><tt class="docutils literal">LOG_LPR</tt></td>
+<td>Printer subsystem</td>
+</tr>
+<tr><td><tt class="docutils literal">LOG_MAIL</tt></td>
+<td>Mail subsystem</td>
+</tr>
+<tr><td><tt class="docutils literal">LOG_NEWS</tt></td>
+<td>USENET news subsystem</td>
+</tr>
+<tr><td><tt class="docutils literal">LOG_SYSLOG</tt></td>
+<td>Internal syslog messages</td>
+</tr>
+<tr><td><tt class="docutils literal">LOG_USER</tt></td>
+<td>Generic user-level messages</td>
+</tr>
+<tr><td><tt class="docutils literal">LOG_UUCP</tt></td>
+<td>UUCP subsystem</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id21">
+<h4>2.11.3&nbsp;&nbsp;&nbsp;Example</h4>
+<pre class="literal-block">
+$logger = Log::singleton('syslog', LOG_LOCAL0, 'ident');
+for ($i = 0; $i &lt; 10; $i++) {
+    $logger-&gt;log(&quot;Log entry $i&quot;);
+}
+</pre>
+</div>
+</div>
+<div class="section" id="the-window-handler">
+<h3>2.12&nbsp;&nbsp;&nbsp;The Window Handler</h3>
+<p>The Window handler sends log events to a separate browser window.  The
+original idea for this handler was inspired by Craig Davis' Zend.com article
+entitled <a class="reference external" href="http://www.zend.com/zend/tut/tutorial-DebugLib.php">&quot;JavaScript Power PHP Debugging&quot;</a>.</p>
+<div class="section" id="id22">
+<h4>2.12.1&nbsp;&nbsp;&nbsp;Configuration</h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="15%" />
+<col width="21%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Type</th>
+<th class="head">Default</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">title</tt></td>
+<td>String</td>
+<td><tt class="docutils literal">Log Output
+Window</tt></td>
+<td>The title of the output
+window.</td>
+</tr>
+<tr><td><tt class="docutils literal">styles</tt></td>
+<td>Array</td>
+<td><a class="reference external" href="http://www.cis.rit.edu/">ROY G BIV</a>
+(high to low)</td>
+<td>Mapping of log priorities
+to CSS styles.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> The Window handler may not work reliably when PHP's <a class="reference external" href="http://www.php.net/outcontrol">output
+buffering</a> system is enabled.</p>
+</div>
+<div class="section" id="id23">
+<h4>2.12.2&nbsp;&nbsp;&nbsp;Example</h4>
+<pre class="literal-block">
+$conf = array('title' =&gt; 'Sample Log Output');
+$logger = Log::singleton('win', 'LogWindow', 'ident', $conf);
+for ($i = 0; $i &lt; 10; $i++) {
+    $logger-&gt;log(&quot;Log entry $i&quot;);
+}
+</pre>
+</div>
+</div>
+</div>
+<div class="section" id="composite-handlers">
+<h2>3&nbsp;&nbsp;&nbsp;Composite Handlers</h2>
+<p>It is often useful to log events to multiple handlers.  The Log package
+provides a compositing system that marks this task trivial.</p>
+<p>Start by creating the individual log handlers:</p>
+<pre class="literal-block">
+$console = Log::singleton('console', '', 'TEST');
+$file = Log::singleton('file', 'out.log', 'TEST');
+</pre>
+<p>Then, construct a composite handler and add the individual handlers as
+children of the composite:</p>
+<pre class="literal-block">
+$composite = Log::singleton('composite');
+$composite-&gt;addChild($console);
+$composite-&gt;addChild($file);
+</pre>
+<p>The composite handler implements the standard <tt class="docutils literal">Log</tt> interface so you can use
+it just like any of the other handlers:</p>
+<pre class="literal-block">
+$composite-&gt;log('This event will be logged to both handlers.');
+</pre>
+<p>Children can be removed from the composite when they're not longer needed:</p>
+<pre class="literal-block">
+$composite-&gt;removeChild($file);
+</pre>
+</div>
+<div class="section" id="log-observers">
+<h2>4&nbsp;&nbsp;&nbsp;Log Observers</h2>
+<p>Log observers provide an implementation of the <a class="reference external" href="http://wikipedia.org/wiki/Observer_pattern">observer pattern</a>.  In the
+content of the Log package, they provide a mechanism by which you can examine
+(i.e. observe) each event as it is logged.  This allows the implementation of
+special behavior based on the contents of a log event.  For example, the
+observer code could send an alert email if a log event contained the string
+<tt class="docutils literal">PANIC</tt>.</p>
+<p>Creating a log observer involves implementing a subclass of the
+<tt class="docutils literal">Log_observer</tt> class.  The subclass must override the base class's
+<tt class="docutils literal">notify()</tt> method.  This method is passed a hash containing the event's
+priority and event.  The subclass's implementation is free to act upon this
+information in any way it likes.</p>
+<p>Log observers are attached to <tt class="docutils literal">Log</tt> instances via the <tt class="docutils literal">attach()</tt> method:</p>
+<pre class="literal-block">
+$observer = Log_observer::factory('yourType');
+$logger-&gt;attach($observer);
+</pre>
+<p>Observers can be detached using the <tt class="docutils literal">detach()</tt> method:</p>
+<pre class="literal-block">
+$logger-&gt;detach($observer);
+</pre>
+<p>At this time, no concrete <tt class="docutils literal">Log_observer</tt> implementations are distributed
+with the Log package.</p>
+</div>
+<div class="section" id="logging-from-standard-error-handlers">
+<h2>5&nbsp;&nbsp;&nbsp;Logging From Standard Error Handlers</h2>
+<div class="section" id="logging-php-errors">
+<h3>5.1&nbsp;&nbsp;&nbsp;Logging PHP Errors</h3>
+<p>PHP's default error handler can be overridden using the <a class="reference external" href="http://www.php.net/set_error_handler">set_error_handler()</a>
+function.  The custom error handling function can use a global Log instance to
+log the PHP errors.</p>
+<p><strong>Note:</strong> Fatal PHP errors cannot be handled by a custom error handler at this
+time.</p>
+<pre class="literal-block">
+function errorHandler($code, $message, $file, $line)
+{
+    global $logger;
+
+    /* Map the PHP error to a Log priority. */
+    switch ($code) {
+    case E_WARNING:
+    case E_USER_WARNING:
+        $priority = PEAR_LOG_WARNING;
+        break;
+    case E_NOTICE:
+    case E_USER_NOTICE:
+        $priority = PEAR_LOG_NOTICE;
+        break;
+    case E_ERROR:
+    case E_USER_ERROR:
+        $priority = PEAR_LOG_ERR;
+        break;
+    default:
+        $priority = PEAR_LOG_INFO;
+    }
+
+    $logger-&gt;log($message . ' in ' . $file . ' at line ' . $line,
+                 $priority);
+}
+
+set_error_handler('errorHandler');
+trigger_error('This is an information log message.', E_USER_NOTICE);
+</pre>
+</div>
+<div class="section" id="logging-php-assertions">
+<h3>5.2&nbsp;&nbsp;&nbsp;Logging PHP Assertions</h3>
+<p>PHP allows user-defined <a class="reference external" href="http://www.php.net/assert">assert()</a> callback handlers.  The assertion callback
+is configured using the <a class="reference external" href="http://www.php.net/assert_options">assert_options()</a> function.</p>
+<pre class="literal-block">
+function assertCallback($file, $line, $message)
+{
+    global $logger;
+
+    $logger-&gt;log($message . ' in ' . $file . ' at line ' . $line,
+                 PEAR_LOG_ALERT);
+}
+
+assert_options(ASSERT_CALLBACK, 'assertCallback');
+assert(false);
+</pre>
+</div>
+<div class="section" id="logging-php-exceptions">
+<h3>5.3&nbsp;&nbsp;&nbsp;Logging PHP Exceptions</h3>
+<p>PHP 5 and later support the concept of <a class="reference external" href="http://www.php.net/exceptions">exceptions</a>.  A custom exception
+handler can be assigned using the <a class="reference external" href="http://www.php.net/set_exception_handler">set_exception_handler()</a> function.</p>
+<pre class="literal-block">
+function exceptionHandler($exception)
+{
+    global $logger;
+
+    $logger-&gt;log($exception-&gt;getMessage(), PEAR_LOG_ALERT);
+}
+
+set_exception_handler('exceptionHandler');
+throw new Exception('Uncaught Exception');
+</pre>
+</div>
+<div class="section" id="logging-pear-errors">
+<h3>5.4&nbsp;&nbsp;&nbsp;Logging PEAR Errors</h3>
+<p>The Log package can be used with <a class="reference external" href="http://pear.php.net/manual/en/core.pear.pear.seterrorhandling.php">PEAR::setErrorHandling()</a>'s
+<tt class="docutils literal">PEAR_ERROR_CALLBACK</tt> mechanism by writing an error handling function that
+uses a global Log instance.  Here's an example:</p>
+<pre class="literal-block">
+function errorHandler($error)
+{
+    global $logger;
+
+    $message = $error-&gt;getMessage();
+
+    if (!empty($error-&gt;backtrace[1]['file'])) {
+        $message .= ' (' . $error-&gt;backtrace[1]['file'];
+        if (!empty($error-&gt;backtrace[1]['line'])) {
+            $message .= ' at line ' . $error-&gt;backtrace[1]['line'];
+        }
+        $message .= ')';
+    }
+
+    $logger-&gt;log($message, $error-&gt;code);
+}
+
+PEAR::setErrorHandling(PEAR_ERROR_CALLBACK, 'errorHandler');
+PEAR::raiseError('This is an information log message.', PEAR_LOG_INFO);
+</pre>
+</div>
+</div>
+<div class="section" id="custom-handlers">
+<h2>6&nbsp;&nbsp;&nbsp;Custom Handlers</h2>
+<p>There are times when the standard handlers aren't a perfect match for your
+needs.  In those situations, the solution might be to write a custom handler.</p>
+<div class="section" id="using-a-custom-handler">
+<h3>6.1&nbsp;&nbsp;&nbsp;Using a Custom Handler</h3>
+<p>Using a custom Log handler is very simple.  Once written (see <a class="reference internal" href="#writing-new-handlers">Writing New
+Handlers</a> and <a class="reference internal" href="#extending-existing-handlers">Extending Existing Handlers</a> below), you have the choice of
+placing the file in your PEAR installation's main <tt class="docutils literal">Log/</tt> directory (usually
+something like <tt class="docutils literal">/usr/local/lib/php/Log</tt> or <tt class="docutils literal"><span class="pre">C:\php\pear\Log</span></tt>), where it
+can be found and use by any PHP application on the system, or placing the file
+somewhere in your application's local hierarchy and including it before the
+the custom Log object is constructed.</p>
+<div class="section" id="method-1-handler-in-the-standard-location">
+<h4>6.1.1&nbsp;&nbsp;&nbsp;Method 1: Handler in the Standard Location</h4>
+<p>After copying the handler file to your PEAR installation's <tt class="docutils literal">Log/</tt> directory,
+simply treat the handler as if it were part of the standard distributed.  If
+your handler is named <tt class="docutils literal">custom</tt> (and therefore implemented by a class named
+<tt class="docutils literal">Log_custom</tt>):</p>
+<pre class="literal-block">
+require_once 'Log.php';
+
+$logger = Log::factory('custom', '', 'CUSTOM');
+</pre>
+</div>
+<div class="section" id="method-2-handler-in-a-custom-location">
+<h4>6.1.2&nbsp;&nbsp;&nbsp;Method 2: Handler in a Custom Location</h4>
+<p>If you prefer storing your handler in your application's local hierarchy,
+you'll need to include that file before you can create a Log instance based on
+it.</p>
+<pre class="literal-block">
+require_once 'Log.php';
+require_once 'LocalHandlers/custom.php';
+
+$logger = Log::factory('custom', '', 'CUSTOM');
+</pre>
+</div>
+</div>
+<div class="section" id="writing-new-handlers">
+<h3>6.2&nbsp;&nbsp;&nbsp;Writing New Handlers</h3>
+<p>Writing a new Log handler is as simple as authoring a new class that extends
+the <tt class="docutils literal">Log</tt> class and that implements a relatively small set of standard
+methods.</p>
+<p>Every handler's class name must start with <tt class="docutils literal">Log_</tt> in order for it to be
+recognized by the Log package.</p>
+<pre class="literal-block">
+class Log_custom extends Log
+</pre>
+<p>The handler's constructor will be called with four parameters.  These values
+are discussed in detail in the <a class="reference internal" href="#configuring-a-handler">Configuring a Handler</a> section.</p>
+<pre class="literal-block">
+Log_custom($name, $ident = '', $conf = array(), $level = PEAR_LOG_DEBUG)
+</pre>
+<p>The constructor is responsible for configuring the handler based on these
+values.  Handler-specific parameters are passed as part of the <tt class="docutils literal">$conf</tt>
+array.  At a minimum, the handler's constructor must set the following values
+defined by the <tt class="docutils literal">Log</tt> base class:</p>
+<pre class="literal-block">
+$this-&gt;_id = md5(microtime());
+$this-&gt;_name = $name;
+$this-&gt;_ident = $ident;
+$this-&gt;_mask = Log::UPTO($level);
+</pre>
+<p>The <a class="reference internal" href="#handler-methods">Handler Methods</a> section below details the various standard methods that
+can be implemented by a log handler.  The <a class="reference internal" href="#utility-methods">Utility Methods</a> section describes
+some useful utility methods provided by the <tt class="docutils literal">Log</tt> base class which may be
+useful when implementing a log handler.</p>
+</div>
+<div class="section" id="extending-existing-handlers">
+<h3>6.3&nbsp;&nbsp;&nbsp;Extending Existing Handlers</h3>
+<p>Extending existing handlers is very similar to <a class="reference internal" href="#writing-new-handlers">writing new handlers</a> with
+the exception that, instead of inheriting from the <tt class="docutils literal">Log</tt> base class
+directly, the handler extends an existing handler's class.  This is a useful
+way of adding some custom behavior to an existing handler without writing an
+entirely new class (in the spirit of object-oriented programming).</p>
+<p>For example, <a class="reference internal" href="#the-mail-handler">the mail handler</a> could be extended to support sending messages
+with MIME-encoded attachments simply by authoring a new <tt class="docutils literal">Log_mail_mime</tt>
+class with a compliant constructor and a custom <tt class="docutils literal">log()</tt> method.  The rest of
+the standard methods would fall back on the <tt class="docutils literal">Log_mail</tt> base class's
+implementations.</p>
+<p>Obviously, the specific details involved in extending an existing handler
+require a good working understanding of that handler's implementation.</p>
+</div>
+<div class="section" id="handler-methods">
+<h3>6.4&nbsp;&nbsp;&nbsp;Handler Methods</h3>
+<div class="section" id="bool-open">
+<h4>6.4.1&nbsp;&nbsp;&nbsp;bool open()</h4>
+<p>The <tt class="docutils literal">open()</tt> method is called to open the log resource for output.  Handlers
+can call <tt class="docutils literal">open()</tt> immediately upon construction or lazily at runtime
+(perhaps when the first log event is received).</p>
+<p>The <tt class="docutils literal">Log</tt> base class provides a protected <tt class="docutils literal">$_opened</tt> member variable which
+should be set to <tt class="docutils literal">true</tt> when the log handler is opened and <tt class="docutils literal">false</tt> when it
+is closed.  Handler methods can inspect this value to determine whether or not
+the handler is currently open and ready for output.</p>
+<p>If the <tt class="docutils literal">open()</tt> method fails to ready the handler for output, it should
+return <tt class="docutils literal">false</tt> and set <tt class="docutils literal"><span class="pre">$this-&gt;_opened</span></tt> to <tt class="docutils literal">false</tt>.</p>
+</div>
+<div class="section" id="bool-close">
+<h4>6.4.2&nbsp;&nbsp;&nbsp;bool close()</h4>
+<p>The <tt class="docutils literal">close()</tt> method is called to close the log resource.  This method is
+the analog of the <tt class="docutils literal">open()</tt> method.  It should be safe to call <tt class="docutils literal">close()</tt>
+even when the handler is not open for output.</p>
+<p>If the <tt class="docutils literal">close()</tt> method fails to close the handler, it should return
+<tt class="docutils literal">false</tt>.  Otherwise, it should return <tt class="docutils literal">true</tt>.  The <tt class="docutils literal"><span class="pre">$this-&gt;_opened</span></tt>
+flag should also be updated appropriately.</p>
+</div>
+<div class="section" id="bool-flush">
+<h4>6.4.3&nbsp;&nbsp;&nbsp;bool flush()</h4>
+<p>The <tt class="docutils literal">flush()</tt> method flushes any buffered log events, as described in
+<a class="reference internal" href="#flushing-log-events">Flushing Log Events</a>.  The implementation of this method will be largely
+handler-specific.  If the handler does not support buffered output,
+implementing this method is not necessary; the <tt class="docutils literal">Log</tt> class's <tt class="docutils literal">flush()</tt>
+method will be called instead.</p>
+</div>
+<div class="section" id="bool-log-message-priority-null">
+<h4>6.4.4&nbsp;&nbsp;&nbsp;bool log($message, $priority = null)</h4>
+<p>The <tt class="docutils literal">log()</tt> method is the core of every log handler.  It is called whenever
+the user wishes to log an event.  The implementation of this method is very
+handler-specific.  It should return <tt class="docutils literal">true</tt> or <tt class="docutils literal">false</tt>, depending on
+whether or not the message was successfully logged by the handler.</p>
+<p>The <tt class="docutils literal">log()</tt> implementation should be sure to call <a class="reference internal" href="#void-announce-event">_announce()</a> whenever
+an event is successfully logged.</p>
+</div>
+</div>
+<div class="section" id="utility-methods">
+<h3>6.5&nbsp;&nbsp;&nbsp;Utility Methods</h3>
+<p>These utility methods are provided by the <tt class="docutils literal">Log</tt> base class and provide
+common, useful functionality to handler implementations.</p>
+<div class="section" id="string-extractmessage-message">
+<h4>6.5.1&nbsp;&nbsp;&nbsp;string _extractMessage($message)</h4>
+<p>This method returns the string representation of the provided message data.</p>
+<p>If <tt class="docutils literal">$message</tt> is an object, <tt class="docutils literal">_extractMessage()</tt> will attempt to extract
+the message text using a known method (such as a <a class="reference external" href="http://pear.php.net/manual/en/core.pear.pear-error.php">PEAR_Error</a> object's
+<a class="reference external" href="http://pear.php.net/manual/en/core.pear.pear-error.getmessage.php">getMessage()</a> method).  If a known method, cannot be found, the serialized
+representation of the object will be returned.</p>
+<p>If the message data is already a string, it will be returned unchanged.</p>
+</div>
+<div class="section" id="string-format-format-timestamp-priority-message">
+<h4>6.5.2&nbsp;&nbsp;&nbsp;string _format($format, $timestamp, $priority, $message)</h4>
+<p>This method produces a formatted log line based on a format string and a set
+of <a class="reference internal" href="#log-line-format">tokens</a> representing the current log record and state.</p>
+</div>
+<div class="section" id="bool-ismasked-priority">
+<h4>6.5.3&nbsp;&nbsp;&nbsp;bool _isMasked($priority)</h4>
+<p>This method checks if the given priority is included in the handler's current
+level mask.  This is useful for determining whether or not a log event should
+be written to the handler's log.</p>
+</div>
+<div class="section" id="void-announce-event">
+<h4>6.5.4&nbsp;&nbsp;&nbsp;void _announce($event)</h4>
+<p>This method informs any registered <a class="reference internal" href="#log-observers">log observers</a> that a new event has been
+logged.  <tt class="docutils literal">$event</tt> is an array containing two named elements:</p>
+<pre class="literal-block">
+array('priority' =&gt; $priority, 'message' =&gt; $message)
+</pre>
+<p><tt class="docutils literal">_announce()</tt> should be called from a handler's <a class="reference internal" href="#bool-log-message-priority-null">log()</a> method whenever an
+event is successfully logged.  Otherwise, registered observers will never
+become aware of the event.</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
