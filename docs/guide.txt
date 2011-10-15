@@ -949,8 +949,8 @@ provides a compositing system that marks this task trivial.
 
 Start by creating the individual log handlers::
 
-    $console = Log::singleton('console', '', 'TEST');
-    $file = Log::singleton('file', 'out.log', 'TEST');
+    $console = Log::factory('console', '', 'TEST');
+    $file = Log::factory('file', 'out.log', 'TEST');
 
 Then, construct a composite handler and add the individual handlers as
 children of the composite::

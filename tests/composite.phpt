@@ -29,9 +29,9 @@ function testPriority($composite, $priority) {
 /* Create three handlers with different priority masks. */
 $conf = array('lineFormat' => '%2$s [%3$s] %4$s');
 $children = array(
-    Log::singleton('console', '', 'CONSOLE1', $conf),
-    Log::singleton('console', '', 'CONSOLE2', $conf),
-    Log::singleton('console', '', 'CONSOLE3', $conf)
+    Log::factory('console', '', 'CONSOLE1', $conf),
+    Log::factory('console', '', 'CONSOLE2', $conf),
+    Log::factory('console', '', 'CONSOLE3', $conf)
 );
 
 $children[0]->setMask(Log::MASK(PEAR_LOG_DEBUG));
