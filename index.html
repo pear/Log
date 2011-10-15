@@ -1550,8 +1550,8 @@ for ($i = 0; $i &lt; 10; $i++) {
 provides a compositing system that marks this task trivial.</p>
 <p>Start by creating the individual log handlers:</p>
 <pre class="literal-block">
-$console = Log::singleton('console', '', 'TEST');
-$file = Log::singleton('file', 'out.log', 'TEST');
+$console = Log::factory('console', '', 'TEST');
+$file = Log::factory('file', 'out.log', 'TEST');
 </pre>
 <p>Then, construct a composite handler and add the individual handlers as
 children of the composite:</p>
