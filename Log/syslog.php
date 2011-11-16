@@ -173,9 +173,9 @@ class Log_syslog extends Log
         $message = $this->_extractMessage($message);
 
         /* Build a syslog priority value based on our current configuration. */
-        $priority = $this->_toSyslog($priority);
+        $syslogPriority = $this->_toSyslog($priority);
         if ($this->_inherit) {
-            $priority |= $this->_name;
+            $syslogPriority |= $this->_name;
         }
 
         /* Apply the configured line format to the message string. */
@@ -190,7 +190,7 @@ class Log_syslog extends Log
         }
 
         foreach ($parts as $part) {
-            if (!syslog($priority, $part)) {
+            if (!syslog($syslogPriority, $part)) {
                 return false;
             }
         }

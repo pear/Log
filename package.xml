@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2011-09-18</date>
- <time>17:50:51</time>
+ <date>2011-11-15</date>
+ <time>00:00:00</time>
  <version>
-  <release>1.12.7</release>
+  <release>1.12.8</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -37,8 +37,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-- The &apos;firebug&apos; handler is now usable with Chrome, as well. (Request 18617)
-- The &apos;observer&apos; code now longer generates deprecated return value reference notices. (Bug 18830)
+- The syslog handler now emits PEAR_LOG_* priorities. (pear/Log#1)
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
