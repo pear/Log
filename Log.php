@@ -771,7 +771,7 @@ class Log
      * @param object    $observer   The Log_observer instance to attach as a
      *                              listener.
      *
-     * @param boolean   True if the observer is successfully attached.
+     * @return boolean  True if the observer is successfully attached.
      *
      * @access  public
      * @since   Log 1.0
@@ -793,7 +793,7 @@ class Log
      * @param object    $observer   The Log_observer instance to detach from
      *                              the list of listeners.
      *
-     * @param boolean   True if the observer is successfully detached.
+     * @return boolean  True if the observer is successfully detached.
      *
      * @access  public
      * @since   Log 1.0
