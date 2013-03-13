@@ -1,0 +1,17 @@
+{
+    "name": "pear/log",
+    "description": "Pear Log",
+    "require": {
+	"php" : ">5.2"
+    },
+    "autoload": {
+	"classmap": ["Log/", "Log.php"]
+    },
+    "include-path": [""],
+    "authors": [
+        {
+            "name": "Jon Parise",
+            "email": "jon@php.net"
+        }
+    ]
+}
