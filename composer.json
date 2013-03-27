@@ -1,11 +1,11 @@
 {
     "name": "pear/log",
-    "description": "Pear Log",
+    "description": "PEAR Logging Framework",
     "require": {
-	"php" : ">5.2"
+        "php" : ">5.2"
     },
     "autoload": {
-	"classmap": ["Log/", "Log.php"]
+        "classmap": ["Log/", "Log.php"]
     },
     "include-path": [""],
     "authors": [
