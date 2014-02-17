@@ -11,3 +11,8 @@
 /tests/*.log
 /tests/*.out
 /tests/sqlite-log.db
+
+# composer related
+composer.lock
+composer.phar
+vendor
