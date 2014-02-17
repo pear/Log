@@ -24,9 +24,11 @@
         {
             "name": "Jon Parise",
             "email": "jon@php.net",
+            "homepage": "http://www.indelible.org",
             "role": "Developer"
         }
     ],
+    "homepage": "http://pear.github.io/Log/",
     "support": {
         "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Log",
         "source": "https://github.com/pear/Log"
