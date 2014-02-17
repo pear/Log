@@ -13,10 +13,9 @@
         "pear/pear_exception": "*"
     },
     "autoload": {
-        "classmap": [
-            "Log/",
-            "Log.php"
-        ]
+        "psr-0": {
+            "Log": "./"
+        }
     },
     "include-path": [
         ""
@@ -34,5 +33,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "*"
+    },
+    "suggest": {
+        "pear/db": "Install optionally via your project's composer.json"
     }
 }
