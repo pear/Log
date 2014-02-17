@@ -2,21 +2,37 @@
     "name": "pear/log",
     "type": "library",
     "description": "PEAR Logging Framework",
-    "keywords": ["log","logging"],
+    "keywords": [
+        "log",
+        "logging"
+    ],
     "homepage": "https://github.com/pear/Log",
     "license": "MIT",
     "require": {
-        "php" : ">5.2"
+        "php": ">5.2",
+        "pear/pear_exception": "*"
     },
     "autoload": {
-        "classmap": ["Log/", "Log.php"]
+        "classmap": [
+            "Log/",
+            "Log.php"
+        ]
     },
-    "include-path": [""],
+    "include-path": [
+        ""
+    ],
     "authors": [
         {
             "name": "Jon Parise",
             "email": "jon@php.net",
             "role": "Developer"
         }
-    ]
+    ],
+    "support": {
+        "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Log",
+        "source": "https://github.com/pear/Log"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
 }
