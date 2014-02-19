@@ -30,7 +30,7 @@
     ],
     "homepage": "http://pear.github.io/Log/",
     "support": {
-        "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Log",
+        "issues": "https://github.com/pear/Log/issues",
         "source": "https://github.com/pear/Log"
     },
     "require-dev": {
