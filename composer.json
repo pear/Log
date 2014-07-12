@@ -10,7 +10,7 @@
     "license": "MIT",
     "require": {
         "php": ">5.2",
-        "pear/pear_exception": "*"
+        "pear/pear_exception": ">=1.0-beta1"
     },
     "autoload": {
         "psr-0": {
