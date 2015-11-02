@@ -712,7 +712,7 @@ class Log
     /**
      * Returns the current level mask.
      *
-     * @return interger         The current level mask.
+     * @return integer         The current level mask.
      *
      * @access  public
      * @since   Log 1.7.0
