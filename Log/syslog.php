@@ -78,8 +78,8 @@ class Log_syslog extends Log
      * @param int    $level    Log messages up to and including this level.
      * @access public
      */
-    function Log_syslog($name, $ident = '', $conf = array(),
-                        $level = PEAR_LOG_DEBUG)
+    public function __construct($name, $ident = '', $conf = array(),
+                                $level = PEAR_LOG_DEBUG)
     {
         /* Ensure we have a valid integer value for $name. */
         if (empty($name) || !is_int($name)) {
@@ -109,6 +109,22 @@ class Log_syslog extends Log
         $this->_name = $name;
         $this->_ident = $ident;
         $this->_mask = Log::UPTO($level);
+    }
+
+    /**
+     * Legacy constructor, to be removed in a future release.
+     *
+     * @param string $name     The syslog facility.
+     * @param string $ident    The identity string.
+     * @param array  $conf     The configuration array.
+     * @param int    $level    Log messages up to and including this level.
+     * @access public
+     * @deprecated
+     */
+    function Log_syslog($name, $ident = '', $conf = array(),
+                        $level = PEAR_LOG_DEBUG)
+    {
+        self::__construct($name, $ident, $conf, $level);
     }
 
     /**

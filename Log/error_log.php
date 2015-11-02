@@ -65,8 +65,8 @@ class Log_error_log extends Log
      * @param int    $level    Log messages up to and including this level.
      * @access public
      */
-    function Log_error_log($name, $ident = '', $conf = array(),
-                           $level = PEAR_LOG_DEBUG)
+    public function __construct($name, $ident = '', $conf = array(),
+                                $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_type = $name;
@@ -90,6 +90,22 @@ class Log_error_log extends Log
         if (!empty($conf['timeFormat'])) {
             $this->_timeFormat = $conf['timeFormat'];
         }
+    }
+
+    /**
+     * Legacy constructor, to be removed in a future release.
+     *
+     * @param string $name     One of the PEAR_LOG_TYPE_* constants.
+     * @param string $ident    The identity string.
+     * @param array  $conf     The configuration array.
+     * @param int    $level    Log messages up to and including this level.
+     * @access public
+     * @deprecated
+     */
+    function Log_error_log($name, $ident = '', $conf = array(),
+                           $level = PEAR_LOG_DEBUG)
+    {
+        self::__construct($name, $ident, $conf, $level);
     }
 
     /**

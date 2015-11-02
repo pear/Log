@@ -111,6 +111,10 @@ class Log
                             '%{class}'      => '%8$s',
                             '%\{'           => '%%{');
 
+    public function __construct()
+    {
+    }
+
     /**
      * Attempts to return a concrete Log instance of type $handler.
      *

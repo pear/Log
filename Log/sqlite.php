@@ -59,7 +59,6 @@ class Log_sqlite extends Log
      */
     var $_table = 'log_table';
 
-
     /**
      * Constructs a new sql logging object.
      *
@@ -71,7 +70,7 @@ class Log_sqlite extends Log
      * @param int    $level        Log messages up to and including this level.
      * @access public
      */
-    function Log_sqlite($name, $ident = '', &$conf, $level = PEAR_LOG_DEBUG)
+    public function __construct($name, $ident = '', &$conf, $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_table = $name;
@@ -87,6 +86,23 @@ class Log_sqlite extends Log
             $this->_db =& $conf;
             $this->_existingConnection = true;
         }
+    }
+
+    /**
+     * Legacy constructor, to be removed in a future release.
+     *
+     * @param string $name         The target SQL table.
+     * @param string $ident        The identification field.
+     * @param mixed  $conf         Can be an array of configuration options used
+     *                             to open a new database connection
+     *                             or an already opened sqlite connection.
+     * @param int    $level        Log messages up to and including this level.
+     * @access public
+     * @deprecated
+     */
+    function Log_sqlite($name, $ident = '', &$conf, $level = PEAR_LOG_DEBUG)
+    {
+        self::__construct($name, $ident, $conf, $level);
     }
 
     /**

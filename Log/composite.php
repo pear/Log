@@ -35,17 +35,34 @@ class Log_composite extends Log
     /**
      * Constructs a new composite Log object.
      *
-     * @param boolean   $name       This parameter is ignored.
-     * @param boolean   $ident      This parameter is ignored.
-     * @param boolean   $conf       This parameter is ignored.
-     * @param boolean   $level      This parameter is ignored.
+     * @param string   $name       This parameter is ignored.
+     * @param string   $ident      This parameter is ignored.
+     * @param array    $conf       This parameter is ignored.
+     * @param int      $level      This parameter is ignored.
      *
      * @access public
+     */
+    public function __construct($name, $ident = '', $conf = array(),
+                                $level = PEAR_LOG_DEBUG)
+    {
+        $this->_ident = $ident;
+    }
+
+    /**
+     * Legacy constructor, to be removed in a future release.
+     *
+     * @param string    $name       This parameter is ignored.
+     * @param string    $ident      This parameter is ignored.
+     * @param array     $conf       This parameter is ignored.
+     * @param int       $level      This parameter is ignored.
+     *
+     * @access public
+     * @deprecated
      */
     function Log_composite($name, $ident = '', $conf = array(),
                            $level = PEAR_LOG_DEBUG)
     {
-        $this->_ident = $ident;
+        self::__construct($name, $ident, $conf, $level);
     }
 
     /**

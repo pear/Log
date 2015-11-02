@@ -27,12 +27,28 @@ class Log_null extends Log
      * @param int    $level    Log messages up to and including this level.
      * @access public
      */
-    function Log_null($name, $ident = '', $conf = array(),
-					  $level = PEAR_LOG_DEBUG)
+    public function __construct($name, $ident = '', $conf = array(),
+                                $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_ident = $ident;
         $this->_mask = Log::UPTO($level);
+    }
+
+    /**
+     * Legacy constructor, to be removed in a future release.
+     *
+     * @param string $name     Ignored.
+     * @param string $ident    The identity string.
+     * @param array  $conf     The configuration array.
+     * @param int    $level    Log messages up to and including this level.
+     * @access public
+     * @deprecated
+     */
+    function Log_null($name, $ident = '', $conf = array(),
+                      $level = PEAR_LOG_DEBUG)
+    {
+        self::__construct($name, $ident, $conf, $level);
     }
 
     /**

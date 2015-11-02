@@ -61,7 +61,6 @@ class Log_mcal extends Log
      */
     var $_name = LOG_SYSLOG;
 
-
     /**
      * Constructs a new Log_mcal object.
      *
@@ -71,8 +70,8 @@ class Log_mcal extends Log
      * @param int    $level    Log messages up to and including this level.
      * @access public
      */
-    function Log_mcal($name, $ident = '', $conf = array(),
-                      $level = PEAR_LOG_DEBUG)
+    public function __construct($name, $ident = '', $conf = array(),
+                                $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_name = $name;
@@ -82,6 +81,22 @@ class Log_mcal extends Log
         $this->_username = $conf['username'];
         $this->_password = $conf['password'];
         $this->_options = $conf['options'];
+    }
+
+    /**
+     * Legacy constructor, to be removed in a future release.
+     *
+     * @param string $name     The category to use for our events.
+     * @param string $ident    The identity string.
+     * @param array  $conf     The configuration array.
+     * @param int    $level    Log messages up to and including this level.
+     * @access public
+     * @deprecated
+     */
+    function Log_mcal($name, $ident = '', $conf = array(),
+                      $level = PEAR_LOG_DEBUG)
+    {
+        self::__construct($name, $ident, $conf, $level);
     }
 
     /**
