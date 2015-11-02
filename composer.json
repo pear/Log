@@ -6,7 +6,6 @@
         "log",
         "logging"
     ],
-    "homepage": "https://github.com/pear/Log",
     "license": "MIT",
     "require": {
         "php": ">5.2",
