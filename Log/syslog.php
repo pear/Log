@@ -112,22 +112,6 @@ class Log_syslog extends Log
     }
 
     /**
-     * Legacy constructor, to be removed in a future release.
-     *
-     * @param string $name     The syslog facility.
-     * @param string $ident    The identity string.
-     * @param array  $conf     The configuration array.
-     * @param int    $level    Log messages up to and including this level.
-     * @access public
-     * @deprecated
-     */
-    function Log_syslog($name, $ident = '', $conf = array(),
-                        $level = PEAR_LOG_DEBUG)
-    {
-        self::__construct($name, $ident, $conf, $level);
-    }
-
-    /**
      * Opens a connection to the system logger, if it has not already
      * been opened.  This is implicitly called by log(), if necessary.
      * @access public

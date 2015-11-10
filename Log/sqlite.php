@@ -89,23 +89,6 @@ class Log_sqlite extends Log
     }
 
     /**
-     * Legacy constructor, to be removed in a future release.
-     *
-     * @param string $name         The target SQL table.
-     * @param string $ident        The identification field.
-     * @param mixed  $conf         Can be an array of configuration options used
-     *                             to open a new database connection
-     *                             or an already opened sqlite connection.
-     * @param int    $level        Log messages up to and including this level.
-     * @access public
-     * @deprecated
-     */
-    function Log_sqlite($name, $ident = '', &$conf, $level = PEAR_LOG_DEBUG)
-    {
-        self::__construct($name, $ident, $conf, $level);
-    }
-
-    /**
      * Opens a connection to the database, if it has not already
      * been opened. This is implicitly called by log(), if necessary.
      *

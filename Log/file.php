@@ -147,22 +147,6 @@ class Log_file extends Log
     }
 
     /**
-     * Legacy constructor, to be removed in a future release.
-     *
-     * @param string $name     Ignored.
-     * @param string $ident    The identity string.
-     * @param array  $conf     The configuration array.
-     * @param int    $level    Log messages up to and including this level.
-     * @access public
-     * @deprecated
-     */
-    function Log_file($name, $ident = '', $conf = array(),
-                      $level = PEAR_LOG_DEBUG)
-    {
-        self::__construct($name, $ident, $conf, $level);
-    }
-
-    /**
      * Destructor
      */
     function _Log_file()

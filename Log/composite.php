@@ -49,23 +49,6 @@ class Log_composite extends Log
     }
 
     /**
-     * Legacy constructor, to be removed in a future release.
-     *
-     * @param string    $name       This parameter is ignored.
-     * @param string    $ident      This parameter is ignored.
-     * @param array     $conf       This parameter is ignored.
-     * @param int       $level      This parameter is ignored.
-     *
-     * @access public
-     * @deprecated
-     */
-    function Log_composite($name, $ident = '', $conf = array(),
-                           $level = PEAR_LOG_DEBUG)
-    {
-        self::__construct($name, $ident, $conf, $level);
-    }
-
-    /**
      * Opens all of the child instances.
      *
      * @return  True if all of the child instances were successfully opened.

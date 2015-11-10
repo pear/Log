@@ -54,20 +54,6 @@ class Log_observer
     }
 
     /**
-     * Legacy constructor, to be removed in a future release.
-     *
-     * @param integer   $priority   The highest priority at which to receive
-     *                              log event notifications.
-     *
-     * @access public
-     * @deprecated
-     */
-    function Log_observer($priority = PEAR_LOG_INFO)
-    {
-        self::__construct($priority);
-    }
-
-    /**
      * Attempts to return a new concrete Log_observer instance of the requested
      * type.
      *

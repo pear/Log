@@ -84,22 +84,6 @@ class Log_mcal extends Log
     }
 
     /**
-     * Legacy constructor, to be removed in a future release.
-     *
-     * @param string $name     The category to use for our events.
-     * @param string $ident    The identity string.
-     * @param array  $conf     The configuration array.
-     * @param int    $level    Log messages up to and including this level.
-     * @access public
-     * @deprecated
-     */
-    function Log_mcal($name, $ident = '', $conf = array(),
-                      $level = PEAR_LOG_DEBUG)
-    {
-        self::__construct($name, $ident, $conf, $level);
-    }
-
-    /**
      * Opens a calendar stream, if it has not already been
      * opened. This is implicitly called by log(), if necessary.
      * @access public

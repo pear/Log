@@ -104,22 +104,6 @@ class Log_firebug extends Log
     }
 
     /**
-     * Legacy constructor, to be removed in a future release.
-     *
-     * @param string $name     Ignored.
-     * @param string $ident    The identity string.
-     * @param array  $conf     The configuration array.
-     * @param int    $level    Log messages up to and including this level.
-     * @access public
-     * @deprecated
-     */
-    function Log_firebug($name = '', $ident = 'PHP', $conf = array(),
-                         $level = PEAR_LOG_DEBUG)
-    {
-        self::__construct($name, $ident, $conf, $level);
-    }
-
-    /**
      * Opens the firebug handler.
      *
      * @access  public
