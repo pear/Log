@@ -107,7 +107,6 @@ class Log_sql extends Log
      */
     var $_identLimit = 16;
 
-
     /**
      * Constructs a new sql logging object.
      *
@@ -117,8 +116,8 @@ class Log_sql extends Log
      * @param int $level           Log messages up to and including this level.
      * @access public
      */
-    function Log_sql($name, $ident = '', $conf = array(),
-                     $level = PEAR_LOG_DEBUG)
+    public function __construct($name, $ident = '', $conf = array(),
+                                $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_table = $name;

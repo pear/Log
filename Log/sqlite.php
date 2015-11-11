@@ -59,7 +59,6 @@ class Log_sqlite extends Log
      */
     var $_table = 'log_table';
 
-
     /**
      * Constructs a new sql logging object.
      *
@@ -71,7 +70,7 @@ class Log_sqlite extends Log
      * @param int    $level        Log messages up to and including this level.
      * @access public
      */
-    function Log_sqlite($name, $ident = '', &$conf, $level = PEAR_LOG_DEBUG)
+    public function __construct($name, $ident = '', &$conf, $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_table = $name;

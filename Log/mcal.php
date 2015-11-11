@@ -61,7 +61,6 @@ class Log_mcal extends Log
      */
     var $_name = LOG_SYSLOG;
 
-
     /**
      * Constructs a new Log_mcal object.
      *
@@ -71,8 +70,8 @@ class Log_mcal extends Log
      * @param int    $level    Log messages up to and including this level.
      * @access public
      */
-    function Log_mcal($name, $ident = '', $conf = array(),
-                      $level = PEAR_LOG_DEBUG)
+    public function __construct($name, $ident = '', $conf = array(),
+                                $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_name = $name;

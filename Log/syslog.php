@@ -78,8 +78,8 @@ class Log_syslog extends Log
      * @param int    $level    Log messages up to and including this level.
      * @access public
      */
-    function Log_syslog($name, $ident = '', $conf = array(),
-                        $level = PEAR_LOG_DEBUG)
+    public function __construct($name, $ident = '', $conf = array(),
+                                $level = PEAR_LOG_DEBUG)
     {
         /* Ensure we have a valid integer value for $name. */
         if (empty($name) || !is_int($name)) {
