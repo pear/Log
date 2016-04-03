@@ -241,7 +241,7 @@ It is also possible to retrieve and modify a Log object's existing mask::
 
 Log Line Format
 ---------------
-Most log handlers support configurable line formats.  The following is a list 
+Most log handlers support configurable line formats.  The following is a list
 of special tokens that will be expanded at runtime with contextual information
 related to the log event.  Each token has an alternate shorthand notation, as
 well.
@@ -1278,7 +1278,7 @@ If the message data is already a string, it will be returned unchanged.
 string _format($format, $timestamp, $priority, $message)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This method produces a formatted log line based on a format string and a set
-of `tokens`_ representing the current log record and state.  
+of `tokens`_ representing the current log record and state.
 
 .. _tokens: `Log Line Format`_
 
