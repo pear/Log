@@ -1180,7 +1180,7 @@ values.  Handler-specific parameters are passed as part of the ``$conf``
 array.  At a minimum, the handler's constructor must set the following values
 defined by the ``Log`` base class::
 
-        $this->_id = md5(microtime());
+        $this->_id = md5(microtime().rand());
         $this->_name = $name;
         $this->_ident = $ident;
         $this->_mask = Log::UPTO($level);

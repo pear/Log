@@ -81,7 +81,7 @@ class Log_firebug extends Log
     public function __construct($name = '', $ident = 'PHP', $conf = array(),
                                 $level = PEAR_LOG_DEBUG)
     {
-        $this->_id = md5(microtime());
+        $this->_id = md5(microtime().rand());
         $this->_ident = $ident;
         $this->_mask = Log::UPTO($level);
         if (isset($conf['buffering'])) {

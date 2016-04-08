@@ -115,7 +115,7 @@ class Log_mdb2 extends Log
     public function __construct($name, $ident = '', $conf = array(),
                                 $level = PEAR_LOG_DEBUG)
     {
-        $this->_id = md5(microtime());
+        $this->_id = md5(microtime().rand());
         $this->_table = $name;
         $this->_mask = Log::UPTO($level);
 

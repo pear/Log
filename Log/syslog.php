@@ -105,7 +105,7 @@ class Log_syslog extends Log
             $this->_timeFormat = $conf['timeFormat'];
         }
 
-        $this->_id = md5(microtime());
+        $this->_id = md5(microtime().rand());
         $this->_name = $name;
         $this->_ident = $ident;
         $this->_mask = Log::UPTO($level);

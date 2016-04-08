@@ -72,7 +72,7 @@ class Log_sqlite extends Log
      */
     public function __construct($name, $ident = '', &$conf, $level = PEAR_LOG_DEBUG)
     {
-        $this->_id = md5(microtime());
+        $this->_id = md5(microtime().rand());
         $this->_table = $name;
         $this->_ident = $ident;
         $this->_mask = Log::UPTO($level);

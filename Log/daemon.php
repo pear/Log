@@ -78,7 +78,7 @@ class Log_daemon extends Log
             $name = LOG_SYSLOG;
         }
 
-        $this->_id = md5(microtime());
+        $this->_id = md5(microtime().rand());
         $this->_name = $name;
         $this->_ident = $ident;
         $this->_mask = Log::UPTO($level);
