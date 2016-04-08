@@ -15,7 +15,7 @@ $conf = array('lineFormat' => '%2$s [%3$s] %4$s');
 $logger = Log::singleton('file', $filename, '', $conf);
 
 for ($i = 0; $i < 3; $i++) {
-	$logger->log("Log entry $i");
+    $logger->log("Log entry $i");
 }
 $logger->close();
 

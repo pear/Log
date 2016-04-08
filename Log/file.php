@@ -9,7 +9,7 @@
 /**
  * The Log_file class is a concrete implementation of the Log abstract
  * class that logs messages to a text file.
- * 
+ *
  * @author  Jon Parise <jon@php.net>
  * @author  Roman Neuhauser <neuhauser@bellavista.cz>
  * @since   Log 1.0
@@ -302,7 +302,7 @@ class Log_file extends Log
         /* Write the log line to the log file. */
         $success = (fwrite($this->_fp, $line) !== false);
 
-        /* Unlock the file now that we're finished writing to it. */ 
+        /* Unlock the file now that we're finished writing to it. */
         if ($this->_locking) {
             flock($this->_fp, LOCK_UN);
         }

@@ -45,8 +45,8 @@ class Log_syslog extends Log
     var $_reopen = false;
 
     /**
-     * Maximum message length that will be sent to syslog().  If the handler 
-     * receives a message longer than this length limit, it will be split into 
+     * Maximum message length that will be sent to syslog().  If the handler
+     * receives a message longer than this length limit, it will be split into
      * multiple syslog() calls.
      * @var integer
      * @access private

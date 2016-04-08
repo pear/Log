@@ -182,11 +182,11 @@ class Log_firebug extends Log
 
         /* normalize line breaks and escape quotes*/
         $message = preg_replace("/\r?\n/", "\\n", addslashes($message));
-        
+
         /* Build the string containing the complete log line. */
         $line = $this->_format($this->_lineFormat,
                                strftime($this->_timeFormat),
-                               $priority, 
+                               $priority,
                                $message);
 
         if ($this->_buffering) {

@@ -86,7 +86,7 @@ class Log
     var $_listeners = array();
 
     /**
-     * Starting depth to use when walking a backtrace in search of the 
+     * Starting depth to use when walking a backtrace in search of the
      * function that invoked the log system.
      *
      * @var integer
@@ -516,8 +516,8 @@ class Log
     }
 
     /**
-     * Sets the starting depth to use when walking a backtrace in search of 
-     * the function that invoked the log system.  This is used on conjunction 
+     * Sets the starting depth to use when walking a backtrace in search of
+     * the function that invoked the log system.  This is used on conjunction
      * with the 'file', 'line', 'function', and 'class' formatters.
      *
      * @param int $depth    The new backtrace depth.

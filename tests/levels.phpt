@@ -24,7 +24,7 @@ function testLevels($mask)
         echo($masked) ? "masked\n" : "unmasked\n";
     }
 
-	echo "\n";
+    echo "\n";
 }
 
 testLevels(PEAR_LOG_NONE);
