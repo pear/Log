@@ -294,7 +294,7 @@ Fixing a rare notice when extracting the class name from a backtrace involving t
    <date>2010-01-24</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
    <notes>
-This release drops PHP4 compatibility (enforced by the package dependencies).  
+This release drops PHP4 compatibility (enforced by the package dependencies).
 
 There is unfortunately no way to support both PHP4 and PHP5 in the same code base when running under E_ALL.  Because it appears that the majority of Log package users have moved to PHP5, the Log package now targets that audience.
 
@@ -316,7 +316,7 @@ Also:
    <date>2009-12-27</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
    <notes>
-This release drops PHP4 compatibility (enforced by the package dependencies).  
+This release drops PHP4 compatibility (enforced by the package dependencies).
 
 There is unfortunately no way to support both PHP4 and PHP5 in the same code base when running under E_ALL.  Because it appears that the majority of Log package users have moved to PHP5, the Log package now targets that audience.
 
