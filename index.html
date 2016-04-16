@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.8.1: http://docutils.sourceforge.net/" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
 <title>The Log Package</title>
 <style type="text/css">
 
@@ -1754,7 +1754,7 @@ values.  Handler-specific parameters are passed as part of the <tt class="docuti
 array.  At a minimum, the handler's constructor must set the following values
 defined by the <tt class="docutils literal">Log</tt> base class:</p>
 <pre class="literal-block">
-$this-&gt;_id = md5(microtime());
+$this-&gt;_id = md5(microtime().rand());
 $this-&gt;_name = $name;
 $this-&gt;_ident = $ident;
 $this-&gt;_mask = Log::UPTO($level);
