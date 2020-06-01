@@ -21,7 +21,8 @@ function printIdents($children) {
 }
 
 function testPriority($composite, $priority) {
-    $name = Log::priorityToString($priority);
+    $log = new Log;
+    $name = $log->priorityToString($priority);
     $success = $composite->log($name, $priority);
     echo "$name : " . (($success) ? 'GOOD' : 'BAD') . "\n";
 }
