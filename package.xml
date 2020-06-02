@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2016-04-16</date>
+ <date>2020-06-02</date>
  <time>00:00:00</time>
  <version>
-  <release>1.13.1</release>
+  <release>1.13.2</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -37,7 +37,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-Use rand() to make instance identifiers more unique than microtime()'s resolution.
+Bump pear/pear_exception dependency to version to 1.0.1.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -139,6 +139,21 @@ Use rand() to make instance identifiers more unique than microtime()'s resolutio
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.13.1</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2016-04-16</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+Use rand() to make instance identifiers more unique than microtime()'s resolution.
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.13.0</release>
