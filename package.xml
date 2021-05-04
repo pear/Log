@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2020-06-02</date>
+ <date>2021-05-04</date>
  <time>00:00:00</time>
  <version>
-  <release>1.13.2</release>
+  <release>1.13.3</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -37,7 +37,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-Bump pear/pear_exception dependency to version to 1.0.1.
+Support versions 1.0.1 and 1.0.2 of pear/pear_exception.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
