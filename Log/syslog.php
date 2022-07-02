@@ -180,7 +180,7 @@ class Log_syslog extends Log
 
         /* Apply the configured line format to the message string. */
         $message = $this->_format($this->_lineFormat,
-                                  strftime($this->_timeFormat),
+                                  $this->formatTime($this->_timeFormat),
                                   $priority, $message);
 
         /* Split the string into parts based on our maximum length setting. */

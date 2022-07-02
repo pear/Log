@@ -268,7 +268,7 @@ EOT;
         /* Build the output line that contains the log entry row. */
         $line  = '<tr>';
         $line .= sprintf('<td>%s.%s</td>',
-                         strftime('%H:%M:%S', $sec), substr($usec, 2, 2));
+                         $this->formatTime('%H:%M:%S', $sec), substr($usec, 2, 2));
         if (!empty($this->_ident)) {
             $line .= '<td>' . $this->_ident . '</td>';
         }
