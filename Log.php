@@ -916,6 +916,6 @@ class Log
      */
     public function formatTime($format)
     {
-        return strftime($format, $this->_locale);
+        return strftime($format, NULL, $this->_locale);
     }
 }
