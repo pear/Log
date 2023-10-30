@@ -45,12 +45,7 @@
 
     $timestamp->setTimezone(new DateTimeZone(date_default_timezone_get()));
 
-    if (empty($locale)) {
-      // get current locale
-      $locale = setlocale(LC_TIME, '0');
-    }
-    // remove trailing part not supported by ext-intl locale
-    $locale = preg_replace('/[^\w-].*$/', '', $locale);
+    $locale = substr((string) $locale, 0, 5);
 
     $intl_formats = [
       '%a' => 'EEE',	// An abbreviated textual representation of the day	Sun through Sat

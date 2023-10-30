@@ -114,6 +114,14 @@ class Log
                             '%{class}'      => '%8$s',
                             '%\{'           => '%%{');
 
+    /**
+     * Locale to be passed to strftime when formatting
+     *
+     * @var string
+     * @access protected
+     */
+    var $_locale = 'en_US';
+
     public function __construct()
     {
     }
@@ -874,6 +882,30 @@ class Log
     }
 
     /**
+     * Set the current locale
+     * @param string    $locale   The new locale
+     *
+     * @access public
+     * @since
+     */
+    function setLocale($locale)
+    {
+        $this->_locale = $locale;
+    }
+
+    /**
+     * Returns the current locale
+     * @return string
+     *
+     * @access public
+     * @since
+     */
+    function getLocale()
+    {
+        return $this->_locale;
+    }
+
+    /**
      * Returns formatted time string using the PHP81_BC\strftime function to avoid deprecation errors
      * @param string $format the format of the string to return
      *
@@ -884,6 +916,6 @@ class Log
      */
     public function formatTime($format)
     {
-        return strftime($format);
+        return strftime($format, $this->_locale);
     }
 }
