@@ -110,7 +110,7 @@ class Log_firebug extends Log
     /**
      * Destructor
      */
-    private function log_firebug_destructor()
+    public function log_firebug_destructor()
     {
         $this->close();
     }

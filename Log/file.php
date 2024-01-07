@@ -139,7 +139,7 @@ class Log_file extends Log
     /**
      * Destructor
      */
-    private function log_file_destructor()
+    public function log_file_destructor()
     {
         if ($this->opened) {
             $this->close();

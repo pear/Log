@@ -106,7 +106,7 @@ class Log_console extends Log
     /**
      * Destructor
      */
-    private function log_console_destructor()
+    public function log_console_destructor()
     {
         $this->close();
     }

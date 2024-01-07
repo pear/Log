@@ -105,7 +105,7 @@ class Log_daemon extends Log
     /**
      * Destructor.
      */
-    private function log_daemon_destructor()
+    public function log_daemon_destructor()
     {
         $this->close();
     }

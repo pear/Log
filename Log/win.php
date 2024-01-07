@@ -90,7 +90,7 @@ class Log_win extends Log
     /**
      * Destructor
      */
-    private function log_win_destructor()
+    public function log_win_destructor()
     {
         if ($this->opened || (count($this->buffer) > 0)) {
             $this->close();

@@ -153,7 +153,7 @@ class Log_mail extends Log
      * Destructor. Calls close().
      *
      */
-    private function log_mail_destructor()
+    public function log_mail_destructor()
     {
         $this->close();
     }
