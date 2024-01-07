@@ -15,7 +15,7 @@ for ($i = 0; $i < 3; $i++) {
 }
 
 --EXPECTF--
-<script language="JavaScript">
+<script>
 test = window.open('', 'test', 'toolbar=no,scrollbars,width=600,height=400');
 test.document.writeln('<html>');
 test.document.writeln('<head>');
