@@ -1,10 +1,7 @@
 --TEST--
 Log: _extractMessage() [Zend Engine 2.2]
 --SKIPIF--
-<?php
-if (version_compare(zend_version(), "2.2.0", "<") ||
-    version_compare(zend_version(), "4.2.0", ">=")) die('skip');
-?>
+<?php if (version_compare(zend_version(), "4.2.0", "<")) die('skip'); ?>
 --INI--
 date.timezone=UTC
 --FILE--
@@ -50,7 +47,7 @@ $logger->log(array('message' => array(1, 2, 3)));
 
 --EXPECT--
 ident [info] String
-ident [info] BareObject::__set_state(array(
+ident [info] \BareObject::__set_state(array(
 ))
 ident [info] getMessage
 ident [info] toString
