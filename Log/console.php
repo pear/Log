@@ -21,46 +21,40 @@ class Log_console extends Log
     /**
      * Handle to the current output stream.
      * @var resource
-     * @access private
      */
-    var $_stream = null;
+    private $stream = null;
 
     /**
      * Is this object responsible for closing the stream resource?
      * @var bool
-     * @access private
      */
-    var $_closeResource = false;
+    private $closeResource = false;
 
     /**
      * Should the output be buffered or displayed immediately?
      * @var string
-     * @access private
      */
-    var $_buffering = false;
+    private $buffering = false;
 
     /**
      * String holding the buffered output.
      * @var string
-     * @access private
      */
-    var $_buffer = '';
+    private $buffer = '';
 
     /**
      * String containing the format of a log line.
      * @var string
-     * @access private
      */
-    var $_lineFormat = '%1$s %2$s [%3$s] %4$s';
+    private $lineFormat = '%1$s %2$s [%3$s] %4$s';
 
     /**
      * String containing the timestamp format.  It will be passed directly to
      * strftime().  Note that the timestamp string will generated using the
      * current locale.
      * @var string
-     * @access private
      */
-    var $_timeFormat = '%b %d %H:%M:%S';
+    private $timeFormat = '%b %d %H:%M:%S';
 
     /**
      * Constructs a new Log_console object.
@@ -69,51 +63,50 @@ class Log_console extends Log
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
-     * @access public
      */
     public function __construct($name, $ident = '', $conf = array(),
                                 $level = PEAR_LOG_DEBUG)
     {
-        $this->_id = md5(microtime().rand());
-        $this->_ident = $ident;
-        $this->_mask = Log::UPTO($level);
+        $this->id = md5(microtime().rand());
+        $this->ident = $ident;
+        $this->mask = Log::MAX($level);
 
         if (!empty($conf['stream'])) {
-            $this->_stream = $conf['stream'];
+            $this->stream = $conf['stream'];
         } elseif (defined('STDOUT')) {
-            $this->_stream = STDOUT;
+            $this->stream = STDOUT;
         } else {
-            $this->_stream = fopen('php://output', 'a');
-            $this->_closeResource = true;
+            $this->stream = fopen('php://output', 'a');
+            $this->closeResource = true;
         }
 
         if (isset($conf['buffering'])) {
-            $this->_buffering = $conf['buffering'];
+            $this->buffering = $conf['buffering'];
         }
 
         if (!empty($conf['lineFormat'])) {
-            $this->_lineFormat = str_replace(array_keys($this->_formatMap),
-                                             array_values($this->_formatMap),
+            $this->lineFormat = str_replace(array_keys($this->formatMap),
+                                             array_values($this->formatMap),
                                              $conf['lineFormat']);
         }
 
         if (!empty($conf['timeFormat'])) {
-            $this->_timeFormat = $conf['timeFormat'];
+            $this->timeFormat = $conf['timeFormat'];
         }
 
         /*
          * If output buffering has been requested, we need to register a
          * shutdown function that will dump the buffer upon termination.
          */
-        if ($this->_buffering) {
-            register_shutdown_function(array(&$this, '_Log_console'));
+        if ($this->buffering) {
+            register_shutdown_function(array(&$this, 'log_console_destructor'));
         }
     }
 
     /**
      * Destructor
      */
-    function _Log_console()
+    public function log_console_destructor()
     {
         $this->close();
     }
@@ -121,12 +114,11 @@ class Log_console extends Log
     /**
      * Open the output stream.
      *
-     * @access public
      * @since Log 1.9.7
      */
-    function open()
+    public function open()
     {
-        $this->_opened = true;
+        $this->opened = true;
         return true;
     }
 
@@ -135,15 +127,14 @@ class Log_console extends Log
      *
      * This results in a call to flush().
      *
-     * @access public
      * @since Log 1.9.0
      */
-    function close()
+    public function close()
     {
         $this->flush();
-        $this->_opened = false;
-        if ($this->_closeResource === true && is_resource($this->_stream)) {
-            fclose($this->_stream);
+        $this->opened = false;
+        if ($this->closeResource === true && is_resource($this->stream)) {
+            fclose($this->stream);
         }
         return true;
     }
@@ -151,22 +142,21 @@ class Log_console extends Log
     /**
      * Flushes all pending ("buffered") data to the output stream.
      *
-     * @access public
      * @since Log 1.8.2
      */
-    function flush()
+    public function flush()
     {
         /*
          * If output buffering is enabled, dump the contents of the buffer to
          * the output stream.
          */
-        if ($this->_buffering && (strlen($this->_buffer) > 0)) {
-            fwrite($this->_stream, $this->_buffer);
-            $this->_buffer = '';
+        if ($this->buffering && (strlen($this->buffer) > 0)) {
+            fwrite($this->stream, $this->buffer);
+            $this->buffer = '';
         }
 
-        if (is_resource($this->_stream)) {
-            return fflush($this->_stream);
+        if (is_resource($this->stream)) {
+            return fflush($this->stream);
         }
 
         return false;
@@ -182,40 +172,39 @@ class Log_console extends Log
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
-     * @access public
      */
-    function log($message, $priority = null)
+    public function log($message, $priority = null)
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
-            $priority = $this->_priority;
+            $priority = $this->priority;
         }
 
         /* Abort early if the priority is above the maximum logging level. */
-        if (!$this->_isMasked($priority)) {
+        if (!$this->isMasked($priority)) {
             return false;
         }
 
         /* Extract the string representation of the message. */
-        $message = $this->_extractMessage($message);
+        $message = $this->extractMessage($message);
 
         /* Build the string containing the complete log line. */
-        $line = $this->_format($this->_lineFormat,
-                               strftime($this->_timeFormat),
+        $line = $this->format($this->lineFormat,
+                               strftime($this->timeFormat),
                                $priority, $message) . "\n";
 
         /*
          * If buffering is enabled, append this line to the output buffer.
          * Otherwise, print the line to the output stream immediately.
          */
-        if ($this->_buffering) {
-            $this->_buffer .= $line;
+        if ($this->buffering) {
+            $this->buffer .= $line;
         } else {
-            fwrite($this->_stream, $line);
+            fwrite($this->stream, $line);
         }
 
         /* Notify observers about this log message. */
-        $this->_announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(array('priority' => $priority, 'message' => $message));
 
         return true;
     }

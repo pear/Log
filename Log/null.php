@@ -25,37 +25,34 @@ class Log_null extends Log
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
-     * @access public
      */
     public function __construct($name, $ident = '', $conf = array(),
                                 $level = PEAR_LOG_DEBUG)
     {
-        $this->_id = md5(microtime().rand());
-        $this->_ident = $ident;
-        $this->_mask = Log::UPTO($level);
+        $this->id = md5(microtime().rand());
+        $this->ident = $ident;
+        $this->mask = Log::MAX($level);
     }
 
     /**
      * Opens the handler.
      *
-     * @access  public
      * @since   Log 1.9.6
      */
-    function open()
+    public function open()
     {
-        $this->_opened = true;
+        $this->opened = true;
         return true;
     }
 
     /**
      * Closes the handler.
      *
-     * @access  public
      * @since   Log 1.9.6
      */
-    function close()
+    public function close()
     {
-        $this->_opened = false;
+        $this->opened = false;
         return true;
     }
 
@@ -69,21 +66,20 @@ class Log_null extends Log
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
-     * @access public
      */
-    function log($message, $priority = null)
+    public function log($message, $priority = null)
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
-            $priority = $this->_priority;
+            $priority = $this->priority;
         }
 
         /* Abort early if the priority is above the maximum logging level. */
-        if (!$this->_isMasked($priority)) {
+        if (!$this->isMasked($priority)) {
             return false;
         }
 
-        $this->_announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(array('priority' => $priority, 'message' => $message));
 
         return true;
     }

@@ -21,45 +21,45 @@ class Log_daemon extends Log
      * Integer holding the log facility to use.
      * @var string
      */
-    var $_name = LOG_DAEMON;
+    private $name = LOG_DAEMON;
 
     /**
      * Var holding the resource pointer to the socket
      * @var resource
      */
-    var $_socket;
+    private $socket;
 
     /**
      * The ip address or servername
      * @see http://www.php.net/manual/en/transports.php
      * @var string
      */
-    var $_ip = '127.0.0.1';
+    private $ip = '127.0.0.1';
 
     /**
      * Protocol to use (tcp, udp, etc.)
      * @see http://www.php.net/manual/en/transports.php
      * @var string
      */
-    var $_proto = 'udp';
+    private $proto = 'udp';
 
     /**
      * Port to connect to
      * @var int
      */
-    var $_port = 514;
+    private $port = 514;
 
     /**
      * Maximum message length in bytes
      * @var int
      */
-    var $_maxsize = 4096;
+    private $maxsize = 4096;
 
     /**
      * Socket timeout in seconds
      * @var int
      */
-    var $_timeout = 1;
+    private $timeout = 1;
 
     /**
      * Constructs a new syslog object.
@@ -68,7 +68,6 @@ class Log_daemon extends Log
      * @param string $ident The identity string.
      * @param array  $conf  The configuration array.
      * @param int    $level Maximum level at which to log.
-     * @access public
      */
     public function __construct($name, $ident = '', $conf = array(),
                                 $level = PEAR_LOG_DEBUG)
@@ -78,37 +77,35 @@ class Log_daemon extends Log
             $name = LOG_SYSLOG;
         }
 
-        $this->_id = md5(microtime().rand());
-        $this->_name = $name;
-        $this->_ident = $ident;
-        $this->_mask = Log::UPTO($level);
+        $this->id = md5(microtime().rand());
+        $this->name = $name;
+        $this->ident = $ident;
+        $this->mask = Log::MAX($level);
 
         if (isset($conf['ip'])) {
-            $this->_ip = $conf['ip'];
+            $this->ip = $conf['ip'];
         }
         if (isset($conf['proto'])) {
-            $this->_proto = $conf['proto'];
+            $this->proto = $conf['proto'];
         }
         if (isset($conf['port'])) {
-            $this->_port = $conf['port'];
+            $this->port = $conf['port'];
         }
         if (isset($conf['maxsize'])) {
-            $this->_maxsize = $conf['maxsize'];
+            $this->maxsize = $conf['maxsize'];
         }
         if (isset($conf['timeout'])) {
-            $this->_timeout = $conf['timeout'];
+            $this->timeout = $conf['timeout'];
         }
-        $this->_proto = $this->_proto . '://';
+        $this->proto = $this->proto . '://';
 
-        register_shutdown_function(array(&$this, '_Log_daemon'));
+        register_shutdown_function(array(&$this, 'log_daemon_destructor'));
     }
 
     /**
      * Destructor.
-     *
-     * @access private
      */
-    function _Log_daemon()
+    public function log_daemon_destructor()
     {
         $this->close();
     }
@@ -116,30 +113,28 @@ class Log_daemon extends Log
     /**
      * Opens a connection to the system logger, if it has not already
      * been opened.  This is implicitly called by log(), if necessary.
-     * @access public
      */
-    function open()
+    public function open()
     {
-        if (!$this->_opened) {
-            $this->_opened = (bool)($this->_socket = @fsockopen(
-                                                $this->_proto . $this->_ip,
-                                                $this->_port,
+        if (!$this->opened) {
+            $this->opened = (bool)($this->socket = @fsockopen(
+                                                $this->proto . $this->ip,
+                                                $this->port,
                                                 $errno,
                                                 $errstr,
-                                                $this->_timeout));
+                                                $this->timeout));
         }
-        return $this->_opened;
+        return $this->opened;
     }
 
     /**
      * Closes the connection to the system logger, if it is open.
-     * @access public
      */
-    function close()
+    public function close()
     {
-        if ($this->_opened) {
-            $this->_opened = false;
-            return fclose($this->_socket);
+        if ($this->opened) {
+            $this->opened = false;
+            return fclose($this->socket);
         }
         return true;
     }
@@ -154,46 +149,47 @@ class Log_daemon extends Log
      *                  values are: LOG_EMERG, LOG_ALERT, LOG_CRIT,
      *                  LOG_ERR, LOG_WARNING, LOG_NOTICE, LOG_INFO,
      *                  and LOG_DEBUG.  The default is LOG_INFO.
-     * @access public
      */
-    function log($message, $priority = null)
+    public function log($message, $priority = null)
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
-            $priority = $this->_priority;
+            $priority = $this->priority;
         }
 
         /* Abort early if the priority is above the maximum logging level. */
-        if (!$this->_isMasked($priority)) {
+        if (!$this->isMasked($priority)) {
             return false;
         }
 
         /* If the connection isn't open and can't be opened, return failure. */
-        if (!$this->_opened && !$this->open()) {
+        if (!$this->opened && !$this->open()) {
             return false;
         }
 
         /* Extract the string representation of the message. */
-        $message = $this->_extractMessage($message);
+        $message = $this->extractMessage($message);
 
         /* Set the facility level. */
-        $facility_level = intval($this->_name) +
-                          intval($this->_toSyslog($priority));
+        $facility_level = intval($this->name) +
+                          intval($this->toSyslog($priority));
 
         /* Prepend ident info. */
-        if (!empty($this->_ident)) {
-            $message = $this->_ident . ' ' . $message;
+        if (!empty($this->ident)) {
+            $message = $this->ident . ' ' . $message;
         }
 
         /* Check for message length. */
-        if (strlen($message) > $this->_maxsize) {
-            $message = substr($message, 0, ($this->_maxsize) - 10) . ' [...]';
+        if (strlen($message) > $this->maxsize) {
+            $message = substr($message, 0, ($this->maxsize) - 10) . ' [...]';
         }
 
         /* Write to socket. */
-        fwrite($this->_socket, '<' . $facility_level . '>' . $message . "\n");
+        fwrite($this->socket, '<' . $facility_level . '>' . $message . "\n");
 
-        $this->_announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(array('priority' => $priority, 'message' => $message));
+        
+        return true;
     }
 
     /**
@@ -206,11 +202,9 @@ class Log_daemon extends Log
      *
      * @param int $priority     PEAR_LOG_* value to convert to LOG_* value.
      *
-     * @return  The LOG_* representation of $priority.
-     *
-     * @access private
+     * @return integer  The LOG_* representation of $priority.
      */
-    function _toSyslog($priority)
+    private function toSyslog($priority)
     {
         static $priorities = array(
             PEAR_LOG_EMERG   => LOG_EMERG,
