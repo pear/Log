@@ -24,9 +24,8 @@ class Log_observer
      * Instance-specific unique identification number.
      *
      * @var integer
-     * @access private
      */
-    var $_id = 0;
+    private $id = 0;
 
     /**
      * The minimum priority level of message that we want to hear about.
@@ -35,9 +34,8 @@ class Log_observer
      * to PEAR_LOG_INFO, which listens to everything except PEAR_LOG_DEBUG.
      *
      * @var string
-     * @access private
      */
-    var $_priority = PEAR_LOG_INFO;
+    private $priority = PEAR_LOG_INFO;
 
     /**
      * Creates a new basic Log_observer instance.
@@ -45,12 +43,11 @@ class Log_observer
      * @param integer   $priority   The highest priority at which to receive
      *                              log event notifications.
      *
-     * @access public
      */
     public function __construct($priority = PEAR_LOG_INFO)
     {
-        $this->_id = md5(microtime().rand());
-        $this->_priority = $priority;
+        $this->id = md5(microtime().rand());
+        $this->priority = $priority;
     }
 
     /**
@@ -67,7 +64,7 @@ class Log_observer
      * @return object               The newly created concrete Log_observer
      *                              instance, or null on an error.
      */
-    function &factory($type, $priority = PEAR_LOG_INFO, $conf = array())
+    public function &factory($type, $priority = PEAR_LOG_INFO, $conf = array())
     {
         $type = strtolower($type);
         $class = 'Log_observer_' . $type;
@@ -122,7 +119,7 @@ class Log_observer
      *
      * @param array     $event      A hash describing the log event.
      */
-    function notify($event)
+    public function notify($event)
     {
         print_r($event);
     }

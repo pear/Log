@@ -1180,10 +1180,10 @@ values.  Handler-specific parameters are passed as part of the ``$conf``
 array.  At a minimum, the handler's constructor must set the following values
 defined by the ``Log`` base class::
 
-        $this->_id = md5(microtime().rand());
-        $this->_name = $name;
-        $this->_ident = $ident;
-        $this->_mask = Log::UPTO($level);
+        $this->id = md5(microtime().rand());
+        $this->name = $name;
+        $this->ident = $ident;
+        $this->mask = Log::MAX($level);
 
 The `Handler Methods`_ section below details the various standard methods that
 can be implemented by a log handler.  The `Utility Methods`_ section describes
@@ -1251,7 +1251,7 @@ the user wishes to log an event.  The implementation of this method is very
 handler-specific.  It should return ``true`` or ``false``, depending on
 whether or not the message was successfully logged by the handler.
 
-The ``log()`` implementation should be sure to call `_announce()`__ whenever
+The ``log()`` implementation should be sure to call `announce()`__ whenever
 an event is successfully logged.
 
 .. __: `void _announce($event)`_
@@ -1261,7 +1261,7 @@ Utility Methods
 These utility methods are provided by the ``Log`` base class and provide
 common, useful functionality to handler implementations.
 
-string _extractMessage($message)
+string extractMessage($message)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This method returns the string representation of the provided message data.
 
@@ -1275,31 +1275,31 @@ If the message data is already a string, it will be returned unchanged.
 .. _PEAR_Error: http://pear.php.net/manual/en/core.pear.pear-error.php
 .. _getMessage(): http://pear.php.net/manual/en/core.pear.pear-error.getmessage.php
 
-string _format($format, $timestamp, $priority, $message)
+string format($format, $timestamp, $priority, $message)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This method produces a formatted log line based on a format string and a set
 of `tokens`_ representing the current log record and state.
 
 .. _tokens: `Log Line Format`_
 
-bool _isMasked($priority)
+bool isMasked($priority)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 This method checks if the given priority is included in the handler's current
 level mask.  This is useful for determining whether or not a log event should
 be written to the handler's log.
 
-void _announce($event)
+void announce($event)
 ~~~~~~~~~~~~~~~~~~~~~~
 This method informs any registered `log observers`_ that a new event has been
 logged.  ``$event`` is an array containing two named elements::
 
     array('priority' => $priority, 'message' => $message)
 
-``_announce()`` should be called from a handler's `log()`_ method whenever an
+``announce()`` should be called from a handler's `log()`_ method whenever an
 event is successfully logged.  Otherwise, registered observers will never
 become aware of the event.
 
-.. _log(): `bool log($message, $priority = null)`_
+.. log(): `bool log($message, $priority = null)`_
 
 .. |required| replace:: **[required]**
 

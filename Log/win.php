@@ -26,23 +26,20 @@ class Log_win extends Log
     /**
      * The name of the output window.
      * @var string
-     * @access private
      */
-    var $_name = 'LogWindow';
+    private $name = 'LogWindow';
 
     /**
      * The title of the output window.
      * @var string
-     * @access private
      */
-    var $_title = 'Log Output Window';
+    private $title = 'Log Output Window';
 
     /**
      * Mapping of log priorities to styles.
      * @var array
-     * @access private
      */
-    var $_styles = array(
+    private $styles = array(
                         PEAR_LOG_EMERG   => 'color: red;',
                         PEAR_LOG_ALERT   => 'color: orange;',
                         PEAR_LOG_CRIT    => 'color: yellow;',
@@ -56,9 +53,8 @@ class Log_win extends Log
     /**
      * String buffer that holds line that are pending output.
      * @var array
-     * @access private
      */
-    var $_buffer = array();
+    private $buffer = array();
 
     /**
      * Constructs a new Log_win object.
@@ -67,37 +63,36 @@ class Log_win extends Log
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
-     * @access public
      */
     public function __construct($name, $ident = '', $conf = array(),
                                 $level = PEAR_LOG_DEBUG)
     {
-        $this->_id = md5(microtime().rand());
-        $this->_name = str_replace(' ', '_', $name);
-        $this->_ident = $ident;
-        $this->_mask = Log::UPTO($level);
+        $this->id = md5(microtime().rand());
+        $this->name = str_replace(' ', '_', $name);
+        $this->ident = $ident;
+        $this->mask = Log::MAX($level);
 
         if (isset($conf['title'])) {
-            $this->_title = $conf['title'];
+            $this->title = $conf['title'];
         }
         if (isset($conf['styles']) && is_array($conf['styles'])) {
-            $this->_styles = $conf['styles'];
+            $this->styles = $conf['styles'];
         }
         if (isset($conf['colors']) && is_array($conf['colors'])) {
             foreach ($conf['colors'] as $level => $color) {
-                $this->_styles[$level] .= "color: $color;";
+                $this->styles[$level] .= "color: $color;";
             }
         }
 
-        register_shutdown_function(array(&$this, '_Log_win'));
+        register_shutdown_function(array(&$this, 'log_win_destructor'));
     }
 
     /**
      * Destructor
      */
-    function _Log_win()
+    private function log_win_destructor()
     {
-        if ($this->_opened || (count($this->_buffer) > 0)) {
+        if ($this->opened || (count($this->buffer) > 0)) {
             $this->close();
         }
     }
@@ -108,26 +103,25 @@ class Log_win extends Log
      *
      * This is implicitly called by log(), if necessary.
      *
-     * @access public
      */
-    function open()
+    public function open()
     {
-        if (!$this->_opened) {
-            $win = $this->_name;
-            $styles = $this->_styles;
+        if (!$this->opened) {
+            $win = $this->name;
+            $styles = $this->styles;
 
-            if (!empty($this->_ident)) {
+            if (!empty($this->ident)) {
                 $identHeader = "$win.document.writeln('<th>Ident</th>')";
             } else {
                 $identHeader = '';
             }
 
             echo <<< EOT
-<script language="JavaScript">
-$win = window.open('', '{$this->_name}', 'toolbar=no,scrollbars,width=600,height=400');
+<script>
+$win = window.open('', '{$this->name}', 'toolbar=no,scrollbars,width=600,height=400');
 $win.document.writeln('<html>');
 $win.document.writeln('<head>');
-$win.document.writeln('<title>{$this->_title}</title>');
+$win.document.writeln('<title>{$this->title}</title>');
 $win.document.writeln('<style type="text/css">');
 $win.document.writeln('body { font-family: monospace; font-size: 8pt; }');
 $win.document.writeln('td,th { font-size: 8pt; }');
@@ -145,22 +139,22 @@ $win.document.writeln('td.l7 { $styles[7] }');
 $win.document.writeln('</style>');
 $win.document.writeln('<script type="text/javascript">');
 $win.document.writeln('function scroll() {');
-$win.document.writeln(' body = document.getElementById("{$this->_name}");');
+$win.document.writeln(' body = document.getElementById("{$this->name}");');
 $win.document.writeln(' body.scrollTop = body.scrollHeight;');
 $win.document.writeln('}');
 $win.document.writeln('<\/script>');
 $win.document.writeln('</head>');
-$win.document.writeln('<body id="{$this->_name}" onclick="scroll()">');
+$win.document.writeln('<body id="{$this->name}" onclick="scroll()">');
 $win.document.writeln('<table border="0" cellpadding="2" cellspacing="0">');
 $win.document.writeln('<tr><th>Time</th>');
 $identHeader
 $win.document.writeln('<th>Priority</th><th width="100%">Message</th></tr>');
 </script>
 EOT;
-            $this->_opened = true;
+            $this->opened = true;
         }
 
-        return $this->_opened;
+        return $this->opened;
     }
 
     /**
@@ -168,37 +162,35 @@ EOT;
      * lines in the output buffer, the output window will be opened so that
      * the buffer can be drained.
      *
-     * @access public
      */
-    function close()
+    public function close()
     {
         /*
          * If there are still lines waiting to be written, open the output
          * window so that we can drain the buffer.
          */
-        if (!$this->_opened && (count($this->_buffer) > 0)) {
+        if (!$this->opened && (count($this->buffer) > 0)) {
             $this->open();
         }
 
-        if ($this->_opened) {
-            $this->_writeln('</table>');
-            $this->_writeln('</body></html>');
-            $this->_drainBuffer();
-            $this->_opened = false;
+        if ($this->opened) {
+            $this->writeln('</table>');
+            $this->writeln('</body></html>');
+            $this->drainBuffer();
+            $this->opened = false;
         }
 
-        return ($this->_opened === false);
+        return ($this->opened === false);
     }
 
     /**
      * Writes the contents of the output buffer to the output window.
      *
-     * @access private
      */
-    function _drainBuffer()
+    private function drainBuffer()
     {
-        $win = $this->_name;
-        foreach ($this->_buffer as $line) {
+        $win = $this->name;
+        foreach ($this->buffer as $line) {
             echo "<script language='JavaScript'>\n";
             echo "$win.document.writeln('" . addslashes($line) . "');\n";
             echo "self.focus();\n";
@@ -206,7 +198,7 @@ EOT;
         }
 
         /* Now that the buffer has been drained, clear it. */
-        $this->_buffer = array();
+        $this->buffer = array();
     }
 
     /**
@@ -214,12 +206,11 @@ EOT;
      *
      * @param string    $line   The line of text to write.
      *
-     * @access private
      */
-    function _writeln($line)
+    private function writeln($line)
     {
         /* Add this line to our output buffer. */
-        $this->_buffer[] = $line;
+        $this->buffer[] = $line;
 
         /* Buffer the output until this page's headers have been sent. */
         if (!headers_sent()) {
@@ -227,12 +218,12 @@ EOT;
         }
 
         /* If we haven't already opened the output window, do so now. */
-        if (!$this->_opened && !$this->open()) {
+        if (!$this->opened && !$this->open()) {
             return;
         }
 
         /* Drain the buffer to the output window. */
-        $this->_drainBuffer();
+        $this->drainBuffer();
     }
 
     /**
@@ -245,22 +236,21 @@ EOT;
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
-     * @access public
      */
-    function log($message, $priority = null)
+    public function log($message, $priority = null)
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
-            $priority = $this->_priority;
+            $priority = $this->priority;
         }
 
         /* Abort early if the priority is above the maximum logging level. */
-        if (!$this->_isMasked($priority)) {
+        if (!$this->isMasked($priority)) {
             return false;
         }
 
         /* Extract the string representation of the message. */
-        $message = $this->_extractMessage($message);
+        $message = $this->extractMessage($message);
         $message = preg_replace('/\r\n|\n|\r/', '<br />', $message);
 
         list($usec, $sec) = explode(' ', microtime());
@@ -269,16 +259,16 @@ EOT;
         $line  = '<tr>';
         $line .= sprintf('<td>%s.%s</td>',
                          strftime('%H:%M:%S', $sec), substr($usec, 2, 2));
-        if (!empty($this->_ident)) {
-            $line .= '<td>' . $this->_ident . '</td>';
+        if (!empty($this->ident)) {
+            $line .= '<td>' . $this->ident . '</td>';
         }
         $line .= '<td>' . ucfirst($this->priorityToString($priority)) . '</td>';
         $line .= sprintf('<td class="l%d">%s</td>', $priority, $message);
         $line .= '</tr>';
 
-        $this->_writeln($line);
+        $this->writeln($line);
 
-        $this->_announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(array('priority' => $priority, 'message' => $message));
 
         return true;
     }

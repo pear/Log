@@ -23,23 +23,20 @@ class Log_firebug extends Log
     /**
      * Should the output be buffered or displayed immediately?
      * @var string
-     * @access private
      */
-    var $_buffering = false;
+    private $buffering = false;
 
     /**
      * String holding the buffered output.
      * @var string
-     * @access private
      */
-    var $_buffer = array();
+    private $buffer = array();
 
     /**
      * String containing the format of a log line.
      * @var string
-     * @access private
      */
-    var $_lineFormat = '%2$s [%3$s] %4$s';
+    private $lineFormat = '%2$s [%3$s] %4$s';
 
     /**
      * String containing the timestamp format.  It will be passed directly to
@@ -49,16 +46,14 @@ class Log_firebug extends Log
      * Note! Default lineFormat of this driver does not display time.
      *
      * @var string
-     * @access private
      */
-    var $_timeFormat = '%b %d %H:%M:%S';
+    private $timeFormat = '%b %d %H:%M:%S';
 
     /**
      * Mapping of log priorities to Firebug methods.
      * @var array
-     * @access private
      */
-    var $_methods = array(
+    private $methods = array(
                         PEAR_LOG_EMERG   => 'error',
                         PEAR_LOG_ALERT   => 'error',
                         PEAR_LOG_CRIT    => 'error',
@@ -76,48 +71,46 @@ class Log_firebug extends Log
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
-     * @access public
      */
     public function __construct($name = '', $ident = 'PHP', $conf = array(),
                                 $level = PEAR_LOG_DEBUG)
     {
-        $this->_id = md5(microtime().rand());
-        $this->_ident = $ident;
-        $this->_mask = Log::UPTO($level);
+        $this->id = md5(microtime().rand());
+        $this->ident = $ident;
+        $this->mask = Log::MAX($level);
         if (isset($conf['buffering'])) {
-            $this->_buffering = $conf['buffering'];
+            $this->buffering = $conf['buffering'];
         }
 
-        if ($this->_buffering) {
-            register_shutdown_function(array(&$this, '_Log_firebug'));
+        if ($this->buffering) {
+            register_shutdown_function(array(&$this, 'log_firebug_destructor'));
         }
 
         if (!empty($conf['lineFormat'])) {
-            $this->_lineFormat = str_replace(array_keys($this->_formatMap),
-                                             array_values($this->_formatMap),
+            $this->lineFormat = str_replace(array_keys($this->formatMap),
+                                             array_values($this->formatMap),
                                              $conf['lineFormat']);
         }
 
         if (!empty($conf['timeFormat'])) {
-            $this->_timeFormat = $conf['timeFormat'];
+            $this->timeFormat = $conf['timeFormat'];
         }
     }
 
     /**
      * Opens the firebug handler.
      *
-     * @access  public
      */
-    function open()
+    public function open()
     {
-        $this->_opened = true;
+        $this->opened = true;
         return true;
     }
 
     /**
      * Destructor
      */
-    function _Log_firebug()
+    private function log_firebug_destructor()
     {
         $this->close();
     }
@@ -125,31 +118,29 @@ class Log_firebug extends Log
     /**
      * Closes the firebug handler.
      *
-     * @access  public
      */
-    function close()
+    public function close()
     {
         $this->flush();
-        $this->_opened = false;
+        $this->opened = false;
         return true;
     }
 
     /**
      * Flushes all pending ("buffered") data.
      *
-     * @access public
      */
-    function flush() {
-        if (count($this->_buffer)) {
+    public function flush() {
+        if (count($this->buffer)) {
             print '<script type="text/javascript">';
             print "\nif ('console' in window) {\n";
-            foreach ($this->_buffer as $line) {
+            foreach ($this->buffer as $line) {
                 print "  $line\n";
             }
             print "}\n";
             print "</script>\n";
-        };
-        $this->_buffer = array();
+        }
+        $this->buffer = array();
     }
 
     /**
@@ -162,35 +153,34 @@ class Log_firebug extends Log
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
-     * @access public
      */
-    function log($message, $priority = null)
+    public function log($message, $priority = null)
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
-            $priority = $this->_priority;
+            $priority = $this->priority;
         }
 
         /* Abort early if the priority is above the maximum logging level. */
-        if (!$this->_isMasked($priority)) {
+        if (!$this->isMasked($priority)) {
             return false;
         }
 
         /* Extract the string representation of the message. */
-        $message = $this->_extractMessage($message);
-        $method  = $this->_methods[$priority];
+        $message = $this->extractMessage($message);
+        $method  = $this->methods[$priority];
 
         /* normalize line breaks and escape quotes*/
         $message = preg_replace("/\r?\n/", "\\n", addslashes($message));
 
         /* Build the string containing the complete log line. */
-        $line = $this->_format($this->_lineFormat,
-                               strftime($this->_timeFormat),
+        $line = $this->format($this->lineFormat,
+                               strftime($this->timeFormat),
                                $priority,
                                $message);
 
-        if ($this->_buffering) {
-            $this->_buffer[] = sprintf('console.%s("%s");', $method, $line);
+        if ($this->buffering) {
+            $this->buffer[] = sprintf('console.%s("%s");', $method, $line);
         } else {
             print '<script type="text/javascript">';
             print "\nif ('console' in window) {\n";
@@ -200,7 +190,7 @@ class Log_firebug extends Log
             print "</script>\n";
         }
         /* Notify observers about this log message. */
-        $this->_announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(array('priority' => $priority, 'message' => $message));
 
         return true;
     }

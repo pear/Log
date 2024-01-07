@@ -4,25 +4,25 @@ require_once 'Log/observer.php';
 
 class Log_observer_mail extends Log_observer
 {
-    var $_to = '';
-    var $_subject = '';
-    var $_pattern = '';
+    private $to = '';
+    private $subject = '';
+    private $pattern = '';
 
-    function Log_observer_mail($priority, $conf)
+    public function __construct($priority, $conf)
     {
         /* Call the base class constructor. */
-        $this->Log_observer($priority);
+        parent::__construct($priority);
 
         /* Configure the observer. */
-        $this->_to = $conf['to'];
-        $this->_subject = $conf['subject'];
-        $this->_pattern = $conf['pattern'];
+        $this->to = $conf['to'];
+        $this->subject = $conf['subject'];
+        $this->pattern = $conf['pattern'];
     }
 
-    function notify($event)
+    public function notify($event)
     {
-        if (preg_match($this->_pattern, $event['message']) != 0) {
-            mail($this->_to, $this->_subject, $event['message']);
+        if (preg_match($this->pattern, $event['message']) != 0) {
+            mail($this->to, $this->subject, $event['message']);
         }
     }
 }
