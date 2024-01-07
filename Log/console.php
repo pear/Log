@@ -198,7 +198,7 @@ class Log_console extends Log
 
         /* Build the string containing the complete log line. */
         $line = $this->format($this->lineFormat,
-                               $this->timeFormat($this->timeFormat, time(), $this->timeFormatter),
+                               $this->formatTime(time(), $this->timeFormat,$this->timeFormatter),
                                $priority, $message) . "\n";
 
         /*

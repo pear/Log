@@ -321,8 +321,8 @@ Configuration
 | ``lineFormat``    | String    | ``%1$s %2$s   | `Log line format`_        |
 |                   |           | [%3$s] %4$s`` | specification.            |
 +-------------------+-----------+---------------+---------------------------+
-| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
-|                   |           | %H:%M:%S``    | (for date_).              |
+| ``timeFormat``    | String    | ``M d H:i:s`` | Time stamp format         |
+|                   |           |               | (for date_).              |
 +-------------------+-----------+---------------+---------------------------+
 | ``timeFormatter`` | Callable  | null          | Time formatter example    |
 |                   |           |               | fn() => date('H:i:s')     |
@@ -355,8 +355,8 @@ Configuration
 | ``lineFormat``    | String    | ``<b>%3$s</b>:| `Log line format`_        |
 |                   |           | %4$s``        | specification.            |
 +-------------------+-----------+---------------+---------------------------+
-| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
-|                   |           | %H:%M:%S``    | (for date_).              |
+| ``timeFormat``    | String    | ``M d H:i:s`` | Time stamp format         |
+|                   |           |               | (for date_).              |
 +-------------------+-----------+---------------+---------------------------+
 | ``timeFormatter`` | Callable  | null          | Time formatter example    |
 |                   |           |               | fn() => date('H:i:s')     |
@@ -417,8 +417,8 @@ Configuration
 | ``lineFormat``    | String    | ``%2$s: %4$s``| `Log line format`_        |
 |                   |           |               | specification.            |
 +-------------------+-----------+---------------+---------------------------+
-| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
-|                   |           | %H:%M:%S``    | (for date_).              |
+| ``timeFormat``    | String    | ``M d H:i:s`` | Time stamp format         |
+|                   |           |               | (for date_).              |
 +-------------------+-----------+---------------+---------------------------+
 | ``timeFormatter`` | Callable  | null          | Time formatter example    |
 |                   |           |               | fn() => date('H:i:s')     |
@@ -506,8 +506,8 @@ Configuration
 | ``lineFormat``    | String    | ``%1$s %2$s   | `Log line format`_        |
 |                   |           | [%3$s] %4$s`` | specification.            |
 +-------------------+-----------+---------------+---------------------------+
-| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
-|                   |           | %H:%M:%S``    | (for date_).              |
+| ``timeFormat``    | String    | ``M d H:i:s`` | Time stamp format         |
+|                   |           |               | (for date_).              |
 +-------------------+-----------+---------------+---------------------------+
 | ``timeFormatter`` | Callable  | null          | Time formatter example    |
 |                   |           |               | fn() => date('H:i:s')     |
@@ -546,8 +546,8 @@ Configuration
 | ``lineFormat``    | String    | ``%2$s [%3$s] | `Log line format`_        |
 |                   |           | %4$s``        | specification.            |
 +-------------------+-----------+---------------+---------------------------+
-| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
-|                   |           | %H:%M:%S``    | (for date_).              |
+| ``timeFormat``    | String    | ``M d H:i:s`` | Time stamp format         |
+|                   |           |               | (for date_).              |
 +-------------------+-----------+---------------+---------------------------+
 | ``timeFormatter`` | Callable  | null          | Time formatter example    |
 |                   |           |               | fn() => date('H:i:s')     |
@@ -595,8 +595,8 @@ Configuration
 | ``lineFormat``    | String    | ``%1$s %2$s   | `Log line format`_        |
 |                   |           | [%3$s] %4$s`` | specification.            |
 +-------------------+-----------+---------------+---------------------------+
-| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
-|                   |           | %H:%M:%S``    | (for date_).              |
+| ``timeFormat``    | String    | ``M d H:i:s`` | Time stamp format         |
+|                   |           |               | (for date_).              |
 +-------------------+-----------+---------------+---------------------------+
 | ``timeFormatter`` | Callable  | null          | Time formatter example    |
 |                   |           |               | fn() => date('H:i:s')     |
@@ -877,8 +877,8 @@ Configuration
 | ``lineFormat``    | String    | ``%4$s``      | `Log line format`_        |
 |                   |           |               | specification.            |
 +-------------------+-----------+---------------+---------------------------+
-| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
-|                   |           | %H:%M:%S``    | (for date_).              |
+| ``timeFormat``    | String    | ``M d H:i:s`` | Time stamp format         |
+|                   |           |               | (for date_).              |
 +-------------------+-----------+---------------+---------------------------+
 | ``timeFormatter`` | Callable  | null          | Time formatter example    |
 |                   |           |               | fn() => date('H:i:s')     |

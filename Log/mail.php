@@ -274,7 +274,7 @@ class Log_mail extends Log
 
         /* Append the string containing the complete log line. */
         $this->message .= $this->format($this->lineFormat,
-                                          $this->timeFormat($this->timeFormat, time(), $this->timeFormatter),
+                                          $this->formatTime(time(), $this->timeFormat, $this->timeFormatter),
                                           $priority, $message) . "\r\n";
         $this->shouldSend = true;
 
