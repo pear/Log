@@ -14,9 +14,13 @@ if (is_a($console1, 'Log_console') && is_a($console2, 'Log_console'))
 }
 
 $reflection1 = new ReflectionObject($console1);
-$id1 = $reflection1->getProperty('id')->getValue($console1);
+$idProperty1 = $reflection1->getProperty('id');
+$idProperty1->setAccessible(true);
+$id1 = $idProperty1->getValue($console1);
 $reflection2 = new ReflectionObject($console2);
-$id2 = $reflection2->getProperty('id')->getValue($console2);
+$idProperty2 = $reflection2->getProperty('id');
+$idProperty2->setAccessible(true);
+$id2 = $idProperty2->getValue($console2);
 
 if ($id1 != $id2) {
 	echo "The objects have different IDs.\n";
