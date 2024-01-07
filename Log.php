@@ -37,6 +37,8 @@ define('PEAR_LOG_TYPE_SAPI',    4); /* Use the SAPI logging handler */
  */
 class Log
 {
+    const DEFAULT_TIME_FORMAT = 'M d H:i:s';
+
     /**
      * Indicates whether or not the log can been opened / connected.
      *
@@ -437,7 +439,7 @@ class Log
      *
      * @since   Log 1.9.4
      */
-    public function _getBacktraceVars($depth)
+    private function getBacktraceVars($depth)
     {
         /* Start by generating a backtrace from the current call (here). */
         $bt = debug_backtrace();
@@ -526,7 +528,7 @@ class Log
         if (preg_match('/%[5678]/', $format)) {
             /* Plus 2 to account for our internal function calls. */
             $d = $this->backtrace_depth + 2;
-            list($file, $line, $func, $class) = $this->_getBacktraceVars($d);
+            list($file, $line, $func, $class) = $this->getBacktraceVars($d);
         }
 
         /*
@@ -753,7 +755,7 @@ class Log
             return false;
         }
 
-        $this->listeners[$observer->_id] = &$observer;
+        $this->listeners[$observer->getId()] = &$observer;
 
         return true;
     }
@@ -771,11 +773,11 @@ class Log
     public function detach($observer)
     {
         if (!is_a($observer, 'Log_observer') ||
-            !isset($this->listeners[$observer->_id])) {
+            !isset($this->listeners[$observer->getId()])) {
             return false;
         }
 
-        unset($this->listeners[$observer->_id]);
+        unset($this->listeners[$observer->getId()]);
 
         return true;
     }
@@ -789,9 +791,12 @@ class Log
      */
     protected function announce($event)
     {
-        foreach ($this->listeners as $id => $listener) {
-            if ($event['priority'] <= $this->listeners[$id]->_priority) {
-                $this->listeners[$id]->notify($event);
+        /**
+         * @var Log_observer $listener
+         */
+        foreach ($this->listeners as $listener) {
+            if ($event['priority'] <= $listener->getPriority()) {
+                $listener->notify($event);
             }
         }
     }
@@ -830,5 +835,68 @@ class Log
     public function getIdent()
     {
         return $this->ident;
+    }
+
+    /**
+     * Function to format unix timestamp in specified format, which will be used in log record
+     * By default will be used format self::DEFAULT_TIME_FORMAT
+     * timeFormatter function will be used if it is set
+     *
+     * @param int $time unix timestamp
+     * @param string $timeFormat specified format, which will be used in log record
+     * @param callable|null $timeFormatter function which will be used to format time
+     * @return string
+     */
+    protected function formatTime($time, $timeFormat = self::DEFAULT_TIME_FORMAT, callable $timeFormatter = null)
+    {
+        if (!is_null($timeFormatter) && is_callable($timeFormatter)) {
+            return call_user_func($timeFormatter, $timeFormat, $time);
+        }
+
+        if (strpos($timeFormat, '%') !== false) {
+            trigger_error('Using strftime-style formatting is deprecated', E_USER_WARNING);
+            $timeFormat = $this->convertStrftimeFormatConverter($timeFormat);
+        }
+
+        return date($timeFormat, $time);
+    }
+
+    /**-
+     * Function to convert strftime format to format acceptable by date function
+     *
+     * @param string $timeFormat
+     * @return string
+     */
+    private function convertStrftimeFormatConverter($timeFormat)
+    {
+        $strf_syntax = [
+            '%O', '%d', '%a', '%e', '%A', '%u', '%w', '%j',
+            '%V',
+            '%B', '%m', '%b', '%-m',
+            '%G', '%Y', '%y',
+            '%P', '%p', '%l', '%I', '%H', '%M', '%S',
+            '%z', '%Z',
+            '%s'
+        ];
+
+        // http://php.net/manual/en/function.date.php
+        $date_syntax = [
+            'S', 'd', 'D', 'j', 'l', 'N', 'w', 'z',
+            'W',
+            'F', 'm', 'M', 'n',
+            'o', 'Y', 'y',
+            'a', 'A', 'g', 'h', 'H', 'i', 's',
+            'O', 'T',
+            'U'
+        ];
+
+        $pattern = array_map(
+            function ($s) {
+                return '/(?<!\\\\|\%)' . $s . '/';
+            },
+            $strf_syntax
+        );
+
+        return preg_replace($pattern, $date_syntax, $timeFormat);
     }
 }

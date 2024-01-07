@@ -64,12 +64,17 @@ class Log_file extends Log
     private $lineFormat = '%1$s %2$s [%3$s] %4$s';
 
     /**
-     * String containing the timestamp format.  It will be passed directly to
-     * strftime().  Note that the timestamp string will generated using the
+     * String containing the timestamp format. It will be passed to date().
+     * If timeFormatter configured, it will be used.
      * current locale.
      * @var string
      */
-    private $timeFormat = '%b %d %H:%M:%S';
+    private $timeFormat = 'M d H:i:s';
+
+    /**
+     * @var callable
+     */
+    private $timeFormatter;
 
     /**
      * String containing the end-on-line character sequence.
@@ -125,6 +130,10 @@ class Log_file extends Log
 
         if (!empty($conf['timeFormat'])) {
             $this->timeFormat = $conf['timeFormat'];
+        }
+
+        if (!empty($conf['timeFormatter'])) {
+            $this->timeFormatter = $conf['timeFormatter'];
         }
 
         if (!empty($conf['eol'])) {
@@ -273,7 +282,7 @@ class Log_file extends Log
 
         /* Build the string containing the complete log line. */
         $line = $this->format($this->lineFormat,
-                               strftime($this->timeFormat),
+                               $this->formatTime(time(), $this->timeFormat, $this->timeFormatter),
                                $priority, $message) . $this->eol;
 
         /* If locking is enabled, acquire an exclusive lock on the file. */

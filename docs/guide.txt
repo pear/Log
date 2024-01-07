@@ -321,12 +321,15 @@ Configuration
 | ``lineFormat``    | String    | ``%1$s %2$s   | `Log line format`_        |
 |                   |           | [%3$s] %4$s`` | specification.            |
 +-------------------+-----------+---------------+---------------------------+
-| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
-|                   |           | %H:%M:%S``    | (for strftime_).          |
+| ``timeFormat``    | String    | ``M d H:i:s`` | Time stamp format         |
+|                   |           |               | (for date_).              |
++-------------------+-----------+---------------+---------------------------+
+| ``timeFormatter`` | Callable  | null          | Time formatter example    |
+|                   |           |               | fn() => date('H:i:s')     |
 +-------------------+-----------+---------------+---------------------------+
 
 .. _STDOUT: http://www.php.net/wrappers.php
-.. _strftime: http://www.php.net/strftime
+.. _date: http://www.php.net/date
 
 Example
 ~~~~~~~
@@ -352,8 +355,11 @@ Configuration
 | ``lineFormat``    | String    | ``<b>%3$s</b>:| `Log line format`_        |
 |                   |           | %4$s``        | specification.            |
 +-------------------+-----------+---------------+---------------------------+
-| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
-|                   |           | %H:%M:%S``    | (for strftime_).          |
+| ``timeFormat``    | String    | ``M d H:i:s`` | Time stamp format         |
+|                   |           |               | (for date_).              |
++-------------------+-----------+---------------+---------------------------+
+| ``timeFormatter`` | Callable  | null          | Time formatter example    |
+|                   |           |               | fn() => date('H:i:s')     |
 +-------------------+-----------+---------------+---------------------------+
 | ``error_prepend`` | String    | PHP INI value | This string will be       |
 |                   |           |               | prepended to the line     |
@@ -374,6 +380,7 @@ Configuration
 +-------------------+-----------+---------------+---------------------------+
 
 .. _error handling values: http://www.php.net/errorfunc
+.. _date: http://www.php.net/date
 
 Example
 ~~~~~~~
@@ -410,8 +417,11 @@ Configuration
 | ``lineFormat``    | String    | ``%2$s: %4$s``| `Log line format`_        |
 |                   |           |               | specification.            |
 +-------------------+-----------+---------------+---------------------------+
-| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
-|                   |           | %H:%M:%S``    | (for strftime_).          |
+| ``timeFormat``    | String    | ``M d H:i:s`` | Time stamp format         |
+|                   |           |               | (for date_).              |
++-------------------+-----------+---------------+---------------------------+
+| ``timeFormatter`` | Callable  | null          | Time formatter example    |
+|                   |           |               | fn() => date('H:i:s')     |
 +-------------------+-----------+---------------+---------------------------+
 
 Error_Log Types
@@ -496,12 +506,15 @@ Configuration
 | ``lineFormat``    | String    | ``%1$s %2$s   | `Log line format`_        |
 |                   |           | [%3$s] %4$s`` | specification.            |
 +-------------------+-----------+---------------+---------------------------+
-| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
-|                   |           | %H:%M:%S``    | (for strftime_).          |
+| ``timeFormat``    | String    | ``M d H:i:s`` | Time stamp format         |
+|                   |           |               | (for date_).              |
++-------------------+-----------+---------------+---------------------------+
+| ``timeFormatter`` | Callable  | null          | Time formatter example    |
+|                   |           |               | fn() => date('H:i:s')     |
 +-------------------+-----------+---------------+---------------------------+
 
 .. _flock: http://www.php.net/flock
-.. _strftime: http://www.php.net/strftime
+.. _date: http://www.php.net/date
 
 The file handler will only attempt to set the ``mode`` value if it was
 responsible for creating the file.
@@ -533,12 +546,15 @@ Configuration
 | ``lineFormat``    | String    | ``%2$s [%3$s] | `Log line format`_        |
 |                   |           | %4$s``        | specification.            |
 +-------------------+-----------+---------------+---------------------------+
-| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
-|                   |           | %H:%M:%S``    | (for strftime_).          |
+| ``timeFormat``    | String    | ``M d H:i:s`` | Time stamp format         |
+|                   |           |               | (for date_).              |
++-------------------+-----------+---------------+---------------------------+
+| ``timeFormatter`` | Callable  | null          | Time formatter example    |
+|                   |           |               | fn() => date('H:i:s')     |
 +-------------------+-----------+---------------+---------------------------+
 
 .. _Firebug: http://www.getfirebug.com/
-.. _strftime: http://www.php.net/strftime
+.. _date: http://www.php.net/date
 
 Example
 ~~~~~~~
@@ -579,8 +595,11 @@ Configuration
 | ``lineFormat``    | String    | ``%1$s %2$s   | `Log line format`_        |
 |                   |           | [%3$s] %4$s`` | specification.            |
 +-------------------+-----------+---------------+---------------------------+
-| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
-|                   |           | %H:%M:%S``    | (for strftime_).          |
+| ``timeFormat``    | String    | ``M d H:i:s`` | Time stamp format         |
+|                   |           |               | (for date_).              |
++-------------------+-----------+---------------+---------------------------+
+| ``timeFormatter`` | Callable  | null          | Time formatter example    |
+|                   |           |               | fn() => date('H:i:s')     |
 +-------------------+-----------+---------------+---------------------------+
 | ``mailBackend``   | String    | `` `(empty)`  | Name of the Mail package  |
 |                   |           |               | backend to use.           |
@@ -592,6 +611,7 @@ Configuration
 
 .. _PEAR Mail: http://pear.php.net/package/Mail
 .. _mail(): http://www.php.net/mail
+.. _date: http://www.php.net/date
 
 Example
 ~~~~~~~
@@ -857,8 +877,11 @@ Configuration
 | ``lineFormat``    | String    | ``%4$s``      | `Log line format`_        |
 |                   |           |               | specification.            |
 +-------------------+-----------+---------------+---------------------------+
-| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
-|                   |           | %H:%M:%S``    | (for strftime_).          |
+| ``timeFormat``    | String    | ``M d H:i:s`` | Time stamp format         |
+|                   |           |               | (for date_).              |
++-------------------+-----------+---------------+---------------------------+
+| ``timeFormatter`` | Callable  | null          | Time formatter example    |
+|                   |           |               | fn() => date('H:i:s')     |
 +-------------------+-----------+---------------+---------------------------+
 
 Facilities
@@ -1224,7 +1247,7 @@ is closed.  Handler methods can inspect this value to determine whether or not
 the handler is currently open and ready for output.
 
 If the ``open()`` method fails to ready the handler for output, it should
-return ``false`` and set ``$this->_opened`` to ``false``.
+return ``false`` and set ``$this-_opened`` to ``false``.
 
 bool close()
 ~~~~~~~~~~~~
@@ -1233,7 +1256,7 @@ the analog of the ``open()`` method.  It should be safe to call ``close()``
 even when the handler is not open for output.
 
 If the ``close()`` method fails to close the handler, it should return
-``false``.  Otherwise, it should return ``true``.  The ``$this->_opened``
+``false``.  Otherwise, it should return ``true``.  The ``$this->opened``
 flag should also be updated appropriately.
 
 bool flush()

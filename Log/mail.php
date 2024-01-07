@@ -59,12 +59,17 @@ class Log_mail extends Log
     private $lineFormat = '%1$s %2$s [%3$s] %4$s';
 
     /**
-     * String containing the timestamp format.  It will be passed directly to
-     * strftime().  Note that the timestamp string will generated using the
+     * String containing the timestamp format. It will be passed to date().
+     * If timeFormatter configured, it will be used.
      * current locale.
      * @var string
      */
-    private $timeFormat = '%b %d %H:%M:%S';
+    private $timeFormat = 'M d H:i:s';
+
+    /**
+     * @var callable
+     */
+    private $timeFormatter;
 
     /**
      * String holding the mail message body.
@@ -135,6 +140,10 @@ class Log_mail extends Log
 
         if (!empty($conf['timeFormat'])) {
             $this->timeFormat = $conf['timeFormat'];
+        }
+
+        if (!empty($conf['timeFormatter'])) {
+            $this->timeFormatter = $conf['timeFormatter'];
         }
 
         if (!empty($conf['mailBackend'])) {
@@ -265,7 +274,7 @@ class Log_mail extends Log
 
         /* Append the string containing the complete log line. */
         $this->message .= $this->format($this->lineFormat,
-                                          strftime($this->timeFormat),
+                                          $this->formatTime(time(), $this->timeFormat, $this->timeFormatter),
                                           $priority, $message) . "\r\n";
         $this->shouldSend = true;
 

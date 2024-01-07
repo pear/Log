@@ -28,12 +28,17 @@ class Log_display extends Log
     private $lineFormat = '<b>%3$s</b>: %4$s';
 
     /**
-     * String containing the timestamp format.  It will be passed directly to
-     * strftime().  Note that the timestamp string will generated using the
+     * String containing the timestamp format. It will be passed to date().
+     * If timeFormatter configured, it will be used.
      * current locale.
      * @var string
      */
-    private $timeFormat = '%b %d %H:%M:%S';
+    private $timeFormat = 'M d H:i:s';
+
+    /**
+     * @var callable
+     */
+    private $timeFormatter;
 
     /**
      * Flag indicating whether raw message text should be passed directly to
@@ -99,6 +104,10 @@ class Log_display extends Log
             $this->timeFormat = $conf['timeFormat'];
         }
 
+        if (!empty($conf['timeFormatter'])) {
+            $this->timeFormatter = $conf['timeFormatter'];
+        }
+
         /* Message text conversion can be disabled. */
         if (isset($conf['rawText'])) {
             $this->rawText = $conf['rawText'];
@@ -161,7 +170,7 @@ class Log_display extends Log
 
         /* Build and output the complete log line. */
         echo $this->format($this->lineFormat,
-                            strftime($this->timeFormat),
+                            $this->formatTime(time(), $this->timeFormat, $this->timeFormatter),
                             $priority,
                             $message);
 

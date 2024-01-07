@@ -56,12 +56,18 @@ class Log_syslog extends Log
     private $lineFormat = '%4$s';
 
     /**
-     * String containing the timestamp format.  It will be passed directly to
-     * strftime().  Note that the timestamp string will generated using the
+     * String containing the timestamp format. It will be passed to date().
+     * If timeFormatter configured, it will be used.
      * current locale.
      * @var string
      */
-    private $timeFormat = '%b %d %H:%M:%S';
+    private $timeFormat = 'M d H:i:s';
+
+    /**
+     * @var callable
+     */
+    private $timeFormatter;
+
 
     /**
      * Constructs a new syslog object.
@@ -96,6 +102,10 @@ class Log_syslog extends Log
         }
         if (!empty($conf['timeFormat'])) {
             $this->timeFormat = $conf['timeFormat'];
+        }
+
+        if (!empty($conf['timeFormatter'])) {
+            $this->timeFormatter = $conf['timeFormatter'];
         }
 
         $this->id = md5(microtime().rand());
@@ -170,7 +180,7 @@ class Log_syslog extends Log
 
         /* Apply the configured line format to the message string. */
         $message = $this->format($this->lineFormat,
-                                  strftime($this->timeFormat),
+                                  $this->formatTime(time(), $this->timeFormat, $this->timeFormatter),
                                   $priority, $message);
 
         /* Split the string into parts based on our maximum length setting. */
