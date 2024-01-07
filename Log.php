@@ -844,7 +844,7 @@ class Log
      * @param callable|null $timeFormatter function which will be used to format time
      * @return string
      */
-    public function formatTime($time, $timeFormat = self::DEFAULT_TIME_FORMAT, callable $timeFormatter = null)
+    protected function formatTime($time, $timeFormat = self::DEFAULT_TIME_FORMAT, callable $timeFormatter = null)
     {
         if (!is_null($timeFormatter) && is_callable($timeFormatter)) {
             return call_user_func($timeFormatter, $timeFormat, $time);
