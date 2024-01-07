@@ -831,4 +831,64 @@ class Log
     {
         return $this->ident;
     }
+
+    /**
+     * @param string $timeFormat
+     * @param int|null $time
+     * @param callable|null $timeFormatter
+     * @return string
+     */
+    public function timeFormat($timeFormat = 'Y-m-d H:i:s', $time = null, callable $timeFormatter = null)
+    {
+        if (is_null($time)) {
+            $time = time();
+        }
+        if (!is_null($timeFormatter) && is_callable($timeFormatter)) {
+            return call_user_func($timeFormatter, $timeFormat, $time);
+        }
+
+        if (strstr($timeFormat, '%') !== false) {
+            trigger_error('Using timeFormat string for strftime is deprecated', E_USER_WARNING);
+            $timeFormat = $this->convertStrftimeFormatConverter($timeFormat);
+        }
+
+        return date($timeFormat, $time);
+    }
+
+    /**
+     * @param string $timeFormat
+     * @return string
+     */
+    private function convertStrftimeFormatConverter($timeFormat)
+    {
+        $strf_syntax = [
+            '%O', '%d', '%a', '%e', '%A', '%u', '%w', '%j',
+            '%V',
+            '%B', '%m', '%b', '%-m',
+            '%G', '%Y', '%y',
+            '%P', '%p', '%l', '%I', '%H', '%M', '%S',
+            '%z', '%Z',
+            '%s'
+        ];
+
+        // http://php.net/manual/en/function.date.php
+        $date_syntax = [
+            'S', 'd', 'D', 'j', 'l', 'N', 'w', 'z',
+            'W',
+            'F', 'm', 'M', 'n',
+            'o', 'Y', 'y',
+            'a', 'A', 'g', 'h', 'H', 'i', 's',
+            'O', 'T',
+            'U'
+        ];
+
+        $pattern = array_map(
+            function ($s) {
+                return '/(?<!\\\\|\%)' . $s . '/';
+            },
+            $strf_syntax
+        );
+
+        return preg_replace($pattern, $date_syntax, $timeFormat);
+    }
 }

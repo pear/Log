@@ -44,12 +44,17 @@ class Log_error_log extends Log
     private $lineFormat = '%2$s: %4$s';
 
     /**
-     * String containing the timestamp format.  It will be passed directly to
-     * strftime().  Note that the timestamp string will generated using the
+     * String containing the timestamp format. It will be passed to date().
+     * If timeFormatter configured, it will be used.
      * current locale.
      * @var string
      */
-    private $timeFormat = '%b %d %H:%M:%S';
+    private $timeFormat = 'M d H:i:s';
+
+    /**
+     * @var callable
+     */
+    private $timeFormatter;
 
     /**
      * Constructs a new Log_error_log object.
@@ -83,6 +88,10 @@ class Log_error_log extends Log
 
         if (!empty($conf['timeFormat'])) {
             $this->timeFormat = $conf['timeFormat'];
+        }
+
+        if (!empty($conf['timeFormatter'])) {
+            $this->timeFormatter = $conf['timeFormatter'];
         }
     }
 
@@ -136,7 +145,7 @@ class Log_error_log extends Log
 
         /* Build the string containing the complete log line. */
         $line = $this->format($this->lineFormat,
-                               strftime($this->timeFormat),
+                               $this->timeFormat($this->timeFormat, null, $this->timeFormatter),
                                $priority, $message);
 
         /* Pass the log line and parameters to the error_log() function. */
