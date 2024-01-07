@@ -123,4 +123,23 @@ class Log_observer
     {
         print_r($event);
     }
+
+    /**
+     * Return instance-specific unique identification number.
+     *
+     * @return int
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * Return The minimum priority level of message that we want to hear about.
+     *
+     * @return string
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
 }

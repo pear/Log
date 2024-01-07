@@ -1247,7 +1247,7 @@ is closed.  Handler methods can inspect this value to determine whether or not
 the handler is currently open and ready for output.
 
 If the ``open()`` method fails to ready the handler for output, it should
-return ``false`` and set ``$this->_opened`` to ``false``.
+return ``false`` and set ``$this-_opened`` to ``false``.
 
 bool close()
 ~~~~~~~~~~~~
@@ -1256,7 +1256,7 @@ the analog of the ``open()`` method.  It should be safe to call ``close()``
 even when the handler is not open for output.
 
 If the ``close()`` method fails to close the handler, it should return
-``false``.  Otherwise, it should return ``true``.  The ``$this->_opened``
+``false``.  Otherwise, it should return ``true``.  The ``$this->opened``
 flag should also be updated appropriately.
 
 bool flush()

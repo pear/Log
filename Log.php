@@ -439,7 +439,7 @@ class Log
      *
      * @since   Log 1.9.4
      */
-    public function _getBacktraceVars($depth)
+    private function getBacktraceVars($depth)
     {
         /* Start by generating a backtrace from the current call (here). */
         $bt = debug_backtrace();
@@ -528,7 +528,7 @@ class Log
         if (preg_match('/%[5678]/', $format)) {
             /* Plus 2 to account for our internal function calls. */
             $d = $this->backtrace_depth + 2;
-            list($file, $line, $func, $class) = $this->_getBacktraceVars($d);
+            list($file, $line, $func, $class) = $this->getBacktraceVars($d);
         }
 
         /*
@@ -755,7 +755,7 @@ class Log
             return false;
         }
 
-        $this->listeners[$observer->_id] = &$observer;
+        $this->listeners[$observer->getId()] = &$observer;
 
         return true;
     }
@@ -773,11 +773,11 @@ class Log
     public function detach($observer)
     {
         if (!is_a($observer, 'Log_observer') ||
-            !isset($this->listeners[$observer->_id])) {
+            !isset($this->listeners[$observer->getId()])) {
             return false;
         }
 
-        unset($this->listeners[$observer->_id]);
+        unset($this->listeners[$observer->getId()]);
 
         return true;
     }
@@ -791,9 +791,12 @@ class Log
      */
     protected function announce($event)
     {
-        foreach ($this->listeners as $id => $listener) {
-            if ($event['priority'] <= $this->listeners[$id]->_priority) {
-                $this->listeners[$id]->notify($event);
+        /**
+         * @var Log_observer $listener
+         */
+        foreach ($this->listeners as $listener) {
+            if ($event['priority'] <= $listener->getPriority()) {
+                $listener->notify($event);
             }
         }
     }
