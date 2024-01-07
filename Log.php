@@ -37,6 +37,8 @@ define('PEAR_LOG_TYPE_SAPI',    4); /* Use the SAPI logging handler */
  */
 class Log
 {
+    const TIME_FORMAT = 'M d H:i:s';
+
     /**
      * Indicates whether or not the log can been opened / connected.
      *
@@ -833,29 +835,34 @@ class Log
     }
 
     /**
+     * Function to format time in specified format, which will be used in log record
+     * By default will be used format self::TIME_FORMAT
+     * timeFormatter function will be used if it is set
+     *
      * @param string $timeFormat
-     * @param int|null $time
+     * @param int $time
      * @param callable|null $timeFormatter
      * @return string
      */
-    public function timeFormat($timeFormat = 'Y-m-d H:i:s', $time = null, callable $timeFormatter = null)
+    public function timeFormat($timeFormat, $time, callable $timeFormatter = null)
     {
-        if (is_null($time)) {
-            $time = time();
-        }
+        $timeFormat = empty($timeFormat) ? self::TIME_FORMAT : $timeFormat;
+
         if (!is_null($timeFormatter) && is_callable($timeFormatter)) {
             return call_user_func($timeFormatter, $timeFormat, $time);
         }
 
-        if (strstr($timeFormat, '%') !== false) {
-            trigger_error('Using timeFormat string for strftime is deprecated', E_USER_WARNING);
+        if (strpos($timeFormat, '%') !== false) {
+            trigger_error('Using strftime style formatting is deprecated', E_USER_WARNING);
             $timeFormat = $this->convertStrftimeFormatConverter($timeFormat);
         }
 
         return date($timeFormat, $time);
     }
 
-    /**
+    /**-
+     * Function to convert strftime format to format acceptable by date function
+     *
      * @param string $timeFormat
      * @return string
      */

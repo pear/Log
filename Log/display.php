@@ -170,7 +170,7 @@ class Log_display extends Log
 
         /* Build and output the complete log line. */
         echo $this->format($this->lineFormat,
-                            $this->timeFormat($this->timeFormat, null, $this->timeFormatter),
+                            $this->timeFormat($this->timeFormat, time(), $this->timeFormatter),
                             $priority,
                             $message);
 

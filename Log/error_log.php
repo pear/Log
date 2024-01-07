@@ -145,7 +145,7 @@ class Log_error_log extends Log
 
         /* Build the string containing the complete log line. */
         $line = $this->format($this->lineFormat,
-                               $this->timeFormat($this->timeFormat, null, $this->timeFormatter),
+                               $this->timeFormat($this->timeFormat, time(), $this->timeFormatter),
                                $priority, $message);
 
         /* Pass the log line and parameters to the error_log() function. */
