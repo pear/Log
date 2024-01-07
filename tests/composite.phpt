@@ -9,14 +9,19 @@ require_once 'Log.php';
 
 function printOpenStates($children) {
     foreach ($children as $child) {
-        $state = ($child->_opened) ? 'OPEN' : 'CLOSED';
-        echo "$child->_ident : $state\n";
+        $reflection = new ReflectionObject($child);
+        $opened = $reflection->getProperty('opened')->getValue($child);
+        $ident = $reflection->getProperty('ident')->getValue($child);
+        $state = ($opened) ? 'OPEN' : 'CLOSED';
+        echo "$ident : $state\n";
     }
 }
 
 function printIdents($children) {
     foreach ($children as $child) {
-        echo "$child->_ident\n";
+        $reflection = new ReflectionObject($child);
+        $ident = $reflection->getProperty('ident')->getValue($child);
+        echo "$ident\n";
     }
 }
 
