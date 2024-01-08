@@ -44,7 +44,7 @@ $children = [
     Log::factory('console', '', 'CONSOLE1', $conf),
     Log::factory('console', '', 'CONSOLE2', $conf),
     Log::factory('console', '', 'CONSOLE3', $conf)
-);
+];
 
 $children[0]->setMask(Log::MASK(PEAR_LOG_DEBUG));
 $children[1]->setMask(Log::MASK(PEAR_LOG_INFO));
