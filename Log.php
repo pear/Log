@@ -397,7 +397,7 @@ class Log
          */
         if (is_object($message)) {
             if (method_exists($message, 'getmessage')) {
-                $message = $message->getMessage();
+                $message = (string)$message->getMessage();
             } else if (method_exists($message, 'tostring')) {
                 $message = $message->toString();
             } else if (method_exists($message, '__tostring')) {
@@ -408,7 +408,7 @@ class Log
         } else if (is_array($message)) {
             if (isset($message['message'])) {
                 if (is_scalar($message['message'])) {
-                    $message = $message['message'];
+                    $message = (string)$message['message'];
                 } else {
                     $message = var_export($message['message'], true);
                 }
