@@ -68,19 +68,19 @@ class Log_syslog extends Log
     /**
      * Constructs a new syslog object.
      *
-     * @param int $name     The syslog facility.
+     * @param string $name     The syslog facility.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
      */
     public function __construct(
-        int $name,
+        string $name,
         string $ident = '',
         array $conf = [],
         int $level = PEAR_LOG_DEBUG
     ) {
         /* Ensure we have a valid integer value for $name. */
-        if (empty($name)) {
+        if (empty($name) || !is_numeric($name)) {
             $name = LOG_SYSLOG;
         }
 

@@ -23,7 +23,7 @@ class Log_error_log extends Log
     /**
      * The error_log() log type.
      */
-    private int $type = PEAR_LOG_TYPE_SYSTEM;
+    private int $type;
 
     /**
      * The type-specific destination value.
@@ -56,19 +56,25 @@ class Log_error_log extends Log
     /**
      * Constructs a new Log_error_log object.
      *
-     * @param int $name     One of the PEAR_LOG_TYPE_* constants.
+     * @param string $name     One of the PEAR_LOG_TYPE_* constants.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
      */
     public function __construct(
-        int $name,
+        string $name,
         string $ident = '',
         array $conf = [],
         int $level = PEAR_LOG_DEBUG
     ) {
         $this->id = md5(microtime().random_int(0, mt_getrandmax()));
-        $this->type = $name;
+
+        /* Ensure we have a valid integer value for $name. */
+        if (empty($name) || !is_numeric($name)) {
+            $name = PEAR_LOG_TYPE_SYSTEM;
+        }
+
+        $this->type = (int)$name;
         $this->ident = $ident;
         $this->mask = Log::MAX($level);
 
