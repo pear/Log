@@ -69,7 +69,7 @@ class Log_daemon extends Log
      * @param array  $conf  The configuration array.
      * @param int    $level Maximum level at which to log.
      */
-    public function __construct($name, $ident = '', $conf = array(),
+    public function __construct($name, $ident = '', $conf = [],
                                 $level = PEAR_LOG_DEBUG)
     {
         /* Ensure we have a valid integer value for $name. */
@@ -99,7 +99,7 @@ class Log_daemon extends Log
         }
         $this->proto = $this->proto . '://';
 
-        register_shutdown_function(array(&$this, 'log_daemon_destructor'));
+        register_shutdown_function([&$this, 'log_daemon_destructor']);
     }
 
     /**
@@ -187,7 +187,7 @@ class Log_daemon extends Log
         /* Write to socket. */
         fwrite($this->socket, '<' . $facility_level . '>' . $message . "\n");
 
-        $this->announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(['priority' => $priority, 'message' => $message]);
         
         return true;
     }
@@ -206,7 +206,7 @@ class Log_daemon extends Log
      */
     private function toSyslog($priority)
     {
-        static $priorities = array(
+        static $priorities = [
             PEAR_LOG_EMERG   => LOG_EMERG,
             PEAR_LOG_ALERT   => LOG_ALERT,
             PEAR_LOG_CRIT    => LOG_CRIT,
@@ -214,8 +214,8 @@ class Log_daemon extends Log
             PEAR_LOG_WARNING => LOG_WARNING,
             PEAR_LOG_NOTICE  => LOG_NOTICE,
             PEAR_LOG_INFO    => LOG_INFO,
-            PEAR_LOG_DEBUG   => LOG_DEBUG
-        );
+            PEAR_LOG_DEBUG   => LOG_DEBUG,
+        ];
 
         /* If we're passed an unknown priority, default to LOG_INFO. */
         if (!is_int($priority) || !in_array($priority, $priorities)) {

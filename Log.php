@@ -79,7 +79,7 @@ class Log
      *
      * @var array
      */
-    protected $listeners = array();
+    protected $listeners = [];
 
     /**
      * Starting depth to use when walking a backtrace in search of the
@@ -95,15 +95,17 @@ class Log
      *
      * @var array
      */
-    protected $formatMap = array('%{timestamp}'  => '%1$s',
-                            '%{ident}'      => '%2$s',
-                            '%{priority}'   => '%3$s',
-                            '%{message}'    => '%4$s',
-                            '%{file}'       => '%5$s',
-                            '%{line}'       => '%6$s',
-                            '%{function}'   => '%7$s',
-                            '%{class}'      => '%8$s',
-                            '%\{'           => '%%{');
+    protected $formatMap = [
+        '%{timestamp}'  => '%1$s',
+        '%{ident}'      => '%2$s',
+        '%{priority}'   => '%3$s',
+        '%{message}'    => '%4$s',
+        '%{file}'       => '%5$s',
+        '%{line}'       => '%6$s',
+        '%{function}'   => '%7$s',
+        '%{class}'      => '%8$s',
+        '%\{'           => '%%{',
+    ];
 
     public function __construct()
     {
@@ -134,7 +136,7 @@ class Log
      * @since Log 1.0
      */
     public static function factory($handler, $name = '', $ident = '',
-                                   $conf = array(), $level = PEAR_LOG_DEBUG)
+                                   $conf = [], $level = PEAR_LOG_DEBUG)
     {
         $handler = strtolower($handler);
         $class = 'Log_' . $handler;
@@ -195,12 +197,12 @@ class Log
      * @since Log 1.0
      */
     public static function singleton($handler, $name = '', $ident = '',
-                                     $conf = array(), $level = PEAR_LOG_DEBUG)
+                                     $conf = [], $level = PEAR_LOG_DEBUG)
     {
         static $instances;
-        if (!isset($instances)) $instances = array();
+        if (!isset($instances)) $instances = [];
 
-        $signature = serialize(array($handler, $name, $ident, $conf, $level));
+        $signature = serialize([$handler, $name, $ident, $conf, $level]);
         if (!isset($instances[$signature])) {
             $instances[$signature] = Log::factory($handler, $name, $ident,
                                                   $conf, $level);
@@ -475,8 +477,7 @@ class Log
          * However, if log() was called from one of our "shortcut" functions,
          * we're going to need to go back an additional step.
          */
-        if (in_array($func, array('emerg', 'alert', 'crit', 'err', 'warning',
-                                  'notice', 'info', 'debug'))) {
+        if (in_array($func, ['emerg', 'alert', 'crit', 'err', 'warning', 'notice', 'info', 'debug'])) {
             $bt2 = isset($bt[$depth + 2]) ? $bt[$depth + 2] : null;
 
             $file = is_array($bt1) ? $bt1['file'] : null;
@@ -494,7 +495,7 @@ class Log
         }
 
         /* Return a 4-tuple containing (file, line, function, class). */
-        return array($file, $line, $func, $class);
+        return [$file, $line, $func, $class];
     }
 
     /**
@@ -558,7 +559,7 @@ class Log
      */
     public function priorityToString($priority)
     {
-        $levels = array(
+        $levels = [
             PEAR_LOG_EMERG   => 'emergency',
             PEAR_LOG_ALERT   => 'alert',
             PEAR_LOG_CRIT    => 'critical',
@@ -566,8 +567,8 @@ class Log
             PEAR_LOG_WARNING => 'warning',
             PEAR_LOG_NOTICE  => 'notice',
             PEAR_LOG_INFO    => 'info',
-            PEAR_LOG_DEBUG   => 'debug'
-        );
+            PEAR_LOG_DEBUG   => 'debug',
+        ];
 
         return $levels[$priority];
     }
@@ -586,7 +587,7 @@ class Log
      */
     public function stringToPriority($name)
     {
-        $levels = array(
+        $levels = [
             'emergency' => PEAR_LOG_EMERG,
             'alert'     => PEAR_LOG_ALERT,
             'critical'  => PEAR_LOG_CRIT,
@@ -595,7 +596,7 @@ class Log
             'notice'    => PEAR_LOG_NOTICE,
             'info'      => PEAR_LOG_INFO,
             'debug'     => PEAR_LOG_DEBUG
-        );
+        ];
 
         return $levels[strtolower($name)];
     }

@@ -3,7 +3,7 @@
 require_once 'Log.php';
 
 /* Creating a new database connection. */
-$conf = array('filename' => 'log.db', 'mode' => 0666, 'persistent' => true);
+$conf = ['filename' => 'log.db', 'mode' => 0666, 'persistent' => true];
 $logger =& Log::factory('sqlite', 'log_table', 'ident', $conf);
 $logger->log('logging an event', PEAR_LOG_WARNING);
 

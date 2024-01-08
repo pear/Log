@@ -30,7 +30,7 @@ class Log_firebug extends Log
      * String holding the buffered output.
      * @var string
      */
-    private $buffer = array();
+    private $buffer = [];
 
     /**
      * String containing the format of a log line.
@@ -57,16 +57,16 @@ class Log_firebug extends Log
      * Mapping of log priorities to Firebug methods.
      * @var array
      */
-    private $methods = array(
-                        PEAR_LOG_EMERG   => 'error',
-                        PEAR_LOG_ALERT   => 'error',
-                        PEAR_LOG_CRIT    => 'error',
-                        PEAR_LOG_ERR     => 'error',
-                        PEAR_LOG_WARNING => 'warn',
-                        PEAR_LOG_NOTICE  => 'info',
-                        PEAR_LOG_INFO    => 'info',
-                        PEAR_LOG_DEBUG   => 'debug'
-                    );
+    private $methods = [
+        PEAR_LOG_EMERG   => 'error',
+        PEAR_LOG_ALERT   => 'error',
+        PEAR_LOG_CRIT    => 'error',
+        PEAR_LOG_ERR     => 'error',
+        PEAR_LOG_WARNING => 'warn',
+        PEAR_LOG_NOTICE  => 'info',
+        PEAR_LOG_INFO    => 'info',
+        PEAR_LOG_DEBUG   => 'debug',
+    ];
 
     /**
      * Constructs a new Log_firebug object.
@@ -76,7 +76,7 @@ class Log_firebug extends Log
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
      */
-    public function __construct($name = '', $ident = 'PHP', $conf = array(),
+    public function __construct($name = '', $ident = 'PHP', $conf = [],
                                 $level = PEAR_LOG_DEBUG)
     {
         $this->id = md5(microtime().rand());
@@ -87,7 +87,7 @@ class Log_firebug extends Log
         }
 
         if ($this->buffering) {
-            register_shutdown_function(array(&$this, 'log_firebug_destructor'));
+            register_shutdown_function([&$this, 'log_firebug_destructor']);
         }
 
         if (!empty($conf['lineFormat'])) {
@@ -148,7 +148,7 @@ class Log_firebug extends Log
             print "}\n";
             print "</script>\n";
         }
-        $this->buffer = array();
+        $this->buffer = [];
     }
 
     /**
@@ -198,7 +198,7 @@ class Log_firebug extends Log
             print "</script>\n";
         }
         /* Notify observers about this log message. */
-        $this->announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(['priority' => $priority, 'message' => $message]);
 
         return true;
     }

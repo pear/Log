@@ -64,7 +64,7 @@ class Log_observer
      * @return object               The newly created concrete Log_observer
      *                              instance, or null on an error.
      */
-    public function &factory($type, $priority = PEAR_LOG_INFO, $conf = array())
+    public function &factory($type, $priority = PEAR_LOG_INFO, $conf = [])
     {
         $type = strtolower($type);
         $class = 'Log_observer_' . $type;
@@ -81,7 +81,7 @@ class Log_observer
 
         /* Support both the new-style and old-style file naming conventions. */
         $newstyle = true;
-        $classfile = dirname(__FILE__) . '/observer_' . $type . '.php';
+        $classfile = __DIR__ . '/observer_' . $type . '.php';
 
         if (!file_exists($classfile)) {
             $classfile = 'Log/' . $type . '.php';

@@ -77,7 +77,7 @@ class Log_syslog extends Log
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
      */
-    public function __construct($name, $ident = '', $conf = array(),
+    public function __construct($name, $ident = '', $conf = [],
                                 $level = PEAR_LOG_DEBUG)
     {
         /* Ensure we have a valid integer value for $name. */
@@ -195,7 +195,7 @@ class Log_syslog extends Log
             }
         }
 
-        $this->announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(['priority' => $priority, 'message' => $message]);
 
         return true;
     }
@@ -215,7 +215,7 @@ class Log_syslog extends Log
      */
     private function toSyslog($priority)
     {
-        static $priorities = array(
+        static $priorities = [
             PEAR_LOG_EMERG   => LOG_EMERG,
             PEAR_LOG_ALERT   => LOG_ALERT,
             PEAR_LOG_CRIT    => LOG_CRIT,
@@ -223,8 +223,8 @@ class Log_syslog extends Log
             PEAR_LOG_WARNING => LOG_WARNING,
             PEAR_LOG_NOTICE  => LOG_NOTICE,
             PEAR_LOG_INFO    => LOG_INFO,
-            PEAR_LOG_DEBUG   => LOG_DEBUG
-        );
+            PEAR_LOG_DEBUG   => LOG_DEBUG,
+        ];
 
         /* If we're passed an unknown priority, default to LOG_INFO. */
         if (!is_int($priority) || !in_array($priority, $priorities)) {

@@ -90,7 +90,7 @@ class Log_file extends Log
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
      */
-    public function __construct($name, $ident = '', $conf = array(),
+    public function __construct($name, $ident = '', $conf = [],
                                 $level = PEAR_LOG_DEBUG)
     {
         $this->id = md5(microtime().rand());
@@ -142,7 +142,7 @@ class Log_file extends Log
             $this->eol = (strstr(PHP_OS, 'WIN')) ? "\r\n" : "\n";
         }
 
-        register_shutdown_function(array(&$this, 'log_file_destructor'));
+        register_shutdown_function([&$this, 'log_file_destructor']);
     }
 
     /**
@@ -299,7 +299,7 @@ class Log_file extends Log
         }
 
         /* Notify observers about this log message. */
-        $this->announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(['priority' => $priority, 'message' => $message]);
 
         return $success;
     }

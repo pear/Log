@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": ">5.2",
+        "php": ">7.4",
         "pear/pear_exception": "1.0.1 || 1.0.2"
     },
     "autoload": {
@@ -34,7 +34,8 @@
         "source": "https://github.com/pear/Log"
     },
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "rector/rector": "*"
     },
     "suggest": {
         "pear/db": "Install optionally via your project's composer.json"

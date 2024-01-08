@@ -59,7 +59,7 @@ class Log_sql extends Log
      * Array containing our set of DB configuration options.
      * @var array
      */
-    private $options = array('persistent' => true);
+    private $options = ['persistent' => true];
 
     /**
      * Object holding the database handle.
@@ -106,7 +106,7 @@ class Log_sql extends Log
      * @param array $conf          The connection configuration array.
      * @param int $level           Log messages up to and including this level.
      */
-    public function __construct($name, $ident = '', $conf = array(),
+    public function __construct($name, $ident = '', $conf = [],
                                 $level = PEAR_LOG_DEBUG)
     {
         $this->id = md5(microtime().rand());
@@ -248,7 +248,7 @@ class Log_sql extends Log
 
         /* Build our set of values for this log entry. */
         $id = $this->db->nextId($this->sequence);
-        $values = array($id, $this->ident, $priority, $message);
+        $values = [$id, $this->ident, $priority, $message];
 
         /* Execute the SQL query for this log entry insertion. */
         $result =& $this->db->execute($this->statement, $values);
@@ -256,7 +256,7 @@ class Log_sql extends Log
             return false;
         }
 
-        $this->announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(['priority' => $priority, 'message' => $message]);
 
         return true;
     }

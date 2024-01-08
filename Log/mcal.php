@@ -63,7 +63,7 @@ class Log_mcal extends Log
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
      */
-    public function __construct($name, $ident = '', $conf = array(),
+    public function __construct($name, $ident = '', $conf = [],
                                 $level = PEAR_LOG_DEBUG)
     {
         $this->id = md5(microtime().rand());
@@ -151,7 +151,7 @@ class Log_mcal extends Log
             $dates[3], $dates[4], $dates[5]);
         mcal_append_event($this->stream);
 
-        $this->announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(['priority' => $priority, 'message' => $message]);
 
         return true;
     }

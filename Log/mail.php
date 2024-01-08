@@ -94,7 +94,7 @@ class Log_mail extends Log
      * Array holding the params for PEAR::Mail
      * @var array
      */
-    private $mailParams = array();
+    private $mailParams = [];
 
     /**
      * Constructs a new Log_mail object.
@@ -110,7 +110,7 @@ class Log_mail extends Log
      * @param array  $conf      The configuration array.
      * @param int    $level     Log messages up to and including this level.
      */
-    public function __construct($name, $ident = '', $conf = array(),
+    public function __construct($name, $ident = '', $conf = [],
                                 $level = PEAR_LOG_DEBUG)
     {
         $this->id = md5(microtime().rand());
@@ -155,7 +155,7 @@ class Log_mail extends Log
         }
 
         /* register the destructor */
-        register_shutdown_function(array(&$this, 'log_mail_destructor'));
+        register_shutdown_function([&$this, 'log_mail_destructor']);
     }
 
     /**
@@ -202,10 +202,12 @@ class Log_mail extends Log
                     }
                 } else {  // use PEAR::Mail
                     include_once 'Mail.php';
-                    $headers = array('From' => $this->from,
-                                     'To' => $this->recipients,
-                                     'User-Agent' => 'PEAR Log Package',
-                                     'Subject' => $this->subject);
+                    $headers = [
+                        'From' => $this->from,
+                        'To' => $this->recipients,
+                        'User-Agent' => 'PEAR Log Package',
+                        'Subject' => $this->subject
+                    ];
                     $mailer = &Mail::factory($this->mailBackend,
                                              $this->mailParams);
                     $res = $mailer->send($this->recipients, $headers,
@@ -279,7 +281,7 @@ class Log_mail extends Log
         $this->shouldSend = true;
 
         /* Notify observers about this log message. */
-        $this->announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(['priority' => $priority, 'message' => $message]);
 
         return true;
     }

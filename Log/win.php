@@ -39,22 +39,22 @@ class Log_win extends Log
      * Mapping of log priorities to styles.
      * @var array
      */
-    private $styles = array(
-                        PEAR_LOG_EMERG   => 'color: red;',
-                        PEAR_LOG_ALERT   => 'color: orange;',
-                        PEAR_LOG_CRIT    => 'color: yellow;',
-                        PEAR_LOG_ERR     => 'color: green;',
-                        PEAR_LOG_WARNING => 'color: blue;',
-                        PEAR_LOG_NOTICE  => 'color: indigo;',
-                        PEAR_LOG_INFO    => 'color: violet;',
-                        PEAR_LOG_DEBUG   => 'color: black;'
-                    );
+    private $styles = [
+        PEAR_LOG_EMERG   => 'color: red;',
+        PEAR_LOG_ALERT   => 'color: orange;',
+        PEAR_LOG_CRIT    => 'color: yellow;',
+        PEAR_LOG_ERR     => 'color: green;',
+        PEAR_LOG_WARNING => 'color: blue;',
+        PEAR_LOG_NOTICE  => 'color: indigo;',
+        PEAR_LOG_INFO    => 'color: violet;',
+        PEAR_LOG_DEBUG   => 'color: black;',
+    ];
 
     /**
      * String buffer that holds line that are pending output.
      * @var array
      */
-    private $buffer = array();
+    private $buffer = [];
 
     /**
      * Constructs a new Log_win object.
@@ -64,7 +64,7 @@ class Log_win extends Log
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
      */
-    public function __construct($name, $ident = '', $conf = array(),
+    public function __construct($name, $ident = '', $conf = [],
                                 $level = PEAR_LOG_DEBUG)
     {
         $this->id = md5(microtime().rand());
@@ -84,7 +84,7 @@ class Log_win extends Log
             }
         }
 
-        register_shutdown_function(array(&$this, 'log_win_destructor'));
+        register_shutdown_function([&$this, 'log_win_destructor']);
     }
 
     /**
@@ -198,7 +198,7 @@ EOT;
         }
 
         /* Now that the buffer has been drained, clear it. */
-        $this->buffer = array();
+        $this->buffer = [];
     }
 
     /**
@@ -268,7 +268,7 @@ EOT;
 
         $this->writeln($line);
 
-        $this->announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(['priority' => $priority, 'message' => $message]);
 
         return true;
     }

@@ -28,7 +28,7 @@ class Log_composite extends Log
      *
      * @var array
      */
-    private $children = array();
+    private $children = [];
 
 
     /**
@@ -39,7 +39,7 @@ class Log_composite extends Log
      * @param array    $conf       This parameter is ignored.
      * @param int      $level      This parameter is ignored.
      */
-    public function __construct($name, $ident = '', $conf = array(),
+    public function __construct($name, $ident = '', $conf = [],
                                 $level = PEAR_LOG_DEBUG)
     {
         $this->ident = $ident;
@@ -183,7 +183,7 @@ class Log_composite extends Log
         }
 
         /* Notify the observers. */
-        $this->announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(['priority' => $priority, 'message' => $message]);
 
         /* Return success if all of the open children logged the event. */
         return $success;

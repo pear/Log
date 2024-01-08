@@ -34,8 +34,7 @@ class Log_sqlite extends Log
      * Array containing the connection defaults
      * @var array
      */
-    private $options = array('mode'       => 0666,
-                          'persistent' => false);
+    private $options = ['mode' => 0666, 'persistent' => false];
 
     /**
      * Object holding the database handle.
@@ -179,7 +178,7 @@ class Log_sqlite extends Log
         if (!($res = @sqlite_unbuffered_query($this->db, $q))) {
             return false;
         }
-        $this->announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(['priority' => $priority, 'message' => $message]);
 
         return true;
     }
