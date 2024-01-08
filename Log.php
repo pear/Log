@@ -237,7 +237,7 @@ class Log
      * Abstract implementation of the log() method.
      * @since Log 1.0
      */
-    public function log(mixed $message, int $priority = null): bool
+    public function log($message, int $priority = null): bool
     {
         return false;
     }
@@ -253,7 +253,7 @@ class Log
      *
      * @since   Log 1.7.0
      */
-    public function emerg(mixed $message): bool
+    public function emerg($message): bool
     {
         return $this->log($message, PEAR_LOG_EMERG);
     }
@@ -269,7 +269,7 @@ class Log
      *
      * @since   Log 1.7.0
      */
-    public function alert(mixed $message): bool
+    public function alert($message): bool
     {
         return $this->log($message, PEAR_LOG_ALERT);
     }
@@ -285,7 +285,7 @@ class Log
      *
      * @since   Log 1.7.0
      */
-    public function crit(mixed $message): bool
+    public function crit($message): bool
     {
         return $this->log($message, PEAR_LOG_CRIT);
     }
@@ -301,7 +301,7 @@ class Log
      *
      * @since   Log 1.7.0
      */
-    public function err(mixed $message): bool
+    public function err($message): bool
     {
         return $this->log($message, PEAR_LOG_ERR);
     }
@@ -317,7 +317,7 @@ class Log
      *
      * @since   Log 1.7.0
      */
-    public function warning(mixed $message): bool
+    public function warning($message): bool
     {
         return $this->log($message, PEAR_LOG_WARNING);
     }
@@ -333,7 +333,7 @@ class Log
      *
      * @since   Log 1.7.0
      */
-    public function notice(mixed $message): bool
+    public function notice($message): bool
     {
         return $this->log($message, PEAR_LOG_NOTICE);
     }
@@ -349,7 +349,7 @@ class Log
      *
      * @since   Log 1.7.0
      */
-    public function info(mixed $message): bool
+    public function info($message): bool
     {
         return $this->log($message, PEAR_LOG_INFO);
     }
@@ -365,7 +365,7 @@ class Log
      *
      * @since   Log 1.7.0
      */
-    public function debug(mixed $message): bool
+    public function debug($message): bool
     {
         return $this->log($message, PEAR_LOG_DEBUG);
     }
@@ -386,7 +386,7 @@ class Log
      * @return string           The string representation of the message.
      *
      */
-    protected function extractMessage(mixed $message): string
+    protected function extractMessage($message): string
     {
         /*
          * If we've been given an object, attempt to extract the message using
