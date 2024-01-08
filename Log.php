@@ -892,9 +892,7 @@ class Log
         ];
 
         $pattern = array_map(
-            function ($s) {
-                return '/(?<!\\\\|\%)' . $s . '/';
-            },
+            fn($s) => '/(?<!\\\\|\%)' . $s . '/',
             $strf_syntax
         );
 
