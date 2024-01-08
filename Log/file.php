@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * $Header$
  *
@@ -21,9 +23,8 @@ class Log_file extends Log
 {
     /**
      * String containing the name of the log file.
-     * @var string
      */
-    private $filename = 'php.log';
+    private string $filename = 'php.log';
 
     /**
      * Handle to the log file.
@@ -34,42 +35,36 @@ class Log_file extends Log
     /**
      * Should new log entries be append to an existing log file, or should the
      * a new log file overwrite an existing one?
-     * @var boolean
      */
-    private $append = true;
+    private bool $append = true;
 
     /**
      * Should advisory file locking (i.e., flock()) be used?
-     * @var boolean
      */
-    private $locking = false;
+    private bool $locking = false;
 
     /**
      * Integer (in octal) containing the log file's permissions mode.
-     * @var integer
      */
-    private $mode = 0644;
+    private int $mode = 0644;
 
     /**
      * Integer (in octal) specifying the file permission mode that will be
      * used when creating directories that do not already exist.
-     * @var integer
      */
-    private $dirmode = 0755;
+    private int $dirmode = 0755;
 
     /**
      * String containing the format of a log line.
-     * @var string
      */
-    private $lineFormat = '%1$s %2$s [%3$s] %4$s';
+    private string $lineFormat = '%1$s %2$s [%3$s] %4$s';
 
     /**
      * String containing the timestamp format. It will be passed to date().
      * If timeFormatter configured, it will be used.
      * current locale.
-     * @var string
      */
-    private $timeFormat = 'M d H:i:s';
+    private string $timeFormat = 'M d H:i:s';
 
     /**
      * @var callable
@@ -78,9 +73,8 @@ class Log_file extends Log
 
     /**
      * String containing the end-on-line character sequence.
-     * @var string
      */
-    private $eol = "\n";
+    private string $eol = "\n";
 
     /**
      * Constructs a new Log_file object.
@@ -90,9 +84,12 @@ class Log_file extends Log
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
      */
-    public function __construct($name, $ident = '', $conf = [],
-                                $level = PEAR_LOG_DEBUG)
-    {
+    public function __construct(
+        string $name,
+        string $ident = '',
+        array $conf = [],
+        int $level = PEAR_LOG_DEBUG
+    ) {
         $this->id = md5(microtime().random_int(0, mt_getrandmax()));
         $this->filename = $name;
         $this->ident = $ident;
@@ -148,7 +145,7 @@ class Log_file extends Log
     /**
      * Destructor
      */
-    public function log_file_destructor()
+    public function log_file_destructor(): void
     {
         if ($this->opened) {
             $this->close();
@@ -168,7 +165,7 @@ class Log_file extends Log
      * @return bool  True if the full path is successfully created or already
      *          exists.
      */
-    private function mkpath($path, $mode = 0700)
+    private function mkpath(string $path, int $mode = 0700): bool
     {
         /* Separate the last pathname component from the rest of the path. */
         $head = dirname($path);
@@ -196,7 +193,7 @@ class Log_file extends Log
      *
      * This is implicitly called by log(), if necessary.
      */
-    public function open()
+    public function open(): bool
     {
         if (!$this->opened) {
             /* If the log file's directory doesn't exist, create it. */
@@ -225,7 +222,7 @@ class Log_file extends Log
     /**
      * Closes the log file if it is open.
      */
-    public function close()
+    public function close(): bool
     {
         /* If the log file is open, close it. */
         if ($this->opened && fclose($this->fp)) {
@@ -240,7 +237,7 @@ class Log_file extends Log
      *
      * @since Log 1.8.2
      */
-    public function flush()
+    public function flush(): bool
     {
         if (is_resource($this->fp)) {
             return fflush($this->fp);
@@ -254,13 +251,13 @@ class Log_file extends Log
      * to any Log_observer instances that are observing this Log.
      *
      * @param mixed  $message  String or object containing the message to log.
-     * @param string $priority The priority of the message.  Valid
+     * @param int|null $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
      */
-    public function log($message, $priority = null)
+    public function log(mixed $message, int $priority = null): bool
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {

@@ -13,9 +13,7 @@ function printOpenStates($children) {
         $openedProperty = $reflection->getProperty('opened');
         $openedProperty->setAccessible(true);
         $opened = $openedProperty->getValue($child);
-        $identProperty = $reflection->getProperty('ident');
-        $identProperty->setAccessible(true);
-        $ident = $identProperty->getValue($child);
+        $ident = $child->getIdent();
         $state = ($opened) ? 'OPEN' : 'CLOSED';
         echo "$ident : $state\n";
     }
@@ -23,11 +21,7 @@ function printOpenStates($children) {
 
 function printIdents($children) {
     foreach ($children as $child) {
-        $reflection = new ReflectionObject($child);
-        $identProperty = $reflection->getProperty('ident');
-        $identProperty->setAccessible(true);
-        $ident = $identProperty->getValue($child);
-        echo "$ident\n";
+        echo $child->getIdent() . "\n";
     }
 }
 

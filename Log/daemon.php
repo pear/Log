@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * $Header$
  *
@@ -19,9 +21,8 @@ class Log_daemon extends Log
 {
     /**
      * Integer holding the log facility to use.
-     * @var string
      */
-    private $name = LOG_DAEMON;
+    private int $name = LOG_DAEMON;
 
     /**
      * Var holding the resource pointer to the socket
@@ -32,34 +33,29 @@ class Log_daemon extends Log
     /**
      * The ip address or servername
      * @see http://www.php.net/manual/en/transports.php
-     * @var string
      */
-    private $ip = '127.0.0.1';
+    private string $ip = '127.0.0.1';
 
     /**
      * Protocol to use (tcp, udp, etc.)
      * @see http://www.php.net/manual/en/transports.php
-     * @var string
      */
-    private $proto = 'udp';
+    private string $proto = 'udp';
 
     /**
      * Port to connect to
-     * @var int
      */
-    private $port = 514;
+    private int $port = 514;
 
     /**
      * Maximum message length in bytes
-     * @var int
      */
-    private $maxsize = 4096;
+    private int $maxsize = 4096;
 
     /**
      * Socket timeout in seconds
-     * @var int
      */
-    private $timeout = 1;
+    private int $timeout = 1;
 
     /**
      * Constructs a new syslog object.
@@ -69,9 +65,12 @@ class Log_daemon extends Log
      * @param array  $conf  The configuration array.
      * @param int    $level Maximum level at which to log.
      */
-    public function __construct($name, $ident = '', $conf = [],
-                                $level = PEAR_LOG_DEBUG)
-    {
+    public function __construct(
+        string $name,
+        string $ident = '',
+        array $conf = [],
+        int $level = PEAR_LOG_DEBUG
+    ) {
         /* Ensure we have a valid integer value for $name. */
         if (empty($name) || !is_int($name)) {
             $name = LOG_SYSLOG;
@@ -105,7 +104,7 @@ class Log_daemon extends Log
     /**
      * Destructor.
      */
-    public function log_daemon_destructor()
+    public function log_daemon_destructor(): void
     {
         $this->close();
     }
@@ -114,7 +113,7 @@ class Log_daemon extends Log
      * Opens a connection to the system logger, if it has not already
      * been opened.  This is implicitly called by log(), if necessary.
      */
-    public function open()
+    public function open(): bool
     {
         if (!$this->opened) {
             $this->opened = (bool)($this->socket = @fsockopen(
@@ -130,7 +129,7 @@ class Log_daemon extends Log
     /**
      * Closes the connection to the system logger, if it is open.
      */
-    public function close()
+    public function close(): bool
     {
         if ($this->opened) {
             $this->opened = false;
@@ -145,12 +144,12 @@ class Log_daemon extends Log
      * instances that are observing this Log.
      *
      * @param string $message  The textual message to be logged.
-     * @param int $priority (optional) The priority of the message.  Valid
+     * @param int|null $priority (optional) The priority of the message.  Valid
      *                  values are: LOG_EMERG, LOG_ALERT, LOG_CRIT,
      *                  LOG_ERR, LOG_WARNING, LOG_NOTICE, LOG_INFO,
      *                  and LOG_DEBUG.  The default is LOG_INFO.
      */
-    public function log($message, $priority = null)
+    public function log(mixed $message, int $priority = null): bool
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
@@ -171,8 +170,7 @@ class Log_daemon extends Log
         $message = $this->extractMessage($message);
 
         /* Set the facility level. */
-        $facility_level = intval($this->name) +
-                          intval($this->toSyslog($priority));
+        $facility_level = $this->name + $this->toSyslog($priority);
 
         /* Prepend ident info. */
         if (!empty($this->ident)) {
@@ -204,7 +202,7 @@ class Log_daemon extends Log
      *
      * @return integer  The LOG_* representation of $priority.
      */
-    private function toSyslog($priority)
+    private function toSyslog(int $priority): int
     {
         static $priorities = [
             PEAR_LOG_EMERG   => LOG_EMERG,
@@ -218,7 +216,7 @@ class Log_daemon extends Log
         ];
 
         /* If we're passed an unknown priority, default to LOG_INFO. */
-        if (!is_int($priority) || !in_array($priority, $priorities)) {
+        if (!in_array($priority, $priorities)) {
             return LOG_INFO;
         }
 

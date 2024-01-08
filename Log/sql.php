@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * $Header$
  * $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
@@ -44,28 +46,23 @@ class Log_sql extends Log
 {
     /**
      * Variable containing the DSN information.
-     * @var mixed
      */
-    private $dsn = '';
+    private mixed $dsn = '';
 
     /**
      * String containing the SQL insertion statement.
-     *
-     * @var string
      */
-    private $sql = '';
+    private string $sql = '';
 
     /**
      * Array containing our set of DB configuration options.
-     * @var array
      */
-    private $options = ['persistent' => true];
+    private array $options = ['persistent' => true];
 
     /**
      * Object holding the database handle.
-     * @var object
      */
-    private $db = null;
+    private ?object $db = null;
 
     /**
      * Resource holding the prepared statement handle.
@@ -75,28 +72,24 @@ class Log_sql extends Log
 
     /**
      * Flag indicating that we're using an existing database connection.
-     * @var boolean
      */
-    private $existingConnection = false;
+    private bool $existingConnection = false;
 
     /**
      * String holding the database table to use.
-     * @var string
      */
-    private $table = 'log_table';
+    private string $table = 'log_table';
 
     /**
      * String holding the name of the ID sequence.
-     * @var string
      */
-    private $sequence = 'log_id';
+    private string $sequence = 'log_id';
 
     /**
      * Maximum length of the $ident string.  This corresponds to the size of
      * the 'ident' column in the SQL table.
-     * @var integer
      */
-    private $identLimit = 16;
+    private int $identLimit = 16;
 
     /**
      * Constructs a new sql logging object.
@@ -106,9 +99,12 @@ class Log_sql extends Log
      * @param array $conf          The connection configuration array.
      * @param int $level           Log messages up to and including this level.
      */
-    public function __construct($name, $ident = '', $conf = [],
-                                $level = PEAR_LOG_DEBUG)
-    {
+    public function __construct(
+        string $name,
+        string $ident = '',
+        array $conf = [],
+        int $level = PEAR_LOG_DEBUG
+    ) {
         $this->id = md5(microtime().random_int(0, mt_getrandmax()));
         $this->table = $name;
         $this->mask = Log::MAX($level);
@@ -156,7 +152,7 @@ class Log_sql extends Log
      *
      * @return boolean   True on success, false on failure.
      */
-    public function open()
+    public function open(): bool
     {
         if (!$this->opened) {
             /* Use the DSN and options to create a database connection. */
@@ -184,7 +180,7 @@ class Log_sql extends Log
      *
      * @return boolean   True on success, false on failure.
      */
-    public function close()
+    public function close(): bool
     {
         if ($this->opened && !$this->existingConnection) {
             $this->opened = false;
@@ -204,7 +200,7 @@ class Log_sql extends Log
      *
      * @since   Log 1.8.5
      */
-    public function setIdent($ident)
+    public function setIdent(string $ident): void
     {
         $this->ident = substr($ident, 0, $this->identLimit);
     }
@@ -215,13 +211,13 @@ class Log_sql extends Log
      * instances that are observing this Log.
      *
      * @param mixed  $message  String or object containing the message to log.
-     * @param string $priority The priority of the message.  Valid
+     * @param int|null $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
      */
-    public function log($message, $priority = null)
+    public function log(mixed $message, int $priority = null): bool
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
@@ -268,7 +264,7 @@ class Log_sql extends Log
      *
      * @since   Log 1.9.1
      */
-    private function prepareStatement()
+    private function prepareStatement(): bool
     {
         $this->statement = $this->db->prepare($this->sql);
 

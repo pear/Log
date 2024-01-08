@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * $Header$
  *
@@ -25,21 +27,18 @@ class Log_win extends Log
 {
     /**
      * The name of the output window.
-     * @var string
      */
-    private $name = 'LogWindow';
+    private string $name = 'LogWindow';
 
     /**
      * The title of the output window.
-     * @var string
      */
-    private $title = 'Log Output Window';
+    private string $title = 'Log Output Window';
 
     /**
      * Mapping of log priorities to styles.
-     * @var array
      */
-    private $styles = [
+    private array $styles = [
         PEAR_LOG_EMERG   => 'color: red;',
         PEAR_LOG_ALERT   => 'color: orange;',
         PEAR_LOG_CRIT    => 'color: yellow;',
@@ -52,9 +51,8 @@ class Log_win extends Log
 
     /**
      * String buffer that holds line that are pending output.
-     * @var array
      */
-    private $buffer = [];
+    private array $buffer = [];
 
     /**
      * Constructs a new Log_win object.
@@ -64,9 +62,12 @@ class Log_win extends Log
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
      */
-    public function __construct($name, $ident = '', $conf = [],
-                                $level = PEAR_LOG_DEBUG)
-    {
+    public function __construct(
+        string $name,
+        string $ident = '',
+        array $conf = [],
+        int $level = PEAR_LOG_DEBUG
+    ) {
         $this->id = md5(microtime().random_int(0, mt_getrandmax()));
         $this->name = str_replace(' ', '_', $name);
         $this->ident = $ident;
@@ -90,7 +91,7 @@ class Log_win extends Log
     /**
      * Destructor
      */
-    public function log_win_destructor()
+    public function log_win_destructor(): void
     {
         if ($this->opened || (count($this->buffer) > 0)) {
             $this->close();
@@ -104,7 +105,7 @@ class Log_win extends Log
      * This is implicitly called by log(), if necessary.
      *
      */
-    public function open()
+    public function open(): bool
     {
         if (!$this->opened) {
             $win = $this->name;
@@ -163,7 +164,7 @@ EOT;
      * the buffer can be drained.
      *
      */
-    public function close()
+    public function close(): bool
     {
         /*
          * If there are still lines waiting to be written, open the output
@@ -187,7 +188,7 @@ EOT;
      * Writes the contents of the output buffer to the output window.
      *
      */
-    private function drainBuffer()
+    private function drainBuffer(): void
     {
         $win = $this->name;
         foreach ($this->buffer as $line) {
@@ -207,7 +208,7 @@ EOT;
      * @param string    $line   The line of text to write.
      *
      */
-    private function writeln($line)
+    private function writeln(string $line): void
     {
         /* Add this line to our output buffer. */
         $this->buffer[] = $line;
@@ -231,13 +232,13 @@ EOT;
      * to any Log_observer instances that are observing this Log.
      *
      * @param mixed  $message  String or object containing the message to log.
-     * @param string $priority The priority of the message.  Valid
+     * @param int|null $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
      */
-    public function log($message, $priority = null)
+    public function log(mixed $message, int $priority = null): bool
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
@@ -258,7 +259,7 @@ EOT;
         /* Build the output line that contains the log entry row. */
         $line  = '<tr>';
         $line .= sprintf('<td>%s.%s</td>',
-                         $this->formatTime($sec, 'H:i:s'), substr($usec, 2, 2));
+                         $this->formatTime((int)$sec, 'H:i:s'), substr($usec, 2, 2));
         if (!empty($this->ident)) {
             $line .= '<td>' . $this->ident . '</td>';
         }

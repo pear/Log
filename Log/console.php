@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * $Header$
  *
@@ -20,43 +22,38 @@ class Log_console extends Log
 {
     /**
      * Handle to the current output stream.
-     * @var resource
+     * @var
      */
     private $stream = null;
 
     /**
      * Is this object responsible for closing the stream resource?
-     * @var bool
      */
-    private $closeResource = false;
+    private bool $closeResource = false;
 
     /**
      * Should the output be buffered or displayed immediately?
-     * @var string
      */
-    private $buffering = false;
+    private bool $buffering = false;
 
     /**
      * String holding the buffered output.
-     * @var string
      */
-    private $buffer = '';
+    private string $buffer = '';
 
     /**
      * String containing the format of a log line.
-     * @var string
      */
-    private $lineFormat = '%1$s %2$s [%3$s] %4$s';
+    private string $lineFormat = '%1$s %2$s [%3$s] %4$s';
 
     /**
      * String containing the timestamp format. It will be passed to date().
      * If timeFormatter configured, it will be used.
-     * @var string
      */
-    private $timeFormat = 'M d H:i:s';
+    private string $timeFormat = 'M d H:i:s';
 
     /**
-     * @var callable
+     * @var callable|null
      */
     private $timeFormatter;
 
@@ -68,9 +65,12 @@ class Log_console extends Log
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
      */
-    public function __construct($name, $ident = '', $conf = [],
-                                $level = PEAR_LOG_DEBUG)
-    {
+    public function __construct(
+        string $name,
+        string $ident = '',
+        array $conf = [],
+        int $level = PEAR_LOG_DEBUG
+    ) {
         $this->id = md5(microtime().random_int(0, mt_getrandmax()));
         $this->ident = $ident;
         $this->mask = Log::MAX($level);
@@ -114,7 +114,7 @@ class Log_console extends Log
     /**
      * Destructor
      */
-    public function log_console_destructor()
+    public function log_console_destructor(): void
     {
         $this->close();
     }
@@ -124,7 +124,7 @@ class Log_console extends Log
      *
      * @since Log 1.9.7
      */
-    public function open()
+    public function open(): bool
     {
         $this->opened = true;
         return true;
@@ -137,7 +137,7 @@ class Log_console extends Log
      *
      * @since Log 1.9.0
      */
-    public function close()
+    public function close(): bool
     {
         $this->flush();
         $this->opened = false;
@@ -152,7 +152,7 @@ class Log_console extends Log
      *
      * @since Log 1.8.2
      */
-    public function flush()
+    public function flush(): bool
     {
         /*
          * If output buffering is enabled, dump the contents of the buffer to
@@ -175,13 +175,13 @@ class Log_console extends Log
      * along to any Log_observer instances that are observing this Log.
      *
      * @param mixed  $message    String or object containing the message to log.
-     * @param string $priority The priority of the message.  Valid
+     * @param int|null $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
      */
-    public function log($message, $priority = null)
+    public function log(mixed $message, int $priority = null): bool
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
@@ -198,7 +198,7 @@ class Log_console extends Log
 
         /* Build the string containing the complete log line. */
         $line = $this->format($this->lineFormat,
-                               $this->formatTime(time(), $this->timeFormat,$this->timeFormatter),
+                               $this->formatTime(time(), $this->timeFormat, $this->timeFormatter),
                                $priority, $message) . "\n";
 
         /*

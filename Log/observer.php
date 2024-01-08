@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * $Header$
  * $Horde: horde/lib/Log/observer.php,v 1.5 2000/06/28 21:36:13 jon Exp $
@@ -22,20 +24,16 @@ class Log_observer
 {
     /**
      * Instance-specific unique identification number.
-     *
-     * @var integer
      */
-    private $id = 0;
+    private string $id;
 
     /**
      * The minimum priority level of message that we want to hear about.
      * PEAR_LOG_EMERG is the highest priority, so we will only hear messages
      * with an integer priority value less than or equal to ours.  It defaults
      * to PEAR_LOG_INFO, which listens to everything except PEAR_LOG_DEBUG.
-     *
-     * @var string
      */
-    private $priority = PEAR_LOG_INFO;
+    private int $priority = PEAR_LOG_INFO;
 
     /**
      * Creates a new basic Log_observer instance.
@@ -44,7 +42,7 @@ class Log_observer
      *                              log event notifications.
      *
      */
-    public function __construct($priority = PEAR_LOG_INFO)
+    public function __construct(int $priority = PEAR_LOG_INFO)
     {
         $this->id = md5(microtime().random_int(0, mt_getrandmax()));
         $this->priority = $priority;
@@ -61,10 +59,10 @@ class Log_observer
      * @param array     $conf       Optional associative array of additional
      *                              configuration values.
      *
-     * @return object               The newly created concrete Log_observer
+     * @return Log|null             The newly created concrete Log_observer
      *                              instance, or null on an error.
      */
-    public function &factory($type, $priority = PEAR_LOG_INFO, $conf = [])
+    public function &factory(string $type, int $priority = PEAR_LOG_INFO, array $conf = []): ?Log
     {
         $type = strtolower($type);
         $class = 'Log_observer_' . $type;
@@ -119,26 +117,22 @@ class Log_observer
      *
      * @param array     $event      A hash describing the log event.
      */
-    public function notify($event)
+    public function notify(array $event): void
     {
         print_r($event);
     }
 
     /**
      * Return instance-specific unique identification number.
-     *
-     * @return int
      */
-    public function getId() {
+    public function getId(): string {
         return $this->id;
     }
 
     /**
      * Return The minimum priority level of message that we want to hear about.
-     *
-     * @return string
      */
-    public function getPriority()
+    public function getPriority(): int
     {
         return $this->priority;
     }

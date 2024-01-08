@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * $Header$
  *
@@ -22,31 +24,26 @@ class Log_firebug extends Log
 {
     /**
      * Should the output be buffered or displayed immediately?
-     * @var string
      */
-    private $buffering = false;
+    private bool $buffering = false;
 
     /**
      * String holding the buffered output.
-     * @var string
      */
-    private $buffer = [];
+    private array $buffer = [];
 
     /**
      * String containing the format of a log line.
-     * @var string
      */
-    private $lineFormat = '%2$s [%3$s] %4$s';
+    private string $lineFormat = '%2$s [%3$s] %4$s';
 
     /**
      * String containing the timestamp format. It will be passed to date().
      * If timeFormatter configured, it will be used.
      *
      * Note! Default lineFormat of this driver does not display time.
-     *
-     * @var string
      */
-    private $timeFormat = 'M d H:i:s';
+    private string $timeFormat = 'M d H:i:s';
 
     /**
      * @var callable
@@ -57,7 +54,7 @@ class Log_firebug extends Log
      * Mapping of log priorities to Firebug methods.
      * @var array
      */
-    private $methods = [
+    private array $methods = [
         PEAR_LOG_EMERG   => 'error',
         PEAR_LOG_ALERT   => 'error',
         PEAR_LOG_CRIT    => 'error',
@@ -76,9 +73,12 @@ class Log_firebug extends Log
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
      */
-    public function __construct($name = '', $ident = 'PHP', $conf = [],
-                                $level = PEAR_LOG_DEBUG)
-    {
+    public function __construct(
+        string $name,
+        string $ident = '',
+        array $conf = [],
+        int $level = PEAR_LOG_DEBUG
+    ) {
         $this->id = md5(microtime().random_int(0, mt_getrandmax()));
         $this->ident = $ident;
         $this->mask = Log::MAX($level);
@@ -109,7 +109,7 @@ class Log_firebug extends Log
      * Opens the firebug handler.
      *
      */
-    public function open()
+    public function open(): bool
     {
         $this->opened = true;
         return true;
@@ -118,7 +118,7 @@ class Log_firebug extends Log
     /**
      * Destructor
      */
-    public function log_firebug_destructor()
+    public function log_firebug_destructor(): void
     {
         $this->close();
     }
@@ -127,7 +127,7 @@ class Log_firebug extends Log
      * Closes the firebug handler.
      *
      */
-    public function close()
+    public function close(): bool
     {
         $this->flush();
         $this->opened = false;
@@ -138,7 +138,8 @@ class Log_firebug extends Log
      * Flushes all pending ("buffered") data.
      *
      */
-    public function flush() {
+    public function flush(): bool
+    {
         if (count($this->buffer)) {
             print '<script type="text/javascript">';
             print "\nif ('console' in window) {\n";
@@ -149,6 +150,8 @@ class Log_firebug extends Log
             print "</script>\n";
         }
         $this->buffer = [];
+
+        return true;
     }
 
     /**
@@ -156,13 +159,13 @@ class Log_firebug extends Log
      * along to any Log_observer instances that are observing this Log.
      *
      * @param mixed  $message    String or object containing the message to log.
-     * @param string $priority The priority of the message.  Valid
+     * @param int|null $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
      */
-    public function log($message, $priority = null)
+    public function log(mixed $message, int $priority = null): bool
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {

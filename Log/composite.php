@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * $Header$
  * $Horde: horde/lib/Log/composite.php,v 1.2 2000/06/28 21:36:13 jon Exp $
@@ -25,23 +28,24 @@ class Log_composite extends Log
     /**
      * Array holding all of the Log instances to which log events should be
      * sent.
-     *
-     * @var array
      */
-    private $children = [];
+    private array $children = [];
 
 
     /**
      * Constructs a new composite Log object.
      *
      * @param string   $name       This parameter is ignored.
-     * @param string   $ident      This parameter is ignored.
+     * @param string   $ident      The label that uniquely identifies this set of log messages.
      * @param array    $conf       This parameter is ignored.
      * @param int      $level      This parameter is ignored.
      */
-    public function __construct($name, $ident = '', $conf = [],
-                                $level = PEAR_LOG_DEBUG)
-    {
+    public function __construct(
+        string $name,
+        string $ident = '',
+        array $conf = [],
+        int $level = PEAR_LOG_DEBUG
+    ) {
         $this->ident = $ident;
     }
 
@@ -50,7 +54,7 @@ class Log_composite extends Log
      *
      * @return bool True if all of the child instances were successfully opened.
      */
-    public function open()
+    public function open(): bool
     {
         /* Attempt to open each of our children. */
         $this->opened = true;
@@ -68,7 +72,7 @@ class Log_composite extends Log
      * @return bool True if all of the opened child instances were successfully
      *          closed.
      */
-    public function close()
+    public function close(): bool
     {
         /* If we haven't been opened, there's nothing more to do. */
         if (!$this->opened) {
@@ -98,7 +102,7 @@ class Log_composite extends Log
      *
      * @since Log 1.8.2
      */
-    public function flush()
+    public function flush(): bool
     {
         /* Attempt to flush each of our children. */
         $flushed = true;
@@ -116,7 +120,7 @@ class Log_composite extends Log
      *
      * @param mixed     $message    String or object containing the message
      *                              to log.
-     * @param string    $priority   (optional) The priority of the message.
+     * @param int|null  $priority   (optional) The priority of the message.
      *                              Valid values are: PEAR_LOG_EMERG,
      *                              PEAR_LOG_ALERT, PEAR_LOG_CRIT,
      *                              PEAR_LOG_ERR, PEAR_LOG_WARNING,
@@ -125,7 +129,7 @@ class Log_composite extends Log
      *
      * @return boolean  True if the entry is successfully logged.
      */
-    public function log($message, $priority = null)
+    public function log(mixed $message, int $priority = null): bool
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
@@ -194,7 +198,7 @@ class Log_composite extends Log
      *
      * @return bool True if this is a composite class.
      */
-    public function isComposite()
+    public function isComposite(): bool
     {
         return true;
     }
@@ -206,7 +210,7 @@ class Log_composite extends Log
      *
      * @since  Log 1.6.7
      */
-    public function setIdent($ident)
+    public function setIdent(string $ident): void
     {
         /* Call our base class's setIdent() method. */
         parent::setIdent($ident);
@@ -220,17 +224,12 @@ class Log_composite extends Log
     /**
      * Adds a Log instance to the list of children.
      *
-     * @param object    $child      The Log instance to add.
+     * @param Log    $child      The Log instance to add.
      *
      * @return boolean  True if the Log instance was successfully added.
      */
-    public function addChild(&$child)
+    public function addChild(Log $child): bool
     {
-        /* Make sure this is a Log instance. */
-        if (!is_a($child, 'Log')) {
-            return false;
-        }
-
         $this->children[$child->id] = $child;
 
         return true;
@@ -239,13 +238,13 @@ class Log_composite extends Log
     /**
      * Removes a Log instance from the list of children.
      *
-     * @param object    $child      The Log instance to remove.
+     * @param Log    $child      The Log instance to remove.
      *
      * @return bool True if the Log instance was successfully removed.
      */
-    public function removeChild($child)
+    public function removeChild(Log $child): bool
     {
-        if (!is_a($child, 'Log') || !isset($this->children[$child->id])) {
+        if (!isset($this->children[$child->id])) {
             return false;
         }
 

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * $Header$
  *
@@ -30,41 +32,35 @@ class Log_mail extends Log
     /**
      * String holding the recipients' email addresses.  Multiple addresses
      * should be separated with commas.
-     * @var string
      */
-    private $recipients = '';
+    private string $recipients = '';
 
     /**
      * String holding the sender's email address.
-     * @var string
      */
-    private $from = '';
+    private string $from = '';
 
     /**
      * String holding the email's subject.
-     * @var string
      */
-    private $subject = '[Log_mail] Log message';
+    private string $subject = '[Log_mail] Log message';
 
     /**
      * String holding an optional preamble for the log messages.
-     * @var string
      */
-    private $preamble = '';
+    private string $preamble = '';
 
     /**
      * String containing the format of a log line.
-     * @var string
      */
-    private $lineFormat = '%1$s %2$s [%3$s] %4$s';
+    private string $lineFormat = '%1$s %2$s [%3$s] %4$s';
 
     /**
      * String containing the timestamp format. It will be passed to date().
      * If timeFormatter configured, it will be used.
      * current locale.
-     * @var string
      */
-    private $timeFormat = 'M d H:i:s';
+    private string $timeFormat = 'M d H:i:s';
 
     /**
      * @var callable
@@ -73,28 +69,24 @@ class Log_mail extends Log
 
     /**
      * String holding the mail message body.
-     * @var string
      */
-    private $message = '';
+    private string $message = '';
 
     /**
      * Flag used to indicated that log lines have been written to the message
      * body and the message should be sent on close().
-     * @var boolean
      */
-    private $shouldSend = false;
+    private bool $shouldSend = false;
 
     /**
      * String holding the backend name of PEAR::Mail
-     * @var string
      */
-    private $mailBackend = '';
+    private string $mailBackend = '';
 
     /**
      * Array holding the params for PEAR::Mail
-     * @var array
      */
-    private $mailParams = [];
+    private array $mailParams = [];
 
     /**
      * Constructs a new Log_mail object.
@@ -110,9 +102,12 @@ class Log_mail extends Log
      * @param array  $conf      The configuration array.
      * @param int    $level     Log messages up to and including this level.
      */
-    public function __construct($name, $ident = '', $conf = [],
-                                $level = PEAR_LOG_DEBUG)
-    {
+    public function __construct(
+        string $name,
+        string $ident = '',
+        array $conf = [],
+        int $level = PEAR_LOG_DEBUG
+    ) {
         $this->id = md5(microtime().random_int(0, mt_getrandmax()));
         $this->recipients = $name;
         $this->ident = $ident;
@@ -162,7 +157,7 @@ class Log_mail extends Log
      * Destructor. Calls close().
      *
      */
-    public function log_mail_destructor()
+    public function log_mail_destructor(): void
     {
         $this->close();
     }
@@ -172,7 +167,7 @@ class Log_mail extends Log
      * This is implicitly called by log(), if necessary.
      *
      */
-    public function open()
+    public function open(): bool
     {
         if (!$this->opened) {
             if (!empty($this->preamble)) {
@@ -189,7 +184,7 @@ class Log_mail extends Log
      * This is implicitly called by the destructor, if necessary.
      *
      */
-    public function close()
+    public function close(): bool
     {
         if ($this->opened) {
             if ($this->shouldSend && !empty($this->message)) {
@@ -234,7 +229,7 @@ class Log_mail extends Log
      *
      * @since Log 1.8.2
      */
-    public function flush()
+    public function flush(): bool
     {
         /*
          * It's sufficient to simply call close() to flush the output.
@@ -248,13 +243,13 @@ class Log_mail extends Log
      * Calls open(), if necessary.
      *
      * @param mixed  $message  String or object containing the message to log.
-     * @param string $priority The priority of the message.  Valid
+     * @param int|null $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
      */
-    public function log($message, $priority = null)
+    public function log(mixed $message, int $priority = null): bool
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {

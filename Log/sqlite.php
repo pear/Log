@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * $Header$
  *
@@ -32,27 +34,24 @@ class Log_sqlite extends Log
 {
     /**
      * Array containing the connection defaults
-     * @var array
      */
-    private $options = ['mode' => 0666, 'persistent' => false];
+    private array $options = ['mode' => 0666, 'persistent' => false];
 
     /**
      * Object holding the database handle.
-     * @var object
+     * @var resource
      */
     private $db = null;
 
     /**
      * Flag indicating that we're using an existing database connection.
-     * @var boolean
      */
-    private $existingConnection = false;
+    private bool $existingConnection = false;
 
     /**
      * String holding the database table to use.
-     * @var string
      */
-    private $table = 'log_table';
+    private string $table = 'log_table';
 
     /**
      * Constructs a new sql logging object.
@@ -64,8 +63,12 @@ class Log_sqlite extends Log
      *                             or an already opened sqlite connection.
      * @param int    $level        Log messages up to and including this level.
      */
-    public function __construct($name, $ident = '', &$conf, $level = PEAR_LOG_DEBUG)
-    {
+    public function __construct(
+        string $name,
+        string $ident = '',
+        array $conf = [],
+        int $level = PEAR_LOG_DEBUG
+    ) {
         $this->id = md5(microtime().random_int(0, mt_getrandmax()));
         $this->table = $name;
         $this->ident = $ident;
@@ -88,7 +91,7 @@ class Log_sqlite extends Log
      *
      * @return boolean   True on success, false on failure.
      */
-    public function open()
+    public function open(): bool
     {
         if (is_resource($this->db)) {
             $this->opened = true;
@@ -120,7 +123,7 @@ class Log_sqlite extends Log
      *
      * @return boolean   True on success, false on failure.
      */
-    public function close()
+    public function close(): bool
     {
         /* We never close existing connections. */
         if ($this->existingConnection) {
@@ -141,13 +144,13 @@ class Log_sqlite extends Log
      * instances that are observing this Log.
      *
      * @param mixed  $message  String or object containing the message to log.
-     * @param string $priority The priority of the message.  Valid
+     * @param int|null $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
      */
-    public function log($message, $priority = null)
+    public function log(mixed $message, int $priority = null): bool
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
@@ -188,7 +191,7 @@ class Log_sqlite extends Log
      *
      * @return boolean  True on success or false on failure.
      */
-    private function createTable()
+    private function createTable(): bool
     {
         $q = "SELECT name FROM sqlite_master WHERE name='" . $this->table .
              "' AND type='table'";
