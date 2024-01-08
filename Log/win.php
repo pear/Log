@@ -253,7 +253,7 @@ EOT;
         $message = $this->extractMessage($message);
         $message = preg_replace('/\r\n|\n|\r/', '<br />', $message);
 
-        list($usec, $sec) = explode(' ', microtime());
+        [$usec, $sec] = explode(' ', microtime());
 
         /* Build the output line that contains the log entry row. */
         $line  = '<tr>';

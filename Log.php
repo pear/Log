@@ -37,7 +37,7 @@ define('PEAR_LOG_TYPE_SAPI',    4); /* Use the SAPI logging handler */
  */
 class Log
 {
-    const DEFAULT_TIME_FORMAT = 'M d H:i:s';
+    private const DEFAULT_TIME_FORMAT = 'M d H:i:s';
 
     /**
      * Indicates whether or not the log can been opened / connected.
@@ -529,7 +529,7 @@ class Log
         if (preg_match('/%[5678]/', $format)) {
             /* Plus 2 to account for our internal function calls. */
             $d = $this->backtrace_depth + 2;
-            list($file, $line, $func, $class) = $this->getBacktraceVars($d);
+            [$file, $line, $func, $class] = $this->getBacktraceVars($d);
         }
 
         /*
