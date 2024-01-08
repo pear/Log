@@ -83,7 +83,7 @@ class Log_composite extends Log
         $closed = true;
         foreach ($this->children as $child) {
             if ($child->opened) {
-                $closed &= $child->close();
+                $closed = $closed && $child->close();
             }
         }
 
@@ -182,7 +182,7 @@ class Log_composite extends Log
 
             /* Finally, attempt to log the message to the child handler. */
             if ($child->opened) {
-                $success &= $child->log($message, $priority);
+                $success = $success && $child->log($message, $priority);
             }
         }
 
