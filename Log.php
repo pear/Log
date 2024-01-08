@@ -417,6 +417,8 @@ class Log
             }
         } else if (is_bool($message) || $message === NULL) {
             $message = var_export($message, true);
+        } else {
+            $message = (string)$message;
         }
 
         /* Otherwise, we assume the message is a string. */

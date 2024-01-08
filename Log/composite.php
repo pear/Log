@@ -59,7 +59,7 @@ class Log_composite extends Log
         /* Attempt to open each of our children. */
         $this->opened = true;
         foreach ($this->children as $child) {
-            $this->opened &= $child->open();
+            $this->opened = $this->opened && $child->open();
         }
 
         /* If all children were opened, return success. */
