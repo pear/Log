@@ -9,7 +9,7 @@ date.timezone=UTC
 
 require_once 'Log.php';
 
-$conf = array('lineFormat' => '%2$s [%3$s] %4$s');
+$conf = ['lineFormat' => '%2$s [%3$s] %4$s'];
 $logger = Log::singleton('console', '', 'ident', $conf);
 
 /* Logging a regular string. */
@@ -36,14 +36,14 @@ require_once 'PEAR.php';
 $logger->log(new PEAR_Error('PEAR_Error object', 100));
 
 /* Logging an array. */
-$logger->log(array(1, 2, 'three' => 3));
+$logger->log([1, 2, 'three' => 3]);
 
 /* Logging an array with scalar 'message' keys. */
-$logger->log(array('message' => 'Message Key'));
-$logger->log(array('message' => 50));
+$logger->log(['message' => 'Message Key']);
+$logger->log(['message' => 50]);
 
 /* Logging an array with a non-scalar 'message' key. */
-$logger->log(array('message' => array(1, 2, 3)));
+$logger->log(['message' => [1, 2, 3]]);
 
 --EXPECT--
 ident [info] String

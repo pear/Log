@@ -7,7 +7,7 @@ date.timezone=UTC
 
 require_once 'Log.php';
 
-$conf = array();
+$conf = [];
 print "** UNBUFFERED **\n";
 $logger = Log::singleton('firebug', '', 'PHP', $conf);
 $logger->log('Debug',     PEAR_LOG_DEBUG);
@@ -21,7 +21,7 @@ $logger->log('Emergency', PEAR_LOG_EMERG);
 unset($logger);
 
 print "\n** START BUFFERING **\n";
-$conf = array('buffering' => true);
+$conf = ['buffering' => true];
 $logger = Log::singleton('firebug', '', 'PHP', $conf);
 $logger->log('Debug',     PEAR_LOG_DEBUG);
 $logger->log('Info',      PEAR_LOG_INFO);

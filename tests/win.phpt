@@ -7,7 +7,7 @@ date.timezone=UTC
 
 require_once 'Log.php';
 
-$conf = array('title' => 'Test Output');
+$conf = ['title' => 'Test Output'];
 $logger = Log::singleton('win', 'test', 'ident', $conf);
 
 for ($i = 0; $i < 3; $i++) {

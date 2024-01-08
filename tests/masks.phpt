@@ -19,7 +19,7 @@ for ($level = PEAR_LOG_EMERG; $level <= PEAR_LOG_DEBUG; $level++) {
 echo "\n";
 
 /* Mask */
-$conf = array('lineFormat' => '%2$s [%3$s] %4$s');
+$conf = ['lineFormat' => '%2$s [%3$s] %4$s'];
 $logger = Log::singleton('console', '', 'ident', $conf);
 
 $logger->setMask(Log::MAX(PEAR_LOG_INFO));
