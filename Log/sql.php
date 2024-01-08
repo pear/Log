@@ -109,7 +109,7 @@ class Log_sql extends Log
     public function __construct($name, $ident = '', $conf = [],
                                 $level = PEAR_LOG_DEBUG)
     {
-        $this->id = md5(microtime().rand());
+        $this->id = md5(microtime().random_int(0, mt_getrandmax()));
         $this->table = $name;
         $this->mask = Log::MAX($level);
 

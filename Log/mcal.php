@@ -66,7 +66,7 @@ class Log_mcal extends Log
     public function __construct($name, $ident = '', $conf = [],
                                 $level = PEAR_LOG_DEBUG)
     {
-        $this->id = md5(microtime().rand());
+        $this->id = md5(microtime().random_int(0, mt_getrandmax()));
         $this->name = $name;
         $this->ident = $ident;
         $this->mask = Log::MAX($level);

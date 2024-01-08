@@ -46,7 +46,7 @@ class Log_observer
      */
     public function __construct($priority = PEAR_LOG_INFO)
     {
-        $this->id = md5(microtime().rand());
+        $this->id = md5(microtime().random_int(0, mt_getrandmax()));
         $this->priority = $priority;
     }
 

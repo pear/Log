@@ -447,19 +447,19 @@ class Log
         $bt = debug_backtrace();
 
         /* Store some handy shortcuts to our previous frames. */
-        $bt0 = isset($bt[$depth]) ? $bt[$depth] : null;
-        $bt1 = isset($bt[$depth + 1]) ? $bt[$depth + 1] : null;
+        $bt0 = $bt[$depth] ?? null;
+        $bt1 = $bt[$depth + 1] ?? null;
 
         /*
          * If we were ultimately invoked by the composite handler, we need to
          * increase our depth one additional level to compensate.
          */
-        $class = isset($bt1['class']) ? $bt1['class'] : null;
+        $class = $bt1['class'] ?? null;
         if ($class !== null && strcasecmp($class, 'Log_composite') == 0) {
             $depth++;
-            $bt0 = isset($bt[$depth]) ? $bt[$depth] : null;
-            $bt1 = isset($bt[$depth + 1]) ? $bt[$depth + 1] : null;
-            $class = isset($bt1['class']) ? $bt1['class'] : null;
+            $bt0 = $bt[$depth] ?? null;
+            $bt1 = $bt[$depth + 1] ?? null;
+            $class = $bt1['class'] ?? null;
         }
 
         /*
@@ -478,12 +478,12 @@ class Log
          * we're going to need to go back an additional step.
          */
         if (in_array($func, ['emerg', 'alert', 'crit', 'err', 'warning', 'notice', 'info', 'debug'])) {
-            $bt2 = isset($bt[$depth + 2]) ? $bt[$depth + 2] : null;
+            $bt2 = $bt[$depth + 2] ?? null;
 
             $file = is_array($bt1) ? $bt1['file'] : null;
             $line = is_array($bt1) ? $bt1['line'] : 0;
             $func = is_array($bt2) ? $bt2['function'] : null;
-            $class = isset($bt2['class']) ? $bt2['class'] : null;
+            $class = $bt2['class'] ?? null;
         }
 
         /*
@@ -542,10 +542,10 @@ class Log
                        $this->ident,
                        $this->priorityToString($priority),
                        $message,
-                       isset($file) ? $file : '',
-                       isset($line) ? $line : '',
-                       isset($func) ? $func : '',
-                       isset($class) ? $class : '');
+                       $file ?? '',
+                       $line ?? '',
+                       $func ?? '',
+                       $class ?? '');
     }
 
     /**
