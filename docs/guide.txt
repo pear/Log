@@ -1277,7 +1277,7 @@ whether or not the message was successfully logged by the handler.
 The ``log()`` implementation should be sure to call `announce()`__ whenever
 an event is successfully logged.
 
-.. __: `void _announce($event)`_
+.. __: `void announce($event)`_
 
 Utility Methods
 ---------------
@@ -1322,7 +1322,7 @@ logged.  ``$event`` is an array containing two named elements::
 event is successfully logged.  Otherwise, registered observers will never
 become aware of the event.
 
-.. log(): `bool log($message, $priority = null)`_
+.. _log(): `bool log($message, $priority = null)`_
 
 .. |required| replace:: **[required]**
 
