@@ -278,7 +278,7 @@ system's IO routines, which may buffer the output.
 It's possible to force these handlers to flush their output, however, by
 calling their ``flush()`` method::
 
-    $conf = array('buffering' => true);
+    $conf = ['buffering' => true];
     $logger = Log::singleton('console', '', 'test', $conf);
 
     for ($i = 0; $i < 10; $i++) {
@@ -386,8 +386,8 @@ Example
 ~~~~~~~
 ::
 
-    $conf = array('error_prepend' => '<font color="#ff0000"><tt>',
-                  'error_append'  => '</tt></font>');
+    $conf = ['error_prepend' => '<font color="#ff0000"><tt>',
+                  'error_append'  => '</tt></font>'];
     $logger = Log::singleton('display', '', '', $conf, PEAR_LOG_DEBUG);
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
@@ -523,7 +523,7 @@ Example
 ~~~~~~~
 ::
 
-    $conf = array('mode' => 0600, 'timeFormat' => '%X %x');
+    $conf = ['mode' => 0600, 'timeFormat' => '%X %x'];
     $logger = Log::singleton('file', 'out.log', 'ident', $conf);
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
@@ -617,7 +617,7 @@ Example
 ~~~~~~~
 ::
 
-    $conf = array('subject' => 'Important Log Events');
+    $conf = ['subject' => 'Important Log Events'];
     $logger = Log::singleton('mail', 'webmaster@example.com', 'ident', $conf);
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
@@ -760,7 +760,7 @@ Examples
 ~~~~~~~~
 Using a `Data Source Name`_ to create a new database connection::
 
-    $conf = array('dsn' => 'pgsql://jon@localhost+unix/logs');
+    $conf = ['dsn' => 'pgsql://jon@localhost+unix/logs'];
     $logger = Log::singleton('sql', 'log_table', 'ident', $conf);
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
@@ -835,7 +835,7 @@ Examples
 ~~~~~~~~
 Using a configuration to create a new database connection::
 
-    $conf = array('filename' => 'log.db', 'mode' => 0666, 'persistent' => true);
+    $conf = ['filename' => 'log.db', 'mode' => 0666, 'persistent' => true];
     $logger = Log::factory('sqlite', 'log_table', 'ident', $conf);
     $logger->log('logging an event', PEAR_LOG_WARNING);
 
@@ -958,7 +958,7 @@ Example
 ~~~~~~~
 ::
 
-    $conf = array('title' => 'Sample Log Output');
+    $conf = ['title' => 'Sample Log Output'];
     $logger = Log::singleton('win', 'LogWindow', 'ident', $conf);
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
@@ -1196,7 +1196,7 @@ are discussed in detail in the `Configuring a Handler`_ section.
 
 ::
 
-    Log_custom($name, $ident = '', $conf = array(), $level = PEAR_LOG_DEBUG)
+    Log_custom($name, $ident = '', $conf = [], $level = PEAR_LOG_DEBUG)
 
 The constructor is responsible for configuring the handler based on these
 values.  Handler-specific parameters are passed as part of the ``$conf``
@@ -1316,7 +1316,7 @@ void announce($event)
 This method informs any registered `log observers`_ that a new event has been
 logged.  ``$event`` is an array containing two named elements::
 
-    array('priority' => $priority, 'message' => $message)
+    ['priority' => $priority, 'message' => $message]
 
 ``announce()`` should be called from a handler's `log()`_ method whenever an
 event is successfully logged.  Otherwise, registered observers will never

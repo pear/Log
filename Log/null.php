@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * $Header$
  *
@@ -26,10 +28,13 @@ class Log_null extends Log
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
      */
-    public function __construct($name, $ident = '', $conf = array(),
-                                $level = PEAR_LOG_DEBUG)
-    {
-        $this->id = md5(microtime().rand());
+    public function __construct(
+        string $name,
+        string $ident = '',
+        array $conf = [],
+        int $level = PEAR_LOG_DEBUG
+    ) {
+        $this->id = md5(microtime().random_int(0, mt_getrandmax()));
         $this->ident = $ident;
         $this->mask = Log::MAX($level);
     }
@@ -39,7 +44,7 @@ class Log_null extends Log
      *
      * @since   Log 1.9.6
      */
-    public function open()
+    public function open(): bool
     {
         $this->opened = true;
         return true;
@@ -50,7 +55,7 @@ class Log_null extends Log
      *
      * @since   Log 1.9.6
      */
-    public function close()
+    public function close(): bool
     {
         $this->opened = false;
         return true;
@@ -61,13 +66,13 @@ class Log_null extends Log
      * along to any Log_observer instances that are observing this Log.
      *
      * @param mixed  $message    String or object containing the message to log.
-     * @param string $priority The priority of the message.  Valid
+     * @param int|null $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
      */
-    public function log($message, $priority = null)
+    public function log($message, int $priority = null): bool
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
@@ -79,7 +84,7 @@ class Log_null extends Log
             return false;
         }
 
-        $this->announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(['priority' => $priority, 'message' => $message]);
 
         return true;
     }

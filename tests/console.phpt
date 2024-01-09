@@ -7,14 +7,14 @@ date.timezone=UTC
 
 require_once 'Log.php';
 
-$conf = array('lineFormat' => '%2$s [%3$s] %4$s');
+$conf = ['lineFormat' => '%2$s [%3$s] %4$s'];
 $logger = Log::singleton('console', '', 'ident', $conf);
 for ($i = 0; $i < 3; $i++) {
     $logger->log("Log entry $i");
 }
 
 echo "\n[Buffering / Flush Test]\n";
-$conf = array('lineFormat' => '%2$s [%3$s] %4$s', 'buffering' => true);
+$conf = ['lineFormat' => '%2$s [%3$s] %4$s', 'buffering' => true];
 $buffered_logger = Log::singleton('console', '', 'buffered', $conf);
 for ($i = 0; $i < 3; $i++) {
     $buffered_logger->log("Pre-flush buffered log entry $i");

@@ -11,20 +11,20 @@ set_error_handler(function ($errno, $errstr, $errfile, $errline) {
     echo $errstr . PHP_EOL;
 }, E_USER_NOTICE|E_USER_WARNING);
 
-$tests = array(
-    array('timeFormat' => 'Y-m-d H:i:s', 'timeFormatter' => null, 'expectedResult' => '2024-01-07 20:17:28'),
-    array('timeFormat' => 'H:i:s', 'timeFormatter' => null, 'expectedResult' => '20:17:28'),
-    array('timeFormat' => '%b %d %H:%M:%S', 'timeFormatter' => null, 'expectedResult' => 'Jan 07 20:17:28'),
-    array('timeFormat' => '%O %d %a %e %A %u %w %j', 'timeFormatter' => null, 'expectedResult' => 'th 07 Sun 7 Sunday 7 0 6'),
-    array('timeFormat' => '%V', 'timeFormatter' => null, 'expectedResult' => '01'),
-    array('timeFormat' => '%B %m %b %-m', 'timeFormatter' => null, 'expectedResult' => 'January 01 Jan 1'),
-    array('timeFormat' => '%G %Y %y', 'timeFormatter' => null, 'expectedResult' => '2024 2024 24'),
-    array('timeFormat' => '%P %p %l %I %H %M %S', 'timeFormatter' => null, 'expectedResult' => 'pm PM 8 08 20 17 28'),
-    array('timeFormat' => '%z %Z', 'timeFormatter' => null, 'expectedResult' => '+0000 UTC'),
-    array('timeFormat' => '%s', 'timeFormatter' => null, 'expectedResult' => '1704658648'),
-    array('timeFormat' => 'Y-m-d H:i:s', 'timeFormatter' => function($timeFormat, $time) { return $time;}, 'expectedResult' => '1704658648'),
-    array('timeFormat' => 'Y-m-d H:i:s', 'timeFormatter' => function($timeFormat, $time) { return $timeFormat;}, 'expectedResult' => 'Y-m-d H:i:s'),
-);
+$tests = [
+    ['timeFormat' => 'Y-m-d H:i:s', 'timeFormatter' => null, 'expectedResult' => '2024-01-07 20:17:28'],
+    ['timeFormat' => 'H:i:s', 'timeFormatter' => null, 'expectedResult' => '20:17:28'],
+    ['timeFormat' => '%b %d %H:%M:%S', 'timeFormatter' => null, 'expectedResult' => 'Jan 07 20:17:28'],
+    ['timeFormat' => '%O %d %a %e %A %u %w %j', 'timeFormatter' => null, 'expectedResult' => 'th 07 Sun 7 Sunday 7 0 6'],
+    ['timeFormat' => '%V', 'timeFormatter' => null, 'expectedResult' => '01'],
+    ['timeFormat' => '%B %m %b %-m', 'timeFormatter' => null, 'expectedResult' => 'January 01 Jan 1'],
+    ['timeFormat' => '%G %Y %y', 'timeFormatter' => null, 'expectedResult' => '2024 2024 24'],
+    ['timeFormat' => '%P %p %l %I %H %M %S', 'timeFormatter' => null, 'expectedResult' => 'pm PM 8 08 20 17 28'],
+    ['timeFormat' => '%z %Z', 'timeFormatter' => null, 'expectedResult' => '+0000 UTC'],
+    ['timeFormat' => '%s', 'timeFormatter' => null, 'expectedResult' => '1704658648'],
+    ['timeFormat' => 'Y-m-d H:i:s', 'timeFormatter' => function($timeFormat, $time) { return $time;}, 'expectedResult' => '1704658648'],
+    ['timeFormat' => 'Y-m-d H:i:s', 'timeFormatter' => function($timeFormat, $time) { return $timeFormat;}, 'expectedResult' => 'Y-m-d H:i:s'],
+];
 
 foreach ($tests as $config) {
     $config['lineFormat'] = '%1$s';

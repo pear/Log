@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * $Header$
  *
@@ -43,7 +45,7 @@ class Log_mdb2 extends Log
      * Array containing our set of DB configuration options.
      * @var array
      */
-    private $options = array('persistent' => true);
+    private $options = ['persistent' => true];
 
     /**
      * Object holding the database handle.
@@ -86,13 +88,13 @@ class Log_mdb2 extends Log
      * Set of field types used in the database table.
      * @var array
      */
-    private $types = array(
+    private $types = [
         'id'        => 'integer',
         'logtime'   => 'timestamp',
         'ident'     => 'text',
         'priority'  => 'text',
-        'message'   => 'clob'
-    );
+        'message'   => 'clob',
+    ];
 
     /**
      * Constructs a new sql logging object.
@@ -102,10 +104,13 @@ class Log_mdb2 extends Log
      * @param array $conf          The connection configuration array.
      * @param int $level           Log messages up to and including this level.
      */
-    public function __construct($name, $ident = '', $conf = array(),
-                                $level = PEAR_LOG_DEBUG)
-    {
-        $this->id = md5(microtime().rand());
+    public function __construct(
+        string $name,
+        string $ident = '',
+        array $conf = [],
+        int $level = PEAR_LOG_DEBUG
+    ) {
+        $this->id = md5(microtime().random_int(0, mt_getrandmax()));
         $this->table = $name;
         $this->mask = Log::MAX($level);
 
@@ -147,7 +152,7 @@ class Log_mdb2 extends Log
      *
      * @return boolean   True on success, false on failure.
      */
-    public function open()
+    public function open(): bool
     {
         if (!$this->opened) {
             /* Use the DSN and options to create a database connection. */
@@ -175,7 +180,7 @@ class Log_mdb2 extends Log
      *
      * @return boolean   True on success, false on failure.
      */
-    public function close()
+    public function close(): bool
     {
         /* If we have a statement object, free it. */
         if (is_object($this->statement)) {
@@ -201,7 +206,7 @@ class Log_mdb2 extends Log
      *
      * @since   Log 1.8.5
      */
-    public function setIdent($ident)
+    public function setIdent(string $ident): void
     {
         $this->ident = substr($ident, 0, $this->identLimit);
     }
@@ -212,13 +217,13 @@ class Log_mdb2 extends Log
      * instances that are observing this Log.
      *
      * @param mixed  $message  String or object containing the message to log.
-     * @param string $priority The priority of the message.  Valid
+     * @param int|null $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
      */
-    public function log($message, $priority = null)
+    public function log($message, int $priority = null): bool
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
@@ -244,13 +249,13 @@ class Log_mdb2 extends Log
         $message = $this->extractMessage($message);
 
         /* Build our set of values for this log entry. */
-        $values = array(
+        $values = [
             'id'       => $this->db->nextId($this->sequence),
             'logtime'  => MDB2_Date::mdbNow(),
             'ident'    => $this->ident,
             'priority' => $priority,
             'message'  => $message
-        );
+        ];
 
         /* Execute the SQL query for this log entry insertion. */
         $this->db->expectError(MDB2_ERROR_NOSUCHTABLE);
@@ -282,7 +287,7 @@ class Log_mdb2 extends Log
             }
         }
 
-        $this->announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(['priority' => $priority, 'message' => $message]);
 
         return true;
     }
@@ -292,18 +297,18 @@ class Log_mdb2 extends Log
      *
      * @return boolean  True on success or false on failure.
      */
-    private function createTable()
+    private function createTable(): bool
     {
         $this->db->loadModule('Manager', null, true);
         $result = $this->db->manager->createTable(
             $this->table,
-            array(
-                'id'        => array('type' => $this->types['id']),
-                'logtime'   => array('type' => $this->types['logtime']),
-                'ident'     => array('type' => $this->types['ident']),
-                'priority'  => array('type' => $this->types['priority']),
-                'message'   => array('type' => $this->types['message'])
-            )
+            [
+                'id'        => ['type' => $this->types['id']],
+                'logtime'   => ['type' => $this->types['logtime']],
+                'ident'     => ['type' => $this->types['ident']],
+                'priority'  => ['type' => $this->types['priority']],
+                'message'   => ['type' => $this->types['message']],
+            ]
         );
         if (PEAR::isError($result)) {
             return false;
@@ -312,7 +317,7 @@ class Log_mdb2 extends Log
         $result = $this->db->manager->createIndex(
             $this->table,
             'unique_id',
-            array('fields' => array('id' => true), 'unique' => true)
+            ['fields' => ['id' => true], 'unique' => true]
         );
         if (PEAR::isError($result)) {
             return false;
@@ -328,7 +333,7 @@ class Log_mdb2 extends Log
      *
      * @since   Log 1.9.0
      */
-    private function prepareStatement()
+    private function prepareStatement(): bool
     {
         $this->statement = &$this->db->prepare(
                 'INSERT INTO ' . $this->table .

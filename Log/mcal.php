@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * $Header$
  * $Horde: horde/lib/Log/mcal.php,v 1.2 2000/06/28 21:36:13 jon Exp $
@@ -21,39 +23,33 @@ class Log_mcal extends Log
 {
     /**
      * holding the calendar specification to connect to.
-     * @var string
      */
-    private $calendar = '{localhost/mstore}';
+    private string $calendar = '{localhost/mstore}';
 
     /**
      * holding the username to use.
-     * @var string
      */
-    private $username = '';
+    private string $username = '';
 
     /**
      * holding the password to use.
-     * @var string
      */
-    private $password = '';
+    private string $password = '';
 
     /**
      * holding the options to pass to the calendar stream.
-     * @var integer
      */
-    private $options = 0;
+    private int $options = 0;
 
     /**
      * ResourceID of the MCAL stream.
-     * @var string
      */
-    private $stream = '';
+    private string $stream = '';
 
     /**
      * Integer holding the log facility to use.
-     * @var string
      */
-    private $name = LOG_SYSLOG;
+    private string $name;
 
     /**
      * Constructs a new Log_mcal object.
@@ -63,10 +59,13 @@ class Log_mcal extends Log
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
      */
-    public function __construct($name, $ident = '', $conf = array(),
-                                $level = PEAR_LOG_DEBUG)
-    {
-        $this->id = md5(microtime().rand());
+    public function __construct(
+        string $name,
+        string $ident = '',
+        array $conf = [],
+        int $level = PEAR_LOG_DEBUG
+    ) {
+        $this->id = md5(microtime().random_int(0, mt_getrandmax()));
         $this->name = $name;
         $this->ident = $ident;
         $this->mask = Log::MAX($level);
@@ -80,7 +79,7 @@ class Log_mcal extends Log
      * Opens a calendar stream, if it has not already been
      * opened. This is implicitly called by log(), if necessary.
      */
-    public function open()
+    public function open(): bool
     {
         if (!$this->opened) {
             $this->stream = mcal_open($this->calendar, $this->username,
@@ -94,7 +93,7 @@ class Log_mcal extends Log
     /**
      * Closes the calendar stream, if it is open.
      */
-    public function close()
+    public function close(): bool
     {
         if ($this->opened) {
             mcal_close($this->stream);
@@ -111,13 +110,13 @@ class Log_mcal extends Log
      * this Log.
      *
      * @param mixed  $message  String or object containing the message to log.
-     * @param string $priority The priority of the message. Valid
+     * @param int|null $priority The priority of the message. Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
      */
-    public function log($message, $priority = null)
+    public function log($message, int $priority = null): bool
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
@@ -151,7 +150,7 @@ class Log_mcal extends Log
             $dates[3], $dates[4], $dates[5]);
         mcal_append_event($this->stream);
 
-        $this->announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(['priority' => $priority, 'message' => $message]);
 
         return true;
     }

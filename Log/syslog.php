@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * $Header$
  * $Horde: horde/lib/Log/syslog.php,v 1.6 2000/06/28 21:36:13 jon Exp $
@@ -24,44 +26,38 @@ class Log_syslog extends Log
 {
     /**
      * Integer holding the log facility to use.
-     * @var integer
      */
-    private $name = LOG_SYSLOG;
+    private int $name;
 
     /**
      * Should we inherit the current syslog connection for this process, or
      * should we call openlog() to start a new syslog connection?
-     * @var boolean
      */
-    private $inherit = false;
+    private bool $inherit = false;
 
     /**
      * Should we re-open the syslog connection for each log event?
-     * @var boolean
      */
-    private $reopen = false;
+    private bool $reopen = false;
 
     /**
      * Maximum message length that will be sent to syslog().  If the handler
      * receives a message longer than this length limit, it will be split into
      * multiple syslog() calls.
-     * @var integer
      */
-    private $maxLength = 500;
+    private int $maxLength = 500;
 
     /**
      * String containing the format of a message.
-     * @var string
      */
-    private $lineFormat = '%4$s';
+    private string $lineFormat = '%4$s';
 
     /**
      * String containing the timestamp format. It will be passed to date().
      * If timeFormatter configured, it will be used.
      * current locale.
-     * @var string
      */
-    private $timeFormat = 'M d H:i:s';
+    private string $timeFormat = 'M d H:i:s';
 
     /**
      * @var callable
@@ -77,11 +73,14 @@ class Log_syslog extends Log
      * @param array  $conf     The configuration array.
      * @param int    $level    Log messages up to and including this level.
      */
-    public function __construct($name, $ident = '', $conf = array(),
-                                $level = PEAR_LOG_DEBUG)
-    {
+    public function __construct(
+        string $name,
+        string $ident = '',
+        array $conf = [],
+        int $level = PEAR_LOG_DEBUG
+    ) {
         /* Ensure we have a valid integer value for $name. */
-        if (empty($name) || !is_int($name)) {
+        if (empty($name) || !is_numeric($name)) {
             $name = LOG_SYSLOG;
         }
 
@@ -108,7 +107,7 @@ class Log_syslog extends Log
             $this->timeFormatter = $conf['timeFormatter'];
         }
 
-        $this->id = md5(microtime().rand());
+        $this->id = md5(microtime().random_int(0, mt_getrandmax()));
         $this->name = $name;
         $this->ident = $ident;
         $this->mask = Log::MAX($level);
@@ -118,7 +117,7 @@ class Log_syslog extends Log
      * Opens a connection to the system logger, if it has not already
      * been opened.  This is implicitly called by log(), if necessary.
      */
-    public function open()
+    public function open(): bool
     {
         if (!$this->opened || $this->reopen) {
             $this->opened = openlog($this->ident, LOG_PID, $this->name);
@@ -130,7 +129,7 @@ class Log_syslog extends Log
     /**
      * Closes the connection to the system logger, if it is open.
      */
-    public function close()
+    public function close(): bool
     {
         if ($this->opened && !$this->inherit) {
             closelog();
@@ -146,13 +145,13 @@ class Log_syslog extends Log
      * instances that are observing this Log.
      *
      * @param mixed $message String or object containing the message to log.
-     * @param int $priority (optional) The priority of the message.  Valid
+     * @param int|null $priority (optional) The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
      */
-    public function log($message, $priority = null)
+    public function log($message, int $priority = null): bool
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
@@ -195,7 +194,7 @@ class Log_syslog extends Log
             }
         }
 
-        $this->announce(array('priority' => $priority, 'message' => $message));
+        $this->announce(['priority' => $priority, 'message' => $message]);
 
         return true;
     }
@@ -213,9 +212,9 @@ class Log_syslog extends Log
      * @return int The LOG_* representation of $priority.
      *
      */
-    private function toSyslog($priority)
+    private function toSyslog(int $priority): int
     {
-        static $priorities = array(
+        static $priorities = [
             PEAR_LOG_EMERG   => LOG_EMERG,
             PEAR_LOG_ALERT   => LOG_ALERT,
             PEAR_LOG_CRIT    => LOG_CRIT,
@@ -223,11 +222,11 @@ class Log_syslog extends Log
             PEAR_LOG_WARNING => LOG_WARNING,
             PEAR_LOG_NOTICE  => LOG_NOTICE,
             PEAR_LOG_INFO    => LOG_INFO,
-            PEAR_LOG_DEBUG   => LOG_DEBUG
-        );
+            PEAR_LOG_DEBUG   => LOG_DEBUG,
+        ];
 
         /* If we're passed an unknown priority, default to LOG_INFO. */
-        if (!is_int($priority) || !in_array($priority, $priorities)) {
+        if (!in_array($priority, $priorities)) {
             return LOG_INFO;
         }
 

@@ -22,11 +22,10 @@ function test($name, $conf)
     echo "\n";
 }
 
-test('Default', array());
-test('Line Break', array('linebreak' => "\n"));
-test('Format', array('lineFormat' => '<!-- %4$s -->'));
-test('Prepend / Append', array('error_prepend' => '<tt>',
-                               'error_append' => '</tt>'));
+test('Default', []);
+test('Line Break', ['linebreak' => "\n"]);
+test('Format', ['lineFormat' => '<!-- %4$s -->']);
+test('Prepend / Append', ['error_prepend' => '<tt>', 'error_append' => '</tt>']);
 
 --EXPECT--
 Testing Default Configuration
