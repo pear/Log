@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2024-01-09</date>
+ <date>2024-01-10</date>
  <time>00:00:00</time>
  <version>
-  <release>1.14.0</release>
+  <release>1.14.1</release>
   <api>2.0.0</api>
  </version>
  <stability>
@@ -37,9 +37,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-- Dropped support for PHP 5.6. PHP 7.4+ is now required
-- Added visibility and (strict) type declarations
-- Moved to date()-style time formatting (strftime() is deprecated)
+- Fix the PEAR_LOG_ALL mask on 32-bit systems
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -141,6 +139,23 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.14.0</release>
+    <api>2.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2024-01-10</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+- Dropped support for PHP 5.6. PHP 7.4+ is now required
+- Added visibility and (strict) type declarations
+- Moved to date()-style time formatting (strftime() is deprecated)
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.13.1</release>
