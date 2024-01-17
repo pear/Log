@@ -22,6 +22,7 @@ $tests = [
     ['timeFormat' => '%P %p %l %I %H %M %S', 'timeFormatter' => null, 'expectedResult' => 'pm PM 8 08 20 17 28'],
     ['timeFormat' => '%z %Z', 'timeFormatter' => null, 'expectedResult' => '+0000 UTC'],
     ['timeFormat' => '%s', 'timeFormatter' => null, 'expectedResult' => '1704658648'],
+    ['timeFormat' => '%x %X', 'timeFormatter' => null, 'expectedResult' => '01/07/2024 20:17:28'],
     ['timeFormat' => 'Y-m-d H:i:s', 'timeFormatter' => function($timeFormat, $time) { return $time;}, 'expectedResult' => '1704658648'],
     ['timeFormat' => 'Y-m-d H:i:s', 'timeFormatter' => function($timeFormat, $time) { return $timeFormat;}, 'expectedResult' => 'Y-m-d H:i:s'],
 ];
@@ -55,5 +56,7 @@ Using strftime-style formatting is deprecated
 +0000 UTC OK
 Using strftime-style formatting is deprecated
 1704658648 OK
+Using strftime-style formatting is deprecated
+01/07/2024 20:17:28 OK
 1704658648 OK
 Y-m-d H:i:s OK

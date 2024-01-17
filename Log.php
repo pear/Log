@@ -850,7 +850,8 @@ class Log
             '%G', '%Y', '%y',
             '%P', '%p', '%l', '%I', '%H', '%M', '%S',
             '%z', '%Z',
-            '%s'
+            '%s',
+            '%x', '%X',
         ];
 
         // http://php.net/manual/en/function.date.php
@@ -861,7 +862,8 @@ class Log
             'o', 'Y', 'y',
             'a', 'A', 'g', 'h', 'H', 'i', 's',
             'O', 'T',
-            'U'
+            'U',
+            'm/d/Y', 'H:i:s',
         ];
 
         $pattern = array_map(
