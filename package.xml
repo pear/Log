@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2024-01-21</date>
+ <date>2024-02-07</date>
  <time>00:00:00</time>
  <version>
-  <release>1.14.2</release>
+  <release>1.14.3</release>
   <api>2.0.0</api>
  </version>
  <stability>
@@ -37,7 +37,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-- Add support for converting the strftime() '%x' and '%X' format characters
+- Correct Composer minimum PHP version constraint
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
