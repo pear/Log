@@ -2,10 +2,10 @@
 
 require_once 'Log.php';
 
-$console = &Log::singleton('console', '', 'TEST');
-$file = &Log::singleton('file', 'out.log', 'TEST');
+$console = Log::singleton('console', '', 'TEST');
+$file = Log::singleton('file', 'out.log', 'TEST');
 
-$composite = &Log::singleton('composite');
+$composite = Log::singleton('composite');
 $composite->addChild($console);
 $composite->addChild($file);
 

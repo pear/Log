@@ -2,7 +2,7 @@
 
 require_once 'Log.php';
 
-$logger = &Log::singleton(
+$logger = Log::singleton(
     'firebug',
     '',
     'PHP',

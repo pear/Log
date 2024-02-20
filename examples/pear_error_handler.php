@@ -19,7 +19,7 @@ function errorHandler($error)
     $logger->log($message, $error->code);
 }
 
-$logger = &Log::singleton('console', '', 'ident');
+$logger = Log::singleton('console', '', 'ident');
 
 PEAR::setErrorHandling(PEAR_ERROR_CALLBACK, 'errorHandler');
 PEAR::raiseError('This is an information log message.', PEAR_LOG_INFO);

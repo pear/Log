@@ -108,7 +108,7 @@ class Log_syslog extends Log
         }
 
         $this->id = md5(microtime().random_int(0, mt_getrandmax()));
-        $this->name = $name;
+        $this->name = (int)$name;
         $this->ident = $ident;
         $this->mask = Log::MAX($level);
     }
