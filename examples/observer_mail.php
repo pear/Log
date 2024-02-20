@@ -19,7 +19,7 @@ class Log_observer_mail extends Log_observer
         $this->pattern = $conf['pattern'];
     }
 
-    public function notify($event)
+    public function notify($event): void
     {
         if (preg_match($this->pattern, $event['message']) != 0) {
             mail($this->to, $this->subject, $event['message']);

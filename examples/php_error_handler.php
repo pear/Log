@@ -28,7 +28,7 @@ function errorHandler($code, $message, $file, $line)
                  $priority);
 }
 
-$logger = &Log::singleton('console', '', 'ident');
+$logger = Log::singleton('console', '', 'ident');
 
 set_error_handler('errorHandler');
 trigger_error('This is an information log message.', E_USER_NOTICE);
