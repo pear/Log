@@ -129,7 +129,7 @@ class Log_composite extends Log
      *
      * @return boolean  True if the entry is successfully logged.
      */
-    public function log($message, int $priority = null): bool
+    public function log($message, ?int $priority = null): bool
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {

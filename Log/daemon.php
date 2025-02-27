@@ -149,7 +149,7 @@ class Log_daemon extends Log
      *                  LOG_ERR, LOG_WARNING, LOG_NOTICE, LOG_INFO,
      *                  and LOG_DEBUG.  The default is LOG_INFO.
      */
-    public function log($message, int $priority = null): bool
+    public function log($message, ?int $priority = null): bool
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
