@@ -237,7 +237,7 @@ class Log
      * Abstract implementation of the log() method.
      * @since Log 1.0
      */
-    public function log($message, int $priority = null): bool
+    public function log($message, ?int $priority = null): bool
     {
         return false;
     }

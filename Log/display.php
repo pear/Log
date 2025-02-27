@@ -139,7 +139,7 @@ class Log_display extends Log
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      * @return boolean  True on success or false on failure.
      */
-    public function log($message, int $priority = null): bool
+    public function log($message, ?int $priority = null): bool
     {
         /* If a priority hasn't been specified, use the default value. */
         if ($priority === null) {
