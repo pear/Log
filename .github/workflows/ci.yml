@@ -24,6 +24,8 @@ jobs:
           php-version: ${{ matrix.php-version }}
           extensions: sqlite
           ini-values: include_path=.:/usr/share/php
-      - name: Run tests
-        run: |
-          pear run-tests -d tests/
+      - name: Lint
+        if: ${{ matrix.php-version != '7.4' }}
+        run: for f in ./**/*.php; do php -l "$f"; done;
+      - name: Tests
+        run: pear run-tests -d tests/
