@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2024-02-20</date>
+ <date>2025-03-09</date>
  <time>00:00:00</time>
  <version>
-  <release>1.14.4</release>
+  <release>1.14.5</release>
   <api>2.0.0</api>
  </version>
  <stability>
@@ -37,7 +37,9 @@
  </stability>
  <license uri="https://opensource.org/license/mit">MIT License</license>
  <notes>
-- Correct syslog handler $name typing.
+- Add nullable parameter annotations
+- Remove executable bits from source files
+- Exclude README.rst symlink from Composer archives
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
