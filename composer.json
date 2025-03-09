@@ -11,6 +11,9 @@
         "php": ">=7.4",
         "pear/pear_exception": "1.0.1 || 1.0.2"
     },
+    "archive": {
+        "exclude": ["/README.rst"]
+    },
     "autoload": {
         "psr-0": {
             "Log": "./"
