@@ -25,10 +25,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2025-03-09</date>
+ <date>2025-07-27</date>
  <time>00:00:00</time>
  <version>
-  <release>1.14.5</release>
+  <release>1.14.6</release>
   <api>2.0.0</api>
  </version>
  <stability>
@@ -37,9 +37,7 @@
  </stability>
  <license uri="https://opensource.org/license/mit">MIT License</license>
  <notes>
-- Add nullable parameter annotations
-- Remove executable bits from source files
-- Exclude README.rst symlink from Composer archives
+- Fix composite handler boolean return values
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
