@@ -57,6 +57,10 @@ class Log_Franken extends Log
         int $level = PEAR_LOG_DEBUG
     ) {
 
+        if (!function_exists('frankenphp_log')) {
+            throw new \RuntimeException('frankenphp_log() is not available');
+        }
+
         if (!empty($conf['lineFormat'])) {
             $this->lineFormat = str_replace(array_keys($this->formatMap),
                                             array_values($this->formatMap),
