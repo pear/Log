@@ -570,8 +570,10 @@ The Franken Handler
 -------------------
 The Franken handler sends log events directly to the FrankenPHP logger using
 the `frankenphp_log` function.  This handler is only useful when running under
-[FrankenPHP](https://frankenphp.dev/), and it will fail silently otherwise.
-It supports configurable string formats.
+FrankenPHP_, and it will fail silently otherwise. It supports configurable
+string formats.
+
+.. _FrankenPHP: https://frankenphp.dev/
 
 Configuration
 ~~~~~~~~~~~~~
@@ -588,7 +590,6 @@ Configuration
 |                   |           |                | fn() => date('H:i:s')     |
 +-------------------+-----------+----------------+---------------------------+
 
-.. _STDOUT: http://www.php.net/wrappers.php
 .. _date: http://www.php.net/date
 
 Example
