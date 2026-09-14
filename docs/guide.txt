@@ -566,6 +566,42 @@ Example
     }
 
 
+The Franken Handler
+-------------------
+The Franken handler sends log events directly to the FrankenPHP logger using
+the `frankenphp_log` function.  This handler is only useful when running under
+FrankenPHP_, and it will fail silently otherwise. It supports configurable
+string formats.
+
+.. _FrankenPHP: https://frankenphp.dev/
+
+Configuration
+~~~~~~~~~~~~~
++-------------------+-----------+----------------+---------------------------+
+| Parameter         | Type      | Default        | Description               |
++===================+===========+================+===========================+
+| ``lineFormat``    | String    | ``%2$s: %4$s`` | `Log line format`_        |
+|                   |           |                | specification.            |
++-------------------+-----------+----------------+---------------------------+
+| ``timeFormat``    | String    | ``M d H:i:s``  | Time stamp format         |
+|                   |           |                | (for date_).              |
++-------------------+-----------+----------------+---------------------------+
+| ``timeFormatter`` | Callable  | null           | Time formatter example    |
+|                   |           |                | fn() => date('H:i:s')     |
++-------------------+-----------+----------------+---------------------------+
+
+.. _date: http://www.php.net/date
+
+Example
+~~~~~~~
+::
+
+    $logger = Log::singleton('franken', '', 'ident');
+    for ($i = 0; $i < 10; $i++) {
+        $logger->log("Log entry $i");
+    }
+
+
 The Mail Handler
 ----------------
 
