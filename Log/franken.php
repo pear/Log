@@ -12,18 +12,13 @@ declare(strict_types=1);
  * The Log_Franken class is a concrete implementation of the Log::
  * abstract class which sends messages to the FrankenPHP logger.
  *
- * @author  Karel Kozlik <karek.kozlik@frafos.com>
+ * @author  Karel Kozlik <karel.kozlik@frafos.com>
  * @package Log
  *
  * @example franken.php      Using the frankenphp_log function.
  */
 class Log_Franken extends Log
 {
-    /**
-     * Integer holding the log facility to use.
-     */
-    private int $name;
-
     /**
      * String containing the format of a message.
      */
@@ -168,9 +163,6 @@ class Log_Franken extends Log
 
         /* If we're passed an unknown priority, default to FRANKENPHP_LOG_LEVEL_INFO. */
         if (!array_key_exists($priority, $priorities)) {
-            echo "Unknown priority level: $priority. Defaulting to FRANKENPHP_LOG_LEVEL_INFO.\n";
-            var_dump($priority);
-            var_dump($priorities);
             return FRANKENPHP_LOG_LEVEL_INFO;
         }
 
